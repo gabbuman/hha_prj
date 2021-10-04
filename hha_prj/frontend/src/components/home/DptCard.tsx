@@ -4,6 +4,7 @@ import { Button, Card } from 'react-bootstrap';
 
 export interface dptData {
     name: string;
+    dpt_id: number;
     perc_of_data_entered: number;
     num_of_case_studies: number;
     bg_pic: string;
@@ -17,6 +18,7 @@ export const DptOverview: React.FC<dptProps> = ({dpt}: dptProps) =>{
     return <div className="DpOverview">
         {dpt.map(item => {
             return <DptItem  name={item.name}
+                             dpt_id={item.dpt_id}
                              perc_of_data_entered={item.perc_of_data_entered}
                              num_of_case_studies={item.num_of_case_studies}
                              bg_pic={item.bg_pic}></DptItem>
