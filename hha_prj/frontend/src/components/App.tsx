@@ -20,15 +20,15 @@ class App extends Component {
 			<Router>
 				<Switch>
 					<Route exact path="/">
-						<p>this is a card test</p>
+						<p>this is a test</p>
 					</Route>
-					<Route path='/header' component={Header} />
+					<Route path='/header' component={Header}>
+						<Header />
+					</Route>
 					<Route path='/login' component={Login} />
 					<Route path='/rank' component={Rank} />
 					<Route path='/dptcard' component={DptCard} >
-						<div>
-							<p>this is department Card</p>
-						</div>
+						<DptCard />
 					</Route>
 					<Route path='/cspreview' component={CSPreview} />
 					<Route path='/vernavbar' component={VerNavbar} />
