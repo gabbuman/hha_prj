@@ -15,16 +15,21 @@ class App extends Component {
     	// return (
     	// 	<Header />
     	// )
+		
 		return (
 			<Router>
 				<Switch>
 					<Route exact path="/">
-						<p>this is a test</p>
+						<p>this is a card test</p>
 					</Route>
 					<Route path='/header' component={Header} />
 					<Route path='/login' component={Login} />
 					<Route path='/rank' component={Rank} />
-					<Route path='/dptcard' component={DptCard} />
+					<Route path='/dptcard' component={DptCard} >
+						<div>
+							<p>this is department Card</p>
+						</div>
+					</Route>
 					<Route path='/cspreview' component={CSPreview} />
 					<Route path='/vernavbar' component={VerNavbar} />
 					<Route path='/dataform' component={DataForm} />
