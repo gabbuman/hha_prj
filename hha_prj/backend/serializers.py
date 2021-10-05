@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from backend.models import MonthlyRecord
+from backend.models import MonthlyRecord, NICUPaeds
 
 #Monthly Record Serializer
 class MonthlyRecordSerializer(serializers.ModelSerializer):

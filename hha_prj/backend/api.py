@@ -1,6 +1,6 @@
-from backend.models import MonthlyRecord
+from backend.models import MonthlyRecord, NICUPaeds
 from rest_framework import viewsets, permissions
-from .serializers import MonthlyRecordSerializer
+from .serializers import MonthlyRecordSerializer, NICUPaedsSerializer
 
 # MonthlyRecord ViewSet
 class MonthlyRecordViewSet(viewsets.ModelViewSet):
