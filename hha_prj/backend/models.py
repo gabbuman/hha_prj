@@ -125,5 +125,6 @@ class MaternityMonthlyRecord(models.Model):
     deliveries_unknown_instrumentals = models.PositiveSmallIntegerField()
     
     #LABOR MANAGEMENT SECTION
-    labor_use_partograph = models.PositiveSmallIntegerField()
+    labor_use_partograph_normal = models.PositiveSmallIntegerField(default = 0)
+    labor_use_partograph_cesarean = models.PositiveSmallIntegerField()
     labor_active_management_of_third_phase_labours = models.PositiveSmallIntegerField()
