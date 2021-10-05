@@ -1,6 +1,6 @@
-from backend.models import MonthlyRecord
+from backend.models import MaternityMonthlyRecord, MonthlyRecord
 from rest_framework import viewsets, permissions
-from .serializers import MonthlyRecordSerializer
+from .serializers import MaternityMonthlyRecordSerializer, MonthlyRecordSerializer
 
 # MonthlyRecord ViewSet
 class MonthlyRecordViewSet(viewsets.ModelViewSet):
@@ -9,3 +9,10 @@ class MonthlyRecordViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = MonthlyRecordSerializer
+
+class MaternityMonthlyRecordViewSet(viewsets.ModelViewSet):
+    queryset =  MaternityMonthlyRecord.objects()
+    permission_class = [
+        permissions.AllowAny
+    ]
+    serializer_class = MaternityMonthlyRecordSerializer
