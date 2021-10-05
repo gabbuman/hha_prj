@@ -7,3 +7,7 @@ class MonthlyRecordSerializer(serializers.ModelSerializer):
         model = MonthlyRecord
         fields = '__all__'
         
+class NICUPaedsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NICUPaeds
+        fields = '__all__'
