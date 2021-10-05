@@ -9,3 +9,10 @@ class MonthlyRecordViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = MonthlyRecordSerializer
+
+class NICUPaedsViewSet(viewsets.ModelViewSet):
+    queryset = NICUPaeds.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = NICUPaedsSerializer
