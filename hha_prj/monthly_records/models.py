@@ -6,6 +6,7 @@ class MonthlyRecord(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 class RehabMonthlyRecord(models.Model):
+    month_name = models.CharField(max_length=15)
     beds_available = models.PositiveIntegerField()
     bed_days = models.PositiveIntegerField()
     patient_days = models.PositiveIntegerField()
