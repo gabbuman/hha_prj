@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from backend.models import MaternityMonthlyRecord, MonthlyRecord, maternity_MonthlyRecord
+from backend.models import MaternityMonthlyRecord, MonthlyRecord
 
 #Monthly Record Serializer
 class MonthlyRecordSerializer(serializers.ModelSerializer):

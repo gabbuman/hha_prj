@@ -11,7 +11,7 @@ class MonthlyRecordViewSet(viewsets.ModelViewSet):
     serializer_class = MonthlyRecordSerializer
 
 class MaternityMonthlyRecordViewSet(viewsets.ModelViewSet):
-    queryset =  MaternityMonthlyRecord.objects()
+    queryset =  MaternityMonthlyRecord.objects.all()
     permission_class = [
         permissions.AllowAny
     ]
