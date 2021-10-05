@@ -7,19 +7,19 @@ class MonthlyRecord(models.Model):
 
 class RehabMonthlyRecord(models.Model):
     month_name = models.CharField(max_length=15)
-    beds_available = models.PositiveIntegerField()
-    bed_days = models.PositiveIntegerField()
-    patient_days = models.PositiveIntegerField()
-    hospitalized = models.PositiveIntegerField()
-    discharged_alive = models.PositiveIntegerField()
-    died_before_48_h = models.PositiveIntegerField()
-    died_after_48_h = models.PositiveIntegerField()
-    days_hospitalized = models.PositiveIntegerField()
-    referrals = models.PositiveIntegerField()
-    transfers = models.PositiveIntegerField()
-    self_discharged = models.PositiveIntegerField()
-    stayed_in_the_ward = models.PositiveIntegerField()
-    admissions = models.PositiveIntegerField()
+    beds_available = models.PositiveSmallIntegerField()
+    bed_days = models.PositiveSmallIntegerField()
+    patient_days = models.PositiveSmallIntegerField()
+    hospitalized = models.PositiveSmallIntegerField()
+    discharged_alive = models.PositiveSmallIntegerField()
+    died_before_48_h = models.PositiveSmallIntegerField()
+    died_after_48_h = models.PositiveSmallIntegerField()
+    days_hospitalized = models.PositiveSmallIntegerField()
+    referrals = models.PositiveSmallIntegerField()
+    transfers = models.PositiveSmallIntegerField()
+    self_discharged = models.PositiveSmallIntegerField()
+    stayed_in_the_ward = models.PositiveSmallIntegerField()
+    admissions = models.PositiveSmallIntegerField()
 
     def __str__(self):
         return 'Rehab Record'
