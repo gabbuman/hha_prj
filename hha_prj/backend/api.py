@@ -1,8 +1,4 @@
-<<<<<<< HEAD:hha_prj/monthly_records/api.py
-from monthly_records.models import MonthlyRecord, RehabMonthlyRecord
-=======
-from backend.models import MonthlyRecord
->>>>>>> 2bc00b32138ca2c68f5f7075526b60230d88ef83:hha_prj/backend/api.py
+from backend.models import MonthlyRecord, RehabMonthlyRecord
 from rest_framework import viewsets, permissions
 from .serializers import MonthlyRecordSerializer, RehabMonthlyRecordSerializer
 
