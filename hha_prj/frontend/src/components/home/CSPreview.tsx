@@ -8,84 +8,88 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import ArrowForward from '@mui/icons-material/ArrowForward';
 import Link from '@mui/material/Link';
+import Card from '@mui/material/Card';
 
 export default function AlignItemsList() {
+    
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-        <Link href="#" underline="none">
-            <ListItem alignItems="center">
-                <ListItemAvatar>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-                </ListItemAvatar>
-                <ListItemText
-                primary="Successful baby delivery"
-                secondary={
-                    <React.Fragment>
-                    <Typography
-                        sx={{ display: 'inline' }}
-                        component="span"
-                        variant="body2"
-                        color="text.primary"
-                    >
-                        NICU
-                    </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
-                    </React.Fragment>
-                }
-                />
-                <ArrowForward/>
-            </ListItem>
-        </Link>
-      <Divider variant="inset" component="li" />
-      <Link href="#" underline="none">
-        <ListItem alignItems="center">
-            <ListItemAvatar>
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-            primary="Summer BBQ"
-            secondary={
-                <React.Fragment>
-                <Typography
-                    sx={{ display: 'inline' }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                >
-                    to Scott, Alex, Jennifer
-                </Typography>
-                {" — Wish I could come, but I'm out of town this…"}
-                </React.Fragment>
-            }
-            />
-            <ArrowForward/>
-        </ListItem>
-      </Link>
-      <Divider variant="inset" component="li" />
-      <Link href="#" underline="none">
-        <ListItem alignItems="center">
-            <ListItemAvatar>
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-            primary="Oui Oui"
-            secondary={
-                <React.Fragment>
-                <Typography
-                    sx={{ display: 'inline' }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                >
-                    Sandra Adams
-                </Typography>
-                {' — Do you have Paris recommendations? Have you ever…'}
-                </React.Fragment>
-            }
-            />
-            <ArrowForward/>
-        </ListItem>
-      </Link>
-    </List>
+    <Card sx={{ maxWidth: 300 }}>
+        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+            <Link href="#" underline="none">
+                <ListItem alignItems="center">
+                    {/* <ListItemAvatar>
+                    <Avatar alt="Baby Delivery" src="#" />
+                    </ListItemAvatar> */}
+                    <ListItemText
+                    primary="Patient Story"
+                    secondary={
+                        <React.Fragment>
+                        <Typography
+                            sx={{ display: 'inline' }}
+                            component="span"
+                            variant="body2"
+                            color="text.primary"
+                        >
+                            Maternity
+                        </Typography>
+                        {" — Lorem ipsum dolor sit amet, consectetur adipiscing elit..."}
+                        </React.Fragment>
+                    }
+                    />
+                    <ArrowForward style={{fill: "#B46FBC"}}/>
+                </ListItem>
+            </Link>
+            <Divider variant="inset" component="li" />
+            <Link href="#" underline="none">
+                <ListItem alignItems="center">
+                    {/* <ListItemAvatar>
+                    <Avatar alt="Pamela doing a great job" src="#" />
+                    </ListItemAvatar> */}
+                    <ListItemText
+                    primary="Staff Recognition"
+                    secondary={
+                        <React.Fragment>
+                        <Typography
+                            sx={{ display: 'inline' }}
+                            component="span"
+                            variant="body2"
+                            color="text.primary"
+                        >
+                            Rehab
+                        </Typography>
+                        {" — Lorem ipsum dolor sit amet, consectetur adipiscing elit..."}
+                        </React.Fragment>
+                    }
+                    />
+                    <ArrowForward style={{fill: "#B46FBC"}}/>
+                </ListItem>
+            </Link>
+            <Divider variant="inset" component="li" />
+            <Link href="#" underline="none">
+                <ListItem alignItems="center">
+                    {/* <ListItemAvatar>
+                    <Avatar alt="Chairs Saving Lives" src="#"/>
+                    </ListItemAvatar> */}
+                    <ListItemText
+                    primary="Equiptment Recieved"
+                    secondary={
+                        <React.Fragment>
+                        <Typography
+                            sx={{ display: 'inline' }}
+                            component="span"
+                            variant="body2"
+                            color="text.primary"
+                        >
+                            NICU
+                        </Typography>
+                        {' — Lorem ipsum dolor sit amet, consectetur adipiscing elit...'}
+                        </React.Fragment>
+                    }
+                    />
+                    <ArrowForward style={{fill: "#B46FBC"}}/>
+                </ListItem>
+            </Link>
+        </List>
+    </Card>
   );
 }
