@@ -11,15 +11,11 @@ import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 
 export default function AlignItemsList() {
-    
   return (
     <Card sx={{ maxWidth: 300 }}>
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
             <Link href="#" underline="none">
                 <ListItem alignItems="center">
-                    {/* <ListItemAvatar>
-                    <Avatar alt="Baby Delivery" src="#" />
-                    </ListItemAvatar> */}
                     <ListItemText
                     primary="Patient Story"
                     secondary={
@@ -42,9 +38,6 @@ export default function AlignItemsList() {
             <Divider variant="inset" component="li" />
             <Link href="#" underline="none">
                 <ListItem alignItems="center">
-                    {/* <ListItemAvatar>
-                    <Avatar alt="Pamela doing a great job" src="#" />
-                    </ListItemAvatar> */}
                     <ListItemText
                     primary="Staff Recognition"
                     secondary={
@@ -67,9 +60,6 @@ export default function AlignItemsList() {
             <Divider variant="inset" component="li" />
             <Link href="#" underline="none">
                 <ListItem alignItems="center">
-                    {/* <ListItemAvatar>
-                    <Avatar alt="Chairs Saving Lives" src="#"/>
-                    </ListItemAvatar> */}
                     <ListItemText
                     primary="Equiptment Recieved"
                     secondary={
