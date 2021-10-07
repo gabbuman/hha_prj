@@ -10,7 +10,7 @@ import Card from '@mui/material/Card';
 
 export default function AlignItemsList() {
   return (
-    <Card sx={{ maxWidth: 350, boxShadow:10}}>
+    <Card sx={{ maxWidth: 350, boxShadow:3}}>
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
             <ListItem alignItems="center">
                 <ListItemButton>
@@ -33,29 +33,29 @@ export default function AlignItemsList() {
                     <ArrowForward style={{fill: "#B46FBC"}}/>
                 </ListItemButton>
             </ListItem>
-            <Divider variant="inset" component="li" />
-                <ListItem alignItems="center">
-                    <ListItemButton>
-                        <ListItemText
-                        primary="Staff Recognition"
-                        secondary={
-                            <React.Fragment>
-                            <Typography
-                                sx={{ display: 'inline' }}
-                                component="span"
-                                variant="body2"
-                                color="text.primary"
-                            >
-                                Rehab
-                            </Typography>
-                            {" — Lorem ipsum dolor sit amet, consectetur adipiscing elit..."}
-                            </React.Fragment>
-                        }
-                        />
-                        <ArrowForward style={{fill: "#B46FBC"}}/>
-                    </ListItemButton>
-                </ListItem>
-            <Divider variant="inset" component="li" />
+            <Divider component="li" />
+            <ListItem alignItems="center">
+                <ListItemButton>
+                    <ListItemText
+                    primary="Staff Recognition"
+                    secondary={
+                        <React.Fragment>
+                        <Typography
+                            sx={{ display: 'inline' }}
+                            component="span"
+                            variant="body2"
+                            color="text.primary"
+                        >
+                            Rehab
+                        </Typography>
+                        {" — Lorem ipsum dolor sit amet, consectetur adipiscing elit..."}
+                        </React.Fragment>
+                    }
+                    />
+                    <ArrowForward style={{fill: "#B46FBC"}}/>
+                </ListItemButton>
+            </ListItem>
+            <Divider component="li" />
             <ListItem alignItems="center">
                 <ListItemButton>
                     <ListItemText
