@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
+
 import styled from 'styled-components'
+export interface dptData {
+    name: string;
+    dpt_id: number;
+    perc_of_data_entered: number;
+    num_of_case_studies: number;
+    bg_img: string;
+    main_color: string;
+}
 
 type DptCardProps = {
-    mainColor: string;
-    departmentName: string;
-    image: string;
+    
+    departmentData: dptData[];
 }
 
 type ColorProps = {
-    mainColor: string;
+    main_color: string;
 }
 
 export const DptCardGroup = styled.div<ColorProps> `
@@ -18,13 +25,13 @@ export const DptCardGroup = styled.div<ColorProps> `
     position: relative;
     overflow: hidden;
     border-radius: 10px;
-    box-shadow: 0 10px 20px ${props => props.mainColor}77;
+    box-shadow: 0 10px 20px ${props => props.main_color}77;
     display: grid;
     grid-template-rows: 1fr 1fr;
     transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     &:hover {
         transform: scale(1.1, 1.1);
-        box-shadow: 0 20px 40px ${props => props.mainColor}88;
+        box-shadow: 0 20px 40px ${props => props.main_color}88;
     }
     &:hover img {
         transform: translateY(-10px);
@@ -61,68 +68,35 @@ const CardButton = styled.button<ColorProps> `
 
     &:hover {
         background: white;
-        color: ${props => props.mainColor};
+        color: ${props => props.main_color};
     }
 `
-
-const DptCard = (props: DptCardProps) => (
-    <DptCardGroup mainColor={props.mainColor}>
-        <CardBackground src={props.image} />
-        <CardTitle>{props.departmentName}</CardTitle>
-        <CardButton mainColor={props.mainColor}>Access</CardButton>
-    </DptCardGroup>
-)
-
-export default DptCard
-=======
-import { Button, Card } from 'react-bootstrap';
-
-
-export interface dptData {
-    name: string;
-    dpt_id: number;
-    perc_of_data_entered: number;
-    num_of_case_studies: number;
-    bg_pic: string;
-}
-
-interface dptProps {
-    dpt: dptData[]; 
-}
-
-export const DptOverview: React.FC<dptProps> = ({dpt}: dptProps) =>{
+export const DptOverview: React.FC<DptCardProps> = ({departmentData}: DptCardProps) =>{
     return <div className="DpOverview">
-        {dpt.map(item => {
-            return <DptItem  name={item.name}
+        {departmentData.map(item => {
+            return <DptCard  name={item.name}
                              dpt_id={item.dpt_id}
                              perc_of_data_entered={item.perc_of_data_entered}
                              num_of_case_studies={item.num_of_case_studies}
-                             bg_pic={item.bg_pic}></DptItem>
+                             bg_img={item.bg_img}
+                             main_color={item.main_color}></DptCard>
         })}
     </div>
 }
-export const DptItem: React.FC<dptData> = ({name, perc_of_data_entered, num_of_case_studies, bg_pic}: dptData) =>  {
+
+const DptCard: React.FC<dptData> = ({name, perc_of_data_entered, num_of_case_studies, bg_img, main_color}: dptData) =>  {
   
-		return (
-            <div className="DptCard">
-                <Card
-              
-                    style={{ width: '18rem' }}
-                    className="mb-2"
-                >
-               <Card.Img src={bg_pic}  />
-                <Card.ImgOverlay>
-                    <Card.Title> {name} Department</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.Update now. % of data {perc_of_data_entered}, case studies {num_of_case_studies}
-                    </Card.Text>
-                    <Button variant="primary">Access</Button>
-                </Card.ImgOverlay>
-                </Card> 
-              
-            </div>
-        )
-        
+    return (
+        <div className="DptCard">
+            <DptCardGroup main_color={main_color}>
+                <CardBackground src={bg_img} />
+                <CardTitle>{name}</CardTitle>
+                <CardButton main_color={main_color}>Access</CardButton>
+            </DptCardGroup> 
+          
+        </div>
+    )
+    
 }
->>>>>>> origin/14-department-cards
+
+export default DptCard

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import Header from './layout/Header';
 import VerNavbar from './layout/VerNavbar';
 import Login from './login/Login';
-import {DptOverview} from './home/DptCard';
+import DptCard, { DptOverview } from './home/DptCard';
 import CSPreview from './home/CSPreview';
 import Rank from './home/Rank';
 import DataForm from './dpt/DataForm';
@@ -27,9 +27,10 @@ class App extends Component {
 
 					<Route path='/login' component={Login} />
 					<Route path='/rank' component={Rank} />
-					<Route path='/dptcard' component={DptOverview} >
-						<DptOverview dpt={dpts_Data}/>
+					<Route path='/dptcard' component={DptOverview}>
+						<DptOverview departmentData={dpts_Data}/>
 					</Route>
+				
 					<Route path='/cspreview' component={CSPreview} />
 					<Route path='/vernavbar' component={VerNavbar} />
 					<Route path='/dataform' component={DataForm} />					
