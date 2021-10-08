@@ -1,6 +1,7 @@
 from backend.models import RehabMonthlyRecord
 from rest_framework import serializers
-from backend.models import MaternityMonthlyRecord, MonthlyRecord
+from backend.models import MaternityMonthlyRecord, MonthlyRecord, CustomUser
+from rest_framework.validators import UniqueValidator
 
 #Monthly Record Serializer
 class MonthlyRecordSerializer(serializers.ModelSerializer):
@@ -19,3 +20,18 @@ class MaternityMonthlyRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = MaternityMonthlyRecord
         fields = '__all__'         
+
+# CustomerUser Serializer
+class CustomUserSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(
+        required=False,
+        allow_blank=True,
+        allow_null=True,
+        validators=[
+            UniqueValidator(
+                queryset=CustomUser.objects.all(),
+                message="This username is already taken!",
+            )
+        ],
+    )
+    
