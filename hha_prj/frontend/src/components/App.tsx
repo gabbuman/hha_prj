@@ -20,11 +20,11 @@ class App extends Component {
 			<Router>
 				<Switch>
 					<Route exact path="/">
-						<p>this is a test</p>
+						<p>this is a test,abc</p>
 					</Route>
-					<Route path='/header' component={Header}>
-						<Header />
-					</Route>
+					
+					<Route path='/header' component={() => <Header title={`Hope Health Action`} />}  />
+
 					<Route path='/login' component={Login} />
 					<Route path='/rank' component={Rank} />
 					<Route path='/dptcard' component={DptOverview} >
@@ -32,7 +32,7 @@ class App extends Component {
 					</Route>
 					<Route path='/cspreview' component={CSPreview} />
 					<Route path='/vernavbar' component={VerNavbar} />
-					<Route path='/dataform' component={DataForm} />
+					<Route path='/dataform' component={DataForm} />					
 				</Switch>
 			</Router>
 		)
