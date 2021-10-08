@@ -47,8 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'backend',
+    # 3rd Party Apps
     'rest_framework',
+    # Our Apps
+    'backend',
     'frontend'
 ]
 
@@ -112,6 +114,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'backend.CustomUser'
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
@@ -121,6 +125,7 @@ REST_FRAMEWORK = {
     )
 }
 
+# JWT Authentication Token settings
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
@@ -135,7 +140,6 @@ SIMPLE_JWT = {
     "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
     "TOKEN_TYPE_CLAIM": "token_type",
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
