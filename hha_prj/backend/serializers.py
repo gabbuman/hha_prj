@@ -35,3 +35,10 @@ class CustomUserSerializer(serializers.ModelSerializer):
         ],
     )
     
+    password = serializers.CharField(min_length=3, write_only=True, required=True)
+    class Meta:
+        model = CustomUser
+        fields = ("username", "password")
+        extra_kwargs = {
+            "password": {"write_only": True},
+        }
