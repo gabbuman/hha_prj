@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 
-export class DptCard extends Component {
-    render() {
-		return (
-            <div>
-
-            </div>
-        )
-    }
+type DptCardProps = {
+    mainColor: string;
+    departmentName: string;
+    image: string;
 }
 
-export default DptCard
+type ColorProps = {
+    mainColor: string;
+}
+
