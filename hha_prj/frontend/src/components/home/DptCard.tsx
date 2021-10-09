@@ -1,6 +1,9 @@
+import { number } from 'prop-types';
 import React, { Component } from 'react';
+import { ProgressBar } from 'react-bootstrap';
 
 import styled from 'styled-components'
+const CARD_WIDTH: number = 50;
 export interface dptData {
     name: string;
     dpt_id: number;
@@ -19,9 +22,16 @@ type ColorProps = {
     main_color: string;
 }
 
+type txtColorProp = {
+    txt_color:string;
+}
+type BarProps = {
+    percentage: number;
+}
 export const DptCardGroup = styled.div<ColorProps> `
-    width: 350px;
+    width: 250px;
     height: 225px;
+    padding: 15px 15px 15px 15px;
     position: relative;
     overflow: hidden;
     border-radius: 10px;
@@ -60,17 +70,35 @@ const CardButton = styled.button<ColorProps> `
     color: white;
     text-transform: uppercase;
     background: none;
-    padding: 10px 15px;
+    padding: 5px 15px;
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 5px;
     transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-    margin: auto auto 15px 15px;
+    margin: 10px auto 15px 15px;
 
     &:hover {
         background: white;
         color: ${props => props.main_color};
     }
 `
+const BarContainer = styled.div`
+    height: 0.1em;
+    width: 200px;
+    border-radius: 50px;
+    padding: 0px 0px 8px 0px;
+    border: 1px solid #333;
+    positon: relative;
+    
+`
+const CardBody = styled.div<txtColorProp>`
+    font-size: 8px;
+    font-weight: 700;
+    color: ${txtColorProp => txtColorProp.txt_color};
+    text-transform: Capitalize;
+    padding: auto auto;
+    margin: 15px auto 20px 15px;
+`
+
 export const DptOverview: React.FC<DptCardProps> = ({departmentData}: DptCardProps) =>{
     return <div className="DpOverview">
         {departmentData.map(item => {
@@ -89,8 +117,16 @@ const DptCard: React.FC<dptData> = ({name, perc_of_data_entered, num_of_case_stu
     return (
         <div className="DptCard">
             <DptCardGroup main_color={main_color}>
-                <CardBackground src={bg_img} />
+                <CardBackground src={bg_img}/>
                 <CardTitle>{name}</CardTitle>
+                <BarContainer>
+                <ProgressBar variant="success" now={perc_of_data_entered} max= {100} />
+                </BarContainer>
+                <CardBody txt_color="green">Data Entered: {perc_of_data_entered}%</CardBody>
+                <BarContainer>
+                <ProgressBar variant="info" now={num_of_case_studies} />
+                </BarContainer>
+                <CardBody txt_color="purple">Case Study: {num_of_case_studies}</CardBody>
                 <CardButton main_color={main_color}>Access</CardButton>
             </DptCardGroup> 
           
