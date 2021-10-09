@@ -7,7 +7,7 @@ export const dpts_Data: dptData[] = [
         dpt_id: 1,
         perc_of_data_entered: 80,
         num_of_case_studies: 15,
-        bg_img: "https://source.unsplash.com/900x800/?nature/peace", 
+        bg_img: "/static/rehab-bg.png", 
         main_color: "blue"
     },
     {
@@ -15,7 +15,7 @@ export const dpts_Data: dptData[] = [
         dpt_id: 2,
         perc_of_data_entered: 80,
         num_of_case_studies: 15,
-        bg_img: "https://source.unsplash.com/random/900x800/?Maternity",
+        bg_img: "/static/maternity-bg.png",
         main_color: "blue"
     },
     {
@@ -23,7 +23,7 @@ export const dpts_Data: dptData[] = [
         dpt_id: 3,
         perc_of_data_entered: 80,
         num_of_case_studies: 15,
-        bg_img: "https://source.unsplash.com/random/900x800/?NICU/Padiatric",
+        bg_img: "/static/nicu-bg.png",
         main_color: "blue"
     },
     {
@@ -31,7 +31,7 @@ export const dpts_Data: dptData[] = [
         dpt_id: 4,
         perc_of_data_entered: 80,
         num_of_case_studies: 15,
-        bg_img: "https://source.unsplash.com/random/900x800/?Community-health", 
+        bg_img: "/static/community-health-bg.png", 
         main_color: "blue"
     }
 ]

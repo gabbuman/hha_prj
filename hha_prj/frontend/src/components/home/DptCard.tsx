@@ -29,7 +29,7 @@ type BarProps = {
     percentage: number;
 }
 export const DptCardGroup = styled.div<ColorProps> `
-    width: 250px;
+    width: 350px;
     height: 225px;
     padding: 15px 15px 15px 15px;
     position: relative;
@@ -117,7 +117,7 @@ const DptCard: React.FC<dptData> = ({name, perc_of_data_entered, num_of_case_stu
     return (
         <div className="DptCard">
             <DptCardGroup main_color={main_color}>
-                <CardBackground src={bg_img}/>
+                <CardBackground src={bg_img} />
                 <CardTitle>{name}</CardTitle>
                 <BarContainer>
                 <ProgressBar variant="success" now={perc_of_data_entered} max= {100} />
