@@ -6,7 +6,7 @@ from .serializers import MaternityMonthlyRecordSerializer, MonthlyRecordSerializ
 class MonthlyRecordViewSet(viewsets.ModelViewSet):
     queryset = MonthlyRecord.objects.all()
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
     ]
     serializer_class = MonthlyRecordSerializer
 
@@ -30,6 +30,6 @@ class MaternityMonthlyRecordViewSet(viewsets.ModelViewSet):
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
     ]
     serializer_class = CustomUserSerializer
