@@ -2,6 +2,7 @@ from backend.models import RehabMonthlyRecord
 from rest_framework import serializers
 from backend.models import MaternityMonthlyRecord, MonthlyRecord, CustomUser
 from rest_framework.validators import UniqueValidator
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 #Monthly Record Serializer
 class MonthlyRecordSerializer(serializers.ModelSerializer):
@@ -51,5 +52,15 @@ class CustomUserSerializer(serializers.ModelSerializer):
         if password is not None:
             instance.set_password(password)
         instance.save()
-        
+
         return instance
+
+# Token Pair Serializer
+class CustomTokenPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        refresh = self.get_token(self.user)
+        data["refresh"] = str(refresh)
+        data["access"] = str(refresh.access_token)
+        data["username"] = str(self.user.username)
+        data["id"] = str(self.user.pk)
