@@ -83,5 +83,6 @@ export class CSPreview extends Component {
             </Card>
         )
     }
-
 }
+
+export default CSPreview
