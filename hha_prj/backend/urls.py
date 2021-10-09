@@ -4,7 +4,7 @@ from .api import MonthlyRecordViewSet, RehabMonthlyRecordViewset, MaternityMonth
 from .views import ObtainTokenPairWithUsernameView
 from django.urls import path
 from django.urls.conf import include
-from rest_framework_simplejwt import views
+from rest_framework_simplejwt.views import TokenRefreshView
 
 router = routers.DefaultRouter()
 router.register('api/monthly_records', MonthlyRecordViewSet, 'monthly_records')
@@ -14,6 +14,6 @@ router.register('api/user', CustomUserViewSet, 'user')
 
 urlpatterns = [
     path('', include(router.urls)),
-    #path('api/token/refresh', views.TokenRefresh.as_view()),
+    path('api/token/refresh', TokenRefreshView),
     path('api/token/obtain', ObtainTokenPairWithUsernameView)
 ]

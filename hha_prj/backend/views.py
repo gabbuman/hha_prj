@@ -5,5 +5,5 @@ from .serializers import CustomTokenPairSerializer
 
 # Create your views here.
 class ObtainTokenPairWithUsernameView(TokenObtainPairView):
-    permission_classes = (permissions.AllowAny)
+    permission_classes = (permissions.AllowAny,)
     serializer_class = CustomTokenPairSerializer
