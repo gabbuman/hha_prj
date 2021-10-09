@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import styled from 'styled-components'
 
 type DptCardProps = {
@@ -74,9 +73,10 @@ const DptCard = (props: DptCardProps) => (
 )
 
 export default DptCard
-=======
-import { Button, Card } from 'react-bootstrap';
 
+// ------
+
+import { Button, Card } from 'react-bootstrap';
 
 export interface dptData {
     name: string;
@@ -123,6 +123,4 @@ export const DptItem: React.FC<dptData> = ({name, perc_of_data_entered, num_of_c
               
             </div>
         )
-        
 }
->>>>>>> origin/14-department-cards
