@@ -15,5 +15,5 @@ router.register('api/user', CustomUserViewSet, 'user')
 urlpatterns = [
     path('', include(router.urls)),
     path('api/token/refresh', TokenRefreshView),
-    path('api/token/obtain', ObtainTokenPairWithUsernameView)
+    path('api/token/obtain', ObtainTokenPairWithUsernameView.as_view())
 ]
