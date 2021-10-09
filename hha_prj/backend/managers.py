@@ -8,7 +8,6 @@ class CustomUserManager(BaseUserManager):
         # Create a User with the passed username and password.
         if not username:
             raise ValueError(_('The username is required for user creation'))
-        username = self.normalize_email(username)
         user = self.model(username=username, **extra_fields)
         user.set_password(password)
         user.save()
