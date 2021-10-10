@@ -1,7 +1,10 @@
 from rest_framework import routers
-from .api import MonthlyRecordViewSet, NICUPaedsViewSet
+from .api import MonthlyRecordViewSet, RehabMonthlyRecordViewset, MaternityMonthlyRecordViewSet, NICUPaedsMonthlyRecordViewSet
 
 router = routers.DefaultRouter()
 router.register('api/monthly_records', MonthlyRecordViewSet, 'monthly_records')
-router.register('api/nicu_paed', NICUPaedsViewSet, 'nicu_paed')
+router.register('api/rehab_records', RehabMonthlyRecordViewset, 'rehab_record')
+router.register('api/maternity', MaternityMonthlyRecordViewSet, 'maternity')
+router.register('api/nicu_paed', NICUPaedsMonthlyRecordViewSet, 'nicu_paed')
+
 urlpatterns = router.urls
