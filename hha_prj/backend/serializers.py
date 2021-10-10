@@ -1,6 +1,6 @@
 from backend.models import RehabMonthlyRecord
 from rest_framework import serializers
-from backend.models import MaternityMonthlyRecord, MonthlyRecord, CommunityHealthRecord
+from backend.models import MaternityMonthlyRecord, MonthlyRecord, CommunityHealthMonthlyRecord
 
 #Monthly Record Serializer
 class MonthlyRecordSerializer(serializers.ModelSerializer):
@@ -21,7 +21,7 @@ class MaternityMonthlyRecordSerializer(serializers.ModelSerializer):
         fields = '__all__'     
 
 # Community health Record Serializer
-class CommunityHealthRecordSerializer(serializers.ModelSerializer):
+class CommunityHealthMonthlyRecordSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CommunityHealthRecord
+        model = CommunityHealthMonthlyRecord
         fields = '__all__'   

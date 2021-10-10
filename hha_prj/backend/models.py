@@ -147,7 +147,7 @@ class MaternityMonthlyRecord(models.Model):
     labor_use_partograph_cesarean = models.PositiveSmallIntegerField()
     labor_active_management_of_third_phase_labours = models.PositiveSmallIntegerField()
 
-class CommunityHealthRecord(models.Model):
+class CommunityHealthMonthlyRecord(models.Model):
     month_name = models.CharField(max_length=15)
 
     #DELIVERIES
