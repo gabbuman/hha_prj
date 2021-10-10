@@ -11,7 +11,7 @@ class MonthlyRecordViewSet(viewsets.ModelViewSet):
     serializer_class = MonthlyRecordSerializer
 
 # NICU Paeds Monthly Record Viewset
-class NICUPaedsViewSet(viewsets.ModelViewSet):
+class NICUPaedsMonthlyRecordViewSet(viewsets.ModelViewSet):
     queryset = NICUPaedsMonthlyRecord.objects.all()
     permission_classes = [
         permissions.AllowAny
