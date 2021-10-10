@@ -1,101 +1,59 @@
-import * as React from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import React, {useState} from 'react'
+import styled from 'styled-components'
+import {Link} from 'react-router-dom'
+import * as FaIcons from 'react-icons/fa'
+import * as AiIcons from 'react-icons/ai'
+import { SecondSideBarData, SidebarData } from './SidebarData'
+import Submenu from './Submenu'
+import Menu from './Menu'
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
+const Icons = styled(Link)`
+    margin-left: 2rem;
+    font-size: 2rem;
+    height: flex;
+    justify-content: flex-start;
+    align-items: center; 
+`;
+
+const SideBarNav = styled.nav`
+    background: #15171c;
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 10; 
+    border-right: 1px solid #D7D8DC;
+
+`;
+
+const SideBarWrap = styled.nav`
+    background: #FAF8F8;
+    width: 250px;
+
+`;
+const Sidebar = () => {
+    
+    return (
+        <>
+          <SideBarNav>
+              <SideBarWrap>
+                <Icons to = "#">
+                </Icons>
+                {SidebarData.map((item, index) => {
+                    return <Submenu item={item} key={index} />;
+                })}
+
+                {SecondSideBarData.map((item, index) =>{
+                    return <Menu item={item} key={index} />;
+                })}
+              </SideBarWrap>
+          </SideBarNav>  
+        </>
+    )
 }
 
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+export default Sidebar
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      <Box sx={{ textAlign: 'left' }}>
-      </Box>
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-        
-      )}
-      
-      
-    </div>
-  );
-}
 
-function a11yProps(index: number) {
-  return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-  };
-}
 
-export default function VerticalTabs() {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  return (
-    <Box
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 1000, textAlign: 'left' }}
-    >
-      
-      <Tabs
-        
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: 'divider', textAlign: 'left' }}
-        style={{textTransform: 'lowercase'}}
-        
-      >
-        <Box sx={{ p: 3 }} />
-        <Box sx={{ textAlign: 'left' }}/>
-        <Tab label="Back to Home" {...a11yProps(0)}style={{textTransform: 'none'}} />
-        <Tab label="Monthly Records" {...a11yProps(1)}style={{textTransform: 'none'}} />
-        <Tab label="Case Study" {...a11yProps(2)}style={{textTransform: 'none'}} />
-        <Tab label="Biomechanical Support" {...a11yProps(3)}style={{textTransform: 'none'}} />
-        <Tab label="Employee of Month" {...a11yProps(4)}style={{textTransform: 'none'}}  />
-
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Item Five
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        Item Six
-      </TabPanel>
-      <TabPanel value={value} index={6}>
-        Item Seven
-      </TabPanel>
-      
-    </Box>
-  );
-}

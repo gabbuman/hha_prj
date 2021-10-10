@@ -8,7 +8,7 @@ import DptCard from './home/DptCard';
 import CSPreview from './home/CSPreview';
 import Rank from './home/Rank';
 import DataForm from './dpt/DataForm';
-import Sidebar from './layout/Sidebar';
+
 
 class App extends Component {
     render() {
@@ -27,7 +27,7 @@ class App extends Component {
 					<Route path='/rank' component={Rank} />
 					<Route path='/dptcard' component={DptCard} />
 					<Route path='/cspreview' component={CSPreview} />
-					<Route path='/vernavbar' component={Sidebar} />
+					<Route path='/vernavbar' component={VerNavbar} />
 					<Route path='/dataform' component={DataForm} />					
 				</Switch>
 			</Router>

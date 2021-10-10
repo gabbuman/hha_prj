@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { Component } from 'react';
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import * as FaIcons from 'react-icons/fa'
@@ -6,14 +7,7 @@ import * as AiIcons from 'react-icons/ai'
 import { SecondSideBarData, SidebarData } from './SidebarData'
 import Submenu from './Submenu'
 import Menu from './Menu'
-const Bruh = styled.div`
-    background #15171c;
-    height: 80px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
 
-`
 const Icons = styled(Link)`
     margin-left: 2rem;
     font-size: 2rem;

@@ -3,40 +3,44 @@ import { IoMdHeartEmpty } from 'react-icons/io'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 
-const MenuLink = styled(Link)`
+const SidebarLink = styled(Link)`
     display: flex;
-    color: #e1e9fc;
+    color: #000000;
     justify-content:space-between;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
     list-style: none;
     height: 60px;
     text-decoration: none;
     font-size: 15px;
 
     &:hover {
-        background: #252831;
-        border-left: 4px solid #632ce4;
+        background: #ADC0EB;
+        font-weight: bold;
         cursor: pointer;
     }
 
 `;
 
-const MenuLabel = styled.span`
-    margin-left: 5px;
-`;
 
-const Menu = ({item}) => {
+const SidebarLabel = styled.span`
+    margin-left: 16px;
+
+
+`;
+const Submenu = ({item}:any) => {
     return (
         <>
-            <MenuLink to = {item.path}>
+            <SidebarLink to = {item.path}>
                 <div>
-                    <MenuLabel>{item.title}</MenuLabel>
                     {item.icon}
+                    <SidebarLabel>{item.title}</SidebarLabel>
                 </div>
-            </MenuLink>
+            </SidebarLink>
         </>
     );
 };
 
-export default Menu;
+
+
+export default Submenu;

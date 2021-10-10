@@ -3,7 +3,7 @@ import { IoMdHeartEmpty } from 'react-icons/io'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 
-const SidebarLink = styled(Link)`
+const MenuLink = styled(Link)`
     display: flex;
     color: #000000;
     justify-content:space-between;
@@ -13,6 +13,7 @@ const SidebarLink = styled(Link)`
     height: 60px;
     text-decoration: none;
     font-size: 15px;
+    border-top: 2px solid #D7D8DC;
 
     &:hover {
         background: #ADC0EB;
@@ -22,25 +23,24 @@ const SidebarLink = styled(Link)`
 
 `;
 
-
-const SidebarLabel = styled.span`
-    margin-left: 16px;
-
-
+const ArrowIconWrap = styled.svg`
+    width: 45px;
+    height: 13px; 
+`
+const MenuLabel = styled.span`
+    margin-left: 5px;
 `;
-const Submenu = ({item}) => {
+
+const Menu = ({item}:any) => {
     return (
         <>
-            <SidebarLink to = {item.path}>
+            <MenuLink to = {item.path}>
                 <div>
-                    {item.icon}
-                    <SidebarLabel>{item.title}</SidebarLabel>
+                    <MenuLabel>{item.title}</MenuLabel>  <ArrowIconWrap> {item.icon}</ArrowIconWrap>
                 </div>
-            </SidebarLink>
+            </MenuLink>
         </>
     );
 };
 
-
-
-export default Submenu;
+export default Menu;
