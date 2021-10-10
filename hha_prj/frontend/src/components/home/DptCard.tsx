@@ -12,7 +12,6 @@ export interface dptData {
 }
 
 type DptCardProps = {
-    
     departmentData: dptData[];
 }
 
@@ -50,7 +49,7 @@ export const DptCardGroup = styled.div<ColorProps> `
 
 const CardBackground = styled.img `
     position: absolute;
-    top: 0; /* What does this one do? */
+    top: 0;
     height: 105%;
     z-index: -1;
     transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -60,7 +59,7 @@ const CardTitle = styled.h3 `
     color: white;
     font-size: 25px;
     font-weight: 600;
-    margin: 15px 0 0 15px;
+    margin: 0 0 0 0;
     width: 250px;
 `
 
@@ -71,10 +70,11 @@ const CardButton = styled.button<ColorProps> `
     text-transform: uppercase;
     background: none;
     padding: 5px 15px;
+    align-self: end;
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 5px;
     transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-    margin: 10px auto 15px 15px;
+    margin: 0 auto 0 0;
 
     &:hover {
         background: white;
