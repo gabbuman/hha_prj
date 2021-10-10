@@ -37,7 +37,7 @@ export const DptCardGroup = styled.div<ColorProps> `
     border-radius: 10px;
     box-shadow: 0 10px 20px ${props => props.main_color}77;
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: auto auto auto;
     transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     &:hover {
         transform: scale(1.1, 1.1);
