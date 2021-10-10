@@ -1,4 +1,3 @@
-import { number } from 'prop-types';
 import React, { Component } from 'react';
 import { ProgressBar } from 'react-bootstrap';
 import styled from 'styled-components';
@@ -24,9 +23,11 @@ type ColorProps = {
 type txtColorProp = {
     txt_color:string;
 }
+
 type BarProps = {
     percentage: number;
 }
+
 export const DptCardGroup = styled.div<ColorProps> `
     width: 350px;
     height: 225px;
@@ -84,20 +85,18 @@ const BarContainer = styled.div`
     height: 0.1em;
     width: 200px;
     border-radius: 50px;
-    padding: 0px 0px 8px 0px;
-    border: 1px solid #333;
+    padding: 8px 0px 0px 0px;
     positon: relative;
     
 `
 const CardBody = styled.div<txtColorProp>`
-    font-size: 8px;
+    font-size: 10px;
     font-weight: 700;
     color: ${txtColorProp => txtColorProp.txt_color};
     text-transform: Capitalize;
     padding: auto auto;
     margin: 15px auto 20px 15px;
 `
-
 
 export const DptOverview: React.FC<DptCardProps> = ({departmentData}: DptCardProps) =>{
     return <div className="DpOverview">
