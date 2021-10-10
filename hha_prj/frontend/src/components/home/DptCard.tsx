@@ -27,6 +27,12 @@ type BarProps = {
     percentage: number;
 }
 
+type ProgressProps = {
+    description: string;
+    percentage: number;
+    color: string;
+}
+
 export const DptCardGroup = styled.div<ColorProps> `
     width: 350px;
     height: 225px;
@@ -103,13 +109,21 @@ const BarContainer = styled.div<ColorProps> `
 `
 
 const CardBody = styled.div<txtColorProp>`
-    font-size: 10px;
+    font-size: 8px;
     font-weight: 700;
     color: ${txtColorProp => txtColorProp.txt_color};
     text-transform: Capitalize;
-    padding: auto auto;
-    margin: 15px auto 20px 15px;
+    margin: 0 auto 15px 0;
 `
+
+const DptProgressBar: React.FC<ProgressProps> = ({description, percentage, color}: ProgressProps) => {
+    return (
+        <BarContainer main_color={color} >
+            <progress value={percentage} max= {100} />
+            <CardBody txt_color={color}>{description}: {percentage}%</CardBody>
+        </BarContainer>
+    )
+}
 
 export const DptOverview: React.FC<DptCardProps> = ({departmentData}: DptCardProps) =>{
     return <div className="DpOverview">
