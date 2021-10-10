@@ -1,9 +1,8 @@
 import { number } from 'prop-types';
 import React, { Component } from 'react';
 import { ProgressBar } from 'react-bootstrap';
+import styled from 'styled-components';
 
-import styled from 'styled-components'
-const CARD_WIDTH: number = 50;
 export interface dptData {
     name: string;
     dpt_id: number;
@@ -99,6 +98,7 @@ const CardBody = styled.div<txtColorProp>`
     margin: 15px auto 20px 15px;
 `
 
+
 export const DptOverview: React.FC<DptCardProps> = ({departmentData}: DptCardProps) =>{
     return <div className="DpOverview">
         {departmentData.map(item => {
@@ -113,7 +113,6 @@ export const DptOverview: React.FC<DptCardProps> = ({departmentData}: DptCardPro
 }
 
 const DptCard: React.FC<dptData> = ({name, perc_of_data_entered, num_of_case_studies, bg_img, main_color}: dptData) =>  {
-  
     return (
         <div className="DptCard">
             <DptCardGroup main_color={main_color}>
@@ -136,3 +135,5 @@ const DptCard: React.FC<dptData> = ({name, perc_of_data_entered, num_of_case_stu
 }
 
 export default DptCard
+
+
