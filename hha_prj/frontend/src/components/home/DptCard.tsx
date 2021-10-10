@@ -23,10 +23,6 @@ type txtColorProp = {
     txt_color:string;
 }
 
-type BarProps = {
-    percentage: number;
-}
-
 type ProgressProps = {
     description: string;
     percentage: number;
@@ -148,10 +144,8 @@ const DptCard: React.FC<dptData> = ({name, perc_of_data_entered, num_of_case_stu
                 <DptProgressBar description={"Case Studied"} percentage={60} color={"#DBFF00"} />
                 <CardButton main_color={main_color}>Access</CardButton>
             </DptCardGroup> 
-          
         </div>
     )
-    
 }
 
 export default DptCard
