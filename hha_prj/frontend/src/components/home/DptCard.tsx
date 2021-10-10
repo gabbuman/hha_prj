@@ -144,14 +144,8 @@ const DptCard: React.FC<dptData> = ({name, perc_of_data_entered, num_of_case_stu
             <DptCardGroup main_color={main_color}>
                 <CardBackground src={bg_img} />
                 <CardTitle>{name}</CardTitle>
-                <BarContainer>
-                <ProgressBar variant="success" now={perc_of_data_entered} max= {100} />
-                </BarContainer>
-                <CardBody txt_color="green">Data Entered: {perc_of_data_entered}%</CardBody>
-                <BarContainer>
-                <ProgressBar variant="info" now={num_of_case_studies} />
-                </BarContainer>
-                <CardBody txt_color="purple">Case Study: {num_of_case_studies}</CardBody>
+                <DptProgressBar description={"Data Entered"} percentage={30} color={"#FFB800"} />
+                <DptProgressBar description={"Case Studied"} percentage={60} color={"#DBFF00"} />
                 <CardButton main_color={main_color}>Access</CardButton>
             </DptCardGroup> 
           
