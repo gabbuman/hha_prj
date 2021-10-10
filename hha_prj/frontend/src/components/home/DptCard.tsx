@@ -81,14 +81,27 @@ const CardButton = styled.button<ColorProps> `
         color: ${props => props.main_color};
     }
 `
-const BarContainer = styled.div`
-    height: 0.1em;
+const BarContainer = styled.div<ColorProps> `
     width: 200px;
-    border-radius: 50px;
-    padding: 8px 0px 0px 0px;
-    positon: relative;
-    
+    margin: 0 auto 0 0;
+
+    progress {
+        appearance: none;
+
+        ::-webkit-progress-bar {
+            height: 8px;
+            border-radius: 4px;
+            background-color: #00000010;
+        }
+
+        ::-webkit-progress-value {
+            height: 8px;
+            border-radius: 4px;
+            background-color: ${props => props.main_color};
+        }
+    }
 `
+
 const CardBody = styled.div<txtColorProp>`
     font-size: 10px;
     font-weight: 700;
