@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ProgressBar } from 'react-bootstrap';
 import styled from 'styled-components';
 
 export interface dptData {
