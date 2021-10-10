@@ -10,7 +10,7 @@ const Header: FC<Props> = ({title}): ReactElement => {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <img src="/static/logo.png" width="60" height="50"
           className="d-inline-block align-top" alt="hha logo"/>
-        <a className="navbar-brand" href="">{title}</a>
+        <a className="navbar-brand" href="#">{title}</a>
       </nav>
     </div>
   )
