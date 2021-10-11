@@ -7,8 +7,9 @@ import Login from './login/Login';
 import DptCard, { DptOverview } from './home/DptCard';
 import CSPreview from './home/CSPreview';
 import Rank from './home/Rank';
-import DataForm from './dpt/DataForm';
 import {dpts_Data} from './home/DptData';
+import MonthlyRecord from './dpt/MonthlyRecord';
+
 class App extends Component {
     render() {
 
@@ -33,7 +34,7 @@ class App extends Component {
 				
 					<Route path='/cspreview' component={CSPreview} />
 					<Route path='/vernavbar' component={VerNavbar} />
-					<Route path='/dataform' component={DataForm} />					
+					<Route path='/monthlyrecord' component={MonthlyRecord} />					
 				</Switch>
 			</Router>
 		)
