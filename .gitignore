@@ -15,10 +15,7 @@ db.sqlite3-journal
 media
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
-/hha_prj/frontend/static/*
-/hha_prj/backend/__pycache__/*
-/hha_prj/backend/migrations/*
-!/hha_prj/backend/migrations/__init__.py
+hha_prj/staticfiles/
 
 ### Django.Python Stack ###
 # Byte-compiled / optimized / DLL files
