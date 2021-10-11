@@ -20,7 +20,6 @@ media
 /hha_prj/backend/__pycache__/*
 /hha_prj/backend/migrations/*
 !/hha_prj/backend/migrations/__init__.py
-package-lock.json
 
 
 ### Django.Python Stack ###
