@@ -5,6 +5,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { makeStyles } from "@material-ui/core/styles";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import MonthlyRecord from '../dpt/MonthlyRecord';
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -85,7 +88,8 @@ export default function VerticalTabs() {
         sx={{ borderRight: 1, borderColor: 'divider'}}
 
       >
-        <Button sx={{justifyContent: 'flex-start', textTransform: 'none'}} variant="outlined" href="/dptcard">
+       
+        <Button sx={{justifyContent: 'flex-start', textTransform: 'none' , color: "black"}} variant="outlined" startIcon={<ArrowBackIcon />} href="/dptcard">
             Back to Home
         </Button>
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Monthly Records" {...a11yProps(1)} />
@@ -95,7 +99,7 @@ export default function VerticalTabs() {
 
       </Tabs>
       <TabPanel  value={value} index={1}>
-        Item Two
+        <MonthlyRecord />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three

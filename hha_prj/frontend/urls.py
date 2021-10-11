@@ -9,5 +9,6 @@ urlpatterns = [
     path('dptcard', views.index),
     path('cspreview', views.index),
     path('vernavbar', views.index),
-    path('monthlyrecord', views.index)
+    path('monthlyrecord', views.index),
+    path('dptrecordpage', views.index)    
 ]
