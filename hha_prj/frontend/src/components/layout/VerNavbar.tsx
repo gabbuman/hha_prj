@@ -14,6 +14,41 @@ interface TabPanelProps {
   value: number;
 }
 
+function LinkTab(props: LinkTabProps) {
+    return (      
+    <Tab
+        component="a"
+        onClick={(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+          event.preventDefault();
+        }}
+        {...props}
+      />
+    );
+  }
+
+function a11yProps(index: number) {
+  return {
+    id: `vertical-tab-${index}`,
+    'aria-controls': `vertical-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+    tabs: {
+      "& .MuiTab-wrapper": {
+        flexDirection: "row",
+        justifyContent: "flex-start"
+      }
+    }
+  }));
+
+export default function VerticalTabs() {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 

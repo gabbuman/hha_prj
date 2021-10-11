@@ -150,3 +150,5 @@ const DptCard: React.FC<dptData> = ({name, perc_of_data_entered, num_of_case_stu
 export default DptCard
 
 
+
+
