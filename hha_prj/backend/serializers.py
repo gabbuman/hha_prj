@@ -1,13 +1,18 @@
 from backend.models import RehabMonthlyRecord
 from rest_framework import serializers
-from backend.models import MaternityMonthlyRecord, MonthlyRecord, CustomUser
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from backend.models import MaternityMonthlyRecord, MonthlyRecord, CustomUser, NICUPaedsMonthlyRecord
 
 #Monthly Record Serializer
 class MonthlyRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = MonthlyRecord
+        fields = '__all__'
+        
+class NICUPaedsMonthlyRecordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NICUPaedsMonthlyRecord
         fields = '__all__'
 
 # Rehab Monthly Record Serializer
