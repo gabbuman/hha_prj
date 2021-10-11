@@ -10,6 +10,7 @@ import Rank from './home/Rank';
 import {dpts_Data} from './home/DptData';
 import MonthlyRecord from './dpt/MonthlyRecord';
 
+
 class App extends Component {
     render() {
 
