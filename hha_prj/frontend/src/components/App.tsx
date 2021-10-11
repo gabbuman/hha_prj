@@ -9,13 +9,10 @@ import CSPreview from './home/CSPreview';
 import Rank from './home/Rank';
 import {dpts_Data} from './home/DptData';
 import MonthlyRecord from './dpt/MonthlyRecord';
+import DptRecordPage from './dpt/DptRecordPage';
 
 class App extends Component {
     render() {
-
-    	// return (
-    	// 	<Header />
-    	// )
 		
 		return (
 			<Router>
@@ -34,7 +31,8 @@ class App extends Component {
 				
 					<Route path='/cspreview' component={CSPreview} />
 					<Route path='/vernavbar' component={VerNavbar} />
-					<Route path='/monthlyrecord' component={MonthlyRecord} />					
+					<Route path='/monthlyrecord' component={MonthlyRecord} />	
+					<Route path='/dptrecordpage' component={DptRecordPage} />			
 				</Switch>
 			</Router>
 		)
