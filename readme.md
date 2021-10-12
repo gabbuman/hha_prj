@@ -1,11 +1,9 @@
-﻿# Iteration 1 Instructions
-The deployed application uses "http://142.58.2.141:8000/api/token/obtain" this endpoint on the client side to talk to the database. If trying to test login locally, please change this line in the Login.tsx file to "http://127.0.0.1:8000/api/token/obtain" to enable it. 
+﻿# Iteration 1
+# Viewing and testing the application from a browser on a host SFU machine
+- use the 'Chromium' browser because it is newer and properly renders the application
+- there is a default user created for testing login on the deployed application (username: nurse, password: hospital)
 
-To create a locally user, got to "http://127.0.0.1:8000/api/user/" and enter a 'username' and a 'password.' It will send you the username back a response if successful. From there you can test login on the login page at "http://127.0.0.1:8000/login."
-
-Replace "127.0.0.1" with "142.58.2.141" if trying to interact with the virtual machine's exposed endport and vice versa if running the local version.
-
-# Running the project locally
+# Running the project locally via cloning
 Here are steps to run the local version
 - delete the db.sqlite3 file in "prj/hha_prj/"
 - install frontend dependencies with "npm i"
@@ -26,6 +24,13 @@ Here are steps to run the local version
 - deploy the lateest image by running 'sudo docker-compose up --detach' (you may have to kill other containers using the port)
 - to kill containers using the port, run 'sudo docker ps' to see the id, and 'kill [docker container id]' to stop it
 - if docker image is failing to build because there is not enough space run 'sudo docker system prune' to clear docker caches
+
+# Instructions for Switching Between VM IP Endpoints and Local IP Endpoints for the Client
+The deployed application uses "http://142.58.2.141:8000/api/token/obtain" this endpoint on the client side to talk to the database. If trying to test login locally, please change this line in the Login.tsx file to "http://127.0.0.1:8000/api/token/obtain" to enable it. 
+
+To create a locally user, got to "http://127.0.0.1:8000/api/user/" and enter a 'username' and a 'password.' It will send you the username back a response if successful. From there you can test login on the login page at "http://127.0.0.1:8000/login."
+
+Replace "127.0.0.1" with "142.58.2.141" if trying to interact with the virtual machine's exposed endport and vice versa if running the local version.
 
 # Instructions for setting up the environment and running the server
 1. Clone the project do your machine
