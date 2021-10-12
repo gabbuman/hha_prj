@@ -7,6 +7,7 @@ urlpatterns = [
     path('login', views.index),
     path('rank', views.index),
     path('dptcard', views.index),
+    path('homepage', views.index),
     path('cspreview', views.index),
     path('vernavbar', views.index),
     path('monthlyrecord', views.index),

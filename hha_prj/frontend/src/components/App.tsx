@@ -10,6 +10,7 @@ import Rank from './home/Rank';
 import {dpts_Data} from './home/DptData';
 import MonthlyRecord from './dpt/MonthlyRecord';
 import DptRecordPage from './dpt/DptRecordPage';
+import Homepage from './home/Homepage';
 
 class App extends Component {
     render() {
@@ -28,7 +29,7 @@ class App extends Component {
 					<Route path='/dptcard' component={DptOverview}>
 						<DptOverview departmentData={dpts_Data}/>
 					</Route>
-				
+					<Route path='/homepage' component={Homepage}/>
 					<Route path='/cspreview' component={CSPreview} />
 					<Route path='/vernavbar' component={VerNavbar} />
 					<Route path='/monthlyrecord' component={MonthlyRecord} />	
