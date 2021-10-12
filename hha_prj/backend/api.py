@@ -1,6 +1,8 @@
-from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord
+from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRecord,PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord
 from rest_framework import viewsets, permissions
-from .serializers import MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer
+from rest_framework import viewsets, permissions
+from .serializers import MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, PatientCaseStudyRecordSerializer, StaffRecognitionCaseStudyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer
+
 
 # MonthlyRecord ViewSet
 class MonthlyRecordViewSet(viewsets.ModelViewSet):
@@ -32,6 +34,22 @@ class MaternityMonthlyRecordViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = MaternityMonthlyRecordSerializer
+
+# Patient Case Study Record ViewSet
+class PatientCaseStudyRecordViewSet(viewsets.ModelViewSet):
+    queryset = PatientCaseStudyRecord.objects.all()
+    permission_class = [
+        permissions.AllowAny
+    ]
+    serializer_class = PatientCaseStudyRecordSerializer
+
+# Staff Recognition Case Study Record ViewSet
+class StaffRecognitionCaseStudyViewSet(viewsets.ModelViewSet):
+    queryset = StaffRecognitionCaseStudyRecord.objects.all()
+    permission_class = [
+        permissions.AllowAny
+    ]
+    serializer_class = StaffRecognitionCaseStudyRecordSerializer
 
 #Community Health Record Viewset
 class CommunityHealthMonthlyRecordViewset(viewsets.ModelViewSet):
