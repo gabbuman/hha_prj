@@ -56,7 +56,7 @@ export default function SignIn() {
       .then(res => {
         notifySuccess();
         console.log(res);
-        history.push("/cspreview");
+        history.push("/homepage");
       })
       .catch((error) => {
         notifyFail();
