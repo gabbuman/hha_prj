@@ -20,7 +20,7 @@ class App extends Component {
 			<Router>
 				<Switch>
 					<Route exact path="/">
-						<p>nah fam</p>
+						<h1>HHA Record Management Demo</h1>
 					</Route>
 					
 					<Route path='/header' component={() => <Header title={`Hope Health Action`} />}  />
