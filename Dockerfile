@@ -20,3 +20,5 @@ RUN apt-get update && apt-get upgrade -y && \
 COPY ./package.json /app/package.json
 
 RUN npm i --legacy-peer-deps
+
+COPY ./hha_prj /app
