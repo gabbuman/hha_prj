@@ -264,6 +264,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
                 <Container maxWidth="md" >
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     <Grid item xs={8}>
+                    { this.state.isEdit ? "" :
                         <Stack direction="row" spacing={2} alignItems="flex-end">
                         <h6>Select the month:</h6>  
                             <FormControl required sx={{ m: 1, minWidth: 120 }}>
@@ -282,6 +283,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
                                 </Select>
                             </FormControl>
                         </Stack>
+                         } 
                     </Grid>
                     <Grid item xs={4}>
                         { this.state.isEdit ? "" :
