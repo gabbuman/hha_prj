@@ -10,6 +10,5 @@
 9. Use **manage.py** again, but this time to apply those changes to the database which is currently sqlite3 for convenience of not having to download/setup postgres or mysql like so, **python manage.py migrate**
 10. Nice, the database has been instantiated. Now just run the server with **python manage.py runserver** and you can open the current default app with the local address "http://127.0.0.1:8000/"
 
-
-
-
+# External Resources Used
+Images for department cards are from MANYPIXELS PTE LTD. An nonexclusive, worldwide copyright license has been granted for free. For details of the license, see: https://www.manypixels.co/gallery
