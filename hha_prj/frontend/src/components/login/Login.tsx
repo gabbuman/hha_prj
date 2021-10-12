@@ -52,7 +52,8 @@ export default function SignIn() {
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    axios.post(`http://127.0.0.1:8000/api/token/obtain`, {username, password})
+    // axios.post(`http://142.58.2.141:8000/api/token/obtain`, {username, password}) /* Use this endpoint if deploying to vm container */
+    axios.post(`http://127.0.0.1:8000/api/token/obtain`, {username, password}) /* Use this endpoint if working locally */
       .then(res => {
         notifySuccess();
         console.log(res);
@@ -64,10 +65,6 @@ export default function SignIn() {
       }
     );
   };
-
-  const printStuff = () => {
-    console.log(username + password);
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -97,7 +94,7 @@ export default function SignIn() {
               name="username"
               autoComplete="username"
               autoFocus
-              onChange={e => {setUsername(e.target.value); printStuff()}}
+              onChange={e => {setUsername(e.target.value);}}
             />
             <TextField
               margin="normal"
@@ -108,7 +105,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={e => {setPassword(e.target.value); printStuff()}}
+              onChange={e => {setPassword(e.target.value);}}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
