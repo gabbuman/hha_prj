@@ -12,6 +12,9 @@ RUN pip install -r requirements.txt
 
 COPY ./package.json /app/package.json
 
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install npm -y
+
 RUN npm i
 
 COPY . /app
