@@ -20,7 +20,7 @@ export const dpts_Data: dptData[] = [
         main_color: "#b46fbc"
     },
     {
-        name: "NICU/ Padiatric",
+        name: "NICU / Pediatric",
         dpt_id: 3,
         perc_of_data_entered: 80,
         num_of_case_studies: 15,
