@@ -27,7 +27,7 @@ export default function SignIn() {
   const history = useHistory();
 
   const notifySuccess = () => {
-    toast.success('Login success! Welcome, ' + username, {
+    toast.success('Login success! Welcome back ' + username +'!', {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
