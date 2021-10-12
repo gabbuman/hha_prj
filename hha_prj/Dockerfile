@@ -10,9 +10,4 @@ COPY ./requirements.txt /app/requirements.txt
 
 RUN pip install -r requirements.txt
 
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install npm -y
-
-RUN npm install
-
 COPY . /app
