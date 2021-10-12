@@ -10,4 +10,8 @@ COPY ./requirements.txt /app/requirements.txt
 
 RUN pip install -r requirements.txt
 
+COPY ./../package.json /app
+
+RUN npm i
+
 COPY . /app
