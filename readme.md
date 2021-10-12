@@ -23,7 +23,7 @@ Here are steps to run the local version
 - run 'npm i' and 'npm run dev' to install dependencies and generate the 'main.js' file
 - run 'python manage.py [makemigrations|migrate|runserver]' to prepare the backed and test
 - create the docker image to deploy by running 'sudo docker-compose build' (will take a few minutes) 
-- deploy the lateest image by running 'sudo docker-compose up' (you may have to kill other containers using the port)
+- deploy the lateest image by running 'sudo docker-compose up --detach' (you may have to kill other containers using the port)
 - to kill containers using the port, run 'sudo docker ps' to see the id, and 'kill [docker container id]' to stop it
 - if docker image is failing to build because there is not enough space run 'sudo docker system prune' to clear docker caches
 
