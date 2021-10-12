@@ -19,4 +19,4 @@ RUN apt-get update && apt-get upgrade -y && \
 
 COPY ./package.json /app/package.json
 
-RUN npm i /app/package.json
+RUN npm i
