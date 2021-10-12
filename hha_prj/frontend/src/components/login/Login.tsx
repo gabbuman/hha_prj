@@ -65,10 +65,6 @@ export default function SignIn() {
     );
   };
 
-  const printStuff = () => {
-    console.log(username + password);
-  }
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -97,7 +93,7 @@ export default function SignIn() {
               name="username"
               autoComplete="username"
               autoFocus
-              onChange={e => {setUsername(e.target.value); printStuff()}}
+              onChange={e => {setUsername(e.target.value);}}
             />
             <TextField
               margin="normal"
@@ -108,7 +104,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={e => {setPassword(e.target.value); printStuff()}}
+              onChange={e => {setPassword(e.target.value);}}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
