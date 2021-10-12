@@ -1,6 +1,7 @@
+from django.db.models import fields
 from backend.models import RehabMonthlyRecord
 from rest_framework import serializers
-from backend.models import MaternityMonthlyRecord, MonthlyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord
+from backend.models import MaternityMonthlyRecord, MonthlyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord, PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -25,7 +26,21 @@ class RehabMonthlyRecordSerializer(serializers.ModelSerializer):
 class MaternityMonthlyRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = MaternityMonthlyRecord
-        fields = '__all__'     
+        fields = '__all__'         
+
+
+class PatientCaseStudyRecordSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = PatientCaseStudyRecord
+        fields = '__all__'
+
+
+class StaffRecognitionCaseStudyRecordSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = StaffRecognitionCaseStudyRecord
+        fields = '__all__'    
 
 # Community health Record Serializer
 class CommunityHealthMonthlyRecordSerializer(serializers.ModelSerializer):
