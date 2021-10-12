@@ -15,6 +15,18 @@ Here are steps to run the local version
 - run "python manage.py migrate" in the same folder as above
 - Lastly, in two separate terminals, run "npm run dev" in the root directory and "python manage.py runserver" in "prj/hha_prj" to have live updates to frontend applied and server the api respectively.
 
+# Deploying the application to the virtual machine
+- ssh into our team virtual machine as described by the piazza post
+- cd into the 'prj' directory of our repo
+- pull any changes from master
+- switch any endpoints in the client from the IP prefix "127.0.0.1" to "142.58.2.141"
+- run 'npm i' and 'npm run dev' to install dependencies and generate the 'main.js' file
+- run 'python manage.py [makemigrations|migrate|runserver]' to prepare the backed and test
+- create the docker image to deploy by running 'sudo docker-compose build' (will take a few minutes) 
+- deploy the lateest image by running 'sudo docker-compose up' (you may have to kill other containers using the port)
+- to kill containers using the port, run 'sudo docker ps' to see the id, and 'kill [docker container id]' to stop it
+- if docker image is failing to build because there is not enough space run 'sudo docker system prune' to clear docker caches
+
 # Instructions for setting up the environment and running the server
 1. Clone the project do your machine
 2. Install npm (node package manager) if you have not already
