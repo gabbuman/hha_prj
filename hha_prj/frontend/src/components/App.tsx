@@ -11,6 +11,7 @@ import {dpts_Data} from './home/DptData';
 import MonthlyRecord from './dpt/MonthlyRecord';
 import DptRecordPage from './dpt/DptRecordPage';
 import Homepage from './home/Homepage';
+import { ToastContainer } from 'react-toastify';
 
 class App extends Component {
     render() {
@@ -35,6 +36,7 @@ class App extends Component {
 					<Route path='/monthlyrecord' component={MonthlyRecord} />	
 					<Route path='/dptrecordpage' component={DptRecordPage} />			
 				</Switch>
+				<ToastContainer/>
 			</Router>
 		)
     }

@@ -37,7 +37,7 @@ export const DptCardGroup = styled.div<ColorProps> `
     border-radius: 10px;
     box-shadow: 0 10px 20px ${props => props.main_color}77;
     display: grid;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: 1fr 1fr;
     transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     &:hover {
         transform: scale(1.1, 1.1);
@@ -64,24 +64,6 @@ const CardTitle = styled.h3 `
     width: 250px;
 `
 
-const CardButton = styled.button<ColorProps> `
-    font-size: 12px;
-    font-weight: 600;
-    color: white;
-    text-transform: uppercase;
-    background: none;
-    padding: 5px 15px;
-    align-self: end;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 5px;
-    transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-    margin: 0 auto 0 0;
-
-    &:hover {
-        background: white;
-        color: ${props => props.main_color};
-    }
-`
 const BarContainer = styled.div<ColorProps> `
     width: 200px;
     margin: 0 auto 0 0;
@@ -104,8 +86,8 @@ const BarContainer = styled.div<ColorProps> `
 `
 
 const CardBody = styled.div<txtColorProp>`
-    font-size: 8px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 400;
     color: ${txtColorProp => txtColorProp.txt_color};
     text-transform: Capitalize;
     margin: 0 auto 15px 0;
@@ -135,15 +117,16 @@ export const DptOverview: React.FC<DptCardProps> = ({departmentData}: DptCardPro
 
 const DptCard: React.FC<dptData> = ({name, perc_of_data_entered, num_of_case_studies, bg_img, main_color}: dptData) =>  {
     return (
-        <div className="DptCard">
-            <DptCardGroup main_color={main_color}>
-                <CardBackground src={bg_img} />
-                <CardTitle>{name}</CardTitle>
-                <DptProgressBar description={"Data Entered"} percentage={30} color={"#FFB800"} />
-                <DptProgressBar description={"Case Studied"} percentage={60} color={"#DBFF00"} />
-                <CardButton main_color={main_color}>Access</CardButton>
-            </DptCardGroup> 
-        </div>
+        <a href="/dptrecordpage" style={{ textDecoration: 'none' }}>
+            <div className="DptCard">
+                <DptCardGroup main_color={main_color}>
+                    <CardBackground src={bg_img} />
+                    <CardTitle>{name}</CardTitle>
+                    <DptProgressBar description={"Data Entered"} percentage={30} color={"#78FF04"} />
+                    <DptProgressBar description={"Case Studied"} percentage={60} color={"#DBFF00"} />
+                </DptCardGroup> 
+            </div>
+        </a>
     )
 }
 
