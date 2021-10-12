@@ -1,6 +1,6 @@
-from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord
+from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord
 from rest_framework import viewsets, permissions
-from .serializers import MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer
+from .serializers import MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer
 
 # MonthlyRecord ViewSet
 class MonthlyRecordViewSet(viewsets.ModelViewSet):
@@ -32,6 +32,14 @@ class MaternityMonthlyRecordViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = MaternityMonthlyRecordSerializer
+
+#Community Health Record Viewset
+class CommunityHealthMonthlyRecordViewset(viewsets.ModelViewSet):
+    queryset = CommunityHealthMonthlyRecord.objects.all()
+    permission_class = [
+        permissions.AllowAny
+    ]
+    serializer_class = CommunityHealthMonthlyRecordSerializer
 
 # Custom User Viewset
 class CustomUserViewSet(viewsets.ModelViewSet):
