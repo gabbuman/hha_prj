@@ -4,7 +4,7 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app
 
-ADD . /app
+ADD ./hha_prj /app
 
 COPY ./hha_prj/requirements.txt /app/requirements.txt
 
@@ -16,5 +16,3 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get install npm -y
 
 RUN npm i
-
-COPY . /app
