@@ -16,9 +16,3 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN npm install
 
 COPY . /app
-
-RUN python manage.py makemigrations
-
-RUN python manage.py migrate
-
-RUN python manage.py runserver
