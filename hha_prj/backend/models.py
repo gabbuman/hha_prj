@@ -168,6 +168,20 @@ class MaternityMonthlyRecord(models.Model):
     labor_use_partograph_cesarean = models.PositiveSmallIntegerField()
     labor_active_management_of_third_phase_labours = models.PositiveSmallIntegerField()
 
+class PatientCaseStudyRecord(models.Model):
+
+    #PATIENT STORY
+    patient_name = models.CharField(max_length=20)
+    patient_age = models.PositiveSmallIntegerField()
+    patient_story = models.TextField(max_length=None)
+
+class StaffRecognitionCaseStudyRecord(models.Model):
+    
+    #STAFF RECOGNITION
+    staff_name = models.CharField(max_length=20)
+    job_title = models.CharField(max_length=20)
+    staff_recognition_Story = models.TextField(max_length=None)
+
 class CommunityHealthMonthlyRecord(models.Model):
     month_name = models.CharField(max_length=15)
 
