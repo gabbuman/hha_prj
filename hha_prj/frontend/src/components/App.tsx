@@ -10,12 +10,14 @@ import Rank from './home/Rank';
 import {dpts_Data} from './home/DptData';
 import MonthlyRecord from './dpt/MonthlyRecord';
 import DptRecordPage from './dpt/DptRecordPage';
+import { ToastContainer, toast } from 'react-toastify';
 
 class App extends Component {
     render() {
 		
 		return (
 			<Router>
+				<ToastContainer/>
 				<Switch>
 					<Route exact path="/">
 						<p>nah fam</p>

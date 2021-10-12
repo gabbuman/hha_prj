@@ -14,6 +14,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const theme = createTheme();
 
@@ -21,18 +23,48 @@ export default function SignIn() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
+  const notifySuccess = () => {
+    toast.success('Login success! Welcome, ' + username, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
+  const notifyFail = () => {
+    toast.error('Sorry, the username and password entered does not match any account.', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  } 
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    this.setState({isLoading: true})
-        axios.post(`http://127.0.0.1:8000/api/obtain/token`,{username, password})
-          .then(res => {
-            
-          })
-          .catch((error) => {
-            console.error(error)
-          });
+    axios.post(`http://127.0.0.1:8000/api/token/obtain`, {username, password})
+      .then(res => {
+        notifySuccess();
+        console.log(res);
+        window.open("/cspreview","_self");
+      })
+      .catch((error) => {
+        notifyFail();
+        console.error(error)
+      }
+    );
   };
+
+  const printStuff = () => {
+    console.log(username + password);
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -62,7 +94,7 @@ export default function SignIn() {
               name="username"
               autoComplete="username"
               autoFocus
-              onChange={e => setUsername(e.target.value)}
+              onChange={e => {setUsername(e.target.value); printStuff()}}
             />
             <TextField
               margin="normal"
@@ -73,7 +105,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={e => setPassword(e.target.value)}
+              onChange={e => {setPassword(e.target.value); printStuff()}}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
