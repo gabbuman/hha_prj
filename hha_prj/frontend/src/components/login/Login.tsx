@@ -16,12 +16,15 @@ import axios from 'axios';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useHistory } from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function SignIn() {
+  
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const history = useHistory();
 
   const notifySuccess = () => {
     toast.success('Login success! Welcome, ' + username, {
@@ -53,7 +56,7 @@ export default function SignIn() {
       .then(res => {
         notifySuccess();
         console.log(res);
-        window.open("/cspreview","_self");
+        history.push("/cspreview");
       })
       .catch((error) => {
         notifyFail();
