@@ -9,6 +9,12 @@ import {dpts_Data} from './DptData';
 import DptCard, { DptOverview } from './DptCard';
 import styled from 'styled-components'
 
+const HeaderLabel = styled.h3 `
+    font-weight: 800;
+    font-size: 30px;
+    width: 350px;
+`
+
 const CardGroup = styled.div `
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -22,13 +28,20 @@ const CardGroup = styled.div `
 
     @media (max-width: 1220px) {
         grid-template-columns: repeat(1, 1fr);
+        justify-items: start;
     }
+`
+
+const TitledCardGroup = styled.div `
+    display: grid;
+    grid-template-rows: 60px auto;
+    grid-gap: 0px;
 `
 
 const TrailingGroup = styled.div `
     display: grid;
-    grid-template-rows: repeat(2, auto);
-    grid-gap: 40px;
+    grid-template-rows: 30px auto 30px auto;
+    grid-gap: 20px;
 `
 
 const ContentGroup = styled.div `
@@ -36,6 +49,10 @@ const ContentGroup = styled.div `
     display: grid;
     grid-template-columns: repeat(2, auto);
     grid-gap: 40px;
+
+    @media(max-width: 750px) {
+        grid-template-columns: repeat(1, auto);
+    }
 `
 
 class HomePage extends Component  {
@@ -44,19 +61,24 @@ class HomePage extends Component  {
             <div>
                 <Header title={`Hope Health Action`} />
                 <ContentGroup>
-                    <CardGroup>
-                        {dpts_Data.map(item => {
-                            return <DptCard  
-                                name={item.name}
-                                dpt_id={item.dpt_id}
-                                perc_of_data_entered={item.perc_of_data_entered}
-                                num_of_case_studies={item.num_of_case_studies}
-                                bg_img={item.bg_img}
-                                main_color={item.main_color}></DptCard>
-                        })}
-                    </CardGroup>
+                    <TitledCardGroup>
+                        <HeaderLabel>Departments</HeaderLabel>
+                        <CardGroup>
+                            {dpts_Data.map(item => {
+                                return <DptCard  
+                                    name={item.name}
+                                    dpt_id={item.dpt_id}
+                                    perc_of_data_entered={item.perc_of_data_entered}
+                                    num_of_case_studies={item.num_of_case_studies}
+                                    bg_img={item.bg_img}
+                                    main_color={item.main_color}></DptCard>
+                            })}
+                        </CardGroup>
+                    </TitledCardGroup>
                     <TrailingGroup>
+                        <HeaderLabel>Ranking</HeaderLabel>
                         <Rank/>
+                        <HeaderLabel>Case Studies</HeaderLabel>
                         <CSPreview/>
                     </TrailingGroup>
                 </ContentGroup>
