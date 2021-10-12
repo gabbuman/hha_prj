@@ -12,19 +12,62 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useHistory } from 'react-router-dom';
 
 const theme = createTheme();
 
 export default function SignIn() {
+  
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const history = useHistory();
+
+  const notifySuccess = () => {
+    toast.success('Login success! Welcome, ' + username, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
+  const notifyFail = () => {
+    toast.error('Sorry, the username and password entered does not match any account.', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  } 
+  
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('username'),
-      password: data.get('password'),
-    });
+    axios.post(`http://127.0.0.1:8000/api/token/obtain`, {username, password})
+      .then(res => {
+        notifySuccess();
+        console.log(res);
+        history.push("/cspreview");
+      })
+      .catch((error) => {
+        notifyFail();
+        console.error(error)
+      }
+    );
   };
+
+  const printStuff = () => {
+    console.log(username + password);
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -54,6 +97,7 @@ export default function SignIn() {
               name="username"
               autoComplete="username"
               autoFocus
+              onChange={e => {setUsername(e.target.value); printStuff()}}
             />
             <TextField
               margin="normal"
@@ -64,6 +108,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={e => {setPassword(e.target.value); printStuff()}}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
