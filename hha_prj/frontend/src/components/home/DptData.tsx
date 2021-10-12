@@ -33,6 +33,6 @@ export const dpts_Data: dptData[] = [
         perc_of_data_entered: 80,
         num_of_case_studies: 15,
         bg_img: '/static/community-health-bg.png',
-        main_color: "#ef954a" 
+        main_color: "#ee594a" 
     }
 ]
