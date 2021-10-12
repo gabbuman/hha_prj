@@ -5,6 +5,7 @@ To create a locally user, got to "http://127.0.0.1:8000/api/user/" and enter a '
 
 Replace "127.0.0.1" with "142.58.2.141" if trying to interact with the virtual machine's exposed endport and vice versa if running the local version.
 
+# Running the project locally
 Here are steps to run the local version
 - delete the db.sqlite3 file in "prj/hha_prj/"
 - install frontend dependencies with "npm i"
