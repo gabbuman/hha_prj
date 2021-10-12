@@ -1,9 +1,30 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext as _ # aliasing gettext as _
+from .managers import CustomUserManager
+
 
 # Create your models here.
 class MonthlyRecord(models.Model):
     description = models.CharField(max_length=100, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class NICUPaedsMonthlyRecord(models.Model):
+    month = models.CharField(max_length=100,blank=False,auto_created=True)
+    year = models.PositiveSmallIntegerField(blank=False)
+    Beds_available = models.PositiveSmallIntegerField(blank=False,default=0)
+    Bed_days = models.PositiveSmallIntegerField(blank=False,default=0)
+    Patient_days = models.PositiveSmallIntegerField(blank=False,default=0)
+    Hospitalized = models.PositiveSmallIntegerField(blank=False,default=0)
+    Discharged_alive = models.PositiveSmallIntegerField(blank=False,default=0)
+    Died_before_48h = models.PositiveSmallIntegerField(blank=False,default=0)
+    Died_after_48h = models.PositiveSmallIntegerField(blank=False,default=0)
+    Days_hospitalised = models.PositiveSmallIntegerField(blank=False,default=0)
+    Referrals = models.PositiveSmallIntegerField(blank=False,default=0)
+    Transfers = models.PositiveSmallIntegerField(blank=False,default=0)
+    Self_discharged = models.PositiveSmallIntegerField(blank=False,default=0)
+    Stayed_ward = models.PositiveSmallIntegerField(blank=False,default=0)
+    Admissions = models.PositiveSmallIntegerField(blank=False,default=0)
 
 class RehabMonthlyRecord(models.Model):
     month_name = models.CharField(max_length=15)
@@ -422,3 +443,14 @@ class CommunityHealthMonthlyRecord(models.Model):
     dT2_plus_vaccine_femmes_enceites_comm= models.PositiveSmallIntegerField(default=0)
     dT1_dT2_plus_total_vaccine_doses_utilised= models.PositiveSmallIntegerField(default=0)
     dT1_dT2_plus_total_vaccine_doses_administered= models.PositiveSmallIntegerField(default=0)
+    
+class CustomUser(AbstractUser):
+    username = models.CharField(_('username'), unique=True, max_length=50)
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.username
+
