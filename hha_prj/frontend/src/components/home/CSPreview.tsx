@@ -12,7 +12,7 @@ import Card from '@mui/material/Card';
 export class CSPreview extends Component {
     render (){
         return(
-            <Card sx={{ maxWidth: 350, boxShadow:3}}>
+            <Card sx={{ maxWidth: 300, boxShadow:3}}>
                 <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                     <ListItem alignItems="center">
                         <ListItemButton>
