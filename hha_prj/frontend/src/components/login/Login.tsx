@@ -52,7 +52,7 @@ export default function SignIn() {
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    axios.post(`http://127.0.0.1:8000/api/token/obtain`, {username, password})
+    axios.post(`http://142.58.2.141:8000/api/token/obtain`, {username, password})
       .then(res => {
         notifySuccess();
         console.log(res);
