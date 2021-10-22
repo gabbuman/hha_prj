@@ -19,6 +19,7 @@ class CustomUser(AbstractUser):
         return self.username
 
 class MonthlyRecord(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, blank=True, null=True)
     description = models.CharField(max_length=100, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

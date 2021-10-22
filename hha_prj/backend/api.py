@@ -8,7 +8,7 @@ from .serializers import MaternityMonthlyRecordSerializer, MonthlyRecordSerializ
 class MonthlyRecordViewSet(viewsets.ModelViewSet):
     queryset = MonthlyRecord.objects.all()
     permission_classes = [
-        permissions.IsAuthenticated
+        permissions.AllowAny
     ]
     serializer_class = MonthlyRecordSerializer
 
