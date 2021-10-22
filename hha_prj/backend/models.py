@@ -23,7 +23,7 @@ class MonthlyRecord(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 class NICUPaedsMonthlyRecord(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, blank=True, null=True)
     month = models.CharField(max_length=100,blank=False,auto_created=True)
     year = models.PositiveSmallIntegerField(blank=False)
     Beds_available = models.PositiveSmallIntegerField(blank=False,default=0)
@@ -39,6 +39,8 @@ class NICUPaedsMonthlyRecord(models.Model):
     Self_discharged = models.PositiveSmallIntegerField(blank=False,default=0)
     Stayed_ward = models.PositiveSmallIntegerField(blank=False,default=0)
     Admissions = models.PositiveSmallIntegerField(blank=False,default=0)
+
+    REQUIRED_FIELDS = ['user']
 
 class RehabMonthlyRecord(models.Model):
     month_name = models.CharField(max_length=15)
