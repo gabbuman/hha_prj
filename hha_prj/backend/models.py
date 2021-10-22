@@ -460,8 +460,9 @@ class CommunityHealthMonthlyRecord(models.Model):
     
 class CustomUser(AbstractUser):
     username = models.CharField(_('username'), unique=True, max_length=50)
+    role = models.CharField(default="NURSE" ,max_length=50)
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['role']
 
     objects = CustomUserManager()
 
