@@ -7,9 +7,17 @@ from .managers import CustomUserManager
 
 # Create your models here.
 
+
+class Department(models.Model):
+    department = models.CharField(max_length=100,unique=True, primary_key=True)
+
+class Role(models.Model):
+    role = models.CharField(max_length=100,unique=True, primary_key=True)
+
 class CustomUser(AbstractUser):
+    role = models.ForeignKey(Role, on_delete=models.SET_NULL, blank=True, null=True)
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, blank=True, null=True)
     username = models.CharField(_('username'), unique=True, max_length=50)
-    role = models.CharField(default="NURSE" ,max_length=50)
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['role']
 
@@ -22,6 +30,12 @@ class MonthlyRecord(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, blank=True, null=True)
     description = models.CharField(max_length=100, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class MonthlyRecord(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, blank=True, null=True)
+    description = models.CharField(max_length=100, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
 
 class NICUPaedsMonthlyRecord(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, blank=True, null=True)
