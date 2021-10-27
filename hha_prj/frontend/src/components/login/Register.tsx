@@ -6,8 +6,9 @@ import TextField from '@mui/material/TextField';
 import hmm from '@mui/material/';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import RadioGroup from '@mui/material/RadioGroup';
 import FormLabel from '@mui/material/FormLabel';
+import RadioGroup from '@mui/material/RadioGroup';
+import Radio from '@mui/material/Radio';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
@@ -112,16 +113,18 @@ export default function Register() {
               onChange={e => {setPassword(e.target.value);}}
             />
             <FormControl component="fieldset">
-              <FormLabel component="legend"></FormLabel>
-                <RadioGroup 
+              <FormLabel component="legend">Department</FormLabel>
+                <RadioGroup row
                   aria-label="department"
                   defaultValue="nicu"
                   name="department-buttons-group"
                 >
-                  <FormControlLabel value="nicu" control={<Radio />} label="NICU" />
+                  <FormControlLabel value="rehab" control={<Radio />} label="Rehab" />
+                  <FormControlLabel value="nicu/paeds" control={<Radio />} label="NICU/Paed" />
+                  <FormControlLabel value="maternity" control={<Radio />} label="Maternity" />
+                  <FormControlLabel value="community" control={<Radio />} label="Community Health" />
                 </RadioGroup>
             </FormControl>
-            
             <Button
               type="submit"
               fullWidth
@@ -130,7 +133,6 @@ export default function Register() {
             >
               Register
             </Button>
-            
           </Box>
         </Box>
       </Container>
