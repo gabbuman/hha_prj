@@ -18,7 +18,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
@@ -29,7 +29,26 @@ export default function Register() {
   
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [departments, setDepartments] = useState<Array<any>>([{name:"sup"},{name:"dawg"}]);
   const history = useHistory();
+
+  useEffect(()=>{
+    getDepartments();
+  },[]);
+
+  const getDepartments = () => {
+    axios.get(`http://127.0.0.1:8000/api/department/`) /* Use this endpoint if working locally */
+    .then(res => {
+      typeof(res.data);
+      // setDepartments(res.data);
+      console.log(res.data);
+      console.log(departments);
+      console.log("test");
+    })
+    .catch((error) => {
+      console.error(error)
+    });
+  }
 
   const notifySuccess = () => {
     toast.success('Registration success! Welcome ' + username +'!', {
@@ -119,6 +138,9 @@ export default function Register() {
                   defaultValue="nicu"
                   name="department-buttons-group"
                 >
+                  {departments.map((name:string) => {
+                    <h1>{name}</h1>
+                  })}
                   <FormControlLabel value="rehab" control={<Radio />} label="Rehab" />
                   <FormControlLabel value="nicu/paeds" control={<Radio />} label="NICU/Paed" />
                   <FormControlLabel value="maternity" control={<Radio />} label="Maternity" />
