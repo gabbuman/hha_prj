@@ -62,7 +62,7 @@ export default function Register() {
       .then(res => {
         notifySuccess();
         console.log(res);
-        history.push("/homepage");
+        history.push("/login");
       })
       .catch((error) => {
         notifyFail();
