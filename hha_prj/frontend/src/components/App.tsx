@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Header from './layout/Header';
 import VerNavbar from './layout/VerNavbar';
 import Login from './login/Login';
+import Register from './login/Register';
 import DptCard, { DptOverview } from './home/DptCard';
 import CSPreview from './home/CSPreview';
 import Rank from './home/Rank';
@@ -26,6 +27,7 @@ class App extends Component {
 					<Route path='/header' component={() => <Header title={`Hope Health Action`} />}  />
 
 					<Route path='/login' component={Login} />
+					<Route path='/login' component={Register} />
 					<Route path='/rank' component={Rank} />
 					<Route path='/dptcard' component={DptOverview}>
 						<DptOverview departmentData={dpts_Data}/>

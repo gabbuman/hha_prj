@@ -20,7 +20,7 @@ import { useHistory } from 'react-router-dom';
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function RegisterUser() {
   
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
