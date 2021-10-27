@@ -3,7 +3,11 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
+import hmm from '@mui/material/';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormLabel from '@mui/material/FormLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
@@ -107,10 +111,17 @@ export default function Register() {
               autoComplete="current-password"
               onChange={e => {setPassword(e.target.value);}}
             />
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
+            <FormControl component="fieldset">
+              <FormLabel component="legend"></FormLabel>
+                <RadioGroup 
+                  aria-label="department"
+                  defaultValue="nicu"
+                  name="department-buttons-group"
+                >
+                  <FormControlLabel value="nicu" control={<Radio />} label="NICU" />
+                </RadioGroup>
+            </FormControl>
+            
             <Button
               type="submit"
               fullWidth
