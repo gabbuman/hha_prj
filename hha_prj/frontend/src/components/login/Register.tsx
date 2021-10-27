@@ -29,7 +29,7 @@ export default function Register() {
   
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [departments, setDepartments] = useState<Array<any>>([{name:"sup"},{name:"dawg"}]);
+  const [departments, setDepartments] = useState<Array<any>>([]);
   const history = useHistory();
 
   useEffect(()=>{
@@ -40,7 +40,7 @@ export default function Register() {
     axios.get(`http://127.0.0.1:8000/api/department/`) /* Use this endpoint if working locally */
     .then(res => {
       typeof(res.data);
-      // setDepartments(res.data);
+      setDepartments(res.data);
       console.log(res.data);
       console.log(departments);
       console.log("test");
@@ -138,13 +138,14 @@ export default function Register() {
                   defaultValue="nicu"
                   name="department-buttons-group"
                 >
-                  {departments.map((name:string) => {
-                    <h1>{name}</h1>
+
+                  {departments.map((item, i) => {
+                    return <FormControlLabel key={i} value={i} control={<Radio />} label={item.name} />
                   })}
-                  <FormControlLabel value="rehab" control={<Radio />} label="Rehab" />
-                  <FormControlLabel value="nicu/paeds" control={<Radio />} label="NICU/Paed" />
-                  <FormControlLabel value="maternity" control={<Radio />} label="Maternity" />
-                  <FormControlLabel value="community" control={<Radio />} label="Community Health" />
+
+                  {/* {departments.map((name:string) => {
+                    return <h1>{name}</h1>
+                  })} */}
                 </RadioGroup>
             </FormControl>
             <Button
