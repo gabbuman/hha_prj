@@ -4,11 +4,12 @@ from django.contrib.auth.base_user import BaseUserManager
 
 # Custom user model manager
 class CustomUserManager(BaseUserManager):
-    def create_user(self, username, password, **extra_fields):
+    def create_user(self, username, password, department, **extra_fields):
         # Create a User with the passed username and password.
         if not username:
             raise ValueError(_('The username is required for user creation'))
         user = self.model(username=username, **extra_fields)
+        user.set_department(department)
         user.set_password(password)
         user.save()
         return user

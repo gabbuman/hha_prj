@@ -1,7 +1,7 @@
 from django.db.models import fields
 from backend.models import RehabMonthlyRecord
 from rest_framework import serializers
-from backend.models import MaternityMonthlyRecord, MonthlyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord, PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord
+from backend.models import MaternityMonthlyRecord, MonthlyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord, PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord, Department
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -69,7 +69,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model = CustomUser
-        fields = ("username", "password")
+        fields = ("username", "password", "department")
         extra_kwargs = {
             "password": {"write_only": True},
         }
@@ -95,3 +95,8 @@ class CustomTokenPairSerializer(TokenObtainPairSerializer):
         data["username"] = str(self.user.username)
         data["user_id"] = str(self.user.pk)
         return data
+
+class DepartmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Department
+        fields = '__all__'
