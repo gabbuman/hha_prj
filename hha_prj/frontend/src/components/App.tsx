@@ -27,7 +27,7 @@ class App extends Component {
 					<Route path='/header' component={() => <Header title={`Hope Health Action`} />}  />
 
 					<Route path='/login' component={Login} />
-					<Route path='/login' component={Register} />
+					<Route path='/register' component={Register} />
 					<Route path='/rank' component={Rank} />
 					<Route path='/dptcard' component={DptOverview}>
 						<DptOverview departmentData={dpts_Data}/>

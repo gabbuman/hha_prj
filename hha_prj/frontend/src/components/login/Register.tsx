@@ -20,14 +20,14 @@ import { useHistory } from 'react-router-dom';
 
 const theme = createTheme();
 
-export default function RegisterUser() {
+export default function Register() {
   
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const history = useHistory();
 
   const notifySuccess = () => {
-    toast.success('Login success! Welcome back ' + username +'!', {
+    toast.success('Registration success! Welcome ' + username +'!', {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -39,7 +39,7 @@ export default function RegisterUser() {
   }
 
   const notifyFail = () => {
-    toast.error('Sorry, the username and password entered does not match any account.', {
+    toast.error('Sorry, the username is already in use. Please choose another one!', {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -53,7 +53,7 @@ export default function RegisterUser() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // axios.post(`http://142.58.2.141:8000/api/token/obtain`, {username, password}) /* Use this endpoint if deploying to vm container */
-    axios.post(`http://127.0.0.1:8000/api/token/obtain`, {username, password}) /* Use this endpoint if working locally */
+    axios.post(`http://127.0.0.1:8000/api/user/`, {username, password}) /* Use this endpoint if working locally */
       .then(res => {
         notifySuccess();
         console.log(res);
@@ -82,7 +82,7 @@ export default function RegisterUser() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Staff Login
+            Staff Register
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -107,25 +107,19 @@ export default function RegisterUser() {
               autoComplete="current-password"
               onChange={e => {setPassword(e.target.value);}}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Login
+              Register
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot Username/password?
-                </Link>
-              </Grid>
-            </Grid>
+            
           </Box>
         </Box>
       </Container>
