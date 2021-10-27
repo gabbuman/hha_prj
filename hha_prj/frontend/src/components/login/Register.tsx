@@ -3,15 +3,11 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import hmm from '@mui/material/';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -39,6 +35,7 @@ export default function Register() {
   },[]);
 
   const getDepartments = () => {
+    // axios.post(`http://142.58.2.141:8000/api/department` /* Use this endpoint for VM hosted app */
     axios.get(`http://127.0.0.1:8000/api/department/`) /* Use this endpoint if working locally */
     .then(res => {
       typeof(res.data);
@@ -78,7 +75,7 @@ export default function Register() {
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // axios.post(`http://142.58.2.141:8000/api/token/obtain`, {username, password}) /* Use this endpoint if deploying to vm container */
+    // axios.post(`http://142.58.2.141:8000/api/user`, {username, password, department}) /* Use this endpoint for VM hosted app */
     axios.post(`http://127.0.0.1:8000/api/user/`, {username, password, department}) /* Use this endpoint if working locally */
       .then(res => {
         notifySuccess();
