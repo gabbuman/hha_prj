@@ -29,20 +29,22 @@ export default function Register() {
   
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [departments, setDepartments] = useState<Array<any>>([]);
+  const [department, setDepartment] = useState<string>('');
+  const [departmentList, setDepartmentList] = useState<Array<any>>([]);
   const history = useHistory();
 
   useEffect(()=>{
     getDepartments();
+    console.log(department);
   },[]);
 
   const getDepartments = () => {
     axios.get(`http://127.0.0.1:8000/api/department/`) /* Use this endpoint if working locally */
     .then(res => {
       typeof(res.data);
-      setDepartments(res.data);
+      setDepartmentList(res.data);
       console.log(res.data);
-      console.log(departments);
+      console.log(departmentList);
       console.log("test");
     })
     .catch((error) => {
@@ -77,7 +79,7 @@ export default function Register() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // axios.post(`http://142.58.2.141:8000/api/token/obtain`, {username, password}) /* Use this endpoint if deploying to vm container */
-    axios.post(`http://127.0.0.1:8000/api/user/`, {username, password}) /* Use this endpoint if working locally */
+    axios.post(`http://127.0.0.1:8000/api/user/`, {username, password, department}) /* Use this endpoint if working locally */
       .then(res => {
         notifySuccess();
         console.log(res);
@@ -137,15 +139,11 @@ export default function Register() {
                   aria-label="department"
                   defaultValue="nicu"
                   name="department-buttons-group"
+                  onChange={e => {setDepartment(e.target.value);}}
                 >
-
-                  {departments.map((item, i) => {
+                  {departmentList.map((item, i) => {
                     return <FormControlLabel key={i} value={i} control={<Radio />} label={item.name} />
                   })}
-
-                  {/* {departments.map((name:string) => {
-                    return <h1>{name}</h1>
-                  })} */}
                 </RadioGroup>
             </FormControl>
             <Button
