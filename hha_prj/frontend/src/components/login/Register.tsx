@@ -136,10 +136,13 @@ export default function Register() {
                   aria-label="department"
                   defaultValue="nicu"
                   name="department-buttons-group"
-                  onChange={e => {setDepartment(e.target.value);}}
+                  onChange={e => {
+                    setDepartment(e.target.value);
+                    console.log(e.target.value);
+                  }}
                 >
                   {departmentList.map((item, i) => {
-                    return <FormControlLabel key={i} value={i} control={<Radio />} label={item.name} />
+                    return <FormControlLabel key={i} value={item.name} control={<Radio />} label={item.name} />
                   })}
                 </RadioGroup>
             </FormControl>
