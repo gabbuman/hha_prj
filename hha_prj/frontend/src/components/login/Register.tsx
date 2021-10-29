@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import InputLabel from '@mui/material/InputLabel';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
 import Box from '@mui/material/Box';
@@ -18,6 +19,8 @@ import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 const theme = createTheme();
 
@@ -130,21 +133,23 @@ export default function Register() {
               autoComplete="current-password"
               onChange={e => {setPassword(e.target.value);}}
             />
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Department</FormLabel>
-                <RadioGroup row
-                  aria-label="department"
-                  defaultValue="nicu"
-                  name="department-buttons-group"
-                  onChange={e => {
-                    setDepartment(e.target.value);
-                    console.log(e.target.value);
-                  }}
-                >
-                  {departmentList.map((item, i) => {
-                    return <FormControlLabel key={i} value={item.name} control={<Radio />} label={item.name} />
-                  })}
-                </RadioGroup>
+            <FormControl component="fieldset" fullWidth>
+              <InputLabel id="select-department">Department</InputLabel>
+              <Select
+                labelId="select-department"
+                id="select-department"
+                value={department}
+                label="Department"
+                fullWidth
+                onChange={e => {
+                  setDepartment(e.target.value);
+                  console.log(e.target.value);
+                }}
+              >
+                {departmentList.map((item, i) => {
+                  return <MenuItem value={item.name}>{item.name}</MenuItem>
+                })}
+              </Select>
             </FormControl>
             <Button
               type="submit"
