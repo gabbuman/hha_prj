@@ -467,9 +467,18 @@ class Department(models.Model):
     def __str__(self):
         return self.name 
 
+
+class Role(models.Model):
+    name = models.CharField(unique=True, primary_key=True, max_length=50)
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    
+    def __str__(self):
+        return self.name 
+
 class CustomUser(AbstractUser):
     username = models.CharField(_('username'), unique=True, max_length=50)
     department = models.ForeignKey(Department, on_delete=models.PROTECT, default="Rehab", null=True, blank=True)
+    # role = models.ForeignKey(Role, on_delete=models.PROTECT, default="Rehab", null=True, blank=True)
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
 

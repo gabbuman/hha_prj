@@ -110,7 +110,12 @@ export default function Register() {
           <Typography component="h1" variant="h5">
             Staff Register
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box 
+            component="form" 
+            onSubmit={handleSubmit} 
+            noValidate 
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -141,6 +146,7 @@ export default function Register() {
                 value={department}
                 label="Department"
                 fullWidth
+                required
                 onChange={e => {
                   setDepartment(e.target.value);
                   console.log(e.target.value);

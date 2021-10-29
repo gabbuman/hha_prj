@@ -1,7 +1,10 @@
 from django.db.models import fields
 from backend.models import RehabMonthlyRecord
 from rest_framework import serializers
-from backend.models import MaternityMonthlyRecord, MonthlyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord, PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord, Department
+from backend.models import MaternityMonthlyRecord, MonthlyRecord 
+from backend.models import CommunityHealthMonthlyRecord, CustomUser 
+from backend.models import NICUPaedsMonthlyRecord, PatientCaseStudyRecord
+from backend.models import StaffRecognitionCaseStudyRecord, Department, Role
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -99,4 +102,9 @@ class CustomTokenPairSerializer(TokenObtainPairSerializer):
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
+        fields = '__all__'
+
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Role
         fields = '__all__'

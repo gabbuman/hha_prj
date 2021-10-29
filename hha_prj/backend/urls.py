@@ -3,7 +3,7 @@ from rest_framework import routers
 from .api import CommunityHealthMonthlyRecordViewset, MonthlyRecordViewSet 
 from .api import RehabMonthlyRecordViewset, MaternityMonthlyRecordViewSet
 from .api import CustomUserViewSet, NICUPaedsMonthlyRecordViewSet, PatientCaseStudyRecordViewSet
-from .api import StaffRecognitionCaseStudyViewSet, DepartmentViewSet
+from .api import StaffRecognitionCaseStudyViewSet, DepartmentViewSet, RoleViewSet
 from .views import ObtainTokenPairWithUsernameView
 from django.urls import path
 from django.urls.conf import include
@@ -18,7 +18,8 @@ router.register('api/staff_recognition_case_study', StaffRecognitionCaseStudyVie
 router.register('api/community_health', CommunityHealthMonthlyRecordViewset, 'community_health_record')
 router.register('api/nicu_paed', NICUPaedsMonthlyRecordViewSet, 'nicu_paed')
 router.register('api/user', CustomUserViewSet, 'user'),
-router.register('api/department', DepartmentViewSet, 'department')
+router.register('api/department', DepartmentViewSet, 'department'),
+router.register('api/role', RoleViewSet, 'role')
 
 urlpatterns = [
     path('', include(router.urls)),
