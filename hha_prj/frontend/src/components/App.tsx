@@ -4,12 +4,13 @@ import ReactDOM from 'react-dom';
 import Header from './layout/Header';
 import VerNavbar from './layout/VerNavbar';
 import Login from './login/Login';
-import DptCard, { DptOverview } from './home/DptCard';
+import { DptOverview } from './home/DptCard';
 import CSPreview from './home/CSPreview';
 import Rank from './home/Rank';
 import {dpts_Data} from './home/DptData';
 import MonthlyRecord from './dpt/MonthlyRecord';
 import DptRecordPage from './dpt/DptRecordPage';
+import {DptTableView} from './home/DptTable';
 import Homepage from './home/Homepage';
 import { ToastContainer } from 'react-toastify';
 
@@ -35,6 +36,7 @@ class App extends Component {
 					<Route path='/vernavbar' component={VerNavbar} />
 					<Route path='/monthlyrecord' component={MonthlyRecord} />	
 					<Route path='/dptrecordpage' component={DptRecordPage} />			
+					<Route path='/dpttableview' component={DptTableView} />			
 				</Switch>
 				<ToastContainer/>
 			</Router>
