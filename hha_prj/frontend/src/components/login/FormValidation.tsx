@@ -4,7 +4,7 @@ export const validateUsername = (username:string) => {
 }
 
 export const validatePassword = (password:string) => {
-    // https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
+    // Citation: https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
     const regexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     return regexp.test(password);
 }
