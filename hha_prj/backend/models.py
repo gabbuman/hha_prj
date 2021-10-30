@@ -477,8 +477,8 @@ class Role(models.Model):
 
 class CustomUser(AbstractUser):
     username = models.CharField(_('username'), unique=True, max_length=50)
-    department = models.ForeignKey(Department, on_delete=models.PROTECT, default="Rehab", null=True, blank=True)
-    # role = models.ForeignKey(Role, on_delete=models.PROTECT, default="Rehab", null=True, blank=True)
+    department = models.ForeignKey(Department, on_delete=models.PROTECT, default="Rehab", blank=True)
+    role = models.ForeignKey(Role, on_delete=models.PROTECT, default="Staff", blank=True)
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
 

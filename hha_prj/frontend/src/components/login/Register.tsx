@@ -29,12 +29,16 @@ export default function Register() {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [department, setDepartment] = useState<string>('');
+  const [role, setRole] = useState<string>('');
   const [departmentList, setDepartmentList] = useState<Array<any>>([]);
+  const [roleList, setRoleList] = useState<Array<any>>([]);
   const history = useHistory();
 
   useEffect(()=>{
     getDepartments();
-    console.log(department);
+    getRoles();
+    console.log(departmentList);
+    console.log(roleList);
   },[]);
 
   const getDepartments = () => {
@@ -45,7 +49,20 @@ export default function Register() {
       setDepartmentList(res.data);
       console.log(res.data);
       console.log(departmentList);
-      console.log("test");
+    })
+    .catch((error) => {
+      console.error(error)
+    });
+  }
+
+  const getRoles = () => {
+    // axios.post(`http://142.58.2.141:8000/api/department` /* Use this endpoint for VM hosted app */
+    axios.get(`http://127.0.0.1:8000/api/role/`) /* Use this endpoint if working locally */
+    .then(res => {
+      typeof(res.data);
+      setRoleList(res.data);
+      console.log(res.data);
+      console.log(roleList);
     })
     .catch((error) => {
       console.error(error)
@@ -79,7 +96,7 @@ export default function Register() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // axios.post(`http://142.58.2.141:8000/api/user`, {username, password, department}) /* Use this endpoint for VM hosted app */
-    axios.post(`http://127.0.0.1:8000/api/user/`, {username, password, department}) /* Use this endpoint if working locally */
+    axios.post(`http://127.0.0.1:8000/api/user/`, {username:username, password:password, department:department, role:role}) /* Use this endpoint if working locally */
       .then(res => {
         notifySuccess();
         console.log(res);
@@ -138,7 +155,7 @@ export default function Register() {
               autoComplete="current-password"
               onChange={e => {setPassword(e.target.value);}}
             />
-            <FormControl component="fieldset" fullWidth>
+            <FormControl component="fieldset" fullWidth margin="normal">
               <InputLabel id="select-department">Department</InputLabel>
               <Select
                 labelId="select-department"
@@ -153,6 +170,25 @@ export default function Register() {
                 }}
               >
                 {departmentList.map((item, i) => {
+                  return <MenuItem value={item.name}>{item.name}</MenuItem>
+                })}
+              </Select>
+            </FormControl>
+            <FormControl component="fieldset" fullWidth margin="normal">
+              <InputLabel id="select-role">Role</InputLabel>
+              <Select
+                labelId="select-role"
+                id="select-role"
+                value={role}
+                label="Role"
+                fullWidth
+                required
+                onChange={e => {
+                  setRole(e.target.value);
+                  console.log(e.target.value);
+                }}
+              >
+                {roleList.map((item, i) => {
                   return <MenuItem value={item.name}>{item.name}</MenuItem>
                 })}
               </Select>
