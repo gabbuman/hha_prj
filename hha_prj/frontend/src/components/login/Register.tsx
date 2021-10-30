@@ -21,6 +21,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import { validateUsername, validatePassword, validateNotNull } from './FormValidation';
 
 const theme = createTheme();
 
@@ -98,30 +99,11 @@ export default function Register() {
     });
   } 
 
-  const validateUsername = () => {
-    const regexp = /^[a-zA-Z0-9_]{5,}$/;
-    return regexp.test(username);
-  }
-
-  const validatePassword = () => {
-    // https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
-    const regexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    return regexp.test(password);
-  }
-
-  const validateDepartment = () => {
-    return department != "";
-  }
-
-  const validateRole = () => {
-    return role != "";
-  }
-
   const validateForm = () => {
-    if (!validateUsername()) { setUsernameError("Username must be 5 characters or longer. They may not include special characters other than underscore."); return false; }
-    if (!validatePassword()) { setPasswordError("Password must contain minimum eight characters, at least one letter, one number and one special character."); return false; }
-    if (!validateDepartment()) { setDepartmentError("Please select a department for this user."); return false; }
-    if (!validateRole()) { setRoleError("Please select a role for this user."); return false; }
+    if (!validateUsername(username)) { setUsernameError("Username must be 5 characters or longer. They may not include special characters other than underscore."); return false; }
+    if (!validatePassword(password)) { setPasswordError("Password must contain minimum eight characters, at least one letter, one number and one special character."); return false; }
+    if (!validateNotNull(department)) { setDepartmentError("Please select a department for this user."); return false; }
+    if (!validateNotNull(role)) { setRoleError("Please select a role for this user."); return false; }
     return true;
   }
   
