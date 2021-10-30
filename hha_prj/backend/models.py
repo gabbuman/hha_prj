@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.fields.related import ForeignKey
 from django.utils.translation import gettext as _ # aliasing gettext as _
 from .managers import CustomUserManager
+import datetime
 
 
 # Create your models here.
@@ -457,14 +459,30 @@ class CommunityHealthMonthlyRecord(models.Model):
     dT2_plus_vaccine_femmes_enceites_comm= models.PositiveSmallIntegerField(default=0)
     dT1_dT2_plus_total_vaccine_doses_utilised= models.PositiveSmallIntegerField(default=0)
     dT1_dT2_plus_total_vaccine_doses_administered= models.PositiveSmallIntegerField(default=0)
+
+class Department(models.Model):
+    name = models.CharField(unique=True, primary_key=True, max_length=50)
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
     
+    def __str__(self):
+        return self.name 
+
+
+class Role(models.Model):
+    name = models.CharField(unique=True, primary_key=True, max_length=50)
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    
+    def __str__(self):
+        return self.name 
+
 class CustomUser(AbstractUser):
     username = models.CharField(_('username'), unique=True, max_length=50)
+    department = models.ForeignKey(Department, on_delete=models.PROTECT, default="Rehab", blank=True)
+    role = models.ForeignKey(Role, on_delete=models.PROTECT, default="Staff", blank=True)
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
-
+    
     def __str__(self):
-        return self.username
-
+        return "%s %s" % (self.username, self.department)
