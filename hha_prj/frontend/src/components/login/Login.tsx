@@ -17,7 +17,7 @@ import { useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import { notifyFail, notifySuccess } from './Notifications';
-import { endpoint } from './Endpoint'
+import { endpoint } from '../Endpoint'
 import { validatePassword, validateUsername } from './FormValidation';
 
 const theme = createTheme();

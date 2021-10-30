@@ -19,7 +19,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { validateUsername, validatePassword, validateNotNull } from './FormValidation';
 import { notifyFail, notifySuccess } from './Notifications';
-import { endpoint } from './Endpoint'
+import { endpoint } from '../Endpoint'
 
 const theme = createTheme();
 
