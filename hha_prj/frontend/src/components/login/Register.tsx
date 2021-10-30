@@ -23,6 +23,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { validateUsername, validatePassword, validateNotNull } from './FormValidation';
 import { notifyFail, notifySuccess } from './Notifications';
 import { getRoles, getDepartments } from './RoleDepartmentLists'
+import { endpoint } from './Endpoint'
 
 const theme = createTheme();
 
@@ -64,8 +65,7 @@ export default function Register() {
   };
 
   const sendCreateUserRequest = () => {
-    // axios.post(`http://142.58.2.141:8000/api/user`, {username, password, department}) /* Use this endpoint for VM hosted app */
-    axios.post(`http://127.0.0.1:8000/api/user/`, {username:username, password:password, department:department, role:role}) /* Use this endpoint if working locally */
+    axios.post( endpoint + 'api/user/', {username:username, password:password, department:department, role:role})
       .then(res => {
         notifySuccess('Registration success! Welcome ' + username +'!');
         console.log(res);

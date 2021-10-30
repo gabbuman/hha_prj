@@ -1,8 +1,8 @@
 import axios from 'axios';
+import { endpoint } from './Endpoint'
 
 export const getDepartments = ():any => {
-    // axios.post(`http://142.58.2.141:8000/api/department` /* Use this endpoint for VM hosted app */
-    axios.get(`http://127.0.0.1:8000/api/department/`) /* Use this endpoint if working locally */
+    axios.get(endpoint + 'api/department/')
     .then(res => {
       typeof(res.data);
       console.log(res.data);
@@ -14,8 +14,7 @@ export const getDepartments = ():any => {
 }
 
 export const getRoles = ():any => {
-    // axios.post(`http://142.58.2.141:8000/api/department` /* Use this endpoint for VM hosted app */
-    axios.get(`http://127.0.0.1:8000/api/role/`) /* Use this endpoint if working locally */
+    axios.get(endpoint + 'api/role/') 
     .then(res => {
       typeof(res.data);
       console.log(res.data);
