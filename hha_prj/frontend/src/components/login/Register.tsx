@@ -22,6 +22,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { validateUsername, validatePassword, validateNotNull } from './FormValidation';
 import { notifyFail, notifySuccess } from './Notifications';
+import { getRoles, getDepartments } from './RoleDepartmentLists'
 
 const theme = createTheme();
 
@@ -41,39 +42,11 @@ export default function Register() {
   const [roleError, setRoleError] = useState<string>('');
 
   useEffect(()=>{
-    getDepartments();
-    getRoles();
+    setDepartmentList(getDepartments());
+    setRoleList(getRoles());
     console.log(departmentList);
     console.log(roleList);
   },[]);
-
-  const getDepartments = () => {
-    // axios.post(`http://142.58.2.141:8000/api/department` /* Use this endpoint for VM hosted app */
-    axios.get(`http://127.0.0.1:8000/api/department/`) /* Use this endpoint if working locally */
-    .then(res => {
-      typeof(res.data);
-      setDepartmentList(res.data);
-      console.log(res.data);
-      console.log(departmentList);
-    })
-    .catch((error) => {
-      console.error(error)
-    });
-  }
-
-  const getRoles = () => {
-    // axios.post(`http://142.58.2.141:8000/api/department` /* Use this endpoint for VM hosted app */
-    axios.get(`http://127.0.0.1:8000/api/role/`) /* Use this endpoint if working locally */
-    .then(res => {
-      typeof(res.data);
-      setRoleList(res.data);
-      console.log(res.data);
-      console.log(roleList);
-    })
-    .catch((error) => {
-      console.error(error)
-    });
-  }
 
   const validateForm = () => {
     if (!validateUsername(username)) { setUsernameError("Username must be 5 characters or longer. They may not include special characters other than underscore."); return false; }
