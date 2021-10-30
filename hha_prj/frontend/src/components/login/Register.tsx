@@ -16,12 +16,12 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { validateUsername, validatePassword, validateNotNull } from './FormValidation';
+import { notifyFail, notifySuccess } from './Notifications';
 
 const theme = createTheme();
 
@@ -75,30 +75,6 @@ export default function Register() {
     });
   }
 
-  const notifySuccess = () => {
-    toast.success('Registration success! Welcome ' + username +'!', {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  }
-
-  const notifyFail = () => {
-    toast.error('Sorry, the username is already in use. Please choose another one!', {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  } 
-
   const validateForm = () => {
     if (!validateUsername(username)) { setUsernameError("Username must be 5 characters or longer. They may not include special characters other than underscore."); return false; }
     if (!validatePassword(password)) { setPasswordError("Password must contain minimum eight characters, at least one letter, one number and one special character."); return false; }
@@ -118,12 +94,12 @@ export default function Register() {
     // axios.post(`http://142.58.2.141:8000/api/user`, {username, password, department}) /* Use this endpoint for VM hosted app */
     axios.post(`http://127.0.0.1:8000/api/user/`, {username:username, password:password, department:department, role:role}) /* Use this endpoint if working locally */
       .then(res => {
-        notifySuccess();
+        notifySuccess('Registration success! Welcome ' + username +'!');
         console.log(res);
         history.push("/login");
       })
       .catch((error) => {
-        notifyFail();
+        notifyFail('Sorry, the username is already in use. Please choose another one!');
         console.error(error)
       }
     );
