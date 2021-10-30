@@ -25,7 +25,7 @@ import MenuItem from '@mui/material/MenuItem';
 const theme = createTheme();
 
 export default function Register() {
-  
+
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [department, setDepartment] = useState<string>('');
@@ -33,6 +33,11 @@ export default function Register() {
   const [departmentList, setDepartmentList] = useState<Array<any>>([]);
   const [roleList, setRoleList] = useState<Array<any>>([]);
   const history = useHistory();
+
+  const [usernameError, setUsernameError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
+  const [departmentError, setDepartmentError] = useState<string>('');
+  const [roleError, setRoleError] = useState<string>('');
 
   useEffect(()=>{
     getDepartments();
@@ -92,9 +97,42 @@ export default function Register() {
       progress: undefined,
     });
   } 
+
+  const validateUsername = () => {
+    const regexp = /^[a-zA-Z0-9_]{5,}$/;
+    return regexp.test(username);
+  }
+
+  const validatePassword = () => {
+    // https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
+    const regexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return regexp.test(password);
+  }
+
+  const validateDepartment = () => {
+    return department != "";
+  }
+
+  const validateRole = () => {
+    return role != "";
+  }
+
+  const validateForm = () => {
+    if (!validateUsername()) { setUsernameError("Invalid username entered. Username must be 5 characters or longer. They may not include special characters other than underscore."); return false; }
+    if (!validatePassword()) { setPasswordError("Invalid password entered. Password must contain minimum eight characters, at least one letter, one number and one special character."); return false; }
+    if (!validateDepartment()) { setDepartmentError("Please select a department for this user."); return false; }
+    if (!validateRole()) { setRoleError("Please select a role for this user."); return false; }
+    return true;
+  }
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (validateForm()){
+      sendCreateUserRequest();
+    }
+  };
+
+  const sendCreateUserRequest = () => {
     // axios.post(`http://142.58.2.141:8000/api/user`, {username, password, department}) /* Use this endpoint for VM hosted app */
     axios.post(`http://127.0.0.1:8000/api/user/`, {username:username, password:password, department:department, role:role}) /* Use this endpoint if working locally */
       .then(res => {
@@ -107,7 +145,7 @@ export default function Register() {
         console.error(error)
       }
     );
-  };
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -143,6 +181,7 @@ export default function Register() {
               autoComplete="username"
               autoFocus
               onChange={e => {setUsername(e.target.value);}}
+              helperText={usernameError}
             />
             <TextField
               margin="normal"
@@ -154,6 +193,7 @@ export default function Register() {
               id="password"
               autoComplete="current-password"
               onChange={e => {setPassword(e.target.value);}}
+              helperText={passwordError}
             />
             <FormControl component="fieldset" fullWidth margin="normal">
               <InputLabel id="select-department">Department</InputLabel>
