@@ -10,6 +10,7 @@ export const getDepartments = ():any => {
     })
     .catch((error) => {
       console.error(error)
+      return [];
     });
 }
 
@@ -22,5 +23,6 @@ export const getRoles = ():any => {
     })
     .catch((error) => {
       console.error(error)
+      return [];
     });
 }

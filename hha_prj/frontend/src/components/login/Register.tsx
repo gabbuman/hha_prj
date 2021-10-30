@@ -3,6 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
+import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import Box from '@mui/material/Box';
@@ -18,7 +19,6 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { validateUsername, validatePassword, validateNotNull } from './FormValidation';
 import { notifyFail, notifySuccess } from './Notifications';
-import { getRoles, getDepartments } from './RoleDepartmentLists'
 import { endpoint } from './Endpoint'
 
 const theme = createTheme();
@@ -39,11 +39,37 @@ export default function Register() {
   const [roleError, setRoleError] = useState<string>('');
 
   useEffect(()=>{
-    setDepartmentList(getDepartments());
-    setRoleList(getRoles());
+    getDepartments();
+    getRoles();
     console.log(departmentList);
     console.log(roleList);
   },[]);
+
+  const getDepartments = () => {
+    axios.get(endpoint + 'api/department/') 
+    .then(res => {
+      typeof(res.data);
+      setDepartmentList(res.data);
+      console.log(res.data);
+      console.log(departmentList);
+    })
+    .catch((error) => {
+      console.error(error)
+    });
+  }
+
+  const getRoles = () => {
+    axios.get(endpoint + 'api/role/') 
+    .then(res => {
+      typeof(res.data);
+      setRoleList(res.data);
+      console.log(res.data);
+      console.log(roleList);
+    })
+    .catch((error) => {
+      console.error(error)
+    });
+  }
 
   const validateForm = () => {
     if (!validateUsername(username)) { setUsernameError("Username must be 5 characters or longer. They may not include special characters other than underscore."); return false; }
@@ -61,7 +87,7 @@ export default function Register() {
   };
 
   const sendCreateUserRequest = () => {
-    axios.post( endpoint + 'api/user/', {username:username, password:password, department:department, role:role})
+    axios.post(endpoint + '/api/user/', {username:username, password:password, department:department, role:role})
       .then(res => {
         notifySuccess('Registration success! Welcome ' + username +'!');
         console.log(res);
@@ -140,6 +166,7 @@ export default function Register() {
                   return <MenuItem value={item.name}>{item.name}</MenuItem>
                 })}
               </Select>
+              <FormHelperText>{departmentError}</FormHelperText>
             </FormControl>
             <FormControl component="fieldset" fullWidth margin="normal">
               <InputLabel id="select-role">Role</InputLabel>
@@ -159,6 +186,7 @@ export default function Register() {
                   return <MenuItem value={item.name}>{item.name}</MenuItem>
                 })}
               </Select>
+              <FormHelperText>{roleError}</FormHelperText>
             </FormControl>
             <Button
               type="submit"
