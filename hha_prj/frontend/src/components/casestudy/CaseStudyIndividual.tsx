@@ -29,6 +29,7 @@ export default class CaseStudyIndividual extends Component <CSProps, CSState>{
     render() {
         return (
             <div>
+                <img src="" alt="" />
                 <TextField
                 variant = 'outlined'
                 id="title-case-study"
