@@ -71,12 +71,15 @@ export default class CaseStudyIndividual extends Component <CSProps, CSState>{
                 }}
                 >
                     <TextField
-                    id="outlined-multiline-static"
+                    id="case-study-description"
                     label="Description"
-                    disabled
+                    variant="outlined"
                     multiline
                     rows={20}
-                    defaultValue="some case study stuff here"
+                    inputProps={
+                        { readOnly: true, }
+                    }
+                    value={this.state.type}
                 />
                 </Box>
             </div>
