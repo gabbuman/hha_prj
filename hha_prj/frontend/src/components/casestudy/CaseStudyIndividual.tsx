@@ -29,24 +29,56 @@ export default class CaseStudyIndividual extends Component <CSProps, CSState>{
     render() {
         return (
             <div>
-                <TextField
-                variant = 'outlined'
-                id="title-case-study"
-                label="Title"
-                value={this.state.title}
-                inputProps={
-					{ readOnly: true, }
-				}
+                <Box
+                component="form"
+                noValidate
+                autoComplete="off"
+                sx={{
+                '& .MuiTextField-root': { m: 2},
+                }}
+                >
+                    <TextField
+                    variant = 'outlined'
+                    id="title-case-study"
+                    label="Title"
+                    value={this.state.title}
+                    inputProps={
+                        { readOnly: true, }
+                    }
+                    sx={{
+                        width: '50ch'
+                    }}
+                    />
+                    <TextField
+                    variant = 'outlined'
+                    id="type-case-study"
+                    label="Type of Case Study"
+                    value={this.state.type}
+                    inputProps={
+                        { readOnly: true, }
+                    }
+                    sx={{
+                        width: '25ch'
+                    }}
+                    />
+                </Box>
+                <Box
+                component="form"
+                noValidate
+                autoComplete="off"
+                sx={{
+                    '& .MuiTextField-root': { m: 2, width: '50ch' }, maxWidth: '100%'
+                }}
+                >
+                    <TextField
+                    id="outlined-multiline-static"
+                    label="Description"
+                    disabled
+                    multiline
+                    rows={20}
+                    defaultValue="some case study stuff here"
                 />
-                <TextField
-                variant = 'outlined'
-                id="type-case-study"
-                label="Type of Case Study"
-                value={this.state.type}
-                inputProps={
-					{ readOnly: true, }
-				}
-                />
+                </Box>
             </div>
         )
     }
