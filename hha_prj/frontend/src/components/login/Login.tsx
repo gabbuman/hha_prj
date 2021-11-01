@@ -19,11 +19,13 @@ import { useHistory } from 'react-router-dom';
 import { notifyFail, notifySuccess } from './Notifications';
 import { endpoint } from '../Endpoint'
 import { validatePassword, validateUsername } from './FormValidation';
+import { useAuth } from '../../hooks';
 
 const theme = createTheme();
 
 export default function SignIn() {
   
+  const [token, setToken] = useAuth();
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const history = useHistory();
@@ -33,8 +35,8 @@ export default function SignIn() {
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if(!validateUsername(username)) { setUsernameError("Username must be 5 characters or longer. They may not include special characters other than underscore."); return false; }
-    if(!validatePassword(password)) { setPasswordError("Password must contain minimum eight characters, at least one letter, one number and one special character."); return false; }
+    if(!validateUsername(username)) { setUsernameError("Username must be 5 characters or longer. They may not include special characters other than underscore."); }
+    //if(!validatePassword(password)) { setPasswordError("Password must contain minimum eight characters, at least one letter, one number and one special character."); }
     sendUserLoginRequest();
   };
 
@@ -42,7 +44,8 @@ export default function SignIn() {
     axios.post(endpoint + 'api/token/obtain', {username, password})
       .then(res => {
         notifySuccess('Login success! Welcome back ' + username +'!');
-        console.log(res);
+        setToken(res.data);
+        console.log(token);
         history.push("/homepage");
       })
       .catch((error) => {
