@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MonthlyRecord from '../dpt/MonthlyRecord';
+import CaseStudyIndividual from '../casestudy/CaseStudyIndividual';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -108,7 +109,7 @@ export default function VerticalTabs() {
         Item Four
       </TabPanel>
       <TabPanel value={value} index={4}>
-        Item Five
+        <CaseStudyIndividual />
       </TabPanel>
     </Box>
   );
