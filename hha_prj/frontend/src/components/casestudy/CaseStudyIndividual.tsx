@@ -91,10 +91,10 @@ export default class CaseStudyIndividual extends Component <CSProps, CSState>{
                         component="img"
                         m={2}
                         sx={{
-                        height: 350,
-                        width: 350,
-                        maxHeight: { xs: 350, md: 350 },
-                        maxWidth: { xs: 350, md: 350 },
+                        height: 400,
+                        width: 400,
+                        maxHeight: { xs: 400, md: 400 },
+                        maxWidth: { xs: 400, md: 400 },
                         }}
                         alt=""
                         src={this.state.image}
