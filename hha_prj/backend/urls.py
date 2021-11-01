@@ -8,6 +8,12 @@ from .views import ObtainTokenPairWithUsernameView
 from django.urls import path
 from django.urls.conf import include
 from rest_framework_simplejwt.views import TokenRefreshView
+import pymongo
+
+my_client = pymongo.MongoClient("mongodb+srv://admin:pword@hhadb.tm3pa.mongodb.net/HHA?retryWrites=true&w=majority")
+db = my_client['HHA']
+col_case = db['Case_study']
+schema = col_case.find({"title": "schema"})
 
 router = routers.DefaultRouter()
 router.register('api/monthly_records', MonthlyRecordViewSet, 'monthly_records')
