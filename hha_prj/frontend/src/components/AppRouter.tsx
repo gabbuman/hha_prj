@@ -15,11 +15,11 @@ import { ToastContainer } from 'react-toastify';
 import { UserContext } from './UserContext';
 
 function AppRouter() {
-    const [value, setValue] = useState("hello from context");
+    const [user, setUser] = useState("hello from context");
     return (
         <Router>
             <Switch>
-                <UserContext.Provider value = {{value, setValue}}>
+                <UserContext.Provider value = {{user, setUser}}>
                     <Route exact path="/">
                         <h1>HHA Record Management Demo</h1>
                     </Route>

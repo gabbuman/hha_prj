@@ -31,7 +31,7 @@ export default function SignIn() {
 
   const [usernameError, setUsernameError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
-  // const {user, setUser} = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
   
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -69,8 +69,8 @@ export default function SignIn() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          {/* <h1>{user}</h1>
-          <button onClick={()=>setUser('ho')}>{user}</button> */}
+          <h1>{user}</h1>
+          <button onClick={()=>setUser('ho')}>{user}</button>
           <Typography component="h1" variant="h5">
             Staff Login
           </Typography>
