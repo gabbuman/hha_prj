@@ -7,52 +7,70 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import { grey } from '@mui/material/colors';
+import { Box, Container, Grid, Stack, FormControl, InputLabel, Select, MenuItem} from '@mui/material';
+
 
 function createData(
     name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number,
+    value: number
   ) {
-    return { name, calories, fat, carbs, protein };
+    return { name, value };
   }
 
+  interface tableProps{
+
+  }
+
+  interface tableState {
+    month: string;
+    year: string;
+}
+
+const months = [
+    'JAN',
+    'FEB',
+    'MAR',
+    'APR',
+    'MAY',
+    'JUN',
+    'JUL',
+    'AUG',
+    'SEP',
+    'OCT',
+    'NOV',
+    'DEC'
+]
+
 const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('Beds available', 159 ),
+    createData('Beds available', 237),
+    createData('Beds available', 262),
+    createData('Beds available', 305),
   ];
 
-export class DptTableView extends Component {
+export class TableData extends Component {
     render (){
         return(
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                    <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
-                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                    </TableRow>
-                    </TableHead>
+                <Table sx={{ width: "auto" }} aria-label="simple table">
                     <TableBody>
                     {rows.map((row) => (
                         <TableRow
                         key={row.name}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                        <TableCell component="th" scope="row">
+                        <TableCell component="th" scope="row" >
                             {row.name}
                         </TableCell>
-                        <TableCell align="right">{row.calories}</TableCell>
-                        <TableCell align="right">{row.fat}</TableCell>
-                        <TableCell align="right">{row.carbs}</TableCell>
-                        <TableCell align="right">{row.protein}</TableCell>
+                        <TableCell align="left" >
+                            {row.value}
+                        </TableCell>
+                        <TableCell align="right" >
+                            <Button startIcon={<TimelineIcon sx={{ color: grey[500]}}/>} href="/dptgraphview"/>
+                        </TableCell>
                         </TableRow>
                     ))}
                     </TableBody>
@@ -62,4 +80,77 @@ export class DptTableView extends Component {
     }
 }
 
-export default DptTableView
+export class DptTableView extends Component<tableProps, tableState> {
+
+    private tabledataElement: React.RefObject<TableData>;
+    constructor(props: tableProps){
+        super(props);
+        this.state = {
+            month: "9",
+            year: ""
+        };
+        this.tabledataElement = React.createRef();
+    }
+
+
+    dropdownHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({month: event.target.value});
+    };
+
+   
+
+    return (){
+        <div>
+                <Box m={5}>
+                <Container maxWidth="md" >
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                    <Grid item xs={8}>
+                    { 
+                        <Stack direction="row" spacing={2} alignItems="flex-end">
+                        <h6>Viewing data from:</h6>  
+                            <FormControl required sx={{ m: 1, minWidth: 120 }}>
+                                <InputLabel id="label">month</InputLabel>
+                                <Select
+                                labelId="label"
+                                id="select"
+                                label="month"
+                                onChange={this.dropdownHandleChange}
+                                >
+                                    {months.map((month) => (
+                                        <MenuItem value={month}> {month}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl> 
+                            <FormControl required sx={{ m: 1, minWidth: 120 }}>
+                                <InputLabel id="label">month</InputLabel>
+                                <Select
+                                labelId="label"
+                                id="select"
+                                label="year"
+                                onChange={this.dropdownHandleChange}
+                                >
+                                    
+                                </Select>
+                            </FormControl>
+                        </Stack>
+                         } 
+                    </Grid>
+                    <Grid item xs={4}>
+                        {
+                            <Stack direction="row" justifyContent="flex-end">
+                                <Button variant="contained" color="primary">Export</Button>
+                            </Stack>
+                        }                   
+                    </Grid>                             
+                    <Grid item xs={12}>
+                        <TableData ref={this.tabledataElement}/>
+                    </Grid>
+                    </Grid>
+                    </Container>  
+                </Box>      
+            </div>
+    }
+}
+
+export default TableData
