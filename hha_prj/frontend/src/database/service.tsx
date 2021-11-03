@@ -1,7 +1,5 @@
 import * as mongoDB from "mongodb";
 
-export const collections: {casestudy?: mongoDB.Collection } ={}
-
 const user = "admin";
 const userPassword = "pword";
 const cluster = "hhadb.tm3pa";
@@ -16,5 +14,5 @@ export async function connectToDatabase () {
     const db: mongoDB.Db = client.db(dbName);
     console.log(`connect to database: ${dbName}`);
 
-    collections.casestudy = db.collection("Case_study");
-};
+    return db
+}
