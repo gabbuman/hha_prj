@@ -14,9 +14,11 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
+import { notifyFail, notifySuccess } from './Notifications';
+import { endpoint } from '../Endpoint'
+import { validatePassword, validateUsername } from './FormValidation';
 
 const theme = createTheme();
 
@@ -26,45 +28,29 @@ export default function SignIn() {
   const [password, setPassword] = useState<string>('');
   const history = useHistory();
 
-  const notifySuccess = () => {
-    toast.success('Login success! Welcome back ' + username +'!', {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  }
-
-  const notifyFail = () => {
-    toast.error('Sorry, the username and password entered does not match any account.', {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  } 
+  const [usernameError, setUsernameError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // axios.post(`http://142.58.2.141:8000/api/token/obtain`, {username, password}) /* Use this endpoint if deploying to vm container */
-    axios.post(`http://127.0.0.1:8000/api/token/obtain`, {username, password}) /* Use this endpoint if working locally */
+    if(!validateUsername(username)) { setUsernameError("Username must be 5 characters or longer. They may not include special characters other than underscore."); return false; }
+    if(!validatePassword(password)) { setPasswordError("Password must contain minimum eight characters, at least one letter, one number and one special character."); return false; }
+    sendUserLoginRequest();
+  };
+
+  const sendUserLoginRequest = () => {
+    axios.post(endpoint + 'api/token/obtain', {username, password})
       .then(res => {
-        notifySuccess();
+        notifySuccess('Login success! Welcome back ' + username +'!');
         console.log(res);
         history.push("/homepage");
       })
       .catch((error) => {
-        notifyFail();
+        notifyFail('Sorry, the username and password entered does not match any account.');
         console.error(error)
       }
     );
-  };
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -95,6 +81,7 @@ export default function SignIn() {
               autoComplete="username"
               autoFocus
               onChange={e => {setUsername(e.target.value);}}
+              helperText={usernameError}
             />
             <TextField
               margin="normal"
@@ -106,6 +93,7 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
               onChange={e => {setPassword(e.target.value);}}
+              helperText={passwordError}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
