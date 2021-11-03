@@ -38,7 +38,7 @@ class App extends Component {
 					<Route path='/vernavbar' component={VerNavbar} />
 					<Route path='/monthlyrecord' component={MonthlyRecord} />	
 					<Route path='/dptrecordpage' component={DptRecordPage} />			
-					<Route path='/dpttableview' component={DptTableView} />			
+					<Route path='/dpttableView' component={DptTableView} />		 	
 				</Switch>
 				<ToastContainer/>
 			</Router>
