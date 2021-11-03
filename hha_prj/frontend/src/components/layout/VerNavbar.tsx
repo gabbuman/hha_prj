@@ -112,7 +112,7 @@ export default function VerticalTabs() {
       <TabPanel value={value} index={4}>
         Item Five
       </TabPanel>
-      <TabPanel value={value} index={4}>
+      <TabPanel value={value} index={5}>
         <DptTableView />
       </TabPanel>
     </Box>
