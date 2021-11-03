@@ -20,13 +20,9 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
     },
-    // output: {
-    //     filename: 'bundle.js',
-    //     path: path.resolve(__dirname, 'dist'),
-    // },
-    // output: {
-    //     library: 'modulename',
-    //     libraryTarget: 'umd',
-    //     filename: 'main.js',
-    // },
+    plugins: [
+        new webpack.ProvidePlugin({
+           "React": "react",
+        }),
+    ],
 }
