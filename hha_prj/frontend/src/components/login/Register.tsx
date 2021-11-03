@@ -33,7 +33,7 @@ export default function Register() {
   const [departmentList, setDepartmentList] = useState<Array<any>>([]);
   const [roleList, setRoleList] = useState<Array<any>>([]);
   const history = useHistory();
-  const msg = useContext(UserContext);
+  // const {value, setValue} = useContext(UserContext);
 
   const [usernameError, setUsernameError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
@@ -114,7 +114,8 @@ export default function Register() {
             alignItems: 'center',
           }}
         >
-           <h1>{msg}</h1>
+           {/* <h1>{msg}</h1> */}
+           {/* <button onClick={()=>setUser("hey")}>change value!</button> */}
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -166,7 +167,7 @@ export default function Register() {
                 }}
               >
                 {departmentList.map((item, i) => {
-                  return <MenuItem value={item.name}>{item.name}</MenuItem>
+                  return <MenuItem key={"dept-"+i} value={item.name}>{item.name}</MenuItem>
                 })}
               </Select>
               <FormHelperText>{departmentError}</FormHelperText>
@@ -186,7 +187,7 @@ export default function Register() {
                 }}
               >
                 {roleList.map((item, i) => {
-                  return <MenuItem value={item.name}>{item.name}</MenuItem>
+                  return <MenuItem key={"dept-"+i} value={item.name}>{item.name}</MenuItem>
                 })}
               </Select>
               <FormHelperText>{roleError}</FormHelperText>

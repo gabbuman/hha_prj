@@ -13,12 +13,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import { notifyFail, notifySuccess } from './Notifications';
 import { endpoint } from '../Endpoint'
 import { validatePassword, validateUsername } from './FormValidation';
+import { UserContext } from '../UserContext';
 
 const theme = createTheme();
 
@@ -30,6 +31,8 @@ export default function SignIn() {
 
   const [usernameError, setUsernameError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
+  // const {user, setUser} = useContext(UserContext);
+  
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -42,8 +45,6 @@ export default function SignIn() {
     axios.post(endpoint + 'api/token/obtain', {username, password})
       .then(res => {
         notifySuccess('Login success! Welcome back ' + username +'!');
-        setToken(res.data);
-        console.log(token);
         history.push("/homepage");
       })
       .catch((error) => {
@@ -68,6 +69,8 @@ export default function SignIn() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
+          {/* <h1>{user}</h1>
+          <button onClick={()=>setUser('ho')}>{user}</button> */}
           <Typography component="h1" variant="h5">
             Staff Login
           </Typography>
