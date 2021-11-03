@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useMemo, useState } from 'react';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import Header from './layout/Header';
 import VerNavbar from './layout/VerNavbar';
@@ -16,10 +16,11 @@ import { UserContext } from './UserContext';
 
 function AppRouter() {
     const [user, setUser] = useState("hello from context");
+    const providerValue = useMemo(()=>({user, setUser}), [user,setUser])
     return (
         <Router>
             <Switch>
-                <UserContext.Provider value = {{user, setUser}}>
+                <UserContext.Provider value = {providerValue}>
                     <Route exact path="/">
                         <h1>HHA Record Management Demo</h1>
                     </Route>
