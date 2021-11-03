@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import Select from '@mui/material/Select';
@@ -20,6 +20,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { validateUsername, validatePassword, validateNotNull } from './FormValidation';
 import { notifyFail, notifySuccess } from './Notifications';
 import { endpoint } from '../Endpoint'
+import { UserContext } from '../UserContext';
 
 const theme = createTheme();
 
@@ -32,6 +33,7 @@ export default function Register() {
   const [departmentList, setDepartmentList] = useState<Array<any>>([]);
   const [roleList, setRoleList] = useState<Array<any>>([]);
   const history = useHistory();
+  const msg = useContext(UserContext);
 
   const [usernameError, setUsernameError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
@@ -112,6 +114,7 @@ export default function Register() {
             alignItems: 'center',
           }}
         >
+           <h1>{msg}</h1>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>

@@ -19,13 +19,11 @@ import { useHistory } from 'react-router-dom';
 import { notifyFail, notifySuccess } from './Notifications';
 import { endpoint } from '../Endpoint'
 import { validatePassword, validateUsername } from './FormValidation';
-import { useAuth } from '../../hooks';
 
 const theme = createTheme();
 
 export default function SignIn() {
   
-  const [token, setToken] = useAuth();
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const history = useHistory();
