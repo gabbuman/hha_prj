@@ -75,7 +75,7 @@ export default function Register() {
 
   const validateForm = () => {
     if (!validateUsername(username)) { setUsernameError("Username must be 5 characters or longer. They may not include special characters other than underscore."); return false; }
-    if (!validatePassword(password)) { setPasswordError("Password must contain minimum eight characters, at least one letter and one number"); return false; }
+    if (!validatePassword(password)) { setPasswordError("Password must contain minimum eight characters, at least one lowercase letter, one uppercase letter and one number."); return false; }
     if (!validateNotNull(department)) { setDepartmentError("Please select a department for this user."); return false; }
     if (!validateNotNull(role)) { setRoleError("Please select a role for this user."); return false; }
     return true;

@@ -37,7 +37,7 @@ export default function SignIn() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if(!validateUsername(username)) { setUsernameError("Username must be 5 characters or longer. They may not include special characters other than underscore."); }
-    //if(!validatePassword(password)) { setPasswordError("Password must contain minimum eight characters, at least one letter, one number and one special character."); }
+    if(!validatePassword(password)) { setPasswordError("Password must contain minimum eight characters, at least one letter, one number and one special character."); }
     sendUserLoginRequest();
   };
 
