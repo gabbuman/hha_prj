@@ -97,6 +97,8 @@ class CustomTokenPairSerializer(TokenObtainPairSerializer):
         data["access"] = str(refresh.access_token)
         data["username"] = str(self.user.username)
         data["user_id"] = str(self.user.pk)
+        data["department"] = str(self.user.department)
+        data["role"] = str(self.user.role)
         return data
 
 class DepartmentSerializer(serializers.ModelSerializer):
