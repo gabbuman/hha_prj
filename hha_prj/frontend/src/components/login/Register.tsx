@@ -91,7 +91,7 @@ export default function Register() {
   const sendCreateUserRequest = () => {
     axios.post(endpoint + 'api/user/', {username:username, password:password, department:department, role:role})
       .then(res => {
-        notifySuccess('Registration success! Welcome ' + username +'!');
+        notifySuccess("New user " + username + " has been register successfully.");
         console.log(res);
         history.push("/login");
       })

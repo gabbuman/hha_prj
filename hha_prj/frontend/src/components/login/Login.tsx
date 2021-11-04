@@ -45,6 +45,7 @@ export default function SignIn() {
     axios.post(endpoint + 'api/token/obtain', {username, password})
       .then(res => {
         notifySuccess('Login success! Welcome back ' + username +'!');
+        console.log(res);
         history.push("/homepage");
       })
       .catch((error) => {
