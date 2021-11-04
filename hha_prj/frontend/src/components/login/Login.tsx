@@ -41,11 +41,20 @@ export default function SignIn() {
     sendUserLoginRequest();
   };
 
+  const storeUser = (data:any) => {
+    localStorage.setItem('role', data?.role);
+    localStorage.setItem('department', data?.department);
+    localStorage.setItem('username',data?.username);
+    localStorage.setItem('user_id',data?.user_id);
+    localStorage.setItem('access', data?.access);
+  }
+
   const sendUserLoginRequest = () => {
-    axios.post(endpoint + 'api/token/obtain', {username, password})
+    axios.post(endpoint + 'api/token/obtain', {username, password} as any)
       .then(res => {
         notifySuccess('Login success! Welcome back ' + username +'!');
-        console.log(res);
+        storeUser(res.data)
+        console.log(localStorage.getItem('department'));
         history.push("/homepage");
       })
       .catch((error) => {
@@ -70,8 +79,8 @@ export default function SignIn() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          <h1>{user}</h1>
-          <button onClick={()=>setUser('ho')}>{user}</button>
+          {/* <h1>{user}</h1>
+          <button onClick={()=>setUser('ho')}>{user}</button> */}
           <Typography component="h1" variant="h5">
             Staff Login
           </Typography>
