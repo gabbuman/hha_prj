@@ -486,3 +486,93 @@ class CustomUser(AbstractUser):
     
     def __str__(self):
         return "%s %s" % (self.username, self.department)
+
+class MonthlyRecordPrimaryData(models.Model):
+    created_at = models.DateField(unique = True,primary_key=True, null=False)
+    department = models.ForeignKey(Department,on_delete=models.PROTECT,default = "Rehab", blank = True)
+    Date_time_submitted = models.DateTimeField()
+
+    beds_available = models.PositiveSmallIntegerField(blank=False)
+    bed_days = models.PositiveSmallIntegerField(blank=False)
+    patient_days = models.PositiveSmallIntegerField(blank= False)
+    hospitalized = models.PositiveSmallIntegerField(blank = False)
+    discharged_alive = models.PositiveSmallIntegerField(blank = False)
+
+    died_before_48h = models.PositiveSmallIntegerField(blank = False)
+    died_after_48h = models.PositiveSmallIntegerField(blank = False)
+    days_hospitalised = models.PositiveSmallIntegerField(blank = False)
+    referrals = models.PositiveSmallIntegerField(blank = False)
+    transfers = models.PositiveSmallIntegerField(blank = False)
+    self_discharged = models.PositiveSmallIntegerField(blank= False)
+    stayed_in_the_ward = models.PositiveSmallIntegerField(blank = False)
+    admissions = models.PositiveSmallIntegerField(blank= False)
+
+    def __str__(self):
+        return "%s %s" % (self.created_at, self.department)
+
+class DischargedAlivePatientRecord(models.Model):
+    department = models.ForeignKey(Department, on_delete= models.PROTECT)
+    monthly_record_date = models.ForeignKey(MonthlyRecordPrimaryData, on_delete= models.PROTECT)
+
+    patient_discharged_diagnosis = models.CharField(max_length=50, blank= False)
+    days_in_rehab = models.PositiveSmallIntegerField(blank = False)
+    discharge_reason = models.CharField(max_length = 100, blank = False)
+    discharge_outcome_ADLs_selfcare = models.CharField(max_length=100, blank = False)
+    discharge_outcome_mobility = models.CharField(max_length=100, blank = False)
+    mobility_device_given = models.CharField(max_length=100, blank = False)
+    discharge_location = models.CharField(max_length=100, blank= False)
+    discharge_employment_status = models.CharField(max_length= 100, blank=False)
+
+class PatientDiedBefore48hRecords(models.Model):
+    department = models.ForeignKey(Department, on_delete= models.PROTECT)
+    monthly_record_date = models.ForeignKey(MonthlyRecordPrimaryData, on_delete= models.PROTECT)
+
+    patient_diagnosis = models.CharField(max_length=50, blank= False)
+    patient_age = models.PositiveSmallIntegerField(blank = False)
+    cause_of_death = models.CharField(max_length= 100, blank = False)
+
+class PatientDiedAfter48hRecords(models.Model):
+    department = models.ForeignKey(Department, on_delete= models.PROTECT)
+    monthly_record_date = models.ForeignKey(MonthlyRecordPrimaryData, on_delete= models.PROTECT)
+
+    patient_diagnosis = models.CharField(max_length=50, blank= False)
+    patient_age = models.PositiveSmallIntegerField(blank = False)
+    cause_of_death = models.CharField(max_length= 100, blank = False)
+
+class SelfDischargedRecords(models.Model):
+    department = models.ForeignKey(Department, on_delete= models.PROTECT)
+    monthly_record_date = models.ForeignKey(MonthlyRecordPrimaryData, on_delete= models.PROTECT)
+
+    reason_for_self_discharge = models.CharField(max_length=100, blank = False)
+
+# class StayedInTheWardRecords(models.Model):
+#     department = models.ForeignKey(Department, on_delete= models.PROTECT)
+#     monthly_record_date = models.ForeignKey(MonthlyRecordPrimaryData, on_delete= models.PROTECT)
+
+#     reason_for_not_descharging = models.CharField(max_length=100, blank= False)
+#     length_of_Stay_current_inpatients = models.CharField(max_length=50, blank = False)
+
+class StayedInTheWardRecords(models.Model):
+    department = models.ForeignKey(Department, on_delete= models.PROTECT)
+    monthly_record_date = models.ForeignKey(MonthlyRecordPrimaryData, on_delete= models.PROTECT)
+
+    not_ready_from_therapy_standpoint = models.PositiveSmallIntegerField(blank = False)
+    wound_care = models.PositiveSmallIntegerField(blank = False)
+    other_medical_reason = models.PositiveSmallIntegerField(blank = False)
+    financial_reason = models.PositiveSmallIntegerField(blank = False)
+
+    _1_to_3_months = models.PositiveSmallIntegerField(blank = False)
+    _3_to_6_months = models.PositiveSmallIntegerField(blank = False)
+    _6_to_12_months = models.PositiveSmallIntegerField(blank = False)
+    _1_to_2_years = models.PositiveSmallIntegerField(blank = False)
+    _2_to_3_years = models.PositiveSmallIntegerField(blank = False)
+    _3_plus_years = models.PositiveSmallIntegerField(blank = False)
+
+class AdmissionRecords(models.Model):
+    department = models.ForeignKey(Department, on_delete= models.PROTECT)
+    monthly_record_date = models.ForeignKey(MonthlyRecordPrimaryData, on_delete= models.PROTECT)
+    
+    quarter_morin = models.PositiveSmallIntegerField(blank = False)
+    cap_haitian = models.PositiveSmallIntegerField(blank = False)
+    department_nord = models.PositiveSmallIntegerField(blank = False)
+    other_departments = models.PositiveSmallIntegerField(blank = False)
