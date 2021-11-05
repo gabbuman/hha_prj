@@ -11,7 +11,7 @@ from django.urls.conf import include
 from rest_framework_simplejwt.views import TokenRefreshView
 
 from django.conf.urls import url
-from .views import departmentApi, monthlyRecordPrimaryDataApi
+from backend import views
 
 router = routers.DefaultRouter()
 router.register('api/monthly_records', MonthlyRecordViewSet, 'monthly_records')
@@ -35,10 +35,5 @@ router.register('api/admission_records', AdmissionRecordsViewSet, 'admission_rec
 urlpatterns = [
     path('', include(router.urls)),
     path('api/token/refresh', TokenRefreshView),
-    path('api/token/obtain', ObtainTokenPairWithUsernameView.as_view()),
-    url(r'^department$',departmentApi),
-    url(r'^department/([0-9]+)$',departmentApi),
-    url(r'^monthlyRecordPrimaryData$',monthlyRecordPrimaryDataApi),
-    url(r'^monthlyRecordPrimaryData/([0-9]+)$',monthlyRecordPrimaryDataApi),
-
+    path('api/token/obtain', ObtainTokenPairWithUsernameView.as_view())
 ]

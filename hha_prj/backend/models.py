@@ -511,7 +511,7 @@ class MonthlyRecordPrimaryData(models.Model):
         return "%s %s" % (self.created_at, self.department)
 
 class DischargedAlivePatientRecord(models.Model):
-    department = models.ForeignKey(Department, on_delete= models.PROTECT)
+    department = models.ForeignKey(Department, on_delete= models.PROTECT,default = "Rehab", blank = True)
     monthly_record_date = models.ForeignKey(MonthlyRecordPrimaryData, on_delete= models.PROTECT)
 
     patient_discharged_diagnosis = models.CharField(max_length=50, blank= False)
@@ -524,7 +524,7 @@ class DischargedAlivePatientRecord(models.Model):
     discharge_employment_status = models.CharField(max_length= 100, blank=False)
 
 class PatientDiedBefore48hRecords(models.Model):
-    department = models.ForeignKey(Department, on_delete= models.PROTECT)
+    department = models.ForeignKey(Department, on_delete= models.PROTECT,default = "Rehab", blank = True)
     monthly_record_date = models.ForeignKey(MonthlyRecordPrimaryData, on_delete= models.PROTECT)
 
     patient_diagnosis = models.CharField(max_length=50, blank= False)
