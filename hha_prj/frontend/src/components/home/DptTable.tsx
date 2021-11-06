@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import { grey } from '@mui/material/colors';
-import { Box, Container, Grid, Stack, FormControl, InputLabel, Select, MenuItem, createTheme, ThemeProvider} from '@mui/material';
+import { Box, Container, Grid, Stack, FormControl, InputLabel, Select, MenuItem, createTheme, ThemeProvider, IconButton, withStyles} from '@mui/material';
 
 const theme = createTheme({
     palette: {
@@ -80,6 +80,7 @@ const initialState: tableState = {
     month: '10',
     year: '2021'
 }
+
  class TableData extends Component <tableProps, tableState> {
     constructor(props: tableProps){
         super(props);
@@ -95,14 +96,17 @@ const initialState: tableState = {
                         key={row.name}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                        <TableCell component="th" scope="row" >
+                        <TableCell component="th" scope="row" width="20%"  style={{fontWeight: 700}} >
                             {row.name}
                         </TableCell>
-                        <TableCell align="left" >
+                        <TableCell align="left" width="15%" >
                             {row.value}
                         </TableCell>
-                        <TableCell align="right" >
-                            <Button startIcon={<TimelineIcon sx={{ color: grey[500]}}/>} href="/dptgraphview"/>
+                        <TableCell align="right" width="90%" >
+                            <IconButton  >
+                                <TimelineIcon sx={{ color: grey[500]}}/>
+                            </IconButton >
+                            
                         </TableCell>
                         </TableRow>
                     ))}
