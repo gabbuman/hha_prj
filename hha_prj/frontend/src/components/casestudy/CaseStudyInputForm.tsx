@@ -48,7 +48,7 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
                         width: '50ch', '& .MuiTextField-root': { m: 2}
                     }}
                     />
-
+                    
                     <FormControl>
                         <InputLabel
                         sx={{
@@ -57,7 +57,7 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
                         id = "case-study-type">Type Of Case Study</InputLabel>
                         <Select
                             sx={{
-                                left:'50px'
+                                left:'50px', width: '15ch'
                             }}
                             labelId = "case-study-type"
                             id="caseStudyType"
