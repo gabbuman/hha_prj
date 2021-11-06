@@ -1,8 +1,6 @@
 from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRecord,PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord, Department, Role
 from rest_framework import viewsets, permissions
 from .serializers import DepartmentSerializer, MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, PatientCaseStudyRecordSerializer, StaffRecognitionCaseStudyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer, RoleSerializer
-from backend.models import MonthlyRecordPrimaryData, DischargedAlivePatientRecord, PatientDiedBefore48hRecords, PatientDiedAfter48hRecords, SelfDischargedRecords, StayedInTheWardRecords, AdmissionRecords
-from .serializers import  MonthlyRecordPrimaryDataSerializer, DischargedAlivePatientRecordSerializer, PatientDiedBefore48hRecordsSerializer, PatientDiedAfter48hRecordsSerializer, SelfDischargedRecordsSerializer, StayedInTheWardRecordsSerializer, AdmissionRecordsSerializer
 # MonthlyRecord ViewSet
 class MonthlyRecordViewSet(viewsets.ModelViewSet):
     queryset = MonthlyRecord.objects.all()
@@ -83,53 +81,3 @@ class RoleViewSet(viewsets.ModelViewSet):
     serializer_class = RoleSerializer
     lookup_field = 'name'
     lookup_url_kwarg = 'name'
-
-
-class MonthlyRecordPrimaryDataViewSet(viewsets.ModelViewSet):
-    queryset = MonthlyRecordPrimaryData.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = MonthlyRecordPrimaryDataSerializer
-
-class DischargedAlivePatientRecordViewSet(viewsets.ModelViewSet):
-    queryset = DischargedAlivePatientRecord.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = DischargedAlivePatientRecordSerializer
-
-class PatientDiedBefore48hRecordsViewSet(viewsets.ModelViewSet):
-    queryset = PatientDiedBefore48hRecords.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = PatientDiedBefore48hRecordsSerializer
-
-class PatientDiedAfter48hRecordsViewSet(viewsets.ModelViewSet):
-    queryset = PatientDiedAfter48hRecords.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = PatientDiedAfter48hRecordsSerializer
-
-class SelfDischargedRecordsViewSet(viewsets.ModelViewSet):
-    queryset = SelfDischargedRecords.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = SelfDischargedRecordsSerializer
-
-class StayedInTheWardRecordsViewSet(viewsets.ModelViewSet):
-    queryset = StayedInTheWardRecords.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = StayedInTheWardRecordsSerializer
-
-class AdmissionRecordsViewSet(viewsets.ModelViewSet):
-    queryset = AdmissionRecords.objects.all()
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = AdmissionRecordsSerializer
