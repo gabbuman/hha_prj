@@ -51,10 +51,10 @@ declare module '@mui/material/Button' {
 
 
 function createData(
-    name: string,
+    question: string,
     value: number
   ) {
-    return { name, value };
+    return { question, value };
   }
 
   interface tableProps{
@@ -63,7 +63,7 @@ function createData(
 
   interface tableState {
     month: string;
-    year: number;
+    year: string;
 }
 
 const months = [
@@ -82,15 +82,22 @@ const months = [
 ]
 
 const rows = [
-    createData('Beds available', 159 ),
-    createData('Beds available', 237),
-    createData('Beds available', 262),
-    createData('Beds available', 305),
+    createData('Beds available', 5 ),
+    createData('Bed Days', 0),
+    createData('Patient Days', 3),
+    createData('Hospitalized', 5),
+    createData('Discharged alive', 5),
+    createData('Died before 48h', 2),
+    createData('Referrals', 1),
+    createData('Transfers', 1),
+    createData('Self-discharged', 1),
+    createData('Stayed in the ward', 1),
+    createData('Amissions', 1),
   ];
 
 const initialState: tableState = {
     month: months[(new Date()).getMonth()-1],
-    year: (new Date()).getFullYear()
+    year: (new Date()).getFullYear().toString()
 }
 
 
@@ -109,19 +116,19 @@ const initialState: tableState = {
                     <TableBody>
                     {rows.map((row) => (
                         <StyledTableRow
-                        key={row.name}
+                        key={row.question}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                         <TableCell component="th" scope="row" width="15%"  style={{fontWeight: 700}} >
-                            {row.name}
+                            {row.question}
                         </TableCell>
                         <TableCell align="left" width="15%" >
                             {row.value}
                         </TableCell>
                         <TableCell align="right" width="100%" >
-                            <IconButton  >
+                            <IconButton>
                                 <TimelineIcon sx={{ color: grey[500]}}/>
-                            </IconButton >
+                            </IconButton>
                             
                         </TableCell>
                         </StyledTableRow>
@@ -140,18 +147,22 @@ export class DptTableView extends Component<tableProps, tableState> {
         super(props);
         this.state = {
             month: months[(new Date()).getMonth()-1],
-            year: (new Date()).getFullYear()
+            year: (new Date()).getFullYear().toString()
         };
         this.tabledataElement = React.createRef();
     }
 
-    dropdownHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dropdownHandleMonthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({month: event.target.value});
+    }
+
+    dropdownHandleYearChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({year: event.target.value});
     }
 
     render (){
 
-        let minOffset = 0, maxOffset = 10;
+        let maxOffset = 10;
         let thisYear = (new Date()).getFullYear();
         let years = [];
         for(let x = 0; x <= maxOffset; x++) {
@@ -174,7 +185,7 @@ export class DptTableView extends Component<tableProps, tableState> {
                                     id="select"
                                     label="month"
                                     value={this.state.month}
-                                    onChange={this.dropdownHandleChange}
+                                    onChange={this.dropdownHandleMonthChange}
                                     >
                                         {months.map((month) => (
                                             <MenuItem value={month}> {month}
@@ -189,7 +200,7 @@ export class DptTableView extends Component<tableProps, tableState> {
                                     id="select"
                                     label="year"
                                     value={this.state.year}
-                                    onChange={this.dropdownHandleChange}
+                                    onChange={this.dropdownHandleYearChange}
                                     >
                                         {years.map((year) => (
                                             <MenuItem value={year}> {year}
