@@ -10,7 +10,19 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import { grey } from '@mui/material/colors';
-import { Box, Container, Grid, Stack, FormControl, InputLabel, Select, MenuItem, createTheme, ThemeProvider, IconButton, withStyles} from '@mui/material';
+import { Box, Container, Grid, Stack, FormControl, InputLabel, Select, MenuItem, createTheme, ThemeProvider, IconButton} from '@mui/material';
+import { createStyles, withStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core/styles';
+
+const StyledTableRow = withStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: grey[200],
+      },
+    },
+  }),
+)(TableRow);
 
 const theme = createTheme({
     palette: {
@@ -81,34 +93,38 @@ const initialState: tableState = {
     year: '2021'
 }
 
+
  class TableData extends Component <tableProps, tableState> {
     constructor(props: tableProps){
         super(props);
         this.state= initialState;    
     }
+
     render (){
+
+
         return(
             <TableContainer component={Paper}>
                 <Table sx={{ width: "auto" }} aria-label="simple table">
                     <TableBody>
                     {rows.map((row) => (
-                        <TableRow
+                        <StyledTableRow
                         key={row.name}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                        <TableCell component="th" scope="row" width="20%"  style={{fontWeight: 700}} >
+                        <TableCell component="th" scope="row" width="15%"  style={{fontWeight: 700}} >
                             {row.name}
                         </TableCell>
                         <TableCell align="left" width="15%" >
                             {row.value}
                         </TableCell>
-                        <TableCell align="right" width="90%" >
+                        <TableCell align="right" width="100%" >
                             <IconButton  >
                                 <TimelineIcon sx={{ color: grey[500]}}/>
                             </IconButton >
                             
                         </TableCell>
-                        </TableRow>
+                        </StyledTableRow>
                     ))}
                     </TableBody>
                 </Table>
@@ -134,6 +150,14 @@ export class DptTableView extends Component<tableProps, tableState> {
     }
 
     render (){
+
+        let minOffset = 0, maxOffset = 10;
+        let thisYear = (new Date()).getFullYear();
+        let years = [];
+        for(let x = 0; x <= maxOffset; x++) {
+            years.push(thisYear - x)
+        }
+
         return(
             <div> 
                     <Box m={5}>
@@ -165,6 +189,10 @@ export class DptTableView extends Component<tableProps, tableState> {
                                     label="year"
                                     onChange={this.dropdownHandleChange}
                                     >
+                                        {years.map((year) => (
+                                            <MenuItem value={year}> {year}
+                                            </MenuItem>
+                                        ))}
                                         
                                     </Select>
                                 </FormControl>
