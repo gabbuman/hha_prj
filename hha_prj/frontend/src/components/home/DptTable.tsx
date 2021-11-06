@@ -63,7 +63,7 @@ function createData(
 
   interface tableState {
     month: string;
-    year: string;
+    year: number;
 }
 
 const months = [
@@ -89,8 +89,8 @@ const rows = [
   ];
 
 const initialState: tableState = {
-    month: '10',
-    year: '2021'
+    month: months[(new Date()).getMonth()-1],
+    year: (new Date()).getFullYear()
 }
 
 
@@ -139,8 +139,8 @@ export class DptTableView extends Component<tableProps, tableState> {
     constructor(props: tableProps){
         super(props);
         this.state = {
-            month: "Nov",
-            year: "2021"
+            month: months[(new Date()).getMonth()-1],
+            year: (new Date()).getFullYear()
         };
         this.tabledataElement = React.createRef();
     }
@@ -165,7 +165,7 @@ export class DptTableView extends Component<tableProps, tableState> {
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         <Grid item xs={8}>
                         {   
-                            <Stack direction="row" spacing={2} alignItems="flex-end">
+                            <Stack direction="row" spacing={2} alignItems ="flex-end">
                             <h6>Viewing data from:</h6>  
                                 <FormControl required sx={{ m: 1, minWidth: 100 }}>
                                     <InputLabel id="label">month</InputLabel>
@@ -173,6 +173,7 @@ export class DptTableView extends Component<tableProps, tableState> {
                                     labelId="label"
                                     id="select"
                                     label="month"
+                                    value={this.state.month}
                                     onChange={this.dropdownHandleChange}
                                     >
                                         {months.map((month) => (
@@ -187,6 +188,7 @@ export class DptTableView extends Component<tableProps, tableState> {
                                     labelId="label"
                                     id="select"
                                     label="year"
+                                    value={this.state.year}
                                     onChange={this.dropdownHandleChange}
                                     >
                                         {years.map((year) => (
