@@ -13,6 +13,7 @@ import { grey } from '@mui/material/colors';
 import { Box, Container, Grid, Stack, FormControl, InputLabel, Select, MenuItem, createTheme, ThemeProvider, IconButton} from '@mui/material';
 import { createStyles, withStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles';
+import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
 
 const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
@@ -95,6 +96,15 @@ const rows = [
     createData('Admissions', 1),
   ];
 
+  const secondaryDataQuestions = [
+    "Discharged alive",
+    "Died before 48h",
+    "Self-discharged",
+    "Stayed in the ward",
+    "Admissions",
+    "Hospitalized"
+  ];
+
 const initialState: tableState = {
     month: months[(new Date()).getMonth()-1],
     year: (new Date()).getFullYear().toString()
@@ -126,11 +136,18 @@ const initialState: tableState = {
                             {row.value}
                         </TableCell>
                         <TableCell align="right" width="100%" >
+                        { secondaryDataQuestions.includes(row.question) &&
                             <IconButton>
-                                <TimelineIcon sx={{ color: grey[500]}}/>
+                                <NotesOutlinedIcon sx={{ color: grey[500]}}/> 
                             </IconButton>
-                            
+                        }
                         </TableCell>
+                        <TableCell align="right" width="100%" >
+                            <IconButton>
+                                <TimelineIcon sx={{ color: grey[500]}}/> 
+                            </IconButton>
+                        </TableCell>
+                        
                         </StyledTableRow>
                     ))}
                     </TableBody>
