@@ -92,7 +92,7 @@ const rows = [
     createData('Transfers', 1),
     createData('Self-discharged', 1),
     createData('Stayed in the ward', 1),
-    createData('Amissions', 1),
+    createData('Admissions', 1),
   ];
 
 const initialState: tableState = {
