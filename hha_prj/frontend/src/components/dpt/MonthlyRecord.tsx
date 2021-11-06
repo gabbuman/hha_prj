@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Box, TextField, Typography, Stack, Button, 
-    FormControl, MenuItem, InputLabel, Select, Grid, Container} from '@mui/material';
+import { Grid, Container, Box } from '@mui/material';
 import RedDataForm from '../dpt/RedDataForm';
+import GreenDataForm from '../dpt/GreenDataForm';
 
 interface MRProps {
 }
@@ -43,46 +43,33 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
         });
     }
 
-    submitClick = () => {
-        window.alert("submit is successful")
-    }
-
     render() {
         const { step } = this.state;
 
         switch(step){
             case 1:
                 return (
-                    <RedDataForm 
-                        nextStep={this.nextStep}
-                        disabled={this.state.disabled} 
-                    />
+                    <div>
+                        <Container >                    
+                            <RedDataForm 
+                                nextStep={this.nextStep}
+                                disabled={this.state.disabled} 
+                            />                     
+                        </Container>  
+                    </div>
                 )
             case 2:
-                return (
-                    <h1>green form</h1>
+                return (             
+                    <div>
+                        <Container >                   
+                            <GreenDataForm 
+                                prevStep={this.prevStep}
+                                disabled={this.state.disabled} 
+                            />                 
+                        </Container>  
+                    </div>
                 )
         }
-		// return (
-        //     <div>
-        //         <Box m={5}>
-        //         <Container maxWidth="md" >
-        //         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        //             <Grid item xs={12}>
-        //                 <RedDataForm disabled={this.state.disabled}/>
-        //             </Grid>
-        //             <Grid item xs={4}>
-        //             </Grid>
-        //             <Grid item xs={8}>
-        //                 <Stack direction="row" spacing={2} justifyContent="flex-end">
-        //                     <Button variant="contained" color="success" onClick={this.submitClick}>Submit</Button>
-        //                 </Stack>
-        //             </Grid> 
-        //         </Grid>  
-        //         </Container>  
-        //         </Box>      
-        //     </div>
-        // )
     }
 }
 
