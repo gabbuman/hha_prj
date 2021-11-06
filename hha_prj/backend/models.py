@@ -486,3 +486,11 @@ class CustomUser(AbstractUser):
     
     def __str__(self):
         return "%s %s" % (self.username, self.department)
+
+class CurrentFieldsList(models.Model):
+    list = models.JSONField(null=True,blank=True)
+    department = models.ForeignKey(Department, on_delete=models.PROTECT, default="Rehab", unique=True)
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    
+    def __str__(self):
+        return self.name 
