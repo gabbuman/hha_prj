@@ -489,7 +489,7 @@ class CustomUser(AbstractUser):
 
 class CurrentFieldsList(models.Model):
     list = models.JSONField(null=True,blank=True)
-    department = models.ForeignKey(Department, on_delete=models.PROTECT, default="Rehab", unique=True)
+    department = models.OneToOneField(Department, on_delete=models.PROTECT, default="Rehab")
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     
     def __str__(self):
