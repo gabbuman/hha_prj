@@ -1,10 +1,22 @@
 import React, { Component, useState } from 'react'
 import Header from '../layout/Header';
 import VerNavbar from '../layout/VerNavbar';
-import { Box, TextField, Typography, Stack, Button, 
+import { Box, TextField, Typography, Stack, Button,
     FormControl, MenuItem, InputLabel, Select, Grid, Container, 
     CardMedia, Card, CardActions, CardActionArea, CardContent} from '@mui/material';
-import { makeStyles } from '@material-ui/styles';
+import express from "express";
+import * as mongoDB from "mongodb";
+
+const user = "admin";
+const userPassword = "pword";
+const cluster = "hhadb.tm3pa";
+const dbName = "HHA"
+const url = `mongodb+srv://${user}:${userPassword}@${cluster}.mongodb.net`;
+
+const client: mongoDB.MongoClient = new mongoDB.MongoClient(url);
+client.connect().then(r => console.log("connected to client") );
+const db: mongoDB.Db = client.db(dbName);
+console.log(`connected to database: ${dbName}`);
 
 interface CSProps {
 

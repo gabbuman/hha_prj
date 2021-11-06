@@ -9,6 +9,7 @@ from django.urls import path
 from django.urls.conf import include
 from rest_framework_simplejwt.views import TokenRefreshView
 
+
 router = routers.DefaultRouter()
 router.register('api/monthly_records', MonthlyRecordViewSet, 'monthly_records')
 router.register('api/rehab_records', RehabMonthlyRecordViewset, 'rehab_record')
