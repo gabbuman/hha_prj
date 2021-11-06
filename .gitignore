@@ -12,8 +12,6 @@ __pycache__/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-hha_prj/media/uploads/*
-!hha_prj/media/uploads/default.jpeg
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # Compiled front and backend files to be ignored
@@ -21,8 +19,8 @@ hha_prj/media/uploads/*
 /hha_prj/backend/__pycache__/*
 /hha_prj/backend/migrations/*
 !/hha_prj/backend/migrations/__init__.py
-# /hha_prj/backend/media/uploads/*
-# !/hha_prj/backend/media/uploads/default.jpeg
+hha_prj/media/uploads/*
+!hha_prj/media/uploads/default.jpeg
 
 
 ### Django.Python Stack ###
