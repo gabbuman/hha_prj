@@ -1,19 +1,14 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import FormLabel from '@mui/material/FormLabel';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import { notifyFail, notifySuccess } from './../login/Notifications';
@@ -27,10 +22,12 @@ export default function CreateDepartment() {
   const [department, setDepartment] = useState<string>('');
   const [departmentError, setDepartmentError] = useState<string>('');
   const [file, setFile] = useState<any>();
+  const [fileError, setFileError] = useState<string>('');
   const history = useHistory();
 
   const validateForm = () => {
     if(!validateDepartment(department)) { setDepartmentError("Department must be 3 characters are longer and contain no special characters"); return false;}
+    if (file==null) { setFileError("No image selected for department. Please choose an image."); return false; }
     return true;
   }
 
@@ -42,14 +39,17 @@ export default function CreateDepartment() {
   };
 
   const sendDepartmentCreateRequest = () => {
-    axios.post(endpoint + 'api/token/obtain', {department, file} as any)
+    axios.post(endpoint + 'api/department/', {department, file}, {
+            headers: {
+            'Content-Type': 'multipart/form-data'
+            }
+        })
       .then(res => {
-        notifySuccess('Login success! Welcome back ' + department +'!');
-        console.log(localStorage.getItem('department'));
+        notifySuccess(department +' successfully created!');
         history.push("/homepage");
       })
       .catch((error) => {
-        notifyFail('Sorry, the department and password entered does not match any account.');
+        notifyFail('Department creation unsuccessful.');
         console.error(error)
       }
     );
@@ -87,10 +87,22 @@ export default function CreateDepartment() {
               onChange={e => {setDepartment(e.target.value);}}
               helperText={departmentError}
             />
-            <label>
-                <input type="file" accept="image/png, image/jpeg" onChange={fileSelectedHandler}>
-                </input>
-            </label>
+            <FormLabel>Department Image
+            </FormLabel>
+            <input
+                    accept="image/*"
+                    style={{ display: 'none' }}
+                    id="raised-button-file"
+                    type="file"
+                    onChange={fileSelectedHandler}
+                />
+                <span>    </span>
+                <label htmlFor="raised-button-file">
+                    <Button component="span" >
+                        Upload
+                    </Button>
+                </label> 
+           
             <Button
               type="submit"
               fullWidth
