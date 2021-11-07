@@ -5,6 +5,7 @@ import { purple } from '@mui/material/colors';
 interface GDFProps {
     prevStep: () => void;
     disabled: boolean;
+    dischargedAlive_shared: number;
 }
 
 interface GDFState {
@@ -52,7 +53,7 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
       };
 
     render() {
-        // const purpleColor = deepPurple[500];
+
 
         return (
             <div>
@@ -65,9 +66,10 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
             noValidate
             autoComplete="off"
             >
+                <div>The shared value is {this.props.dischargedAlive_shared}</div> 
                 <Typography variant="h4">September Hospital Record</Typography>
                 <Box>
-                <Typography variant="h6" color={purple[900]} >2 Discharged Alive</Typography>
+                <Typography variant="h6" color={purple[900]} >{this.props.dischargedAlive_shared} Discharged Alive</Typography>
                 <Typography variant="h5">Patient #1: Discharged Alive</Typography>
                 <FormControl sx={{ m: 1, minWidth: '48%' }}>
                     <InputLabel id="demo-simple-select-label">Discharge Reason</InputLabel>

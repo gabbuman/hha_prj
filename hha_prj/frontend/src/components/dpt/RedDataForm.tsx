@@ -5,6 +5,8 @@ import { Paper, Box, TextField, Typography, Stack, Button } from '@mui/material'
 interface RDFProps {
     nextStep: () => void;
     disabled: boolean;
+    dischargedAlive_shared: number;
+    updateShared: (updateValue: number) => void;
 }
 
 interface RDFState {
@@ -48,6 +50,13 @@ class RedDataForm extends Component <RDFProps, RDFState> {
         e.preventDefault();
         this.props.nextStep();
     };
+
+    updateShared = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            dischargedAlive: +e.target.value
+        })
+        this.props.updateShared(+e.target.value);
+    }
 
     render() {
         return (
@@ -108,7 +117,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                     id=""
                     label="Discharged Alive"
                     value={this.state.dischargedAlive}
-                    onChange={(e)=>{this.setState({dischargedAlive: +e.target.value})}}
+                    onChange={this.updateShared}
                     />          
                 </div>
                 </Box>
