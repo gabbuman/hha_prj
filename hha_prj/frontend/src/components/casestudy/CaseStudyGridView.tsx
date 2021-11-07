@@ -7,13 +7,16 @@ import CSPreview from '../home/CSPreview';
 import Rank from '../home/Rank';
 import {case_data} from './CSData';
 import CSCard from './CaseStudyCard';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import AddCard from './CaseStudyAddCard';
 
 const HeaderLabel = styled.h3 `
     font-weight: 800;
     font-size: 30px;
     width: 350px;
 `
+
+
 
 const CardGroup = styled.div `
     display: grid;
@@ -37,11 +40,6 @@ const TitledCardGroup = styled.div `
     grid-template-rows: 60px auto;
     grid-gap: 0px;
 `
-const TrailingGroup = styled.div `
-    display: grid;
-    grid-template-rows: 30px auto 30px auto;
-    grid-gap: 20px;
-`
 
 const ContentGroup = styled.div `
     margin: 40px;
@@ -54,6 +52,7 @@ const ContentGroup = styled.div `
     }
 `
 
+
 class CaseStudyGridView extends Component {
     render(){
         return(
@@ -65,10 +64,9 @@ class CaseStudyGridView extends Component {
                                 return <CSCard  
                                     title={item.title}
                                     type={item.type}
-                                    content={item.content}
-                                    image={item.image}
-                                    main_color={item.main_color}></CSCard>
+                                    content={item.content}></CSCard>
                             })}
+                            <AddCard/>
                         </CardGroup>
                     </TitledCardGroup>
                 </ContentGroup>

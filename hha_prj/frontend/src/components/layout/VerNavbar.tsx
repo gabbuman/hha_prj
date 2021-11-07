@@ -110,7 +110,7 @@ export default function VerticalTabs() {
         Item Four
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <CaseStudyIndividual />
+        <CaseStudyGridView/>
       </TabPanel>
     </Box>
   );
