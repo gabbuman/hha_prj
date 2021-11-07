@@ -6,7 +6,7 @@ import Header from '../layout/Header';
 import CSPreview from '../home/CSPreview';
 import Rank from '../home/Rank';
 import {dpts_Data} from './DptData';
-import DptCard, { DptOverview } from './DptCard';
+import DptCard, { DptOverview } from './Department Card/DptCard';
 import styled from 'styled-components'
 
 const HeaderLabel = styled.h3 `

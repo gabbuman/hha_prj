@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { Component } from 'react';
-export class DptGraphView extends Component {
-    render (){
-        return(
+import React from 'react';
+
+class DptGraphView extends React.Component {
+    render() {
+        return (
             <div>
             </div>
-           )
-        }
+        )
     }
-    
-    export default DptGraphView
+}
+
+export default DptGraphView

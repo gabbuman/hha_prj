@@ -5,7 +5,7 @@ import Header from './layout/Header';
 import VerNavbar from './layout/VerNavbar';
 import Login from './login/Login';
 import Register from './login/Register';
-import DptCard, { DptOverview } from './home/DptCard';
+import DptCard, { DptOverview } from './home/Department Card/DptCard';
 import CSPreview from './home/CSPreview';
 import Rank from './home/Rank';
 import {dpts_Data} from './home/DptData';
