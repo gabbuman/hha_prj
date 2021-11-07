@@ -41,6 +41,15 @@ const tooltipStyles = {
   color: '#6A91C7',
 };
 
+const tooltipBottomStyles = {
+  ...defaultStyles,
+  color: '#6A91C7',
+  boxShadow: '0 5px 20px rgba(0, 0, 0, 0.15)',
+  minWidth: 75,
+  textAlign: 'center',
+  transform: 'translateX(-62%)',
+};
+
 // util
 const formatDate = timeFormat("%b %d, '%y");
 
@@ -228,12 +237,7 @@ export default withTooltip<AreaProps, TooltipData>(
             <Tooltip
               top={innerHeight + margin.top - 14}
               left={tooltipLeft}
-              style={{
-                ...defaultStyles,
-                minWidth: 72,
-                textAlign: 'center',
-                transform: 'translateX(-50%)',
-              }}
+              style={tooltipBottomStyles}
             >
               {formatDate(getDate(tooltipData))}
             </Tooltip>
