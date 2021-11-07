@@ -10,10 +10,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import { useHistory } from 'react-router-dom';
 import { notifyFail, notifySuccess } from './../login/Notifications';
 import { endpoint } from '../Endpoint'
-import { validateDepartment, validatePassword, validateUsername } from './../login/FormValidation';
+import { validateDepartment } from './../login/FormValidation';
 
 const theme = createTheme();
 
@@ -27,7 +26,7 @@ export default function CreateDepartment() {
 
   const validateForm = () => {
     if(!validateDepartment(department)) { setDepartmentError("Department must be 3 characters are longer and contain no special characters"); return false;}
-    if (file==null) { setFileError("No image selected for department. Please choose an image."); return false; }
+    if (!file) { alert("No image selected for department. Please choose an image."); return false; }
     return true;
   }
 
