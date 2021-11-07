@@ -93,27 +93,27 @@ export class TableData extends Component <tableProps, tableState> {
         this.state= initialState;    
     }
     
-    
-     async getDptData() {
-        this.setState({loading: false})
-        fetch(endpoint + '/api/rehab_department')
-       .then(async res =>{
-           const data = await res.json();
-            if(!res.ok){
-                    const error = res.statusText;
-                } 
-            console.log(data);
+    componentDidMount(){
+        this.getDptData();
+    }
+
+    async getDptData() {
+        axios.get(endpoint + 'api/rehab_records/')
+        .then(res => {
+            console.log(res);
             this.setState({loading: false})
         })
-        .catch(error =>{
-            console.error("Error....", error);
-        });   
+        .catch((error) => {
+            console.error(error)
+          }
+        )
     }
-   
     
+
     render (){ 
 
         return(
+
             <><div>{this.state.loading ? (<div>loading..</div>) : (<div> done..</div>)}</div>
             <TableContainer component={Paper}>
                 <Table sx={{ width: "auto" }} aria-label="simple table">
