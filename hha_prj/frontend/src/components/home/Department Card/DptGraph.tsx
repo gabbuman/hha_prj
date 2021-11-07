@@ -16,12 +16,12 @@ import { LinePath } from '@visx/shape';
 import styled from 'styled-components'
 
 const GraphContainer = styled.div `
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     border-radius: 14px;
     transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     
     &:hover {
-        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.18);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
     }
 `
 

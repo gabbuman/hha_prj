@@ -8,6 +8,7 @@ const DptGraphCard = styled.div `
     grid-template-rows: repeat(3, auto);
     grid-gap: 0;
     position: relative;
+    margin: 15px;
 `
 // box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 
