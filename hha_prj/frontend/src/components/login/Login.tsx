@@ -19,6 +19,7 @@ import { useHistory } from 'react-router-dom';
 import { notifyFail, notifySuccess } from './Notifications';
 import { endpoint } from '../Endpoint'
 import { validatePassword, validateUsername } from './FormValidation';
+import { storeUser } from '../User';
 
 const theme = createTheme();
 
@@ -37,11 +38,6 @@ export default function SignIn() {
     if(!validatePassword(password)) { setPasswordError("Password must contain minimum eight characters, at least one letter, one number and one special character."); }
     sendUserLoginRequest();
   };
-
-  const storeUser = (data:JSON) => {
-    localStorage.setItem('user', JSON.stringify(data));
-    console.log(JSON.parse(localStorage.getItem('user')));
-  }
 
   const sendUserLoginRequest = () => {
     axios.post(endpoint + 'api/token/obtain', {username, password} as any)
