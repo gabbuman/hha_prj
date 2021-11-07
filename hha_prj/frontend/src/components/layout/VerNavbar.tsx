@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MonthlyRecord from '../dpt/MonthlyRecord';
-import DptTableView from '../home/DptTable';
+import DptTableView from '../home/DptTableView';
 
 interface TabPanelProps {
   children?: React.ReactNode;
