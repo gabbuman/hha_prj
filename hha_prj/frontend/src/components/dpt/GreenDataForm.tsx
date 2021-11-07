@@ -12,24 +12,24 @@ interface GDFState {
     dischargeReason: string;
     dischargeOutcome_1: string;
     dischargeOutcome_2: string;
-    mobility: string;
-    dischargeLocation: string;
-    dischargeEmployment: string;
+    // mobility: string;
+    // dischargeLocation: string;
+    // dischargeEmployment: string;
 
 }
 const initialState: GDFState = {
     dischargeReason: '',
     dischargeOutcome_1: '',
     dischargeOutcome_2: '',
-    mobility: '',
-    dischargeLocation: '',
-    dischargeEmployment: '',
+    // mobility: '',
+    // dischargeLocation: '',
+    // dischargeEmployment: '',
 }
 
 class GreenDataForm extends Component <GDFProps, GDFState> {
     constructor(props: GDFProps){
         super(props);
-        this.state= initialState;    
+        this.state= initialState;   
     }
 
     clickPrevious = (e: React.MouseEvent<HTMLElement>) => {
@@ -42,29 +42,27 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
         window.alert("submit is successful")
     };
  
+    
     dropdownHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({dischargeReason: event.target.value,
-            dischargeOutcome_1: event.target.value,
-            dischargeOutcome_2: event.target.value,
-            mobility: event.target.value,
-            dischargeLocation: event.target.value,
-            dischargeEmployment: event.target.value,
-        });
+        this.setState({ 
+            [event.target.name] : event.target.value
+        } as Pick<GDFState, keyof GDFState>);
       };
 
     render() {
         const generateDischargedAliveRecords = (numRecords: number) => {
             let content = [];
-            for (let i = 0; i < numRecords; i++) {
+            for (let i = 1; i <= numRecords; i++) {
                 content.push(
                     <div>
-                        <Typography variant="h6">Patient #{i+1}: Discharged Alive</Typography>
+                        <Typography variant="h6">Patient #{i}: Discharged Alive</Typography>
                         <FormControl sx={{ m: 1, minWidth: '48%' }}>
                             <InputLabel id="demo-simple-select-label">Discharge Reason</InputLabel>
                             <Select
-                                labelId="demo-simple-select-label"
+                                labelId="demo-simple-select-label"                                                                                                                                                                                                
                                 id="demo-simple-select"
                                 value={this.state.dischargeReason}
+                                name="dischargeReason"
                                 label="Discharge Reason"
                                 onChange={this.dropdownHandleChange}
                             >
@@ -73,12 +71,13 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                                 <MenuItem value={2}>Goals not met, discharged for alternate reason</MenuItem>
                             </Select>
                         </FormControl> 
-                        <FormControl sx={{ m: 1, minWidth: '48%' }}>
+                       <FormControl sx={{ m: 1, minWidth: '48%' }}>
                             <InputLabel id="demo-simple-select-label">Discharge Outcome (ADLs/Self-Care) </InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={this.state.dischargeOutcome_1}
+                                name="dischargeOutcome_1"
                                 label="Discharge Outcome (ADLs/Self-Care) "
                                 onChange={this.dropdownHandleChange}
                             >
@@ -97,6 +96,7 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={this.state.dischargeOutcome_2}
+                                name="dischargeOutcome_2"
                                 label="Discharge Outcome (Transfers and Mobility) "
                                 onChange={this.dropdownHandleChange}
                             >
@@ -109,7 +109,7 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                                 <MenuItem value={6}>Dependent</MenuItem>
                             </Select>
                         </FormControl>
-                        <FormControl sx={{ m: 1, minWidth: '48%' }}>
+                         {/* <FormControl sx={{ m: 1, minWidth: '48%' }}>
                             <InputLabel id="demo-simple-select-label">Mobility Aid/Assistive Device Given</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
@@ -152,7 +152,7 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                                 <MenuItem value={2}>Unemployed, due to condition</MenuItem>
                                 <MenuItem value={3}>Retired, not working due to age</MenuItem>
                             </Select>
-                        </FormControl>  
+                        </FormControl>   */}
                     </div> 
                 )
             }
