@@ -1,6 +1,5 @@
 from django.db.models import fields
 from backend.models import RehabMonthlyRecord
-from backend.models import CaseStudy
 from rest_framework import serializers
 from backend.models import MaternityMonthlyRecord, MonthlyRecord 
 from backend.models import CommunityHealthMonthlyRecord, CustomUser 
