@@ -50,17 +50,17 @@ export default function CreateDepartment() {
     formData.append('image',file,file.name);
     console.log(formData);
     axios.post(endpoint + 'api/department/', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-        .then(res => {
-            notifySuccess(department +' successfully created!');
-        })
-        .catch((error) => {
-            notifyFail('Department creation unsuccessful.');
-            console.error(error);
+        headers: {
+            'Content-Type': 'multipart/form-data'
         }
+      })
+      .then(res => {
+          notifySuccess(department +' successfully created!');
+      })
+      .catch((error) => {
+          notifyFail('Department creation unsuccessful.');
+          console.error(error);
+      }
     );
   }
 
@@ -106,7 +106,7 @@ export default function CreateDepartment() {
                   <Button component="span" >
                       Upload
                   </Button>
-              </label>  */}
+              </label> ***Custom Styling, saving for later */}
             <Button
               type="submit"
               fullWidth
