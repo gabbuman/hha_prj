@@ -9,6 +9,7 @@ import { localPoint } from '@visx/event';
 import { LinearGradient } from '@visx/gradient';
 import { max, extent, bisector } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
+import { sampleData } from './RecordData'
 
 class DptGraphView extends React.Component {
     render() {

@@ -10,7 +10,7 @@ interface RecordDataSet {
     data: RecordData[];
 }
 
-const sampleData: RecordDataSet = {
+export const sampleData: RecordDataSet = {
     recordType: "Beds Available",
     startDate: "JAN 2020",
     endDate: "JAN 2021",

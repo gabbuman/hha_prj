@@ -5,7 +5,7 @@ import Header from './layout/Header';
 import VerNavbar from './layout/VerNavbar';
 import Login from './login/Login';
 import Register from './login/Register';
-import DptCard, { DptOverview } from './home/Department Card/DptCard';
+import DptCard, { DptOverview } from './home/DptCard';
 import CSPreview from './home/CSPreview';
 import Rank from './home/Rank';
 import {dpts_Data} from './home/DptData';
@@ -14,7 +14,7 @@ import DptRecordPage from './dpt/DptRecordPage';
 import TableData, {DptTableView} from './home/DptTable';
 import Homepage from './home/Homepage';
 import { ToastContainer } from 'react-toastify';
-import DptGraphView from './home/DptGraph';
+import DptGraphView from './home/Department Card/DptGraph';
 
 class App extends Component {
     render() {

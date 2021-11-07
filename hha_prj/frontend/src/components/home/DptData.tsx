@@ -1,5 +1,5 @@
 
-import { dptData } from './Department Card/DptCard';
+import { dptData } from './DptCard';
 
 export const dpts_Data: dptData[] = [
 
