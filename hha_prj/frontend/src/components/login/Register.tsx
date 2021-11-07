@@ -20,7 +20,6 @@ import MenuItem from '@mui/material/MenuItem';
 import { validateUsername, validatePassword, validateNotNull } from './FormValidation';
 import { notifyFail, notifySuccess } from './Notifications';
 import { endpoint } from '../Endpoint'
-import { UserContext } from '../UserContext';
 
 const theme = createTheme();
 
@@ -33,7 +32,6 @@ export default function Register() {
   const [departmentList, setDepartmentList] = useState<Array<any>>([]);
   const [roleList, setRoleList] = useState<Array<any>>([]);
   const history = useHistory();
-  const {user, setUser} = useContext(UserContext);
 
   const [usernameError, setUsernameError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
@@ -114,8 +112,6 @@ export default function Register() {
             alignItems: 'center',
           }}
         >
-           <h1>{user}</h1>
-           <button onClick={()=>setUser("hey")}>change value!</button>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
