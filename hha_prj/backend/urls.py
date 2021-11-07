@@ -8,6 +8,8 @@ from .views import ObtainTokenPairWithUsernameView
 from django.urls import path
 from django.urls.conf import include
 from rest_framework_simplejwt.views import TokenRefreshView
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register('api/monthly_records', MonthlyRecordViewSet, 'monthly_records')

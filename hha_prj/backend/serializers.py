@@ -1,5 +1,6 @@
 from django.db.models import fields
 from backend.models import RehabMonthlyRecord
+from backend.models import CaseStudy
 from rest_framework import serializers
 from backend.models import MaternityMonthlyRecord, MonthlyRecord 
 from backend.models import CommunityHealthMonthlyRecord, CustomUser 
@@ -107,4 +108,9 @@ class DepartmentSerializer(serializers.ModelSerializer):
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
+        fields = '__all__'
+
+class CaseStudySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = CaseStudy
         fields = '__all__'

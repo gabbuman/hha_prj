@@ -463,6 +463,7 @@ class CommunityHealthMonthlyRecord(models.Model):
 class Department(models.Model):
     name = models.CharField(unique=True, primary_key=True, max_length=50)
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    image = models.ImageField(upload_to="uploads/", null=True)
     
     def __str__(self):
         return self.name 
@@ -486,3 +487,9 @@ class CustomUser(AbstractUser):
     
     def __str__(self):
         return "%s %s" % (self.username, self.department)
+
+def uploadImagePath(instance, filename):
+    ##file name would be the name of the case studies
+    return '/'.join('caseStudies', str(instance.title),filename)
+class CaseStudy(models.Model):
+    caseStudyImages = models.ImageField(blank=True,upload_to=uploadImagePath,null=True)

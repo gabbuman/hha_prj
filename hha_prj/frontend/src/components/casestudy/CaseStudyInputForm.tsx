@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import Header from '../layout/Header';
 import VerNavbar from '../layout/VerNavbar';
 import { Box, TextField, Typography, Stack, Button, 
     FormControl, MenuItem, InputLabel, Select, Grid, Container} from '@mui/material';
-
+import axios from 'axios';
 interface CSSProps {
 
 }
@@ -17,10 +17,14 @@ interface CSSState {
 const initialState: CSSState = {
     title: 'Title of Case',
     type: 'Patient Story',
-    content: 'Testsssssss',
+    content: 'Testsssssss'
 }
+
+
     
 export default class CaseStudySubmissionForm extends Component <CSSProps, CSSState>{
+    
+
     constructor(props: CSSProps){
         super(props);
         this.state = initialState;
@@ -28,6 +32,11 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
 
     dropDownHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({type: event.target.value});
+    }
+
+    handleUpload=(event: React.ChangeEvent<HTMLInputElement>) => {
+        let formData = new FormData();
+        formData.append('')
     }
     render(){
         let types = [];
@@ -107,6 +116,8 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
                         <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
                     </Stack>
                 </Grid>
+                <h3>upload a pic here</h3>
+                <Button variant="contained">upload image</Button>
             </div>
         );
     }
