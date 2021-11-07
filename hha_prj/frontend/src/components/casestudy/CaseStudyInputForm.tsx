@@ -28,7 +28,6 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
 
     dropDownHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({type: event.target.value});
-        console.log("after setstate "+ this.state.type);
     }
     render(){
         let types = [];
