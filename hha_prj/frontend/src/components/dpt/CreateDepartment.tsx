@@ -12,7 +12,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { notifyFail, notifySuccess } from './../login/Notifications';
 import { endpoint } from '../Endpoint'
 import { validateDepartment } from './../login/FormValidation';
-import Image from 'material-ui-image';
 import Paper from '@mui/material/Paper';
 
 const theme = createTheme();
@@ -105,7 +104,7 @@ export default function CreateDepartment() {
               <span>    </span>
               {file ? 
                 <div style={{marginTop:'10px'}}>
-                  <Paper>
+                  <Paper elevation={3}>
                     <img src={file} 
                       style={{maxWidth:'800px', width:'100%', height:'auto', padding:'5%'}}>
                     </img>
@@ -113,14 +112,6 @@ export default function CreateDepartment() {
                 </div>
                 :
                 <div></div>}
-              {/* {file ? 
-           
-                <Image 
-                  object-fit="contain" 
-                  src={file}
-                  style={{widht:'auto',height:'auto'}}
-                  imageStyle={{width:'100%', height:'inherit', padding:'5%'}}
-                /> : <div></div> } */}
             <Button
               type="submit"
               fullWidth
