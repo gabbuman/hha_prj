@@ -13,3 +13,8 @@ export const validatePassword = (password:string) => {
 export const validateNotNull = (field:string) => {
     return field != "";
 }
+
+export const validateDepartment = (department:string) => {
+    const regexp = /^[0-9a-zA-Z]{3,}$/;
+    return regexp.test(department);
+}
