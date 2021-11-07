@@ -26,6 +26,7 @@ export default function SignIn() {
   
   const [department, setDepartment] = useState<string>('');
   const [departmentError, setDepartmentError] = useState<string>('');
+  const [file, setFile] = useState<any>();
   const history = useHistory();
 
   const validateForm = () => {
@@ -41,7 +42,7 @@ export default function SignIn() {
   };
 
   const sendDepartmentCreateRequest = () => {
-    axios.post(endpoint + 'api/token/obtain', {department, password} as any)
+    axios.post(endpoint + 'api/token/obtain', {department, file} as any)
       .then(res => {
         notifySuccess('Login success! Welcome back ' + department +'!');
         console.log(localStorage.getItem('department'));
@@ -52,6 +53,10 @@ export default function SignIn() {
         console.error(error)
       }
     );
+  }
+
+  const fileSelectedHandler = (e:any) => {
+      setFile(e.target.files[0]);
   }
 
   return (
@@ -82,6 +87,10 @@ export default function SignIn() {
               onChange={e => {setDepartment(e.target.value);}}
               helperText={departmentError}
             />
+            <label>
+                <input type="file" accept="image/png, image/jpeg" onChange={fileSelectedHandler}>
+                </input>
+            </label>
             <Button
               type="submit"
               fullWidth
