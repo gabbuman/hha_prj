@@ -4,7 +4,7 @@ from rest_framework import serializers
 from backend.models import MaternityMonthlyRecord, MonthlyRecord 
 from backend.models import CommunityHealthMonthlyRecord, CustomUser 
 from backend.models import NICUPaedsMonthlyRecord, PatientCaseStudyRecord
-from backend.models import StaffRecognitionCaseStudyRecord, Department, Role
+from backend.models import StaffRecognitionCaseStudyRecord, Department, Role, CurrentFieldsList
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
@@ -114,4 +114,9 @@ class RoleSerializer(serializers.ModelSerializer):
 class AnswerListSerializer(serializers.ModelSerializer):
     class Meta:
         model = AnswerList
+        fields = '__all__'
+
+class CurrentFieldListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CurrentFieldsList
         fields = '__all__'

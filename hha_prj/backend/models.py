@@ -513,3 +513,10 @@ class AnswerList(models.Model):
 
     class Meta:
         unique_together = ('month', 'year',)
+class CurrentFieldsList(models.Model):
+    list = models.JSONField(null=False,blank=False)
+    department = models.OneToOneField(Department, on_delete=models.PROTECT)
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    
+    def __str__(self):
+        return self.name 
