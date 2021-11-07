@@ -11,13 +11,18 @@ import { LinearGradient } from '@visx/gradient';
 import { max, extent, bisector } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
 
+import { curveBasis } from '@visx/curve';
+import { LinePath } from '@visx/shape';
+
 type TooltipData = AppleStock;
 
 const stock = appleStock.slice(800);
-export const background = '#ffffff';
-export const background2 = '#fefefe';
-export const accentColor = '#1753A7';
+
+export const background = '#fefefe';
+export const background2 = '#ffffff';
+export const accentColor = '#6A91C7';
 export const accentColorDark = '#6A91C7';
+
 const tooltipStyles = {
   ...defaultStyles,
   background,
@@ -109,13 +114,14 @@ export default withTooltip<AreaProps, TooltipData>(
           />
           <LinearGradient id="area-background-gradient" from={background} to={background2} />
           <LinearGradient id="area-gradient" from={accentColor} to={accentColor} toOpacity={0.1} />
+          <LinearGradient id="stroke-gradient" from={'#1753A7'} to={background} toOpacity={0.0} />
           <GridRows
             left={margin.left}
             scale={stockValueScale}
             width={innerWidth}
             strokeDasharray="1,3"
             stroke={accentColor}
-            strokeOpacity={0}
+            strokeOpacity={0.05}
             pointerEvents="none"
           />
           <GridColumns
@@ -124,7 +130,7 @@ export default withTooltip<AreaProps, TooltipData>(
             height={innerHeight}
             strokeDasharray="1,3"
             stroke={accentColor}
-            strokeOpacity={0.2}
+            strokeOpacity={0.3}
             pointerEvents="none"
           />
           <AreaClosed<AppleStock>
@@ -132,10 +138,18 @@ export default withTooltip<AreaProps, TooltipData>(
             x={(d) => dateScale(getDate(d)) ?? 0}
             y={(d) => stockValueScale(getStockValue(d)) ?? 0}
             yScale={stockValueScale}
-            strokeWidth={1}
-            stroke="url(#area-gradient)"
+            strokeWidth={0}
+            stroke="url(#stroke-gradient)"
             fill="url(#area-gradient)"
             curve={curveMonotoneX}
+          />
+          <LinePath<AppleStock>
+            data={stock}
+            curve={curveBasis}
+            x={(d) => dateScale(getDate(d)) ?? 0}
+            y={(d) => stockValueScale(getStockValue(d)) ?? 0}
+            stroke="#1753A7"
+            strokeWidth={2.5}
           />
           <Bar
             x={margin.left}
