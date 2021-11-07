@@ -22,14 +22,23 @@ export default function CreateDepartment() {
   const [department, setDepartment] = useState<string>('');
   const [departmentError, setDepartmentError] = useState<string>('');
   const [file, setFile] = useState<any>();
+  const [fileType, setFileType] = useState<string>('');
   const [fileError, setFileError] = useState<string>('');
-  const history = useHistory();
 
   const validateForm = () => {
     if(!validateDepartment(department)) { setDepartmentError("Department must be 3 characters are longer and contain no special characters"); return false;}
     if (file==null) { setFileError("No image selected for department. Please choose an image."); return false; }
     return true;
   }
+
+  const handleFileSelect = (event:any) => {
+    if (event.target.files[0]) {
+      const parts = event.target.files[0].name.split(".");
+      const type = parts[parts.length - 1];
+      setFile(event.target.files[0]);
+      setFileType(type);
+    }
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,24 +48,19 @@ export default function CreateDepartment() {
   };
 
   const sendDepartmentCreateRequest = () => {
-    axios.post(endpoint + 'api/department/', {department, file}, {
+    axios.post(endpoint + 'api/department/', {name:department, image:file}, {
             headers: {
-            'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data'
             }
         })
-      .then(res => {
-        notifySuccess(department +' successfully created!');
-        history.push("/homepage");
-      })
-      .catch((error) => {
-        notifyFail('Department creation unsuccessful.');
-        console.error(error)
-      }
+        .then(res => {
+            notifySuccess(department +' successfully created!');
+        })
+        .catch((error) => {
+            notifyFail('Department creation unsuccessful.');
+            console.error(error)
+        }
     );
-  }
-
-  const fileSelectedHandler = (e:any) => {
-      setFile(e.target.files[0]);
   }
 
   return (
@@ -94,7 +98,7 @@ export default function CreateDepartment() {
                     style={{ display: 'none' }}
                     id="raised-button-file"
                     type="file"
-                    onChange={fileSelectedHandler}
+                    onChange={handleFileSelect}
                 />
                 <span>    </span>
                 <label htmlFor="raised-button-file">
