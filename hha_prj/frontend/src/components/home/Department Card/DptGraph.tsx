@@ -22,7 +22,7 @@ const tooltipStyles = {
   ...defaultStyles,
   background,
   border: '1px solid white',
-  color: 'white',
+  color: '#6A91C7',
 };
 
 // util
