@@ -115,6 +115,15 @@ export default withTooltip<AreaProps, TooltipData>(
           <LinearGradient id="area-background-gradient" from={background} to={background2} />
           <LinearGradient id="area-gradient" from={accentColor} to={accentColor} toOpacity={0.1} />
           <LinearGradient id="stroke-gradient" from={'#1753A7'} to={background} toOpacity={0.0} />
+          <clipPath id="background-rect">
+            <rect
+                x={0}
+                y={0}
+                width={width}
+                height={height}
+                rx={14}
+            />
+          </clipPath>
           <GridRows
             left={margin.left}
             scale={stockValueScale}
@@ -138,9 +147,9 @@ export default withTooltip<AreaProps, TooltipData>(
             x={(d) => dateScale(getDate(d)) ?? 0}
             y={(d) => stockValueScale(getStockValue(d)) ?? 0}
             yScale={stockValueScale}
-            
             fill="url(#area-gradient)"
             curve={curveMonotoneX}
+            clipPath="url(#background-rect)"
           />
           <LinePath<AppleStock>
             data={stock}
