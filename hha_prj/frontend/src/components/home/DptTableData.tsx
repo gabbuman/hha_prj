@@ -36,6 +36,7 @@ function createData(
   }
 
   interface tableState {
+    loading: boolean,
     month: string;
     year: string;
 }
@@ -80,6 +81,7 @@ const months = [
 ]
 
 const initialState: tableState = {
+    loading: true,
     month: months[(new Date()).getMonth()-1],
     year: (new Date()).getFullYear().toString()
 }
@@ -91,43 +93,59 @@ export class TableData extends Component <tableProps, tableState> {
         this.state= initialState;    
     }
     
+    
+     async getDptData() {
+        this.setState({loading: false})
+        fetch(endpoint + '/api/rehab_department')
+       .then(async res =>{
+           const data = await res.json();
+            if(!res.ok){
+                    const error = res.statusText;
+                } 
+            console.log(data);
+            this.setState({loading: false})
+        })
+        .catch(error =>{
+            console.error("Error....", error);
+        });   
+    }
    
     
-    render (){
+    render (){ 
 
         return(
+            <><div>{this.state.loading ? (<div>loading..</div>) : (<div> done..</div>)}</div>
             <TableContainer component={Paper}>
                 <Table sx={{ width: "auto" }} aria-label="simple table">
                     <TableBody>
-                    {rows.map((row) => (
-                        <StyledTableRow
-                        key={row.question}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                        <TableCell component="th" scope="row" width="15%"  style={{fontWeight: 700}} >
-                            {row.question}
-                        </TableCell>
-                        <TableCell align="left" width="15%" >
-                            {row.value}
-                        </TableCell>
-                        <TableCell align="right" width="100%" >
-                        { secondaryDataQuestions.includes(row.question) &&
-                            <IconButton>
-                                <NotesOutlinedIcon sx={{ color: grey[500]}}/> 
-                            </IconButton>
-                        }
-                        </TableCell>
-                        <TableCell align="right" width="100%" >
-                            <IconButton>
-                                <TimelineIcon sx={{ color: grey[500]}}/> 
-                            </IconButton>
-                        </TableCell>
-                        
-                        </StyledTableRow>
-                    ))}
+                        {rows.map((row) => (
+                            <StyledTableRow
+                                key={row.question}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row" width="15%" style={{ fontWeight: 700 }}>
+                                    {row.question}
+                                </TableCell>
+                                <TableCell align="left" width="15%">
+                                    {row.value}
+                                </TableCell>
+                                <TableCell align="right" width="100%">
+                                    {secondaryDataQuestions.includes(row.question) &&
+                                        <IconButton>
+                                            <NotesOutlinedIcon sx={{ color: grey[500] }} />
+                                        </IconButton>}
+                                </TableCell>
+                                <TableCell align="right" width="100%">
+                                    <IconButton>
+                                        <TimelineIcon sx={{ color: grey[500] }} />
+                                    </IconButton>
+                                </TableCell>
+
+                            </StyledTableRow>
+                        ))}
                     </TableBody>
                 </Table>
-            </TableContainer>
+            </TableContainer></>
         )
     }
 }
