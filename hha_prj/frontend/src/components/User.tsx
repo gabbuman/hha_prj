@@ -11,3 +11,7 @@ export const checkUserExists = () => {
     if (JSON.parse(localStorage.getItem('user')) != null) return true;
     return false;
 }
+
+export const deleteUser = () => {
+    localStorage.removeItem('user');
+}
