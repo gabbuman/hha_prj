@@ -15,3 +15,7 @@ export const checkUserExists = () => {
 export const deleteUser = () => {
     localStorage.removeItem('user');
 }
+
+export const printUser = () => {
+    if (checkUserExists()) console.log(getUser());
+}

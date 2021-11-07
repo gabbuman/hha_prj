@@ -19,7 +19,7 @@ import { useHistory } from 'react-router-dom';
 import { notifyFail, notifySuccess } from './Notifications';
 import { endpoint } from '../Endpoint'
 import { validatePassword, validateUsername } from './FormValidation';
-import { storeUser } from '../User';
+import { storeUser, printUser } from '../User';
 
 const theme = createTheme();
 
@@ -44,6 +44,7 @@ export default function SignIn() {
       .then(res => {
         notifySuccess('Login success! Welcome back ' + username +'!');
         storeUser(res.data)
+        printUser();
         history.push("/homepage");
       })
       .catch((error) => {
