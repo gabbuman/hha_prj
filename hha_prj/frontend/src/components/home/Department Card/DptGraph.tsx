@@ -138,8 +138,7 @@ export default withTooltip<AreaProps, TooltipData>(
             x={(d) => dateScale(getDate(d)) ?? 0}
             y={(d) => stockValueScale(getStockValue(d)) ?? 0}
             yScale={stockValueScale}
-            strokeWidth={0}
-            stroke="url(#stroke-gradient)"
+            
             fill="url(#area-gradient)"
             curve={curveMonotoneX}
           />
@@ -148,8 +147,8 @@ export default withTooltip<AreaProps, TooltipData>(
             curve={curveBasis}
             x={(d) => dateScale(getDate(d)) ?? 0}
             y={(d) => stockValueScale(getStockValue(d)) ?? 0}
-            stroke="#1753A7"
-            strokeWidth={2.5}
+            stroke="#678ec5"
+            strokeWidth={2.0}
           />
           <Bar
             x={margin.left}

@@ -11,7 +11,7 @@ class SampleGraph extends React.Component {
     render() {
         return (
             <DptGraphCard>
-                <DptGraph width={300} height={300} />
+                <DptGraph width={500} height={300} />
             </DptGraphCard>
         );
     }
