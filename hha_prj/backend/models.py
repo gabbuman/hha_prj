@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.fields.json import JSONExact, JSONField
 from django.db.models.fields.related import ForeignKey
 from django.utils.translation import gettext as _ # aliasing gettext as _
 from .managers import CustomUserManager
@@ -486,3 +487,29 @@ class CustomUser(AbstractUser):
     
     def __str__(self):
         return "%s %s" % (self.username, self.department)
+
+class AnswerList(models.Model):
+    department = models.ForeignKey(Department, on_delete=models.PROTECT)
+
+    class Months(models.IntegerChoices):
+        January = 1
+        February = 2
+        March = 3
+        April = 4
+        May = 5
+        June = 6
+        July = 7
+        August = 8
+        September = 9
+        October = 10
+        November = 11
+        December = 12
+
+    month = models.IntegerField(choices=Months.choices)
+    year = models.PositiveSmallIntegerField()
+
+    answers = models.JSONField()
+    associated_question_list = JSONField()
+
+    class Meta:
+        unique_together = ('month', 'year',)

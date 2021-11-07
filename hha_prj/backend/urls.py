@@ -1,6 +1,6 @@
 from django.utils.module_loading import import_string
 from rest_framework import routers
-from .api import CommunityHealthMonthlyRecordViewset, MonthlyRecordViewSet 
+from .api import AnswerListViewSet, CommunityHealthMonthlyRecordViewset, MonthlyRecordViewSet 
 from .api import RehabMonthlyRecordViewset, MaternityMonthlyRecordViewSet
 from .api import CustomUserViewSet, NICUPaedsMonthlyRecordViewSet, PatientCaseStudyRecordViewSet
 from .api import StaffRecognitionCaseStudyViewSet, DepartmentViewSet, RoleViewSet
@@ -23,6 +23,8 @@ router.register('api/nicu_paed', NICUPaedsMonthlyRecordViewSet, 'nicu_paed')
 router.register('api/user', CustomUserViewSet, 'user'),
 router.register('api/department', DepartmentViewSet, 'department'),
 router.register('api/role', RoleViewSet, 'role')
+router.register('api/answer_list', AnswerListViewSet, 'answer_list')
+
 
 urlpatterns = [
     path('', include(router.urls)),
