@@ -15,6 +15,6 @@ export const validateNotNull = (field:string) => {
 }
 
 export const validateDepartment = (department:string) => {
-    const regexp = /^[0-9a-zA-Z]{3,}$/;
+    const regexp = /^[a-zA-Z]{3,}$/;
     return regexp.test(department);
 }

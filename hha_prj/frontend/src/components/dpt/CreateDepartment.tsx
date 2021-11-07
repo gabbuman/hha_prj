@@ -21,21 +21,17 @@ export default function CreateDepartment() {
   const [department, setDepartment] = useState<string>('');
   const [departmentError, setDepartmentError] = useState<string>('');
   const [file, setFile] = useState<any>();
-  const [fileType, setFileType] = useState<string>('');
-  const [fileError, setFileError] = useState<string>('');
 
   const validateForm = () => {
-    if(!validateDepartment(department)) { setDepartmentError("Department must be 3 characters are longer and contain no special characters"); return false;}
+    if(!validateDepartment(department)) { setDepartmentError("Department must be 3 characters are longer and contain no special characters."); return false;}
     if (!file) { alert("No image selected for department. Please choose an image."); return false; }
     return true;
   }
 
   const handleFileSelect = (event:any) => {
     if (event.target.files[0]) {
-      const parts = event.target.files[0].name.split(".");
-      const type = parts[parts.length - 1];
       setFile(event.target.files[0]);
-      setFileType(type);
+      console.log(event.target.files);
     }
   };
 
@@ -50,6 +46,7 @@ export default function CreateDepartment() {
     const formData = new FormData();
     formData.append('name',department);
     formData.append('image',file,file.name);
+    console.log(formData);
     axios.post(endpoint + 'api/department/', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -60,7 +57,7 @@ export default function CreateDepartment() {
         })
         .catch((error) => {
             notifyFail('Department creation unsuccessful.');
-            console.error(error)
+            console.error(error);
         }
     );
   }
@@ -96,19 +93,18 @@ export default function CreateDepartment() {
             <FormLabel>Department Image
             </FormLabel>
             <input
-                    accept="image/*"
-                    style={{ display: 'none' }}
-                    id="raised-button-file"
-                    type="file"
-                    onChange={handleFileSelect}
-                />
-                <span>    </span>
-                <label htmlFor="raised-button-file">
-                    <Button component="span" >
-                        Upload
-                    </Button>
-                </label> 
-           
+                  accept="image/*"
+                  // style={{ display: 'none' }}
+                  id="raised-button-file"
+                  type="file"
+                  onChange={handleFileSelect}
+              />
+              <span>    </span>
+              {/* <label htmlFor="raised-button-file">
+                  <Button component="span" >
+                      Upload
+                  </Button>
+              </label>  */}
             <Button
               type="submit"
               fullWidth
