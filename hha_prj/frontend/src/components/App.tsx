@@ -14,7 +14,7 @@ import DptRecordPage from './dpt/DptRecordPage';
 import TableData, {DptTableView} from './home/DptTable';
 import Homepage from './home/Homepage';
 import { ToastContainer } from 'react-toastify';
-import DptGraphView from './home/Department Card/DptGraph';
+import SampleGraph from './home/Department Card/SampleGraph';
 
 class App extends Component {
     render() {
@@ -40,7 +40,7 @@ class App extends Component {
 					<Route path='/monthlyrecord' component={MonthlyRecord} />	
 					<Route path='/dptrecordpage' component={DptRecordPage} />			
 					<Route path='/dpttableview' component={DptTableView} />		 	
-					<Route path='/dptgraphview' component={DptGraphView} />		 	
+					<Route path='/dptgraphview' component={SampleGraph} />		 	
 				</Switch>
 				<ToastContainer/>
 			</Router>
