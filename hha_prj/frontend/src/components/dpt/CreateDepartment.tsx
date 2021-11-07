@@ -28,25 +28,31 @@ export default function SignIn() {
   const [departmentError, setDepartmentError] = useState<string>('');
   const history = useHistory();
 
+  const validateForm = () => {
+    if(!validateDepartment(department)) { setDepartmentError("Department must be 3 characters are longer and contain no special characters"); return false;}
+    return true;
+  }
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if(!validateDepartment(department)) { setDepartmentError("Department must be 3 characters are longer and contain no special characters"); }
-    // sendUserLoginRequest();
+    if (validateForm()) {
+        sendDepartmentCreateRequest();
+    }
   };
 
-//   const sendUserLoginRequest = () => {
-//     axios.post(endpoint + 'api/token/obtain', {department, password} as any)
-//       .then(res => {
-//         notifySuccess('Login success! Welcome back ' + department +'!');
-//         console.log(localStorage.getItem('department'));
-//         history.push("/homepage");
-//       })
-//       .catch((error) => {
-//         notifyFail('Sorry, the department and password entered does not match any account.');
-//         console.error(error)
-//       }
-//     );
-//   }
+  const sendDepartmentCreateRequest = () => {
+    axios.post(endpoint + 'api/token/obtain', {department, password} as any)
+      .then(res => {
+        notifySuccess('Login success! Welcome back ' + department +'!');
+        console.log(localStorage.getItem('department'));
+        history.push("/homepage");
+      })
+      .catch((error) => {
+        notifyFail('Sorry, the department and password entered does not match any account.');
+        console.error(error)
+      }
+    );
+  }
 
   return (
     <ThemeProvider theme={theme}>
