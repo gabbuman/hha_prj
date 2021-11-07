@@ -58,7 +58,7 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
             for (let i = 0; i < numRecords; i++) {
                 content.push(
                     <div>
-                        <Typography variant="h5">Patient #{i+1}: Discharged Alive</Typography>
+                        <Typography variant="h6">Patient #{i+1}: Discharged Alive</Typography>
                         <FormControl sx={{ m: 1, minWidth: '48%' }}>
                             <InputLabel id="demo-simple-select-label">Discharge Reason</InputLabel>
                             <Select
@@ -170,8 +170,8 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
             noValidate
             autoComplete="off"
             >
-                <div>The shared value is {this.props.dischargedAlive_shared}</div> 
-                <Typography variant="h4">September Hospital Record</Typography>
+                {/* <div>The shared value is {this.props.dischargedAlive_shared}</div>  */}
+                <Typography variant="h5">September Hospital Record</Typography>
                 <Box>
                     { this.props.dischargedAlive_shared == 0? "" :
                         <div>

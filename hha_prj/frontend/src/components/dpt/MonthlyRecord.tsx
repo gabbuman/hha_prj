@@ -57,7 +57,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
                 return (
                     <div>
                         <Container >   
-                            <div>The shared value is {this.state.dischargedAlive_shared}</div>                 
+                            {/* <div>The shared value is {this.state.dischargedAlive_shared}</div> */}
                             <RedDataForm 
                                 nextStep={this.nextStep}
                                 disabled={this.state.disabled} 
