@@ -13,6 +13,8 @@ import { timeFormat } from 'd3-time-format';
 
 import { curveBasis } from '@visx/curve';
 import { LinePath } from '@visx/shape';
+import { transparent } from 'material-ui/styles/colors';
+import { borderRadius } from '@mui/system';
 
 type TooltipData = AppleStock;
 
@@ -102,7 +104,7 @@ export default withTooltip<AreaProps, TooltipData>(
     );
 
     return (
-      <div>
+      <div style={{boxShadow: "0 5px 20px rgba(0, 0, 0, 0.2)", borderRadius: "14px"}}>
         <svg width={width} height={height}>
           <rect
             x={0}

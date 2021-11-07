@@ -30,6 +30,7 @@ const GraphSubTitle = styled.h3 `
 `
 
 class SampleGraph extends React.Component {
+    // TODO: Use props to update titles
     render() {
         return (
             <DptGraphCard>
