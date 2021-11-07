@@ -6,7 +6,6 @@ export const validateUsername = (username:string) => {
 export const validatePassword = (password:string) => {
     // Citation: https://www.thepolyglotdeveloper.com/2020/02/test-password-strength-regex-react-application/
     const regexp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[0-9a-zA-Z]{8,}$/;
-    console.log(regexp.test(password));
     return regexp.test(password);
 }
 

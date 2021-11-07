@@ -19,7 +19,6 @@ import { useHistory } from 'react-router-dom';
 import { notifyFail, notifySuccess } from './Notifications';
 import { endpoint } from '../Endpoint'
 import { validatePassword, validateUsername } from './FormValidation';
-import { UserContext } from '../UserContext';
 
 const theme = createTheme();
 
@@ -31,8 +30,6 @@ export default function SignIn() {
 
   const [usernameError, setUsernameError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
-  const {user, setUser} = useContext(UserContext);
-  
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -42,11 +39,7 @@ export default function SignIn() {
   };
 
   const storeUser = (data:any) => {
-    localStorage.setItem('role', data?.role);
-    localStorage.setItem('department', data?.department);
-    localStorage.setItem('username',data?.username);
-    localStorage.setItem('user_id',data?.user_id);
-    localStorage.setItem('access', data?.access);
+    localStorage.setItem('user', JSON.stringify(data));
   }
 
   const sendUserLoginRequest = () => {
@@ -54,7 +47,6 @@ export default function SignIn() {
       .then(res => {
         notifySuccess('Login success! Welcome back ' + username +'!');
         storeUser(res.data)
-        console.log(localStorage.getItem('department'));
         history.push("/homepage");
       })
       .catch((error) => {
@@ -79,8 +71,6 @@ export default function SignIn() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
-          {/* <h1>{user}</h1>
-          <button onClick={()=>setUser('ho')}>{user}</button> */}
           <Typography component="h1" variant="h5">
             Staff Login
           </Typography>
