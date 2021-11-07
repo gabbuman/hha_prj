@@ -4,23 +4,27 @@ import VerNavbar from '../layout/VerNavbar';
 import { Box, TextField, Typography, Stack, Button, 
     FormControl, MenuItem, InputLabel, Select, Grid, Container} from '@mui/material';
 import axios from 'axios';
+import { useButtonProps } from '@restart/ui/esm/Button';
 interface CSSProps {
 
 }
+
     
 interface CSSState {
     title: string;
     type: string;
     content: string;// TODO: picture state variable
+    isSubmit: boolean;
     
 }
 const initialState: CSSState = {
     title: 'Title of Case',
     type: 'Patient Story',
-    content: 'Testsssssss'
+    content: 'Testsssssss',
+    isSubmit: false
 }
 
-
+ 
     
 export default class CaseStudySubmissionForm extends Component <CSSProps, CSSState>{
     
@@ -34,10 +38,13 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
         this.setState({type: event.target.value});
     }
 
-    handleUpload=(event: React.ChangeEvent<HTMLInputElement>) => {
-        let formData = new FormData();
-        formData.append('')
+    submitClick = () => {
+        this.setState({ isSubmit: true}) 
+        window.alert("submit is successful")
+
     }
+
+
     render(){
         let types = [];
         types.push("Patient Story");
@@ -111,13 +118,25 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
                     onChange={(e)=>{this.setState({content: e.target.value})}}
                 />
                 </Box>
+                <Box
+                sx={{
+                    m:2
+                }}
+                >
+                    <h3>Upload Pictures</h3>
+                    <input
+                    type="file"
+                    name="file"
+                    />
+
+                </Box>
                 <Grid item xs={12}>
-                    <Stack direction="row" spacing={30} justifyContent="flex-end">
+                    <Stack direction="row" spacing={5} justifyContent="flex-end">
+                        <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="primary"onClick={this.submitClick}>Submit</Button>
                         <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
                     </Stack>
+
                 </Grid>
-                <h3>upload a pic here</h3>
-                <Button variant="contained">upload image</Button>
             </div>
         );
     }

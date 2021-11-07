@@ -488,8 +488,4 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return "%s %s" % (self.username, self.department)
 
-def uploadImagePath(instance, filename):
-    ##file name would be the name of the case studies
-    return '/'.join('caseStudies', str(instance.title),filename)
-class CaseStudy(models.Model):
-    caseStudyImages = models.ImageField(blank=True,upload_to=uploadImagePath,null=True)
+

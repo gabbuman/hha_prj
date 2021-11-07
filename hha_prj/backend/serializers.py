@@ -109,8 +109,3 @@ class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
         fields = '__all__'
-
-class CaseStudySerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = CaseStudy
-        fields = '__all__'
