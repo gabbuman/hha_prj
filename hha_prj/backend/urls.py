@@ -4,7 +4,7 @@ from .api import AnswerListViewSet, CommunityHealthMonthlyRecordViewset, Monthly
 from .api import RehabMonthlyRecordViewset, MaternityMonthlyRecordViewSet
 from .api import CustomUserViewSet, NICUPaedsMonthlyRecordViewSet, PatientCaseStudyRecordViewSet
 from .api import StaffRecognitionCaseStudyViewSet, DepartmentViewSet, RoleViewSet
-from .views import ObtainTokenPairWithUsernameView
+from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus
 from django.urls import path
 from django.urls.conf import include
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -29,5 +29,6 @@ router.register('api/answer_list', AnswerListViewSet, 'answer_list')
 urlpatterns = [
     path('', include(router.urls)),
     path('api/token/refresh', TokenRefreshView),
-    path('api/token/obtain', ObtainTokenPairWithUsernameView.as_view())
+    path('api/token/obtain', ObtainTokenPairWithUsernameView.as_view()),
+    path('api/check_current_month_submission_status', CheckCurrentMonthAdmissionStatus)
 ]
