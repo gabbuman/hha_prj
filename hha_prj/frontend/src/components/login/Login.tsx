@@ -38,8 +38,9 @@ export default function SignIn() {
     sendUserLoginRequest();
   };
 
-  const storeUser = (data:any) => {
+  const storeUser = (data:JSON) => {
     localStorage.setItem('user', JSON.stringify(data));
+    console.log(JSON.parse(localStorage.getItem('user')));
   }
 
   const sendUserLoginRequest = () => {
