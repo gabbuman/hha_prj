@@ -48,7 +48,10 @@ export default function CreateDepartment() {
   };
 
   const sendDepartmentCreateRequest = () => {
-    axios.post(endpoint + 'api/department/', {name:department, image:file}, {
+    const formData = new FormData();
+    formData.append('name',department);
+    formData.append('image',file,file.name);
+    axios.post(endpoint + 'api/department/', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
