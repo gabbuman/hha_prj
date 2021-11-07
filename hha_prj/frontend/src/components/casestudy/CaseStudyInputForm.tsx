@@ -28,8 +28,16 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
 
     dropDownHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({type: event.target.value});
+        console.log("after setstate "+ this.state.type);
     }
     render(){
+        let types = [];
+        types.push("Patient Story");
+        types.push("Equipment Received");
+        types.push("Training Session");
+        types.push("Staff Recognition");
+        types.push("Other Story");
+
         return(
             <div>
                 <Box
@@ -48,7 +56,7 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
                         width: '50ch', '& .MuiTextField-root': { m: 2}
                     }}
                     />
-                    
+
                     <FormControl>
                         <InputLabel
                         sx={{
@@ -57,7 +65,7 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
                         id = "case-study-type">Type Of Case Study</InputLabel>
                         <Select
                             sx={{
-                                left:'50px', width: '15ch'
+                                left:'50px'
                             }}
                             labelId = "case-study-type"
                             id="caseStudyType"
@@ -67,11 +75,11 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
                             
                             
                         >
-                            <MenuItem value = {1}>Patient Story</MenuItem>
-                            <MenuItem value = {2}>Staff Recognition</MenuItem>
-                            <MenuItem value = {3}>Training Session</MenuItem>
-                            <MenuItem value = {4}>Equipment Received</MenuItem>
-                            <MenuItem value = {5}>Other Story</MenuItem>
+                            {types.map((type) => (
+                                            <MenuItem value={type}> {type}
+                                            </MenuItem>
+                            ))}
+
 
                         </Select>
                     </FormControl>
