@@ -22,7 +22,7 @@ import { validateDepartment, validatePassword, validateUsername } from './../log
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function CreateDepartment() {
   
   const [department, setDepartment] = useState<string>('');
   const [departmentError, setDepartmentError] = useState<string>('');
@@ -72,7 +72,7 @@ export default function SignIn() {
           }}
         >
           <Typography component="h1" variant="h5">
-            Staff Login
+            Create New Department
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField

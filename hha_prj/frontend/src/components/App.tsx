@@ -13,6 +13,7 @@ import MonthlyRecord from './dpt/MonthlyRecord';
 import DptRecordPage from './dpt/DptRecordPage';
 import Homepage from './home/Homepage';
 import { ToastContainer } from 'react-toastify';
+import CreateDepartment from './dpt/CreateDepartment';
 
 class App extends Component {
     render() {
@@ -36,7 +37,8 @@ class App extends Component {
 					<Route path='/cspreview' component={CSPreview} />
 					<Route path='/vernavbar' component={VerNavbar} />
 					<Route path='/monthlyrecord' component={MonthlyRecord} />	
-					<Route path='/dptrecordpage' component={DptRecordPage} />			
+					<Route path='/dptrecordpage' component={DptRecordPage} />	
+					<Route path='/createdepartment' component={CreateDepartment} />		
 				</Switch>
 				<ToastContainer/>
 			</Router>
