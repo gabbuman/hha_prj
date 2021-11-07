@@ -53,7 +53,111 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
       };
 
     render() {
-
+        const generateDischargedAliveRecords = (numRecords: number) => {
+            let content = [];
+            for (let i = 0; i < numRecords; i++) {
+                content.push(
+                    <div>
+                        <Typography variant="h5">Patient #{i+1}: Discharged Alive</Typography>
+                        <FormControl sx={{ m: 1, minWidth: '48%' }}>
+                            <InputLabel id="demo-simple-select-label">Discharge Reason</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={this.state.dischargeReason}
+                                label="Discharge Reason"
+                                onChange={this.dropdownHandleChange}
+                            >
+                                <MenuItem value={0}>All goals met</MenuItem>
+                                <MenuItem value={1}>Goals partially met, sufficient for discharge</MenuItem>
+                                <MenuItem value={2}>Goals not met, discharged for alternate reason</MenuItem>
+                            </Select>
+                        </FormControl> 
+                        <FormControl sx={{ m: 1, minWidth: '48%' }}>
+                            <InputLabel id="demo-simple-select-label">Discharge Outcome (ADLs/Self-Care) </InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={this.state.dischargeOutcome_1}
+                                label="Discharge Outcome (ADLs/Self-Care) "
+                                onChange={this.dropdownHandleChange}
+                            >
+                                <MenuItem value={0}>Independent</MenuItem>
+                                <MenuItem value={1}>Modified Independent </MenuItem>
+                                <MenuItem value={2}>Supervision</MenuItem>
+                                <MenuItem value={3}>Minimum Assistance</MenuItem>
+                                <MenuItem value={4}>Moderate Assistance</MenuItem>
+                                <MenuItem value={5}>Maximum Assistance</MenuItem>
+                                <MenuItem value={6}>Dependent</MenuItem>
+                            </Select>
+                        </FormControl>   
+                        <FormControl sx={{ m: 1, minWidth: '48%' }}>
+                            <InputLabel id="demo-simple-select-label">Discharge Outcome (Transfers and Mobility) </InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={this.state.dischargeOutcome_2}
+                                label="Discharge Outcome (Transfers and Mobility) "
+                                onChange={this.dropdownHandleChange}
+                            >
+                                <MenuItem value={0}>Independent</MenuItem>
+                                <MenuItem value={1}>Modified Independent </MenuItem>
+                                <MenuItem value={2}>Supervision</MenuItem>
+                                <MenuItem value={3}>Minimum Assistance</MenuItem>
+                                <MenuItem value={4}>Moderate Assistance</MenuItem>
+                                <MenuItem value={5}>Maximum Assistance</MenuItem>
+                                <MenuItem value={6}>Dependent</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <FormControl sx={{ m: 1, minWidth: '48%' }}>
+                            <InputLabel id="demo-simple-select-label">Mobility Aid/Assistive Device Given</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={this.state.mobility}
+                                label="Mobility Aid/Assistive Device Given"
+                                onChange={this.dropdownHandleChange}
+                            >
+                                <MenuItem value={0}>Wheelchair</MenuItem>
+                                <MenuItem value={1}>Walker</MenuItem>
+                                <MenuItem value={2}>Cane</MenuItem>
+                                <MenuItem value={3}>Crutches</MenuItem>
+                            </Select>
+                        </FormControl>  
+                        <FormControl sx={{ m: 1, minWidth: '48%' }}>
+                            <InputLabel id="demo-simple-select-label">Discharge Location</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={this.state.dischargeLocation}
+                                label="Discharge Location"
+                                onChange={this.dropdownHandleChange}
+                            >
+                                <MenuItem value={0}>Return home, alone</MenuItem>
+                                <MenuItem value={1}>Return home, with family/caregiver(s)</MenuItem>
+                                <MenuItem value={2}>Admitted to hospital</MenuItem>
+                            </Select>
+                        </FormControl> 
+                        <FormControl sx={{ m: 1, minWidth: '48%' }}>
+                            <InputLabel id="demo-simple-select-label">Discharge Employment Status</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={this.state.dischargeEmployment}
+                                label="Discharge Employment Status"
+                                onChange={this.dropdownHandleChange}
+                            >
+                                <MenuItem value={0}>Employed</MenuItem>
+                                <MenuItem value={1}>Unemployed, unable to find work</MenuItem>
+                                <MenuItem value={2}>Unemployed, due to condition</MenuItem>
+                                <MenuItem value={3}>Retired, not working due to age</MenuItem>
+                            </Select>
+                        </FormControl>  
+                    </div> 
+                )
+            }
+            return content;
+        };
 
         return (
             <div>
@@ -69,102 +173,12 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                 <div>The shared value is {this.props.dischargedAlive_shared}</div> 
                 <Typography variant="h4">September Hospital Record</Typography>
                 <Box>
-                <Typography variant="h6" color={purple[900]} >{this.props.dischargedAlive_shared} Discharged Alive</Typography>
-                <Typography variant="h5">Patient #1: Discharged Alive</Typography>
-                <FormControl sx={{ m: 1, minWidth: '48%' }}>
-                    <InputLabel id="demo-simple-select-label">Discharge Reason</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={this.state.dischargeReason}
-                        label="Discharge Reason"
-                        onChange={this.dropdownHandleChange}
-                    >
-                        <MenuItem value={0}>All goals met</MenuItem>
-                        <MenuItem value={1}>Goals partially met, sufficient for discharge</MenuItem>
-                        <MenuItem value={2}>Goals not met, discharged for alternate reason</MenuItem>
-                    </Select>
-                </FormControl> 
-                <FormControl sx={{ m: 1, minWidth: '48%' }}>
-                    <InputLabel id="demo-simple-select-label">Discharge Outcome (ADLs/Self-Care) </InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={this.state.dischargeOutcome_1}
-                        label="Discharge Outcome (ADLs/Self-Care) "
-                        onChange={this.dropdownHandleChange}
-                    >
-                        <MenuItem value={0}>Independent</MenuItem>
-                        <MenuItem value={1}>Modified Independent </MenuItem>
-                        <MenuItem value={2}>Supervision</MenuItem>
-                        <MenuItem value={3}>Minimum Assistance</MenuItem>
-                        <MenuItem value={4}>Moderate Assistance</MenuItem>
-                        <MenuItem value={5}>Maximum Assistance</MenuItem>
-                        <MenuItem value={6}>Dependent</MenuItem>
-                    </Select>
-                </FormControl>   
-                <FormControl sx={{ m: 1, minWidth: '48%' }}>
-                    <InputLabel id="demo-simple-select-label">Discharge Outcome (Transfers and Mobility) </InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={this.state.dischargeOutcome_2}
-                        label="Discharge Outcome (Transfers and Mobility) "
-                        onChange={this.dropdownHandleChange}
-                    >
-                        <MenuItem value={0}>Independent</MenuItem>
-                        <MenuItem value={1}>Modified Independent </MenuItem>
-                        <MenuItem value={2}>Supervision</MenuItem>
-                        <MenuItem value={3}>Minimum Assistance</MenuItem>
-                        <MenuItem value={4}>Moderate Assistance</MenuItem>
-                        <MenuItem value={5}>Maximum Assistance</MenuItem>
-                        <MenuItem value={6}>Dependent</MenuItem>
-                    </Select>
-                </FormControl>
-                <FormControl sx={{ m: 1, minWidth: '48%' }}>
-                    <InputLabel id="demo-simple-select-label">Mobility Aid/Assistive Device Given</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={this.state.mobility}
-                        label="Mobility Aid/Assistive Device Given"
-                        onChange={this.dropdownHandleChange}
-                    >
-                        <MenuItem value={0}>Wheelchair</MenuItem>
-                        <MenuItem value={1}>Walker</MenuItem>
-                        <MenuItem value={2}>Cane</MenuItem>
-                        <MenuItem value={3}>Crutches</MenuItem>
-                    </Select>
-                </FormControl>  
-                <FormControl sx={{ m: 1, minWidth: '48%' }}>
-                    <InputLabel id="demo-simple-select-label">Discharge Location</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={this.state.dischargeLocation}
-                        label="Discharge Location"
-                        onChange={this.dropdownHandleChange}
-                    >
-                        <MenuItem value={0}>Return home, alone</MenuItem>
-                        <MenuItem value={1}>Return home, with family/caregiver(s)</MenuItem>
-                        <MenuItem value={2}>Admitted to hospital</MenuItem>
-                    </Select>
-                </FormControl> 
-                <FormControl sx={{ m: 1, minWidth: '48%' }}>
-                    <InputLabel id="demo-simple-select-label">Discharge Employment Status</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={this.state.dischargeEmployment}
-                        label="Discharge Employment Status"
-                        onChange={this.dropdownHandleChange}
-                    >
-                        <MenuItem value={0}>Employed</MenuItem>
-                        <MenuItem value={1}>Unemployed, unable to find work</MenuItem>
-                        <MenuItem value={2}>Unemployed, due to condition</MenuItem>
-                        <MenuItem value={3}>Retired, not working due to age</MenuItem>
-                    </Select>
-                </FormControl>        
+                    { this.props.dischargedAlive_shared == 0? "" :
+                        <div>
+                            <Typography variant="h6" color={purple[900]} >{this.props.dischargedAlive_shared} Discharged Alive</Typography>
+                            {generateDischargedAliveRecords(this.props.dischargedAlive_shared)}
+                        </div>
+                    }
                 </Box>
             </Box>
             </Paper>
