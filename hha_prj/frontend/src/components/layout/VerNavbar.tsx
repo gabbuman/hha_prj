@@ -3,11 +3,13 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import {Grid, Button} from '@mui/material';
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MonthlyRecord from '../dpt/MonthlyRecord';
-import DptTableView from '../home/DptTable';
+import CaseStudyIndividual from '../casestudy/CaseStudyIndividual';
+import CaseStudySubmissionForm from '../casestudy/CaseStudyInputForm';
+import DptRecordPage from '../dpt/DptRecordPage';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -69,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 export default function VerticalTabs() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -97,12 +99,13 @@ export default function VerticalTabs() {
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Biomechanical Support" {...a11yProps(2)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Employee Of the Month" {...a11yProps(3)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Case Study" {...a11yProps(4)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Past Data Record" {...a11yProps(5)} />
 
       </Tabs>
+      <Grid item xs={10}>
       <TabPanel  value={value} index={1}>
         <MonthlyRecord />
       </TabPanel>
+      </Grid>
       <TabPanel value={value} index={2}>
         Item Three
       </TabPanel>
@@ -110,10 +113,7 @@ export default function VerticalTabs() {
         Item Four
       </TabPanel>
       <TabPanel value={value} index={4}>
-        Item Five
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        <DptTableView />
+        <CaseStudyIndividual />
       </TabPanel>
     </Box>
   );

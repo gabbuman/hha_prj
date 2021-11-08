@@ -6,14 +6,9 @@ from backend.models import CommunityHealthMonthlyRecord, CustomUser
 from backend.models import NICUPaedsMonthlyRecord, PatientCaseStudyRecord
 from backend.models import StaffRecognitionCaseStudyRecord, Department, Role, CurrentFieldsList
 from rest_framework.validators import UniqueValidator
+from backend.models import CaseStudyType, CaseStudy
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-#Monthly Record Serializer
-class MonthlyRecordSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MonthlyRecord
-        fields = '__all__'
-        
 class NICUPaedsMonthlyRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = NICUPaedsMonthlyRecord
@@ -97,6 +92,8 @@ class CustomTokenPairSerializer(TokenObtainPairSerializer):
         data["access"] = str(refresh.access_token)
         data["username"] = str(self.user.username)
         data["user_id"] = str(self.user.pk)
+        data["department"] = str(self.user.department)
+        data["role"] = str(self.user.role)
         return data
 
 class DepartmentSerializer(serializers.ModelSerializer):
@@ -108,8 +105,23 @@ class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
         fields = '__all__'
+    
+class MonthlyRecordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MonthlyRecord
+        fields = '__all__'
 
 class CurrentFieldListSerializer(serializers.ModelSerializer):
     class Meta:
         model = CurrentFieldsList
+        fields = '__all__'
+
+class CaseStudyTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CaseStudyType
+        fields = '__all__'
+        
+class CaseStudySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CaseStudy
         fields = '__all__'

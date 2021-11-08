@@ -1,16 +1,6 @@
-from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRecord,PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord, Department, Role, CurrentFieldsList
+from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRecord,PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord, Department, Role, CurrentFieldsList, CaseStudy, CaseStudyType
 from rest_framework import viewsets, permissions
-
-from .serializers import CurrentFieldListSerializer, DepartmentSerializer, MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, PatientCaseStudyRecordSerializer, StaffRecognitionCaseStudyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer, RoleSerializer
-
-
-# MonthlyRecord ViewSet
-class MonthlyRecordViewSet(viewsets.ModelViewSet):
-    queryset = MonthlyRecord.objects.all()
-    permission_classes = [
-        permissions.IsAuthenticated
-    ]
-    serializer_class = MonthlyRecordSerializer
+from .serializers import CaseStudySerializer, CaseStudyTypeSerializer, CurrentFieldListSerializer, DepartmentSerializer, MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, PatientCaseStudyRecordSerializer, StaffRecognitionCaseStudyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer, RoleSerializer
 
 # NICU Paeds Monthly Record Viewset
 class NICUPaedsMonthlyRecordViewSet(viewsets.ModelViewSet):
@@ -85,6 +75,15 @@ class RoleViewSet(viewsets.ModelViewSet):
     lookup_field = 'name'
     lookup_url_kwarg = 'name'
 
+
+class MonthlyRecordViewSet(viewsets.ModelViewSet):
+    queryset = MonthlyRecord.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = MonthlyRecordSerializer
+    lookup_fields = ('month','year')
+    lookup_url_kwargs = ('month','year')
 class CurrentFieldListVietSet(viewsets.ModelViewSet):
     queryset = CurrentFieldsList.objects.all()
     permissions_classes = [
@@ -93,3 +92,21 @@ class CurrentFieldListVietSet(viewsets.ModelViewSet):
     serializer_class = CurrentFieldListSerializer
     lookup_field = 'department'
     lookup_url_kwarg = 'department'
+
+class CaseStudyTypeViewSet(viewsets.ModelViewSet):
+    queryset = CaseStudyType.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = CaseStudyTypeSerializer
+    lookup_field = 'name'
+    lookup_url_kwarg = 'name'
+
+class CaseStudyViewSet(viewsets.ModelViewSet):
+    queryset = CaseStudy.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = CaseStudySerializer
+    lookup_field = 'title'
+    lookup_url_kwarg = 'title'
