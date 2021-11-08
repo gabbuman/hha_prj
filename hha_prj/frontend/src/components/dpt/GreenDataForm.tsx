@@ -12,18 +12,18 @@ interface GDFState {
     dischargeReason: string;
     dischargeOutcome_1: string;
     dischargeOutcome_2: string;
-    // mobility: string;
-    // dischargeLocation: string;
-    // dischargeEmployment: string;
+    mobility: string;
+    dischargeLocation: string;
+    dischargeEmployment: string;
 
 }
 const initialState: GDFState = {
     dischargeReason: '',
     dischargeOutcome_1: '',
     dischargeOutcome_2: '',
-    // mobility: '',
-    // dischargeLocation: '',
-    // dischargeEmployment: '',
+    mobility: '',
+    dischargeLocation: '',
+    dischargeEmployment: '',
 }
 
 class GreenDataForm extends Component <GDFProps, GDFState> {
@@ -109,12 +109,13 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                                 <MenuItem value={6}>Dependent</MenuItem>
                             </Select>
                         </FormControl>
-                         {/* <FormControl sx={{ m: 1, minWidth: '48%' }}>
+                        <FormControl sx={{ m: 1, minWidth: '48%' }}>
                             <InputLabel id="demo-simple-select-label">Mobility Aid/Assistive Device Given</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={this.state.mobility}
+                                name="mobility"
                                 label="Mobility Aid/Assistive Device Given"
                                 onChange={this.dropdownHandleChange}
                             >
@@ -130,6 +131,7 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={this.state.dischargeLocation}
+                                name="dischargeLocation"
                                 label="Discharge Location"
                                 onChange={this.dropdownHandleChange}
                             >
@@ -144,6 +146,7 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={this.state.dischargeEmployment}
+                                name="dischargeEmployment"
                                 label="Discharge Employment Status"
                                 onChange={this.dropdownHandleChange}
                             >
@@ -152,7 +155,7 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                                 <MenuItem value={2}>Unemployed, due to condition</MenuItem>
                                 <MenuItem value={3}>Retired, not working due to age</MenuItem>
                             </Select>
-                        </FormControl>   */}
+                        </FormControl>
                     </div> 
                 )
             }
