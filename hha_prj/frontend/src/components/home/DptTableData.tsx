@@ -70,7 +70,7 @@ const initialState: tableState = {
     loading: true,
     month: "",
     year: (new Date()).getFullYear().toString(),
-    record: null
+    record: []
 }
 
 
@@ -104,10 +104,13 @@ export class TableData extends Component <tableProps, tableState> {
         .then(res =>res.json())
             
          .then(  (result)=>{ 
-            console.log(result);
-            this.setState({loading: false})
+            var dataString =JSON.stringify(result);
+            
+            
+            this.setState({loading: false, record: JSON.parse(dataString)})
+            //console.log("record" + this.state.record[0]);
             //this.setMonthList(result);
-            this.getQuesValueLists(result);
+            //this.getQuesValueLists(result);
         })
         .catch((error) => {
             console.error(error)
@@ -121,15 +124,14 @@ export class TableData extends Component <tableProps, tableState> {
         ))  
     }
     
-    dataQuestions: string[]
-    dataValues: any[]
-    dataRecords: {question: string, value: number}[] 
-    getQuesValueLists(monthlyRecord: Array<object>){
+    dataRecords: {question: string, value: number}[] []
+    // getQuesValueLists(monthlyRecord: Array<object>){
         
-        monthlyRecord.map((record: object)=> (
-            Object.keys(record).map(function(key) { this.dataRecords.push(createData(key, (record as any)[key]))})));
-           
-    }
+    //     monthlyRecord.map((record: object)=> (
+    //        //this.dataRecords = Object.keys(record).map((key)=> {key, (record as any)[key]})));
+    //        //console.log(this.dataRecords);
+    //     )    )
+    // }
 
     render (){ 
 
