@@ -1,29 +1,13 @@
 import * as React from 'react';
 import { Component } from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import TimelineIcon from '@mui/icons-material/Timeline';
+import { Box, Container, Grid, Stack, FormControl, InputLabel, Select, MenuItem, createTheme, ThemeProvider} from '@mui/material';
+import TableRow from '@mui/material/TableRow';
 import { grey } from '@mui/material/colors';
-import { Box, Container, Grid, Stack, FormControl, InputLabel, Select, MenuItem, createTheme, ThemeProvider, IconButton} from '@mui/material';
-import { createStyles, withStyles } from '@material-ui/styles';
-import { Theme } from '@material-ui/core/styles';
-import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
+import { createStyles, Theme, withStyles } from '@material-ui/core';
+import TableData from './DptTableData';
 
-const StyledTableRow = withStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      '&:nth-of-type(odd)': {
-        backgroundColor: grey[200],
-      },
-    },
-  }),
-)(TableRow);
+
 
 const theme = createTheme({
     palette: {
@@ -32,7 +16,7 @@ const theme = createTheme({
         contrastText: '#ff',
       },
     },
-  });
+});
 
 declare module '@mui/material/styles' {
     interface Palette {
@@ -50,23 +34,6 @@ declare module '@mui/material/Button' {
     }
 }
 
-
-function createData(
-    question: string,
-    value: number
-  ) {
-    return { question, value };
-  }
-
-  interface tableProps{
-
-  }
-
-  interface tableState {
-    month: string;
-    year: string;
-}
-
 const months = [
     'JAN',
     'FEB',
@@ -82,79 +49,18 @@ const months = [
     'DEC'
 ]
 
-const rows = [
-    createData('Beds available', 5 ),
-    createData('Bed Days', 0),
-    createData('Patient Days', 3),
-    createData('Hospitalized', 5),
-    createData('Discharged alive', 5),
-    createData('Died before 48h', 2),
-    createData('Referrals', 1),
-    createData('Transfers', 1),
-    createData('Self-discharged', 1),
-    createData('Stayed in the ward', 1),
-    createData('Admissions', 1),
-  ];
-
-  const secondaryDataQuestions = [
-    "Discharged alive",
-    "Died before 48h",
-    "Self-discharged",
-    "Stayed in the ward",
-    "Admissions",
-    "Hospitalized"
-  ];
-
-const initialState: tableState = {
-    month: months[(new Date()).getMonth()-1],
-    year: (new Date()).getFullYear().toString()
+interface tableProps{
+   
 }
 
+interface tableState {
+    month: string;
+    year: string;
+}
 
- class TableData extends Component <tableProps, tableState> {
-    constructor(props: tableProps){
-        super(props);
-        this.state= initialState;    
-    }
-
-    render (){
-
-
-        return(
-            <TableContainer component={Paper}>
-                <Table sx={{ width: "auto" }} aria-label="simple table">
-                    <TableBody>
-                    {rows.map((row) => (
-                        <StyledTableRow
-                        key={row.question}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                        <TableCell component="th" scope="row" width="15%"  style={{fontWeight: 700}} >
-                            {row.question}
-                        </TableCell>
-                        <TableCell align="left" width="15%" >
-                            {row.value}
-                        </TableCell>
-                        <TableCell align="right" width="100%" >
-                        { secondaryDataQuestions.includes(row.question) &&
-                            <IconButton>
-                                <NotesOutlinedIcon sx={{ color: grey[500]}}/> 
-                            </IconButton>
-                        }
-                        </TableCell>
-                        <TableCell align="right" width="100%" >
-                            <IconButton>
-                                <TimelineIcon sx={{ color: grey[500]}}/> 
-                            </IconButton>
-                        </TableCell>
-                        
-                        </StyledTableRow>
-                    ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        )
-    }
+const initialState: tableState = {    
+    month: months[1],
+    year: "2021", 
 }
 
 export class DptTableView extends Component<tableProps, tableState> {
@@ -162,30 +68,27 @@ export class DptTableView extends Component<tableProps, tableState> {
     private tabledataElement: React.RefObject<TableData>;
     constructor(props: tableProps){
         super(props);
-        this.state = {
-            month: months[(new Date()).getMonth()-1],
-            year: (new Date()).getFullYear().toString()
-        };
+        this.state = initialState;
         this.tabledataElement = React.createRef();
     }
 
     dropdownHandleMonthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({month: event.target.value});
+        this.setState({month: event.target.value});     
     }
 
     dropdownHandleYearChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({year: event.target.value});
     }
-
+   
     render (){
 
         let maxOffset = 10;
         let thisYear = (new Date()).getFullYear();
-        let years = [];
+        let years: number[] = [];
         for(let x = 0; x <= maxOffset; x++) {
             years.push(thisYear - x)
         }
-
+        
         return(
             <div> 
                     <Box m={5}>
@@ -239,7 +142,7 @@ export class DptTableView extends Component<tableProps, tableState> {
                             }                   
                         </Grid>                             
                         <Grid item xs={12}>
-                            <TableData ref={this.tabledataElement}/>
+                            <TableData  ref={this.tabledataElement} dptName={"Rehab"} newMonth={months.indexOf(this.state.month) + 1} newYear={parseInt(this.state.year)}/>
                         </Grid>
                         </Grid>
                         </Container>  
@@ -250,3 +153,4 @@ export class DptTableView extends Component<tableProps, tableState> {
 }
 
 export default DptTableView
+
