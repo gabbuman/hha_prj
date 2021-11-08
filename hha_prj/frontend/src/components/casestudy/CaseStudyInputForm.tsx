@@ -21,9 +21,9 @@ interface CSSState {
     
 }
 const initialState: CSSState = {
-    title: 'Title of Case',
+    title: 'Title of Case Study',
     type: 'Patient Story',
-    content: 'Testsssssss',
+    content: 'Test',
     isSubmit: false
 }
 

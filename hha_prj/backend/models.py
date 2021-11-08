@@ -459,7 +459,7 @@ class CommunityHealthMonthlyRecord(models.Model):
 class Department(models.Model):
     name = models.CharField(unique=True, primary_key=True, max_length=50)
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
-    image = models.ImageField(upload_to="uploads/", null=True)
+    image = models.ImageField(upload_to="uploads/", null=True, default="uploads/default.jpg")
     
     def __str__(self):
         return self.name 
@@ -514,3 +514,16 @@ class CurrentFieldsList(models.Model):
     
     def __str__(self):
         return self.name 
+
+class CaseStudyType(models.Model):
+    name = models.CharField(unique=True, primary_key=True, max_length=50)
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    
+    def __str__(self):
+        return self.name 
+
+class CaseStudy(models.Model):
+    type = models.ForeignKey(CaseStudyType, on_delete=models.PROTECT, default="Patient Story", blank=True)
+    title = models.CharField(max_length=50, null=False, blank=False, default="Case Study Title")
+    description = models.CharField(max_length=50, null=False, blank=False, default="This is a description of a case study")
+    image = models.ImageField(upload_to="uploads/", null=True, default="uploads/default.jpg")
