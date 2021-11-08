@@ -16,5 +16,6 @@ urlpatterns = [
     path('createdepartment', views.index), 
     path('dpttableview', views.index),    
     path('dptgraphview', views.index),
-    path('csinput', views.index)    
+    path('csinput', views.index),
+    path('csindividual', views.index)    
 ]

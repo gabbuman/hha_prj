@@ -15,6 +15,7 @@ from django.conf.urls.static import static
 from django.conf.urls import url
 from backend import views
 
+
 router = routers.DefaultRouter()
 router.register('api/current_field_list', CurrentFieldListVietSet, "current_field_list")
 router.register('api/monthly_records', MonthlyRecordViewSet, 'monthly_records')
