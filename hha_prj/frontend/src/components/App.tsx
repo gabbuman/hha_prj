@@ -42,16 +42,10 @@ class App extends Component {
 					<Route path='/vernavbar' component={VerNavbar} />
 					<Route path='/monthlyrecord' component={MonthlyRecord} />			
 					<Route path='/dpttableview' component={DptTableView} />		 	
-<<<<<<< HEAD
-					<Route path='/dptgraphview' component={DptGraphView} />
-					<Route path='/csinput' component={CaseStudySubmissionForm}/>
-					<Route path='/csindividual' component={CaseStudyIndividual}/>		 	
-=======
 					<Route path='/dptgraphview' component={DptGraphView} />		 	
 					<Route path='/dptrecordpage' component={DptRecordPage} />	
 					<Route path='/createdepartment' component={CreateDepartment} />	
 					<Route path='/csinput' component={CaseStudySubmissionForm}/>		 	
->>>>>>> e494c4fe49de300dbb94c527e29ea7a1b9777fcd
 				</Switch>
 				<ToastContainer/>
 			</Router>
