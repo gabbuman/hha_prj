@@ -7,7 +7,9 @@ import Button from '@mui/material/Button';
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MonthlyRecord from '../dpt/MonthlyRecord';
-import DptTableView from '../home/DptTable';
+import CaseStudyIndividual from '../casestudy/CaseStudyIndividual';
+import CaseStudySubmissionForm from '../casestudy/CaseStudyInputForm';
+import DptRecordPage from '../dpt/DptRecordPage';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -110,10 +112,10 @@ export default function VerticalTabs() {
         Item Four
       </TabPanel>
       <TabPanel value={value} index={4}>
-        Item Five
+        <CaseStudyIndividual />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        <DptTableView />
+        <DptRecordPage/>
       </TabPanel>
     </Box>
   );
