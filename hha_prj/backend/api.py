@@ -2,15 +2,6 @@ from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRe
 from rest_framework import viewsets, permissions
 from .serializers import CaseStudySerializer, CaseStudyTypeSerializer, CurrentFieldListSerializer, DepartmentSerializer, MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, PatientCaseStudyRecordSerializer, StaffRecognitionCaseStudyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer, RoleSerializer
 
-
-# MonthlyRecord ViewSet
-class MonthlyRecordViewSet(viewsets.ModelViewSet):
-    queryset = MonthlyRecord.objects.all()
-    permission_classes = [
-        permissions.IsAuthenticated
-    ]
-    serializer_class = MonthlyRecordSerializer
-
 # NICU Paeds Monthly Record Viewset
 class NICUPaedsMonthlyRecordViewSet(viewsets.ModelViewSet):
     queryset = NICUPaedsMonthlyRecord.objects.all()
@@ -84,6 +75,15 @@ class RoleViewSet(viewsets.ModelViewSet):
     lookup_field = 'name'
     lookup_url_kwarg = 'name'
 
+
+class MonthlyRecordViewSet(viewsets.ModelViewSet):
+    queryset = MonthlyRecord.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = MonthlyRecordSerializer
+    lookup_fields = ('month','year')
+    lookup_url_kwargs = ('month','year')
 class CurrentFieldListVietSet(viewsets.ModelViewSet):
     queryset = CurrentFieldsList.objects.all()
     permissions_classes = [

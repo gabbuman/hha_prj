@@ -16,6 +16,8 @@ import Homepage from './home/Homepage';
 import { ToastContainer } from 'react-toastify';
 import DptGraphView from './home/DptGraph';
 import CreateDepartment from './dpt/CreateDepartment';
+import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
+import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
 
 class App extends Component {
     render() {
@@ -42,7 +44,8 @@ class App extends Component {
 					<Route path='/dpttableview' component={DptTableView} />		 	
 					<Route path='/dptgraphview' component={DptGraphView} />		 	
 					<Route path='/dptrecordpage' component={DptRecordPage} />	
-					<Route path='/createdepartment' component={CreateDepartment} />		
+					<Route path='/createdepartment' component={CreateDepartment} />	
+					<Route path='/csinput' component={CaseStudySubmissionForm}/>		 	
 				</Switch>
 				<ToastContainer/>
 			</Router>

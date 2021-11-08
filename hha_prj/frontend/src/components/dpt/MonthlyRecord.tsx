@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, Component } from 'react';
 import { Grid, Container, Box } from '@mui/material';
 import RedDataForm from '../dpt/RedDataForm';
 import GreenDataForm from '../dpt/GreenDataForm';
@@ -11,7 +11,7 @@ interface MRState {
     step: number;
     isEdit: boolean;
     disabled: boolean;
-    greenData: string;
+    dischargedAlive_shared: number;
 }
 
 
@@ -23,7 +23,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
             step: 1,
             isEdit: true,
             disabled: false,
-            greenData: '',
+            dischargedAlive_shared: 0,
         };
     }
 
@@ -43,6 +43,12 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
         });
     }
 
+    updateShared = (dischargedAlive_shared_value: number) => {
+        this.setState({
+            dischargedAlive_shared: dischargedAlive_shared_value
+        });
+    }
+
     render() {
         const { step } = this.state;
 
@@ -50,10 +56,13 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
             case 1:
                 return (
                     <div>
-                        <Container >                    
+                        <Container >   
+                            {/* <div>The shared value is {this.state.dischargedAlive_shared}</div> */}
                             <RedDataForm 
                                 nextStep={this.nextStep}
                                 disabled={this.state.disabled} 
+                                dischargedAlive_shared={this.state.dischargedAlive_shared}
+                                updateShared={this.updateShared}
                             />                     
                         </Container>  
                     </div>
@@ -65,6 +74,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
                             <GreenDataForm 
                                 prevStep={this.prevStep}
                                 disabled={this.state.disabled} 
+                                dischargedAlive_shared={this.state.dischargedAlive_shared}
                             />                 
                         </Container>  
                     </div>
