@@ -1,15 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.fields.json import JSONExact, JSONField
 from django.db.models.fields.related import ForeignKey
 from django.utils.translation import gettext as _ # aliasing gettext as _
 from .managers import CustomUserManager
 import datetime
 
-
-# Create your models here.
-class MonthlyRecord(models.Model):
-    description = models.CharField(max_length=100, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
 
 class NICUPaedsMonthlyRecord(models.Model):
     month = models.CharField(max_length=100,blank=False,auto_created=True)
@@ -463,6 +459,7 @@ class CommunityHealthMonthlyRecord(models.Model):
 class Department(models.Model):
     name = models.CharField(unique=True, primary_key=True, max_length=50)
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    image = models.ImageField(upload_to="uploads/", null=True)
     
     def __str__(self):
         return self.name 
@@ -487,6 +484,29 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return "%s %s" % (self.username, self.department)
 
+class MonthlyRecord(models.Model):
+    department = models.ForeignKey(Department, on_delete=models.PROTECT)
+    class Months(models.IntegerChoices):
+        January = 1
+        February = 2
+        March = 3
+        April = 4
+        May = 5
+        June = 6
+        July = 7
+        August = 8
+        September = 9
+        October = 10
+        November = 11
+        December = 12
+
+    month = models.IntegerField(choices=Months.choices)
+    year = models.PositiveSmallIntegerField()
+
+    question_answer_list = models.JSONField()
+    class Meta:
+        unique_together = ('month', 'year',)
+        
 class CurrentFieldsList(models.Model):
     list = models.JSONField(null=False,blank=False)
     department = models.OneToOneField(Department, on_delete=models.PROTECT)

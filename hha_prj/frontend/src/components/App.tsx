@@ -13,9 +13,10 @@ import MonthlyRecord from './dpt/MonthlyRecord';
 import DptRecordPage from './dpt/DptRecordPage';
 import {DptTableView} from './home/DptTableView';
 import Homepage from './home/Homepage';
+import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
 import { ToastContainer } from 'react-toastify';
 import DptGraphView from './home/DptGraph';
-
+import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
 class App extends Component {
     render() {
 		
@@ -40,7 +41,8 @@ class App extends Component {
 					<Route path='/monthlyrecord' component={MonthlyRecord} />	
 					<Route path='/dptrecordpage' component={DptRecordPage} />			
 					<Route path='/dpttableview' component={DptTableView} />		 	
-					<Route path='/dptgraphview' component={DptGraphView} />		 	
+					<Route path='/dptgraphview' component={DptGraphView} />
+					<Route path='/csinput' component={CaseStudySubmissionForm}/>		 	
 				</Switch>
 				<ToastContainer/>
 			</Router>

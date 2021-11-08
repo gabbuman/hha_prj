@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3rd Party Apps
     'rest_framework',
+    'corsheaders',
     # Our Apps
     'backend',
     'frontend'
@@ -62,6 +63,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8000'
 ]
 
 ROOT_URLCONF = 'hha_prj.urls'
@@ -168,3 +175,11 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Default Fixture file lookup directory
+#https://stackoverflow.com/questions/15479209/loading-fixtures-django
+FIXTURE_DIRS = (
+    os.path.join(BASE_DIR, 'fixtures'), 
+    )
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA = "/media/"

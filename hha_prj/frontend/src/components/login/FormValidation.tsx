@@ -4,8 +4,8 @@ export const validateUsername = (username:string) => {
 }
 
 export const validatePassword = (password:string) => {
-    // Citation: https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
-    const regexp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    // Citation: https://www.thepolyglotdeveloper.com/2020/02/test-password-strength-regex-react-application/
+    const regexp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[0-9a-zA-Z]{8,}$/;
     return regexp.test(password);
 }
 
