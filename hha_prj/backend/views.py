@@ -4,7 +4,7 @@ from rest_framework import permissions
 from .serializers import CustomTokenPairSerializer
 from django.http import HttpResponse
 from datetime import datetime
-from .models import AnswerList
+from .models import  MonthlyRecord
 
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
@@ -19,7 +19,7 @@ def CheckCurrentMonthAdmissionStatus(request):
     current_year = datetime.now().strftime('%Y')
     current_month = datetime.now().strftime('%m')
 
-    if AnswerList.objects.filter(year = current_year,month = current_month).exists():
+    if MonthlyRecord.objects.filter(year = current_year,month = current_month).exists():
         response = True
     else:
         response = False

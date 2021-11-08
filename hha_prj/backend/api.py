@@ -1,13 +1,6 @@
-from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRecord,PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord, Department, Role, AnswerList, CurrentFieldsList
+from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRecord,PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord, Department, Role, CurrentFieldsList
 from rest_framework import viewsets, permissions
-from .serializers import DepartmentSerializer, MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, PatientCaseStudyRecordSerializer, StaffRecognitionCaseStudyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer, RoleSerializer, AnswerListSerializer, CurrentFieldListSerializer
-# MonthlyRecord ViewSet
-class MonthlyRecordViewSet(viewsets.ModelViewSet):
-    queryset = MonthlyRecord.objects.all()
-    permission_classes = [
-        permissions.IsAuthenticated
-    ]
-    serializer_class = MonthlyRecordSerializer
+from .serializers import DepartmentSerializer, MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, PatientCaseStudyRecordSerializer, StaffRecognitionCaseStudyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer, RoleSerializer, CurrentFieldListSerializer
 
 # NICU Paeds Monthly Record Viewset
 class NICUPaedsMonthlyRecordViewSet(viewsets.ModelViewSet):
@@ -83,12 +76,12 @@ class RoleViewSet(viewsets.ModelViewSet):
     lookup_url_kwarg = 'name'
 
 
-class AnswerListViewSet(viewsets.ModelViewSet):
-    queryset = AnswerList.objects.all()
+class MonthlyRecordViewSet(viewsets.ModelViewSet):
+    queryset = MonthlyRecord.objects.all()
     permissions_classes = [
         permissions.AllowAny
     ]
-    serializer_class = AnswerListSerializer
+    serializer_class = MonthlyRecordSerializer
     lookup_fields = ('month','year')
     lookup_url_kwargs = ('month','year')
 class CurrentFieldListVietSet(viewsets.ModelViewSet):

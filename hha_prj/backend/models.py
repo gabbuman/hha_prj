@@ -7,11 +7,6 @@ from .managers import CustomUserManager
 import datetime
 
 
-# Create your models here.
-class MonthlyRecord(models.Model):
-    description = models.CharField(max_length=100, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
 class NICUPaedsMonthlyRecord(models.Model):
     month = models.CharField(max_length=100,blank=False,auto_created=True)
     year = models.PositiveSmallIntegerField(blank=False)
@@ -488,9 +483,8 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return "%s %s" % (self.username, self.department)
 
-class AnswerList(models.Model):
+class MonthlyRecord(models.Model):
     department = models.ForeignKey(Department, on_delete=models.PROTECT)
-
     class Months(models.IntegerChoices):
         January = 1
         February = 2
@@ -508,11 +502,10 @@ class AnswerList(models.Model):
     month = models.IntegerField(choices=Months.choices)
     year = models.PositiveSmallIntegerField()
 
-    answers = models.JSONField()
-    associated_question_list = JSONField()
-
+    question_answer_list = models.JSONField()
     class Meta:
         unique_together = ('month', 'year',)
+        
 class CurrentFieldsList(models.Model):
     list = models.JSONField(null=False,blank=False)
     department = models.OneToOneField(Department, on_delete=models.PROTECT)
