@@ -32,6 +32,7 @@ export default function SignIn() {
   const [usernameError, setUsernameError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
   
+  
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if(!validateUsername(username)) { setUsernameError("Username must be 5 characters or longer. They may not include special characters other than underscore."); }
