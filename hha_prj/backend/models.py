@@ -504,4 +504,5 @@ class CaseStudyType(models.Model):
 
 class CaseStudy(models.Model):
     type = models.ForeignKey(CaseStudyType, on_delete=models.PROTECT, default="Patient Story", blank=True)
-    
+    title = models.CharField(max_length=50, null=False, blank=False, default="Case Study Title")
+    description = models.CharField(max_length=50, null=False, blank=False, default="This is a description of a case study")
