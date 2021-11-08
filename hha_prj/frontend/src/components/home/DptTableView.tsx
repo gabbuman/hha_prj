@@ -59,7 +59,7 @@ interface tableState {
 }
 
 const initialState: tableState = {    
-    month: months[0],
+    month: months[1],
     year: "2021", 
 }
 
@@ -107,8 +107,8 @@ export class DptTableView extends Component<tableProps, tableState> {
                                     value={this.state.month}
                                     onChange={this.dropdownHandleMonthChange}
                                     >
-                                        {months.map((month, index) => (
-                                            <MenuItem value={index +1}> {month}
+                                        {months.map((month) => (
+                                            <MenuItem value={month}> {month}
                                             </MenuItem>
                                         ))}
                                     </Select>
