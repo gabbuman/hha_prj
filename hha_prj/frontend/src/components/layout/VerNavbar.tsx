@@ -106,7 +106,6 @@ export default function VerticalTabs() {
       <TabPanel  value={value} index={1}>
         <MonthlyRecord />
       </TabPanel>
-      </Grid>
       <TabPanel value={value} index={2}>
         Item Three
       </TabPanel>
@@ -116,6 +115,7 @@ export default function VerticalTabs() {
       <TabPanel value={value} index={4}>
         <CaseStudyGridView/>
       </TabPanel>
+      </Grid>
     </Box>
   );
 }
