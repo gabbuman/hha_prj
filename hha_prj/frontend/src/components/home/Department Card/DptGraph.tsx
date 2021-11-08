@@ -45,8 +45,8 @@ const tooltipBottomStyles = {
     ...defaultStyles,
     color: '#6A91C7',
     boxShadow: '0 5px 20px rgba(0, 0, 0, 0.15)',
-    minWidth: 75,
-    textAlign: 'center',
+    minWidth: 80,
+    textAlign: 'center' as 'center',
     transform: 'translateX(-62%)',
 };
 
