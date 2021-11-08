@@ -19,6 +19,10 @@ import { useHistory } from 'react-router-dom';
 import { notifyFail, notifySuccess } from './Notifications';
 import { endpoint } from '../Endpoint'
 import { validatePassword, validateUsername } from './FormValidation';
+<<<<<<< HEAD
+=======
+import { storeUser, printUser } from '../User';
+>>>>>>> master
 
 const theme = createTheme();
 
@@ -30,7 +34,10 @@ export default function SignIn() {
 
   const [usernameError, setUsernameError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
+<<<<<<< HEAD
   
+=======
+>>>>>>> master
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,20 +46,12 @@ export default function SignIn() {
     sendUserLoginRequest();
   };
 
-  const storeUser = (data:any) => {
-    localStorage.setItem('role', data?.role);
-    localStorage.setItem('department', data?.department);
-    localStorage.setItem('username',data?.username);
-    localStorage.setItem('user_id',data?.user_id);
-    localStorage.setItem('access', data?.access);
-  }
-
   const sendUserLoginRequest = () => {
     axios.post(endpoint + 'api/token/obtain', {username, password} as any)
       .then(res => {
         notifySuccess('Login success! Welcome back ' + username +'!');
         storeUser(res.data)
-        console.log(localStorage.getItem('department'));
+        printUser();
         history.push("/homepage");
       })
       .catch((error) => {

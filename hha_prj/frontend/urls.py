@@ -13,5 +13,7 @@ urlpatterns = [
     path('vernavbar', views.index),
     path('monthlyrecord', views.index),
     path('dptrecordpage', views.index),
-    path('createdepartment', views.index) 
+    path('createdepartment', views.index), 
+    path('dpttableview', views.index),    
+    path('dptgraphview', views.index)    
 ]
