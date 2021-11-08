@@ -1,4 +1,7 @@
 ﻿# Iteration 2
+
+# Marking for Design Tickets
+Our design tickets were trackd on GitLab. However, since they did not have associated branches and respective merge requests, they were simply "closed" when finished. We assigned difficulty points to them as well. So when marking design tickets please filter for **'Label':'Type: Design' and 'Milestone':'Iteration 2' to see screenshots and links to our designs.**
 # Viewing and testing the application from a browser on a host SFU machine
 - use the 'Chromium' browser because it is newer and properly renders the application
 - there is a default user created for testing login on the deployed application (username: nurse, password: hospital)
