@@ -78,6 +78,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         required
                         disabled={this.props.disabled}
                         type="number"
+                        inputProps={{ min: 0}}
                         id="outlined-required"
                         label="Beds Available"
                         value={this.state.bedsAvailable}
@@ -87,6 +88,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         required
                         disabled={this.props.disabled}
                         type="number"
+                        inputProps={{ min: 0}}
                         id=""
                         label="Bed Days"
                         value={this.state.bedDays}
@@ -96,6 +98,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         required
                         disabled={this.props.disabled}
                         type="number"
+                        inputProps={{ min: 0}}
                         id=""
                         label="Patient Days"
                         value={this.state.patientDays}
@@ -105,6 +108,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         required
                         disabled={this.props.disabled}
                         type="number"
+                        inputProps={{ min: 0}}
                         id=""
                         label="Hospitalized"
                         value={this.state.hospitalized}
@@ -114,6 +118,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         required
                         disabled={this.props.disabled}
                         type="number"
+                        inputProps={{ min: 0}}
                         id=""
                         label="Discharged Alive"
                         value={this.state.dischargedAlive}
@@ -128,6 +133,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         required
                         disabled={this.props.disabled}
                         type="number"
+                        inputProps={{ min: 0}}
                         id="outlined-required"
                         label="Died Before 48hr"
                         value={this.state.diedBefore}
@@ -137,6 +143,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         required
                         disabled={this.props.disabled}
                         type="number"
+                        inputProps={{ min: 0}}
                         id=""
                         label="Died After 48hr"
                         value={this.state.diedAfter}
@@ -146,6 +153,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         required
                         disabled={this.props.disabled}
                         type="number"
+                        inputProps={{ min: 0}}
                         id=""
                         label="Days Hospitalized"
                         value={this.state.daysHospitalized}
@@ -160,6 +168,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         required
                         disabled={this.props.disabled}
                         type="number"
+                        inputProps={{ min: 0}}
                         id="outlined-required"
                         label="Referrals"
                         value={this.state.referrals}
@@ -169,6 +178,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         required
                         disabled={this.props.disabled}
                         type="number"
+                        inputProps={{ min: 0}}
                         id=""
                         label="Transfers"
                         value={this.state.transfers}
@@ -178,6 +188,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         required
                         disabled={this.props.disabled}
                         type="number"
+                        inputProps={{ min: 0}}
                         id=""
                         label="Self-Discharged"
                         value={this.state.selfdischarged}
@@ -187,6 +198,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         required
                         disabled={this.props.disabled}
                         type="number"
+                        inputProps={{ min: 0}}
                         id=""
                         label="Stayed in Ward"
                         value={this.state.stayedinward}
@@ -196,6 +208,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         required
                         disabled={this.props.disabled}
                         type="number"
+                        inputProps={{ min: 0}}
                         id=""
                         label="Admissions"
                         value={this.state.admissions}
