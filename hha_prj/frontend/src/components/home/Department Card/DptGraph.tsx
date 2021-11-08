@@ -1,7 +1,11 @@
 import React, { useMemo, useCallback } from 'react';
 import { AreaClosed, Line, Bar } from '@visx/shape';
+
+// ----------- Remove
 import appleStock, { AppleStock } from '@visx/mock-data/lib/mocks/appleStock';
-import { curveMonotoneX } from '@visx/curve';
+// -----------
+
+import { curveLinear } from '@visx/curve';
 import { GridRows, GridColumns } from '@visx/grid';
 import { scaleTime, scaleLinear } from '@visx/scale';
 import { withTooltip, Tooltip, TooltipWithBounds, defaultStyles } from '@visx/tooltip';
@@ -14,6 +18,7 @@ import { timeFormat } from 'd3-time-format';
 import { curveBasis } from '@visx/curve';
 import { LinePath } from '@visx/shape';
 import styled from 'styled-components'
+import { RecordData, sampleData } from './RecordData';
 
 const GraphContainer = styled.div `
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
@@ -25,9 +30,13 @@ const GraphContainer = styled.div `
     }
 `
 
-type TooltipData = AppleStock;
+// -----------
+type TooltipData = RecordData;
+// -----------
 
-const stock = appleStock.slice(800);
+// ----------- Don't need .slice(800), stock - records
+const records = sampleData.data;
+// -----------
 
 export const background = '#fefefe';
 export const background2 = '#ffffff';
@@ -50,13 +59,12 @@ const tooltipBottomStyles = {
     transform: 'translateX(-62%)',
 };
 
-// util
-const formatDate = timeFormat("%b %d, '%y");
-
-// accessors
-const getDate = (d: AppleStock) => new Date(d.date);
-const getStockValue = (d: AppleStock) => d.close;
-const bisectDate = bisector<AppleStock, Date>((d) => new Date(d.date)).left;
+// ----------- const formatDate = timeFormat("%b %d, '%y"); Removed date, 
+const formatDate = timeFormat("%b, '%y");
+const getDate = (record: RecordData) => new Date(record.dateRecorded);
+const getRecordValue = (record: RecordData) => record.value;
+const bisectDate = bisector<RecordData, Date>((record) => new Date(record.dateRecorded)).left;
+// -----------
 
 export type AreaProps = {
     width: number;
@@ -85,15 +93,21 @@ export default withTooltip<AreaProps, TooltipData>(
         const dateScale = useMemo(
             () => scaleTime({
                 range: [margin.left, innerWidth + margin.left],
-                domain: extent(stock, getDate) as [Date, Date],
+                // -----------
+                domain: extent(records, getDate) as [Date, Date],
+                // -----------
             }),
             [innerWidth, margin.left],
         );
         
-        const stockValueScale = useMemo(
+        // -----------
+        const recordsValueScale = useMemo(
+        // -----------
             () => scaleLinear({
                 range: [innerHeight + margin.top, margin.top],
-                domain: [0, (max(stock, getStockValue) || 0) + innerHeight / 3],
+                // -----------
+                domain: [0, (max(records, getRecordValue) || 0) + innerHeight / 10], // used to be / 3
+                // -----------
                 nice: true,
             }),
             [margin.top, innerHeight],
@@ -104,9 +118,11 @@ export default withTooltip<AreaProps, TooltipData>(
             (event: React.TouchEvent<SVGRectElement> | React.MouseEvent<SVGRectElement>) => {
                 const { x } = localPoint(event) || { x: 0 };
                 const x0 = dateScale.invert(x);
-                const index = bisectDate(stock, x0, 1);
-                const d0 = stock[index - 1];
-                const d1 = stock[index];
+                // -----------
+                const index = bisectDate(records, x0, 1);
+                const d0 = records[index - 1];
+                const d1 = records[index];
+                // -----------
                 let d = d0;
                 if (d1 && getDate(d1)) {
                     d = x0.valueOf() - getDate(d0).valueOf() > getDate(d1).valueOf() - x0.valueOf() ? d1 : d0;
@@ -114,10 +130,14 @@ export default withTooltip<AreaProps, TooltipData>(
                 showTooltip({
                     tooltipData: d,
                     tooltipLeft: x,
-                    tooltipTop: stockValueScale(getStockValue(d)),
+                    // -----------
+                    tooltipTop: recordsValueScale(getRecordValue(d)),
+                    // -----------
                 });
             },
-            [showTooltip, stockValueScale, dateScale],
+            // -----------
+            [showTooltip, recordsValueScale, dateScale],
+            // -----------
         );
 
         return (
@@ -145,7 +165,9 @@ export default withTooltip<AreaProps, TooltipData>(
                     </clipPath>
                     <GridRows
                         left={margin.left}
-                        scale={stockValueScale}
+                        // -----------
+                        scale={recordsValueScale}
+                        // -----------
                         width={innerWidth}
                         strokeDasharray="1,3"
                         stroke={accentColor}
@@ -161,20 +183,23 @@ export default withTooltip<AreaProps, TooltipData>(
                         strokeOpacity={0.3}
                         pointerEvents="none"
                     />
-                    <AreaClosed<AppleStock>
-                        data={stock}
-                        x={(d) => dateScale(getDate(d)) ?? 0}
-                        y={(d) => stockValueScale(getStockValue(d)) ?? 0}
-                        yScale={stockValueScale}
+
+                    <AreaClosed<RecordData>
+                        data={records}
+                        x={(data) => dateScale(getDate(data)) ?? 0}
+                        y={(data) => recordsValueScale(getRecordValue(data)) ?? 0}
+                        yScale={recordsValueScale}
+                        // -----------
+
                         fill="url(#area-gradient)"
-                        curve={curveMonotoneX}
+                        curve={curveLinear}
                         clipPath="url(#background-rect)"
                     />
-                    <LinePath<AppleStock>
-                        data={stock}
-                        curve={curveBasis}
-                        x={(d) => dateScale(getDate(d)) ?? 0}
-                        y={(d) => stockValueScale(getStockValue(d)) ?? 0}
+                    <LinePath<RecordData>
+                        data={records}
+                        curve={curveLinear}
+                        x={(data) => dateScale(getDate(data)) ?? 0}
+                        y={(data) => recordsValueScale(getRecordValue(data)) ?? 0}
                         stroke="#678ec5"
                         strokeWidth={2.0}
                     />
@@ -231,7 +256,7 @@ export default withTooltip<AreaProps, TooltipData>(
                         left={tooltipLeft + 12}
                         style={tooltipStyles}
                     >
-                    {`${getStockValue(tooltipData)}`}
+                    {`${getRecordValue(tooltipData)}`}
                     </TooltipWithBounds>
                     <Tooltip
                         top={innerHeight + margin.top - 14}
