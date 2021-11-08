@@ -82,8 +82,8 @@ export default class CaseStudyIndividual extends Component <CSProps, CSState>{
                     value={this.state.type}
                 />
                 </Box>
-                <Grid item xs={12}>
-                    <Stack direction="row" spacing={30} justifyContent="flex-end">
+                <Grid item xs={2}>
+                    <Stack direction="row" spacing={10} justifyContent="center">
                         <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
                     </Stack>
                 </Grid>

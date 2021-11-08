@@ -55,88 +55,92 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
 
         return(
             <div>
+                <Header title={`Hope Health Action/Rehab Department`} />
                 <Box
-                sx={{
-                    m:2
-                }}
-                >
-                    <TextField
-                    variant = 'outlined'
-                    id="title-case-study"
-                    label="Title"
-                    value={this.state.title}
-                    onChange={(e)=>{this.setState({title: e.target.value})}}
-                    
+                sx={{m:4}}>
+                    <Box
                     sx={{
-                        width: '50ch', '& .MuiTextField-root': { m: 2}
+                        m:2
                     }}
-                    />
-
-                    <FormControl>
-                        <InputLabel
+                    >
+                        <TextField
+                        variant = 'outlined'
+                        id="title-case-study"
+                        label="Title"
+                        value={this.state.title}
+                        onChange={(e)=>{this.setState({title: e.target.value})}}
+                        
                         sx={{
-                            left:'50px'
+                            width: '50ch', '& .MuiTextField-root': { m: 2}
                         }}
-                        id = "case-study-type">Type Of Case Study</InputLabel>
-                        <Select
+                        />
+
+                        <FormControl>
+                            <InputLabel
                             sx={{
                                 left:'50px'
                             }}
-                            labelId = "case-study-type"
-                            id="caseStudyType"
-                            value = {this.state.type}
-                            label="typeCaseStudy"
-                            onChange = {this.dropDownHandleChange}
-                            
-                            
-                        >
-                            {types.map((type) => (
-                                            <MenuItem value={type}> {type}
-                                            </MenuItem>
-                            ))}
+                            id = "case-study-type">Type Of Case Study</InputLabel>
+                            <Select
+                                sx={{
+                                    left:'50px'
+                                }}
+                                labelId = "case-study-type"
+                                id="caseStudyType"
+                                value = {this.state.type}
+                                label="typeCaseStudy"
+                                onChange = {this.dropDownHandleChange}
+                                
+                                
+                            >
+                                {types.map((type) => (
+                                                <MenuItem value={type}> {type}
+                                                </MenuItem>
+                                ))}
 
 
-                        </Select>
-                    </FormControl>
-                </Box>
-                
-                <Box
-                component="form"
-                noValidate
-                autoComplete="off"
-                sx={{
-                    '& .MuiTextField-root': { m: 2, width: '100ch' }, maxWidth: '100%'
-                }}
-                >
-                    <TextField
-                    id="case-study-description"
-                    label="Description"
-                    variant="outlined"
-                    multiline
-                    rows={20}
-                    value={this.state.content}
-                    onChange={(e)=>{this.setState({content: e.target.value})}}
-                />
-                </Box>
-                <Box
-                sx={{
-                    m:2
-                }}
-                >
-                    <h3>Upload Pictures</h3>
-                    <input
-                    type="file"
-                    name="file"
+                            </Select>
+                        </FormControl>
+                    </Box>
+                    
+                    <Box
+                    component="form"
+                    noValidate
+                    autoComplete="off"
+                    sx={{
+                        '& .MuiTextField-root': { m: 2, width: '100ch' }, maxWidth: '100%'
+                    }}
+                    >
+                        <TextField
+                        id="case-study-description"
+                        label="Description"
+                        variant="outlined"
+                        multiline
+                        rows={20}
+                        value={this.state.content}
+                        onChange={(e)=>{this.setState({content: e.target.value})}}
                     />
+                    </Box>
+                    <Box
+                    sx={{
+                        m:2
+                    }}
+                    >
+                        <h3>Upload Pictures</h3>
+                        <input
+                        type="file"
+                        name="file"
+                        />
 
+                    </Box>
+                    <Grid item xs={12}>
+                        <Stack direction="row" spacing={5} justifyContent="center">
+                            <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="primary"onClick={this.submitClick}>Submit</Button>
+                            <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
+                        </Stack>
+
+                    </Grid>
                 </Box>
-                <Grid item xs={12}>
-                    <Stack direction="row" spacing={5} justifyContent="flex-end">
-                        <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="primary"onClick={this.submitClick}>Submit</Button>
-                        <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
-                    </Stack>
-
-                </Grid>
             </div>
         );
     }
