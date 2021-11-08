@@ -176,5 +176,10 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#Default Fixture file lookup directory
+#https://stackoverflow.com/questions/15479209/loading-fixtures-django
+FIXTURE_DIRS = (
+    os.path.join(BASE_DIR, 'fixtures'), 
+    )
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA = "/media/"

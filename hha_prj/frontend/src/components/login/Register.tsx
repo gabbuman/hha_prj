@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import Select from '@mui/material/Select';
@@ -73,7 +73,7 @@ export default function Register() {
 
   const validateForm = () => {
     if (!validateUsername(username)) { setUsernameError("Username must be 5 characters or longer. They may not include special characters other than underscore."); return false; }
-    if (!validatePassword(password)) { setPasswordError("Password must contain minimum eight characters, at least one letter, one number and one special character."); return false; }
+    if (!validatePassword(password)) { setPasswordError("Password must contain minimum eight characters, at least one lowercase letter, one uppercase letter and one number."); return false; }
     if (!validateNotNull(department)) { setDepartmentError("Please select a department for this user."); return false; }
     if (!validateNotNull(role)) { setRoleError("Please select a role for this user."); return false; }
     return true;
@@ -87,9 +87,9 @@ export default function Register() {
   };
 
   const sendCreateUserRequest = () => {
-    axios.post(endpoint + '/api/user/', {username:username, password:password, department:department, role:role})
+    axios.post(endpoint + 'api/user/', {username:username, password:password, department:department, role:role})
       .then(res => {
-        notifySuccess('Registration success! Welcome ' + username +'!');
+        notifySuccess("New user " + username + " has been register successfully.");
         console.log(res);
         history.push("/login");
       })
@@ -163,7 +163,7 @@ export default function Register() {
                 }}
               >
                 {departmentList.map((item, i) => {
-                  return <MenuItem value={item.name}>{item.name}</MenuItem>
+                  return <MenuItem key={"dept-"+i} value={item.name}>{item.name}</MenuItem>
                 })}
               </Select>
               <FormHelperText>{departmentError}</FormHelperText>
@@ -183,7 +183,7 @@ export default function Register() {
                 }}
               >
                 {roleList.map((item, i) => {
-                  return <MenuItem value={item.name}>{item.name}</MenuItem>
+                  return <MenuItem key={"dept-"+i} value={item.name}>{item.name}</MenuItem>
                 })}
               </Select>
               <FormHelperText>{roleError}</FormHelperText>
