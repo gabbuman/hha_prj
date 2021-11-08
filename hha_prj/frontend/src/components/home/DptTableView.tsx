@@ -63,7 +63,7 @@ export class DptTableView extends Component<tableProps, tableState> {
     constructor(props: tableProps){
         super(props);
         this.state = {
-            month: months[(new Date()).getMonth()-1],
+            month: "",
             year: (new Date()).getFullYear().toString()
         };
         this.tabledataElement = React.createRef();

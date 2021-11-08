@@ -8,7 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { endpoint } from '../Endpoint';
 import { grey } from '@mui/material/colors';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
@@ -39,6 +39,7 @@ function createData(
     loading: boolean,
     month: string;
     year: string;
+    record: {question: string, value: number}[]
 }
 
 const rows = [
@@ -55,7 +56,7 @@ const rows = [
     createData('Admissions', 1),
   ];
 
-  const secondaryDataQuestions = [
+const secondaryDataQuestions = [
     "Discharged alive",
     "Died before 48h",
     "Self-discharged",
@@ -65,50 +66,70 @@ const rows = [
   ];
 
 
-const months = [
-    'JAN',
-    'FEB',
-    'MAR',
-    'APR',
-    'MAY',
-    'JUN',
-    'JUL',
-    'AUG',
-    'SEP',
-    'OCT',
-    'NOV',
-    'DEC'
-]
-
 const initialState: tableState = {
     loading: true,
-    month: months[(new Date()).getMonth()-1],
-    year: (new Date()).getFullYear().toString()
+    month: "",
+    year: (new Date()).getFullYear().toString(),
+    record: null
 }
 
 
 export class TableData extends Component <tableProps, tableState> {
     constructor(props: tableProps){
         super(props);
-        this.state= initialState;    
+        this.state= initialState;  
     }
+   
     
     componentDidMount(){
         this.getDptData();
     }
 
+    // async getDptData() {
+    //     axios.get(endpoint + 'api/rehab_records/?format=json')
+    //     .then(res => {
+    //         //this.setMonthList(res.data);
+    //         //this.setQuesValueList(res.data);
+           
+    //         console.log(res);
+    //         this.setState({loading: false})
+    //     })
+    //     .catch((error) => {
+    //         console.error(error)
+    //       }
+    //     )
+    // }
     async getDptData() {
-        axios.get(endpoint + 'api/rehab_records/')
-        .then(res => {
-            console.log(res);
+        fetch(endpoint + 'api/rehab_records/?format=json')
+        .then(res =>res.json())
+            
+         .then(  (result)=>{ 
+            console.log(result);
             this.setState({loading: false})
+            //this.setMonthList(result);
+            this.getQuesValueLists(result);
         })
         .catch((error) => {
             console.error(error)
           }
         )
     }
+    static months: string[]
+    getMonthList(monthlyRecord: Array<{question: string, value: any}>){
+        monthlyRecord.map((record: {question: string, value: any})=> (
+           record.question == "month_name" ? (TableData.months.push(record.value)): {}
+        ))  
+    }
     
+    dataQuestions: string[]
+    dataValues: any[]
+    dataRecords: {question: string, value: number}[] 
+    getQuesValueLists(monthlyRecord: Array<object>){
+        
+        monthlyRecord.map((record: object)=> (
+            Object.keys(record).map(function(key) { this.dataRecords.push(createData(key, (record as any)[key]))})));
+           
+    }
 
     render (){ 
 
