@@ -1,6 +1,7 @@
-from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRecord,PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord, Department, Role
+from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRecord,PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord, Department, Role, CurrentFieldsList
 from rest_framework import viewsets, permissions
-from .serializers import DepartmentSerializer, MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, PatientCaseStudyRecordSerializer, StaffRecognitionCaseStudyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer, RoleSerializer
+
+from .serializers import CurrentFieldListSerializer, DepartmentSerializer, MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, PatientCaseStudyRecordSerializer, StaffRecognitionCaseStudyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer, RoleSerializer
 
 
 # MonthlyRecord ViewSet
@@ -83,3 +84,12 @@ class RoleViewSet(viewsets.ModelViewSet):
     serializer_class = RoleSerializer
     lookup_field = 'name'
     lookup_url_kwarg = 'name'
+
+class CurrentFieldListVietSet(viewsets.ModelViewSet):
+    queryset = CurrentFieldsList.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = CurrentFieldListSerializer
+    lookup_field = 'department'
+    lookup_url_kwarg = 'department'
