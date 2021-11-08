@@ -64,10 +64,14 @@ class CaseStudyGridView extends Component {
                     <TitledCardGroup>
                         <CardGroup>
                             {case_data.map(item => {
-                                return <CSCard  
-                                    title={item.title}
-                                    type={item.type}
-                                    content={item.content}></CSCard>
+                                return (
+                                    <Link to = "/csindividual" style={{ textDecoration: 'none' }}>
+                                        <CSCard  
+                                        title={item.title}
+                                        type={item.type}
+                                        content={item.content}></CSCard>
+                                    </Link>
+                                    )
                             })}
                             <Link to = "/csinput" style={{ textDecoration: 'none' }} >
                                 <AddCard/>
