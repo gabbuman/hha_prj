@@ -13,12 +13,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
 import { notifyFail, notifySuccess } from './Notifications';
 import { endpoint } from '../Endpoint'
 import { validatePassword, validateUsername } from './FormValidation';
+import { storeUser, printUser } from '../User';
 
 const theme = createTheme();
 
@@ -33,16 +34,17 @@ export default function SignIn() {
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if(!validateUsername(username)) { setUsernameError("Username must be 5 characters or longer. They may not include special characters other than underscore."); return false; }
-    if(!validatePassword(password)) { setPasswordError("Password must contain minimum eight characters, at least one letter, one number and one special character."); return false; }
+    if(!validateUsername(username)) { setUsernameError("Username must be 5 characters or longer. They may not include special characters other than underscore."); }
+    if(!validatePassword(password)) { setPasswordError("Password must contain minimum eight characters, at least one letter, one number and one special character."); }
     sendUserLoginRequest();
   };
 
   const sendUserLoginRequest = () => {
-    axios.post(endpoint + 'api/token/obtain', {username, password})
+    axios.post(endpoint + 'api/token/obtain', {username, password} as any)
       .then(res => {
         notifySuccess('Login success! Welcome back ' + username +'!');
-        console.log(res);
+        storeUser(res.data)
+        printUser();
         history.push("/homepage");
       })
       .catch((error) => {
