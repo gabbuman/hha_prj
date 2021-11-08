@@ -1,16 +1,22 @@
 from django.utils.module_loading import import_string
 from rest_framework import routers
-from .api import CommunityHealthMonthlyRecordViewset, MonthlyRecordViewSet 
+from .api import CommunityHealthMonthlyRecordViewset, MonthlyRecordViewSet , CurrentFieldListVietSet
 from .api import RehabMonthlyRecordViewset, MaternityMonthlyRecordViewSet
 from .api import CustomUserViewSet, NICUPaedsMonthlyRecordViewSet, PatientCaseStudyRecordViewSet
 from .api import StaffRecognitionCaseStudyViewSet, DepartmentViewSet, RoleViewSet
-from .views import ObtainTokenPairWithUsernameView
+from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus
 from django.urls import path
 from django.urls.conf import include
 from rest_framework_simplejwt.views import TokenRefreshView
+from django.conf import settings
+from django.conf.urls.static import static
+
+from django.conf.urls import url
+from backend import views
 
 
 router = routers.DefaultRouter()
+router.register('api/current_field_list', CurrentFieldListVietSet, "current_field_list")
 router.register('api/monthly_records', MonthlyRecordViewSet, 'monthly_records')
 router.register('api/rehab_records', RehabMonthlyRecordViewset, 'rehab_record')
 router.register('api/maternity', MaternityMonthlyRecordViewSet, 'maternity')
@@ -25,5 +31,6 @@ router.register('api/role', RoleViewSet, 'role')
 urlpatterns = [
     path('', include(router.urls)),
     path('api/token/refresh', TokenRefreshView),
-    path('api/token/obtain', ObtainTokenPairWithUsernameView.as_view())
+    path('api/token/obtain', ObtainTokenPairWithUsernameView.as_view()),
+    path('api/check_current_month_submission_status', CheckCurrentMonthAdmissionStatus)
 ]

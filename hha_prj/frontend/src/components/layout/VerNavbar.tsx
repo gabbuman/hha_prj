@@ -9,6 +9,8 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MonthlyRecord from '../dpt/MonthlyRecord';
 import CaseStudyGridView from '../casestudy/CaseStudyGridView';
 import CaseStudyIndividual from '../casestudy/CaseStudyIndividual';
+import CaseStudySubmissionForm from '../casestudy/CaseStudyInputForm';
+import DptRecordPage from '../dpt/DptRecordPage';
 
 interface TabPanelProps {
   children?: React.ReactNode;
