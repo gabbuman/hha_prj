@@ -8,11 +8,11 @@ import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
-import axios, { AxiosResponse } from 'axios';
 import { endpoint } from '../Endpoint';
 import { grey } from '@mui/material/colors';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
 import { IconButton } from '@mui/material';
+
 
 const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
@@ -24,13 +24,6 @@ const StyledTableRow = withStyles((theme: Theme) =>
   }),
 )(TableRow);
 
-function createData(
-    question: string,
-    value: number
-  ) {
-    return { question, value };
-  }
-
   interface tableProps{
 
   }
@@ -39,22 +32,9 @@ function createData(
     loading: boolean,
     month: string;
     year: string;
-    record: {question: string, value: number}[]
+    quesRecord: {question: string, answer: number}[]
 }
 
-const rows = [
-    createData('Beds available', 5 ),
-    createData('Bed Days', 0),
-    createData('Patient Days', 3),
-    createData('Hospitalized', 5),
-    createData('Discharged alive', 5),
-    createData('Died before 48h', 2),
-    createData('Referrals', 1),
-    createData('Transfers', 1),
-    createData('Self-discharged', 1),
-    createData('Stayed in the ward', 1),
-    createData('Admissions', 1),
-  ];
 
 const secondaryDataQuestions = [
     "Discharged alive",
@@ -70,7 +50,7 @@ const initialState: tableState = {
     loading: true,
     month: "",
     year: (new Date()).getFullYear().toString(),
-    record: []
+    quesRecord: []
 }
 
 
@@ -82,35 +62,19 @@ export class TableData extends Component <tableProps, tableState> {
    
     
     componentDidMount(){
-        this.getDptData();
+        this.getRehabDptData();
     }
 
-    // async getDptData() {
-    //     axios.get(endpoint + 'api/rehab_records/?format=json')
-    //     .then(res => {
-    //         //this.setMonthList(res.data);
-    //         //this.setQuesValueList(res.data);
-           
-    //         console.log(res);
-    //         this.setState({loading: false})
-    //     })
-    //     .catch((error) => {
-    //         console.error(error)
-    //       }
-    //     )
-    // }
-    async getDptData() {
-        fetch(endpoint + 'api/rehab_records/?format=json')
+    async getRehabDptData() {
+        fetch(endpoint + 'api/monthly_records/')
         .then(res =>res.json())
             
          .then(  (result)=>{ 
-            var dataString =JSON.stringify(result);
-            
-            
-            this.setState({loading: false, record: JSON.parse(dataString)})
-            //console.log("record" + this.state.record[0]);
-            //this.setMonthList(result);
-            //this.getQuesValueLists(result);
+            result.map((data: any)=> (
+                data.department == "Rehab" && data.month == 2 && data.year== 2021 ? this.setState({quesRecord: data.question_answer_list}):{}
+            ))
+             
+            this.setState({loading: false})
         })
         .catch((error) => {
             console.error(error)
@@ -141,7 +105,7 @@ export class TableData extends Component <tableProps, tableState> {
             <TableContainer component={Paper}>
                 <Table sx={{ width: "auto" }} aria-label="simple table">
                     <TableBody>
-                        {rows.map((row) => (
+                        {this.state.quesRecord.map((row) => (
                             <StyledTableRow
                                 key={row.question}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -150,7 +114,7 @@ export class TableData extends Component <tableProps, tableState> {
                                     {row.question}
                                 </TableCell>
                                 <TableCell align="left" width="15%">
-                                    {row.value}
+                                    {row.answer}
                                 </TableCell>
                                 <TableCell align="right" width="100%">
                                     {secondaryDataQuestions.includes(row.question) &&

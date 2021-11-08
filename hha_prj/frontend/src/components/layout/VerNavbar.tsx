@@ -116,7 +116,7 @@ export default function VerticalTabs() {
         <CaseStudyIndividual />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        <DptRecordPage/>
+        <DptTableView/>
       </TabPanel>
     </Box>
   );
