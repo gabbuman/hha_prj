@@ -7,11 +7,15 @@ import {Grid, Button} from '@mui/material';
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MonthlyRecord from '../dpt/MonthlyRecord';
+
+import DptTableView from '../home/DptTableView';
+
 import CaseStudyGridView from '../casestudy/CaseStudyGridView';
+
 import CaseStudyIndividual from '../casestudy/CaseStudyIndividual';
 import CaseStudySubmissionForm from '../casestudy/CaseStudyInputForm';
 import DptRecordPage from '../dpt/DptRecordPage';
-import DptTableView from '../home/DptTable';
+
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -104,6 +108,7 @@ export default function VerticalTabs() {
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Past Data Record" {...a11yProps(5)} />
 
       </Tabs>
+
       <Grid item xs={10}>
         <TabPanel  value={value} index={1}>
           <MonthlyRecord />

@@ -37,6 +37,134 @@
                 "admissions"
           ]
             }
-    }
+    },
+    {
+      "model": "backend.MonthlyRecord", 
+      "pk": 1,
+      "fields": {
+        "month": 1,
+        "year": 2021,
+        "question_answer_list": [
+          {
+            "question":"Beds available",
+            "answer": 10
+          },
+          {
+            "question":"Bed days",
+            "answer": 4
+          },
+          {
+            "question":"Patient days",
+            "answer": 5
+          },
+          {
+            "question":"Hospitalized",
+            "answer": 3
+          },
+          {
+            "question":"Discharged alive",
+            "answer": 2
+          },
+          {
+            "question":"Died before 48h",
+            "answer": 5
+          },
+          {
+            "question":"Died after 48h",
+            "answer": 1
+          },
+          {
+            "question":"Days hospitalised",
+            "answer": 20
+          },
+          {
+            "question":"Referrals",
+            "answer": 2
+          },
+          {
+            "question":"Transfers",
+            "answer": 5
+          },
+          {
+            "question":"Self discharged",
+            "answer": 2
+          },
+          {
+            "question":"Stayed in the ward",
+            "answer": 4
+          },
+          {
+            "question":"Admissions",
+            "answer": 5
+          }
+        ],
+        "department": "Rehab"
+          }
+  },
+  {
+    "model": "backend.MonthlyRecord", 
+    "pk": 1,
+    "fields": {
+      "department": "Rehab",
+      "month": 2,
+      "year": 2021,
+      "question_answer_list": [
+        {
+          "question":"Beds available",
+          "answer": 13
+        },
+        {
+          "question":"Bed days",
+          "answer": 2
+        },
+        {
+          "question":"Patient days",
+          "answer": 5
+        },
+        {
+          "question":"Hospitalized",
+          "answer": 4
+        },
+        {
+          "question":"Discharged alive",
+          "answer": 3
+        },
+        {
+          "question":"Died before 48h",
+          "answer": 2
+        },
+        {
+          "question":"Died after 48h",
+          "answer": 0
+        },
+        {
+          "question":"Days hospitalised",
+          "answer": 20
+        },
+        {
+          "question":"Referrals",
+          "answer": 2
+        },
+        {
+          "question":"Transfers",
+          "answer": 5
+        },
+        {
+          "question":"Self discharged",
+          "answer": 2
+        },
+        {
+          "question":"Stayed in the ward",
+          "answer": 4
+        },
+        {
+          "question":"Admissions",
+          "answer": 5
+        }
+      ]
+        }
+}
+  
+
 
 ]
