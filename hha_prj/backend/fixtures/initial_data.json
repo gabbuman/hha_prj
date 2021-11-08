@@ -1,0 +1,42 @@
+[
+    {
+        "model": "backend.Department", 
+        "pk": 1,
+        "fields": {
+            "name": "Rehab",
+            "created_at":"2021-11-07 12:12:12"
+        }
+    },
+    {
+        "model": "backend.Role", 
+        "pk": 1,
+        "fields": {
+          "name": "Staff",
+          "created_at":"2021-11-07 12:12:12"
+            }
+    },
+    {
+        "model": "backend.CurrentFieldsList", 
+        "pk": 1,
+        "fields": {
+          "department": "Rehab",
+          "created_at":"2021-11-07 12:12:12",
+          "list": [
+                "beds_available",
+                "bed_days",
+                "patient_days",
+                "hospitalized",
+                "discharged_alive",
+                "died_before_48h",
+                "died_after_48h",
+                "days_hospitalised",
+                "referrals",
+                "transfers",
+                "self_discharged",
+                "stayed_in_the_ward",
+                "admissions"
+          ]
+            }
+    }
+
+]
