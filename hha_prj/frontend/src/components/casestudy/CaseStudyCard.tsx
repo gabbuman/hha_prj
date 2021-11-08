@@ -46,11 +46,10 @@ const TitleGrid = styled.div `
 `
 const EditDelGrid = styled.div `
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-gap: 0;
     margin: 0 0;
-    justify-items: center;
-    align-items: bottom;
+    justify-items: flex-end;
 `
 
 const CardTitle = styled.h3 `
@@ -80,16 +79,16 @@ const CSCard: React.FC<CSData> = ({title, type, content}: CSData) =>  {
                     <TitleGrid>
                         <Icon src='/static/rehab-bg.png'/>
                         <CardTitle>{title}</CardTitle>
-                        <IconButton aria-label="fingerprint" size="small" style={{height:"50px",width:"50px",backgroundColor: '#FFFFFF', color:"#0E4DA4"}} >
+                        <IconButton aria-label="thumb" size="small" style={{height:"50px",width:"50px",backgroundColor: '#FFFFFF', color:"#0E4DA4"}} >
                             <ThumbUpIcon fontSize="medium"/>
                         </IconButton>
                     </TitleGrid>
                     <CardContent>{content}</CardContent>
                     <EditDelGrid>
                         <Link to = "/csinput" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" color="success" style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}>Edit</Button>
+                            <Button variant="contained" color="warning" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Edit</Button>
                         </Link>
-                        <Button variant="contained" color="error" style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}>Delete</Button>
+                        <Button variant="contained" color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
                     </EditDelGrid>  
                 </CSCardGroup>
             </div>
