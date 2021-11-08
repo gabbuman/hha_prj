@@ -17,12 +17,20 @@ import { LinePath } from '@visx/shape';
 import styled from 'styled-components'
 import { RecordData } from './RecordData';
 
-const GraphContainer = styled.div `
+interface ContainerSizingProps {
+    width: number;
+    height: number;
+}
+
+const GraphContainer = styled.div<ContainerSizingProps> `
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
     border-radius: 14px;
-    transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    
+    width: ${props => props.width}px;
+    height: ${props => props.height}px;
     
     &:hover {
+        transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         box-shadow: 0 15px 25px rgba(0, 0, 0, 0.18);
     }
 `
@@ -122,7 +130,7 @@ export default withTooltip<AreaProps, TooltipData>(
         );
 
         return (
-            <GraphContainer>
+            <GraphContainer width={width} height={height}>
                 <svg width={width} height={height}>
                     <rect
                         x={0}

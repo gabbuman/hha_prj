@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { RecordDataSet } from './RecordData';
 
 const GraphContainer = styled.div `
-    width: 500px;
     display: grid;
     grid-template-rows: repeat(3, auto);
     grid-gap: 0;
