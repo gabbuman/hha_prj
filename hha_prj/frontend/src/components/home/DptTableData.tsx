@@ -85,9 +85,6 @@ class TableData extends Component <tableProps, tableState> {
         .then(res =>res.json()) 
          .then(  (result)=>{ 
             result.map((data: any)=> (
-                    data.department == this.state.dptName ? TableData.months.push(data.month):{}
-                ))
-            result.map((data: any)=> (
                 data.department == this.state.dptName && data.month == this.state.month && data.year== this.state.year ? this.setState({dataRecords: data.question_answer_list})
                 :{}
             ))
