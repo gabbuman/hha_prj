@@ -19,8 +19,8 @@ def CheckCurrentMonthAdmissionStatus():
     current_month = datetime.now().strftime('%m')
 
     if AnswerList.objects.filter(year = current_year,month = current_month).exists():
-        html = "<html><body>Present</body></html>"
+        response = "<html><body>Present</body></html>"
     else:
-        html = "<html><body>Absent</body></html>"
+        response = "<html><body>Absent</body></html>"
 
-    return HttpResponse(html)
+    return HttpResponse(response)

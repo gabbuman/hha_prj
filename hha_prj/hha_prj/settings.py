@@ -168,3 +168,9 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Default Fixture file lookup directory
+#https://stackoverflow.com/questions/15479209/loading-fixtures-django
+FIXTURE_DIRS = (
+    os.path.join(BASE_DIR, 'fixtures'), 
+    )
