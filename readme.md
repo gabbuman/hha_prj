@@ -44,6 +44,7 @@ Replace "127.0.0.1" with "142.58.2.141" if trying to interact with the virtual m
 9. Use **manage.py** again, but this time to apply those changes to the database which is currently sqlite3 for convenience of not having to download/setup postgres or mysql like so, **python manage.py migrate**
 10. Nice, the database has been instantiated. Now just run the server with **python manage.py runserver** and you can open the current default app with the local address "http://127.0.0.1:8000/"
 11. When reviewing someone branch, or just working on and updating a model, often Django will give you errors when you add a "null=True" parameter to a model's field. **Just delete the db.sqlite3 file and the migrations files and re-run migration commands.**
+12. To populate the database with initial values, use **python manage.py loaddata initial_data.json**
 
 # External Resources Used
 Images for department cards are from MANYPIXELS PTE LTD. An nonexclusive, worldwide copyright license has been granted for free. For details of the license, see: https://www.manypixels.co/gallery

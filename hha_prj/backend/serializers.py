@@ -8,12 +8,6 @@ from backend.models import StaffRecognitionCaseStudyRecord, Department, Role, Cu
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-#Monthly Record Serializer
-class MonthlyRecordSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MonthlyRecord
-        fields = '__all__'
-        
 class NICUPaedsMonthlyRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = NICUPaedsMonthlyRecord
@@ -109,6 +103,11 @@ class DepartmentSerializer(serializers.ModelSerializer):
 class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Role
+        fields = '__all__'
+    
+class MonthlyRecordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MonthlyRecord
         fields = '__all__'
 
 class CurrentFieldListSerializer(serializers.ModelSerializer):
