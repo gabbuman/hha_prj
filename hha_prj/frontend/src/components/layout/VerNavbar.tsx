@@ -7,15 +7,14 @@ import {Grid, Button} from '@mui/material';
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MonthlyRecord from '../dpt/MonthlyRecord';
-
 import DptTableView from '../home/DptTableView';
-
 import CaseStudyGridView from '../casestudy/CaseStudyGridView';
-
 import CaseStudyIndividual from '../casestudy/CaseStudyIndividual';
 import CaseStudySubmissionForm from '../casestudy/CaseStudyInputForm';
 import DptRecordPage from '../dpt/DptRecordPage';
-
+import ParentSize from '@visx/responsive/lib/components/ParentSize';
+import { sampleData } from '../home/Department Card/RecordData';
+import {DptGraphCard, GraphProps} from '../home/Department Card/DptGraphCard';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -106,7 +105,7 @@ export default function VerticalTabs() {
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Employee Of the Month" {...a11yProps(3)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Case Study" {...a11yProps(4)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Past Data Record" {...a11yProps(5)} />
-
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Past Data Record (Graphs)" {...a11yProps(6)} />
       </Tabs>
 
       <Grid item xs={10}>
@@ -124,6 +123,15 @@ export default function VerticalTabs() {
         </TabPanel>
         <TabPanel value={value} index={5}>
           <DptTableView />
+        </TabPanel>
+        <TabPanel value={value} index={6}>
+            <ParentSize>
+							  {({width, height}) => 
+								    <DptGraphCard width={width} 
+											            height={300} 
+											            recordDataSet={sampleData} />
+							  }
+						</ParentSize>
         </TabPanel>
       </Grid>
     </Box>

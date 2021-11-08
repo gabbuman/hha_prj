@@ -31,7 +31,7 @@ type ProgressProps = {
 export const DptCardGroup = styled.div<ColorProps> `
     width: 350px;
     height: 225px;
-    padding: 15px 15px 15px 15px;
+    padding: 30px;
     position: relative;
     overflow: hidden;
     border-radius: 10px;
