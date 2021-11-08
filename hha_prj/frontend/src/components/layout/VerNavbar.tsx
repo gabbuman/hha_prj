@@ -3,7 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import {Grid, Button} from '@mui/material';
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MonthlyRecord from '../dpt/MonthlyRecord';
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 export default function VerticalTabs() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -101,9 +101,11 @@ export default function VerticalTabs() {
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Case Study" {...a11yProps(4)} />
 
       </Tabs>
+      <Grid item xs={10}>
       <TabPanel  value={value} index={1}>
         <MonthlyRecord />
       </TabPanel>
+      </Grid>
       <TabPanel value={value} index={2}>
         Item Three
       </TabPanel>
