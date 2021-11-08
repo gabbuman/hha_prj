@@ -1,6 +1,6 @@
 
 // Citation:
-// Parts of the code in this file is adapted from sample code of the Airbnb visx library: https://airbnb.io/visx/
+// Parts of the code in this file is adapted from sample code of the Airbnb visx library: https://airbnb.io/visx/gallery
 
 import React, { useMemo, useCallback } from 'react';
 import { AreaClosed, Line, Bar } from '@visx/shape';
