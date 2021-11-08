@@ -12,6 +12,7 @@ urlpatterns = [
     path('cspreview', views.index),
     path('vernavbar', views.index),
     path('monthlyrecord', views.index),
-    path('dptrecordpage', views.index),
-    path('csform', views.index)    
+    path('dptrecordpage', views.index),    
+    path('dpttableview', views.index),    
+    path('dptgraphview', views.index)    
 ]
