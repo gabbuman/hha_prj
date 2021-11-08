@@ -11,6 +11,7 @@ import CaseStudyGridView from '../casestudy/CaseStudyGridView';
 import CaseStudyIndividual from '../casestudy/CaseStudyIndividual';
 import CaseStudySubmissionForm from '../casestudy/CaseStudyInputForm';
 import DptRecordPage from '../dpt/DptRecordPage';
+import DptTableView from '../home/DptTable';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -100,6 +101,7 @@ export default function VerticalTabs() {
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Biomechanical Support" {...a11yProps(2)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Employee Of the Month" {...a11yProps(3)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Case Study" {...a11yProps(4)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Past Data Record" {...a11yProps(5)} />
 
       </Tabs>
       <TabPanel  value={value} index={1}>
@@ -113,6 +115,9 @@ export default function VerticalTabs() {
       </TabPanel>
       <TabPanel value={value} index={4}>
         <CaseStudyGridView/>
+      </TabPanel>
+      <TabPanel value={value} index={5}>
+        <DptTableView />
       </TabPanel>
     </Box>
   );
