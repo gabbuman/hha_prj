@@ -2,7 +2,9 @@ import * as React from 'react';
 import { Component } from 'react';
 import Button from '@mui/material/Button';
 import { Box, Container, Grid, Stack, FormControl, InputLabel, Select, MenuItem, createTheme, ThemeProvider} from '@mui/material';
-
+import TableRow from '@mui/material/TableRow';
+import { grey } from '@mui/material/colors';
+import { createStyles, Theme, withStyles } from '@material-ui/core';
 import TableData from './DptTableData';
 
 
@@ -14,7 +16,7 @@ const theme = createTheme({
         contrastText: '#ff',
       },
     },
-  });
+});
 
 declare module '@mui/material/styles' {
     interface Palette {
@@ -32,15 +34,6 @@ declare module '@mui/material/Button' {
     }
 }
 
-interface tableProps{
-
-}
-
-interface tableState {
-  month: string;
-  year: string;
-}
-
 const months = [
     'JAN',
     'FEB',
@@ -56,36 +49,46 @@ const months = [
     'DEC'
 ]
 
+interface tableProps{
+   
+}
+
+interface tableState {
+    month: string;
+    year: string;
+}
+
+const initialState: tableState = {    
+    month: months[0],
+    year: "2021", 
+}
 
 export class DptTableView extends Component<tableProps, tableState> {
 
     private tabledataElement: React.RefObject<TableData>;
     constructor(props: tableProps){
         super(props);
-        this.state = {
-            month: "",
-            year: (new Date()).getFullYear().toString()
-        };
+        this.state = initialState;
         this.tabledataElement = React.createRef();
     }
 
     dropdownHandleMonthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({month: event.target.value});
+        this.setState({month: event.target.value});     
     }
 
     dropdownHandleYearChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({year: event.target.value});
     }
-
+   
     render (){
 
         let maxOffset = 10;
         let thisYear = (new Date()).getFullYear();
-        let years = [];
+        let years: number[] = [];
         for(let x = 0; x <= maxOffset; x++) {
             years.push(thisYear - x)
         }
-
+        
         return(
             <div> 
                     <Box m={5}>
@@ -104,8 +107,8 @@ export class DptTableView extends Component<tableProps, tableState> {
                                     value={this.state.month}
                                     onChange={this.dropdownHandleMonthChange}
                                     >
-                                        {months.map((month) => (
-                                            <MenuItem value={month}> {month}
+                                        {months.map((month, index) => (
+                                            <MenuItem value={index +1}> {month}
                                             </MenuItem>
                                         ))}
                                     </Select>
@@ -139,7 +142,7 @@ export class DptTableView extends Component<tableProps, tableState> {
                             }                   
                         </Grid>                             
                         <Grid item xs={12}>
-                            <TableData ref={this.tabledataElement}/>
+                            <TableData  ref={this.tabledataElement} dptName={"Rehab"} newMonth={months.indexOf(this.state.month) + 1} newYear={parseInt(this.state.year)}/>
                         </Grid>
                         </Grid>
                         </Container>  

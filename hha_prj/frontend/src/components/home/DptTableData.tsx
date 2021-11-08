@@ -24,15 +24,17 @@ const StyledTableRow = withStyles((theme: Theme) =>
   }),
 )(TableRow);
 
-  interface tableProps{
-
+interface tableProps{
+    dptName: string,
+    newMonth: number,
+    newYear: number
   }
 
   interface tableState {
-    loading: boolean,
-    month: string;
-    year: string;
-    quesRecord: {question: string, answer: number}[]
+    dptName: string,
+    month: number;
+    year: number;
+    dataRecords: {question: string, answer: number}[]
 }
 
 
@@ -46,66 +48,59 @@ const secondaryDataQuestions = [
   ];
 
 
-const initialState: tableState = {
-    loading: true,
-    month: "",
-    year: (new Date()).getFullYear().toString(),
-    quesRecord: []
+  const initialState: tableState = {
+    dptName: "",
+    month: null,
+    year: null,
+    dataRecords: []
 }
 
 
-export class TableData extends Component <tableProps, tableState> {
+
+class TableData extends Component <tableProps, tableState> {
+    _isMounted = false;
     constructor(props: tableProps){
-        super(props);
-        this.state= initialState;  
+        super(props);  
+        this.state = initialState;
     }
    
-    
-    componentDidMount(){
-        this.getRehabDptData();
+    componentDidMount() {
+        this._isMounted = true;
+        this.setState({dptName: this.props.dptName, month: this.props.newMonth, year: this.props.newYear})
+        this.getDptData();
     }
 
-    async getRehabDptData() {
+    
+
+    async getDptData() {
         fetch(endpoint + 'api/monthly_records/')
-        .then(res =>res.json())
-            
+        .then(res =>res.json()) 
          .then(  (result)=>{ 
             result.map((data: any)=> (
-                data.department == "Rehab" && data.month == 2 && data.year== 2021 ? this.setState({quesRecord: data.question_answer_list}):{}
+                    data.department == this.state.dptName ? TableData.months.push(data.month):{}
+                ))
+            result.map((data: any)=> (
+                data.department == this.state.dptName && data.month == this.state.month && data.year== this.state.year ? this.setState({dataRecords: data.question_answer_list})
+                :{}
             ))
-             
-            this.setState({loading: false})
         })
         .catch((error) => {
             console.error(error)
           }
         )
     }
-    static months: string[]
-    getMonthList(monthlyRecord: Array<{question: string, value: any}>){
-        monthlyRecord.map((record: {question: string, value: any})=> (
-           record.question == "month_name" ? (TableData.months.push(record.value)): {}
-        ))  
-    }
-    
-    dataRecords: {question: string, value: number}[] []
-    // getQuesValueLists(monthlyRecord: Array<object>){
-        
-    //     monthlyRecord.map((record: object)=> (
-    //        //this.dataRecords = Object.keys(record).map((key)=> {key, (record as any)[key]})));
-    //        //console.log(this.dataRecords);
-    //     )    )
-    // }
 
+    static months: number[]=[]; 
     render (){ 
-
         return(
-
-            <><div>{this.state.loading ? (<div>loading..</div>) : (<div> done..</div>)}</div>
+            
             <TableContainer component={Paper}>
                 <Table sx={{ width: "auto" }} aria-label="simple table">
                     <TableBody>
-                        {this.state.quesRecord.map((row) => (
+                        {
+                        this.state.dataRecords.length == 0 ?
+                        <div > <h3>No Records To View</h3> </div>:
+                        this.state.dataRecords.map((row) => (
                             <StyledTableRow
                                 key={row.question}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -132,8 +127,13 @@ export class TableData extends Component <tableProps, tableState> {
                         ))}
                     </TableBody>
                 </Table>
-            </TableContainer></>
-        )
+            </TableContainer>
+            )
+           
+        
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 }
 
