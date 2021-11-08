@@ -59,6 +59,8 @@ const secondaryDataQuestions = [
 
 class TableData extends Component <tableProps, tableState> {
     _isMounted = false;
+    prevProps: any;
+    prevProp: any;
     constructor(props: tableProps){
         super(props);  
         this.state = initialState;
@@ -70,7 +72,13 @@ class TableData extends Component <tableProps, tableState> {
         this.getDptData();
     }
 
-    
+    componentDidUpdate(prevProps: tableProps){
+        if (this.props.newMonth !== prevProps.newMonth || this.props.newYear !== prevProps.newYear) {
+            this.setState({month: this.props.newMonth, year: this.props.newYear})
+            this.setState({dataRecords: initialState.dataRecords});
+            this.getDptData();
+          }
+    }
 
     async getDptData() {
         fetch(endpoint + 'api/monthly_records/')
