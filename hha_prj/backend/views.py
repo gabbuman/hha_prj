@@ -14,7 +14,7 @@ class ObtainTokenPairWithUsernameView(TokenObtainPairView):
     permission_classes = (permissions.AllowAny,)
     serializer_class = CustomTokenPairSerializer
 
-def CheckCurrentMonthAdmissionStatus():
+def CheckCurrentMonthAdmissionStatus(request):
     current_year = datetime.now().strftime('%Y')
     current_month = datetime.now().strftime('%m')
 
