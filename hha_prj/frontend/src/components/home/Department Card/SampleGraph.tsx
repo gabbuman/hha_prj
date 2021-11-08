@@ -10,7 +10,6 @@ const DptGraphCard = styled.div `
     position: relative;
     margin: 15px;
 `
-// box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
 
 const GraphTitle = styled.h2 `
     font-size: 20px;
