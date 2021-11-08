@@ -1,52 +1,11 @@
 from django.db.models import fields
-from backend.models import RehabMonthlyRecord
 from rest_framework import serializers
-from backend.models import MaternityMonthlyRecord, MonthlyRecord 
-from backend.models import CommunityHealthMonthlyRecord, CustomUser 
-from backend.models import NICUPaedsMonthlyRecord, PatientCaseStudyRecord
-from backend.models import StaffRecognitionCaseStudyRecord, Department, Role, CurrentFieldsList
+from backend.models import MonthlyRecord 
+from backend.models import CustomUser 
+from backend.models import Department, Role, CurrentFieldsList
 from rest_framework.validators import UniqueValidator
 from backend.models import CaseStudyType, CaseStudy
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
-class NICUPaedsMonthlyRecordSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = NICUPaedsMonthlyRecord
-        fields = '__all__'
-
-# Rehab Monthly Record Serializer
-class RehabMonthlyRecordSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = RehabMonthlyRecord
-        fields = '__all__'
-
-# Maternity Monthly Record Serializer
-class MaternityMonthlyRecordSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MaternityMonthlyRecord
-        fields = '__all__'         
-
-
-class PatientCaseStudyRecordSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = PatientCaseStudyRecord
-        fields = '__all__'
-
-
-class StaffRecognitionCaseStudyRecordSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = StaffRecognitionCaseStudyRecord
-        fields = '__all__'    
-
-# Community health Record Serializer
-class CommunityHealthMonthlyRecordSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CommunityHealthMonthlyRecord
-        fields = '__all__'          
-
-# CustomerUser Serializer
 class CustomUserSerializer(serializers.ModelSerializer):
     username = serializers.CharField(
         required=False,
@@ -83,7 +42,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
         return instance
 
-# Token Pair Serializer
 class CustomTokenPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
