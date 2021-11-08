@@ -1,7 +1,7 @@
 from django.utils.module_loading import import_string
 from rest_framework import routers
 from .api import CaseStudyTypeViewSet, CaseStudyViewSet
-from .api import CurrentFieldListVietSet, MonthlyRecordViewSet 
+from .api import CurrentFieldListViewSet, MonthlyRecordViewSet 
 from .api import CustomUserViewSet
 from .api import DepartmentViewSet, RoleViewSet
 from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus
@@ -16,7 +16,7 @@ from backend import views
 
 
 router = routers.DefaultRouter()
-router.register('api/current_field_list', CurrentFieldListVietSet, "current_field_list")
+router.register('api/current_field_list', CurrentFieldListViewSet, "current_field_list")
 router.register('api/monthly_records', MonthlyRecordViewSet, 'monthly_records')
 router.register('api/user', CustomUserViewSet, 'user'),
 router.register('api/department', DepartmentViewSet, 'department'),
