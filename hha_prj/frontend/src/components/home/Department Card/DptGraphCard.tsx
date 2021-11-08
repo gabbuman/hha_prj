@@ -1,7 +1,7 @@
 import React from 'react';
 import DptGraph from './DptGraph';
 import styled from 'styled-components'
-import { sampleData } from './RecordData';
+import { RecordDataSet } from './RecordData';
 
 const GraphContainer = styled.div `
     width: 500px;
@@ -31,21 +31,20 @@ const GraphSubTitle = styled.h3 `
     margin: 0 0 0 14px;
 `
 
-interface GraphProps {
-    title: string;
-    subtitle: string;
+export interface GraphProps {
     width: number;
     height: number;
+    recordDataSet: RecordDataSet;
 }
 
-function DptGraphCard() {
+export const DptGraphCard = (props: GraphProps) => {
     return (
         <GraphContainer>
-            <GraphTitle>{sampleData.recordType}</GraphTitle>
-            <GraphSubTitle>From {sampleData.startDate} to {sampleData.endDate}</GraphSubTitle>
-            <DptGraph width={500} height={300} recordsToRender={sampleData.data}/>
+            <GraphTitle>{props.recordDataSet.recordType}</GraphTitle>
+            <GraphSubTitle>From {props.recordDataSet.startDate} to {props.recordDataSet.endDate}</GraphSubTitle>
+            <DptGraph width={props.width} height={props.height} recordsToRender={props.recordDataSet.data}/>
         </GraphContainer>
     )
-}
+};
 
-export default DptGraphCard
+
