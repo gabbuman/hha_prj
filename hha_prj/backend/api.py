@@ -1,7 +1,7 @@
 from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRecord,PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord, Department, Role, CurrentFieldsList
 from rest_framework import viewsets, permissions
 
-from .serializers import CurrentFieldListSerializer, DepartmentSerializer, MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, PatientCaseStudyRecordSerializer, StaffRecognitionCaseStudyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer, RoleSerializer
+from .serializers import CaseStudyTypeSerializer, CurrentFieldListSerializer, DepartmentSerializer, MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, PatientCaseStudyRecordSerializer, StaffRecognitionCaseStudyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer, RoleSerializer
 
 
 # MonthlyRecord ViewSet
@@ -93,3 +93,12 @@ class CurrentFieldListVietSet(viewsets.ModelViewSet):
     serializer_class = CurrentFieldListSerializer
     lookup_field = 'department'
     lookup_url_kwarg = 'department'
+
+class CaseStudyTypeViewSet(viewsets.ModelViewSet):
+    queryset = CurrentFieldsList.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = CaseStudyTypeSerializer
+    lookup_field = 'title'
+    lookup_url_kwarg = 'title'
