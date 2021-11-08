@@ -1,8 +1,9 @@
 import React from 'react';
 import DptGraph from './DptGraph';
 import styled from 'styled-components'
+import { sampleData } from './RecordData';
 
-const DptGraphCard = styled.div `
+const GraphContainer = styled.div `
     width: 500px;
     display: grid;
     grid-template-rows: repeat(3, auto);
@@ -19,6 +20,7 @@ const GraphTitle = styled.h2 `
     z-index: 1;
     margin: 14px 0 0 14px; 
 `
+
 const GraphSubTitle = styled.h3 `
     font-size: 12px;
     font-weight: 500;
@@ -29,17 +31,21 @@ const GraphSubTitle = styled.h3 `
     margin: 0 0 0 14px;
 `
 
-class SampleGraph extends React.Component {
-    // TODO: Use props to update titles
-    render() {
-        return (
-            <DptGraphCard>
-                <GraphTitle>Beds Available</GraphTitle>
-                <GraphSubTitle>From JAN 2020 to JAN 2021</GraphSubTitle>
-                <DptGraph width={500} height={300} />
-            </DptGraphCard>
-        );
-    }
+interface GraphProps {
+    title: string;
+    subtitle: string;
+    width: number;
+    height: number;
 }
 
-export default SampleGraph
+function DptGraphCard() {
+    return (
+        <GraphContainer>
+            <GraphTitle>{sampleData.recordType}</GraphTitle>
+            <GraphSubTitle>From {sampleData.startDate} to {sampleData.endDate}</GraphSubTitle>
+            <DptGraph width={500} height={300} recordsToRender={sampleData.data}/>
+        </GraphContainer>
+    )
+}
+
+export default DptGraphCard

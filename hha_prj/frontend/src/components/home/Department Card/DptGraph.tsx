@@ -11,20 +11,20 @@ import { max, extent, bisector } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
 import { LinePath } from '@visx/shape';
 import styled from 'styled-components'
-import { RecordData, sampleData } from './RecordData';
+import { RecordData } from './RecordData';
 
 const GraphContainer = styled.div `
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
     border-radius: 14px;
     transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     
     &:hover {
-        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.18);
     }
 `
 
 type TooltipData = RecordData;
-const records = sampleData.data;
+let records: RecordData[];
 
 export const background = '#fefefe';
 export const background2 = '#ffffff';
@@ -55,6 +55,7 @@ const bisectDate = bisector<RecordData, Date>((record) => new Date(record.dateRe
 export type AreaProps = {
     width: number;
     height: number;
+    recordsToRender: RecordData[];
     margin?: { top: number; right: number; bottom: number; left: number };
 };
 
@@ -62,6 +63,7 @@ export default withTooltip<AreaProps, TooltipData>(
     ({
         width,
         height,
+        recordsToRender,
         margin = { top: 0, right: 0, bottom: 0, left: 0 },
         showTooltip,
         hideTooltip,
@@ -70,6 +72,7 @@ export default withTooltip<AreaProps, TooltipData>(
         tooltipLeft = 0,
     }: AreaProps & WithTooltipProvidedProps<TooltipData>) => {
         if (width < 10) return null;
+        records = recordsToRender;
 
         // bounds
         const innerWidth = width - margin.left - margin.right;
