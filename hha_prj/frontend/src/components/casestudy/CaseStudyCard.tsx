@@ -5,6 +5,9 @@ import { StringLiteralLike } from 'typescript';
 import { Box, TextField, Typography, Stack, IconButton, Button,
     FormControl, MenuItem, InputLabel, Select, Grid, Container} from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import CaseStudySubmissionForm from './CaseStudyInputForm';
 
 export interface CSData {
     title: string;
@@ -83,10 +86,12 @@ const CSCard: React.FC<CSData> = ({title, type, content}: CSData) =>  {
                     </TitleGrid>
                     <CardContent>{content}</CardContent>
                     <EditDelGrid>
-                        <Button variant="contained" color="success" style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}>Edit</Button>
+                        <Link to = "/csinput" style={{ textDecoration: 'none' }}>
+                            <Button variant="contained" color="success" style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}>Edit</Button>
+                        </Link>
                         <Button variant="contained" color="error" style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}>Delete</Button>
                     </EditDelGrid>  
-                </CSCardGroup> 
+                </CSCardGroup>
             </div>
         </a>
     )

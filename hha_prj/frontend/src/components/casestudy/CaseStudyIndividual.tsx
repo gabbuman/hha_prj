@@ -4,6 +4,9 @@ import VerNavbar from '../layout/VerNavbar';
 import { Box, TextField, Typography, Stack, Button,
     FormControl, MenuItem, InputLabel, Select, Grid, Container, 
     CardMedia, Card, CardActions, CardActionArea, CardContent} from '@mui/material';
+import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import DptRecordPage from '../dpt/DptRecordPage';
 
 
 const user = "admin";
@@ -41,6 +44,7 @@ export default class CaseStudyIndividual extends Component <CSProps, CSState>{
     render() {
         return (
             <div>
+                <Header title={`Hope Health Action/Rehab Department`} />
                 <Box
                 component="form"
                 noValidate
@@ -108,8 +112,12 @@ export default class CaseStudyIndividual extends Component <CSProps, CSState>{
                     />
                 </Box>
                 <Grid item xs={2}>
-                    <Stack direction="row" spacing={10} justifyContent="center">
-                        <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
+                    <Stack direction="row" spacing={10} justifyContent="flex-end"  sx={{
+                            width:"135ch"
+                        }}>
+                        <Link to = "/dptrecordpage" style={{ textDecoration: 'none' }} >
+                            <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
+                        </Link>
                     </Stack>
                 </Grid>
             </div>

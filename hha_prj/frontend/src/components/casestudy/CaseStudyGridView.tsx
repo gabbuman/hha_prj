@@ -9,6 +9,9 @@ import {case_data} from './CSData';
 import CSCard from './CaseStudyCard';
 import styled from 'styled-components';
 import AddCard from './CaseStudyAddCard';
+import CaseStudyIndividual from './CaseStudyIndividual';
+import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
+import ReactDOM from 'react-dom';
 
 const HeaderLabel = styled.h3 `
     font-weight: 800;
@@ -66,7 +69,9 @@ class CaseStudyGridView extends Component {
                                     type={item.type}
                                     content={item.content}></CSCard>
                             })}
-                            <AddCard/>
+                            <Link to = "/csinput" style={{ textDecoration: 'none' }} >
+                                <AddCard/>
+                            </Link>
                         </CardGroup>
                     </TitledCardGroup>
                 </ContentGroup>

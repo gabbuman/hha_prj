@@ -42,7 +42,8 @@ class App extends Component {
 					<Route path='/dptrecordpage' component={DptRecordPage} />			
 					<Route path='/dpttableview' component={DptTableView} />		 	
 					<Route path='/dptgraphview' component={DptGraphView} />
-					<Route path='/csinput' component={CaseStudySubmissionForm}/>		 	
+					<Route path='/csinput' component={CaseStudySubmissionForm}/>
+					<Route path='/csindividual' component={CaseStudyIndividual}/>		 	
 				</Switch>
 				<ToastContainer/>
 			</Router>
