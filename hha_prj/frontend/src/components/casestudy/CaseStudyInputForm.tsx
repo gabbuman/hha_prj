@@ -134,7 +134,10 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
 
                     </Box>
                     <Grid item xs={12}>
-                        <Stack direction="row" spacing={5} justifyContent="center">
+                        <Stack direction="row" spacing={5} justifyContent="center"
+                        sx={{
+                            width:"170ch"
+                        }}>
                             <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="primary"onClick={this.submitClick}>Submit</Button>
                             <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
                         </Stack>
