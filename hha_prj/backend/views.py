@@ -8,6 +8,7 @@ from .models import AnswerList
 
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
+import json
 
 # Create your views here.
 class ObtainTokenPairWithUsernameView(TokenObtainPairView):
@@ -19,8 +20,8 @@ def CheckCurrentMonthAdmissionStatus(request):
     current_month = datetime.now().strftime('%m')
 
     if AnswerList.objects.filter(year = current_year,month = current_month).exists():
-        response = "<html><body>Present</body></html>"
+        response = True
     else:
-        response = "<html><body>Absent</body></html>"
+        response = False
 
-    return HttpResponse(response)
+    return HttpResponse(json.dumps(response), content_type="application/json")
