@@ -9,6 +9,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import MonthlyRecord from '../dpt/MonthlyRecord';
 import CaseStudyIndividual from '../casestudy/CaseStudyIndividual';
 import CaseStudySubmissionForm from '../casestudy/CaseStudyInputForm';
+import DptRecordPage from '../dpt/DptRecordPage';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -114,10 +115,7 @@ export default function VerticalTabs() {
         <CaseStudyIndividual />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        <CaseStudySubmissionForm/>
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        
+        <DptRecordPage/>
       </TabPanel>
     </Box>
   );
