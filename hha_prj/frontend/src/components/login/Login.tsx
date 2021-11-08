@@ -19,7 +19,10 @@ import { useHistory } from 'react-router-dom';
 import { notifyFail, notifySuccess } from './Notifications';
 import { endpoint } from '../Endpoint'
 import { validatePassword, validateUsername } from './FormValidation';
+<<<<<<< HEAD
 import { storeUser, printUser } from '../User';
+=======
+>>>>>>> 66-department-card-images
 
 const theme = createTheme();
 
@@ -31,6 +34,10 @@ export default function SignIn() {
 
   const [usernameError, setUsernameError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 66-department-card-images
   
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
