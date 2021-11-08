@@ -12,7 +12,6 @@ from django.http.response import JsonResponse
 import json
 from rest_framework import viewsets
 
-# Create your views here.
 class ObtainTokenPairWithUsernameView(TokenObtainPairView):
     permission_classes = (permissions.AllowAny,)
     serializer_class = CustomTokenPairSerializer
