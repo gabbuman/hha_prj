@@ -1,7 +1,6 @@
-from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRecord,PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord, Department, Role, CurrentFieldsList
+from backend.models import MaternityMonthlyRecord, MonthlyRecord, RehabMonthlyRecord,PatientCaseStudyRecord, StaffRecognitionCaseStudyRecord, CommunityHealthMonthlyRecord, CustomUser, NICUPaedsMonthlyRecord, Department, Role, CurrentFieldsList, CaseStudy, CaseStudyType
 from rest_framework import viewsets, permissions
-
-from .serializers import CaseStudyTypeSerializer, CurrentFieldListSerializer, DepartmentSerializer, MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, PatientCaseStudyRecordSerializer, StaffRecognitionCaseStudyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer, RoleSerializer
+from .serializers import CaseStudySerializer, CaseStudyTypeSerializer, CurrentFieldListSerializer, DepartmentSerializer, MaternityMonthlyRecordSerializer, MonthlyRecordSerializer, RehabMonthlyRecordSerializer, PatientCaseStudyRecordSerializer, StaffRecognitionCaseStudyRecordSerializer, CustomUserSerializer, NICUPaedsMonthlyRecordSerializer, CommunityHealthMonthlyRecordSerializer, RoleSerializer
 
 
 # MonthlyRecord ViewSet
@@ -95,10 +94,19 @@ class CurrentFieldListVietSet(viewsets.ModelViewSet):
     lookup_url_kwarg = 'department'
 
 class CaseStudyTypeViewSet(viewsets.ModelViewSet):
-    queryset = CurrentFieldsList.objects.all()
+    queryset = CaseStudyType.objects.all()
     permissions_classes = [
         permissions.AllowAny
     ]
     serializer_class = CaseStudyTypeSerializer
+    lookup_field = 'name'
+    lookup_url_kwarg = 'name'
+
+class CaseStudyViewSet(viewsets.ModelViewSet):
+    queryset = CaseStudy.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = CaseStudySerializer
     lookup_field = 'title'
     lookup_url_kwarg = 'title'
