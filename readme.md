@@ -1,4 +1,4 @@
-﻿# Iteration 2
+# Iteration 2
 
 # Marking for Design Tickets
 Our design tickets were trackd on GitLab. However, since they did not have associated branches and respective merge requests, they were simply "closed" when finished. We assigned difficulty points to them as well. So when marking design tickets please filter for **'Label':'Type: Design' and 'Milestone':'Iteration 2' to see screenshots and links to our designs.**
@@ -42,24 +42,12 @@ Replace "127.0.0.1" with "142.58.2.141" if trying to interact with the virtual m
 4. Install pipenv with `pip install --user pipenv` 
 5. Run `pipenv shell` to instantiate a temporary environment
 6. Change directories into the **hha_prj** folder containing **manage.py**
-<<<<<<< HEAD
 7. Install django dependencies in the folder using `pip install -r requirements.txt`
 8. Use **manage.py** to first analyze current models for any changes that would be out of sync with the database like so `python manage.py makemigrations`
 9. Use **manage.py** again, but this time to apply those changes to the database which is currently sqlite3 for convenience of not having to download/setup postgres or mysql like so, `python manage.py migrate`
 10. Nice, the database has been instantiated. Now just run the server with `python manage.py runserver` and you can open the current default app with the local address "http://127.0.0.1:8000/"
-=======
-7. Install django dependencies in the folder using pip install -r requirements.txt
-8. Use **manage.py** to first analyze current models for any changes that would be out of sync with the database like so **python manage.py makemigrations**
-9. Use **manage.py** again, but this time to apply those changes to the database which is currently sqlite3 for convenience of not having to download/setup postgres or mysql like so, **python manage.py migrate**
-<<<<<<< HEAD
-10. To populate the database with initial values, use **python manage.py loaddata initial_data.json**
-11. Nice, the database has been instantiated. Now just run the server with **python manage.py runserver** and you can open the current default app with the local address "http://127.0.0.1:8000/"
->>>>>>> master
-=======
-10. Nice, the database has been instantiated. Now just run the server with **python manage.py runserver** and you can open the current default app with the local address "http://127.0.0.1:8000/"
 11. When reviewing someone branch, or just working on and updating a model, often Django will give you errors when you add a "null=True" parameter to a model's field. **Just delete the db.sqlite3 file and the migrations files and re-run migration commands.**
-12. To populate the database with initial values, use **python manage.py loaddata initial_data.json**
->>>>>>> e494c4fe49de300dbb94c527e29ea7a1b9777fcd
+12. To populate the database with initial values, use `python manage.py loaddata initial_data.json`
 
 # External Resources Used
 Images for department cards are from MANYPIXELS PTE LTD. An nonexclusive, worldwide copyright license has been granted for free. For details of the license, see: https://www.manypixels.co/gallery
