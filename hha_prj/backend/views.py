@@ -38,11 +38,11 @@ def GetRecordDataByDateRange(request, min_year, min_month, max_year, max_month, 
     record_list = list(MonthlyRecord.objects.filter(Q(year__gte=min_year), Q(month__gte=min_month),
         Q(year__lte=max_year), Q(month__lte=max_month)).values())
 
-    nested_question_answer_lists = [d['question_answer_list'] for d in record_list]
+    nested_question_answer_lists = [dictionary['question_answer_list'] for dictionary in record_list]
     question_answer_lists = nested_question_answer_lists[0]
 
     field = field.replace("$$$", " ") # Enable white space passing by an alias "$$$"
-    final_form = [d for d in question_answer_lists if field in d.values()]
+    final_form = [dictionary for dictionary in question_answer_lists if field in dictionary.values()]
 
     data = json.dumps(final_form)
     return HttpResponse(data, content_type="application/json")
