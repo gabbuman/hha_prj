@@ -34,8 +34,15 @@ def GetAllRecordData(request):
     data = json.dumps(record_list)
     return HttpResponse(data, content_type="application/json")
 
-def GetRecordDataByDateRange(request, min_year, min_month, max_year, max_month):
+def GetRecordDataByDateRange(request, min_year, min_month, max_year, max_month, field):
     record_list = list(MonthlyRecord.objects.filter(Q(year__gte=min_year), Q(month__gte=min_month),
         Q(year__lte=max_year), Q(month__lte=max_month)).values())
-    data = json.dumps(record_list)
+
+    question_answer_list = [d['question_answer_list'] for d in record_list]
+    unwrap_question_answer_list = question_answer_list[0]
+
+    field = field.replace("$$$", " ")
+    final_form = [d for d in unwrap_question_answer_list if field in d.values()]
+
+    data = json.dumps(final_form)
     return HttpResponse(data, content_type="application/json")
