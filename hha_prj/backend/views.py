@@ -34,8 +34,8 @@ def GetAllRecordData(request):
     data = json.dumps(record_list)
     return HttpResponse(data, content_type="application/json")
 
-def GetRecordDataByDateRange(request, minYear, minMonth):
-    record_list = list(MonthlyRecord.objects.filter(Q(year__gte=minYear), Q(month__gte=minMonth)).values())
-        # Q(year__lte=maxYear), Q(month__lte=maxMonth)))
+def GetRecordDataByDateRange(request, min_year, min_month, max_year, max_month):
+    record_list = list(MonthlyRecord.objects.filter(Q(year__gte=min_year), Q(month__gte=min_month),
+        Q(year__lte=max_year), Q(month__lte=max_month)).values())
     data = json.dumps(record_list)
     return HttpResponse(data, content_type="application/json")

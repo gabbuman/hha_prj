@@ -31,6 +31,5 @@ urlpatterns = [
     path('api/token/obtain', ObtainTokenPairWithUsernameView.as_view()),
     path('api/check_current_month_submission_status', CheckCurrentMonthAdmissionStatus),
     path('api/monthly_record_data', GetAllRecordData),
-    path('api/monthly_record_data/minYear/<int:minYear>/minMonth/<int:minMonth>/', GetRecordDataByDateRange)
-    # url(r'^api/monthly_record_data/(?P<minYear>[0-9]+)/(?P<minMonth>[0-9]+)/(?P<maxYear>[0-9]+)/(?P<maxMonth>[0-9]+)/$', GetRecordDataByDateRange, name='monthly_record_data')    
+    path('api/monthly_record_data/min_year/<int:min_year>/min_month/<int:min_month>/max_year/<int:max_year>/max_month/<int:max_month>/', GetRecordDataByDateRange)   
 ]
