@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import permissions
@@ -26,3 +27,12 @@ def CheckCurrentMonthAdmissionStatus(request):
         response = False
 
     return HttpResponse(json.dumps(response), content_type="application/json")
+
+def GetMonthlyRecordData(self):
+    minYear = self.kwargs.get('minYear')
+    minMonth = self.kwargs.get('minMonth')
+    maxYear = self.kwargs.get('maxYear')
+    maxMonth = self.kwargs.get('maxMonth')
+
+    return MonthlyRecord.objects.filter(Q(year__gte=minYear), Q(month__gte=minMonth), 
+        Q(year__lte=maxYear), Q(month__lte=maxMonth))
