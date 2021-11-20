@@ -1,5 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render
+from django.core import serializers
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import permissions
 from django.http import HttpResponse
@@ -28,11 +29,13 @@ def CheckCurrentMonthAdmissionStatus(request):
 
     return HttpResponse(json.dumps(response), content_type="application/json")
 
-def GetMonthlyRecordData(self):
-    minYear = self.kwargs.get('minYear')
-    minMonth = self.kwargs.get('minMonth')
-    maxYear = self.kwargs.get('maxYear')
-    maxMonth = self.kwargs.get('maxMonth')
+def GetAllRecordData(request):
+    record_list = list(MonthlyRecord.objects.all().values())
+    data = json.dumps(record_list)
+    return HttpResponse(data, content_type="application/json")
 
-    return MonthlyRecord.objects.filter(Q(year__gte=minYear), Q(month__gte=minMonth), 
-        Q(year__lte=maxYear), Q(month__lte=maxMonth))
+def GetRecordDataByDateRange(request, minYear, minMonth):
+    record_list = list(MonthlyRecord.objects.filter(Q(year__gte=minYear), Q(month__gte=minMonth)).values())
+        # Q(year__lte=maxYear), Q(month__lte=maxMonth)))
+    data = json.dumps(record_list)
+    return HttpResponse(data, content_type="application/json")

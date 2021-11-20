@@ -5,6 +5,7 @@ from .api import CurrentFieldListViewSet, MonthlyRecordViewSet
 from .api import CustomUserViewSet
 from .api import DepartmentViewSet, RoleViewSet
 from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus
+from .views import GetAllRecordData, GetRecordDataByDateRange
 from django.urls import path
 from django.urls.conf import include
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -28,5 +29,8 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api/token/refresh', TokenRefreshView),
     path('api/token/obtain', ObtainTokenPairWithUsernameView.as_view()),
-    path('api/check_current_month_submission_status', CheckCurrentMonthAdmissionStatus)
+    path('api/check_current_month_submission_status', CheckCurrentMonthAdmissionStatus),
+    path('api/monthly_record_data', GetAllRecordData),
+    path('api/monthly_record_data/minYear/<int:minYear>/minMonth/<int:minMonth>/', GetRecordDataByDateRange)
+    # url(r'^api/monthly_record_data/(?P<minYear>[0-9]+)/(?P<minMonth>[0-9]+)/(?P<maxYear>[0-9]+)/(?P<maxMonth>[0-9]+)/$', GetRecordDataByDateRange, name='monthly_record_data')    
 ]
