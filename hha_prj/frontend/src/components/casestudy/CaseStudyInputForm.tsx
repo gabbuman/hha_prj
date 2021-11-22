@@ -8,6 +8,8 @@ import { useButtonProps } from '@restart/ui/esm/Button';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import DptRecordPage from '../dpt/DptRecordPage';
+import { endpoint } from '../Endpoint';
+import { notifyFail, notifySuccess } from '../login/Notifications';
 interface CSSProps {
 
 }
@@ -43,7 +45,22 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
 
     submitClick = () => {
         this.setState({ isSubmit: true}) 
-        window.alert("submit is successful")
+        //window.alert("submit is successful")
+        this.uploadCaseStudy();
+    }
+
+    uploadCaseStudy = () =>{
+        axios.post('http://127.0.0.1:8000/api/case_study/', {title:this.state.title,type:this.state.type, content:this.state.content})
+            .then(res=>{
+                notifySuccess("case study added :D");
+                console.log(res)
+            })
+            .catch((error)=> {
+                notifyFail("Submission failed D:");
+                //console.error(error)
+            }
+        );
+
 
     }
 
