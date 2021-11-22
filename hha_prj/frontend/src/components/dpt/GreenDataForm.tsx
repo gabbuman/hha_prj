@@ -20,12 +20,12 @@ interface GDFState {
     woundCare: number;
     otherReason: number;
     financialReason: number;
-    time_1_3month: number;
-    time_3_6month: number;
-    time_6month_1yr: number;
-    time_1_2yr: number;
-    time_2_3yr: number;
-    time_3yr: number;
+    time1To3month: number;
+    time3To6month: number;
+    time6MonthTo1Year: number;
+    time1To2Year: number;
+    time2To3Year: number;
+    time3PlusYear: number;
 }
 const initialState: GDFState = {
     dischargeReason: '',
@@ -38,12 +38,12 @@ const initialState: GDFState = {
     woundCare: 0,
     otherReason: 0,
     financialReason: 0,
-    time_1_3month: 0,
-    time_3_6month: 0,
-    time_6month_1yr: 0,
-    time_1_2yr: 0,
-    time_2_3yr: 0,
-    time_3yr: 0,
+    time1To3month: 0,
+    time3To6month: 0,
+    time6MonthTo1Year: 0,
+    time1To2Year: 0,
+    time2To3Year: 0,
+    time3PlusYear: 0,
 }
 
 class GreenDataForm extends Component <GDFProps, GDFState> {
@@ -244,8 +244,8 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                             inputProps={{ min: 0}}
                             id="outlined-required"
                             label="1-3 months"
-                            value={this.state.time_1_3month}
-                            onChange={(e)=>{this.setState({time_1_3month: +e.target.value})}}
+                            value={this.state.time1To3month}
+                            onChange={(e)=>{this.setState({time1To3month: +e.target.value})}}
                             />
                             <TextField
                             required
@@ -254,8 +254,8 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                             inputProps={{ min: 0}}
                             id=""
                             label="3-6 months"
-                            value={this.state.time_3_6month}
-                            onChange={(e)=>{this.setState({time_3_6month: +e.target.value})}}
+                            value={this.state.time3To6month} 
+                            onChange={(e)=>{this.setState({time3To6month: +e.target.value})}}
                             />
                             <TextField
                             required
@@ -264,8 +264,8 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                             inputProps={{ min: 0}}
                             id=""
                             label="6 months-1 year"
-                            value={this.state.time_6month_1yr}
-                            onChange={(e)=>{this.setState({time_6month_1yr: +e.target.value})}}
+                            value={this.state.time6MonthTo1Year}
+                            onChange={(e)=>{this.setState({time6MonthTo1Year: +e.target.value})}}
                             />
                             <TextField
                             required
@@ -274,8 +274,8 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                             inputProps={{ min: 0}}
                             id=""
                             label="1-2 years"
-                            value={this.state.time_1_2yr}
-                            onChange={(e)=>{this.setState({time_1_2yr: +e.target.value})}}
+                            value={this.state.time1To2Year}
+                            onChange={(e)=>{this.setState({time1To2Year: +e.target.value})}}
                             />  
                             <TextField
                             required
@@ -284,8 +284,8 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                             inputProps={{ min: 0}}
                             id=""
                             label="2-3 years"
-                            value={this.state.time_2_3yr}
-                            onChange={(e)=>{this.setState({time_2_3yr: +e.target.value})}}
+                            value={this.state.time2To3Year}
+                            onChange={(e)=>{this.setState({time2To3Year: +e.target.value})}}
                             />  
                             <TextField
                             required
@@ -294,8 +294,8 @@ class GreenDataForm extends Component <GDFProps, GDFState> {
                             inputProps={{ min: 0}}
                             id=""
                             label="3+ years"
-                            value={this.state.time_3yr}
-                            onChange={(e)=>{this.setState({time_3yr: +e.target.value})}}
+                            value={this.state.time3PlusYear}
+                            onChange={(e)=>{this.setState({time3PlusYear: +e.target.value})}}
                             />  
                         </div>        
                 </Box>
