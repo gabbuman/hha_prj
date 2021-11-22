@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Box, TextField, Typography, Stack, Button, 
     FormControl, MenuItem, InputLabel, Select, Grid, Container} from '@mui/material';
 import VerNavbar from '../layout/VerNavbar';
@@ -9,6 +9,7 @@ import {case_data} from './CSData';
 import CSCard from './CaseStudyCard';
 import styled from 'styled-components';
 import AddCard from './CaseStudyAddCard';
+import { endpoint } from '../Endpoint'
 import CaseStudyIndividual from './CaseStudyIndividual';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import ReactDOM from 'react-dom';
@@ -57,6 +58,7 @@ const ContentGroup = styled.div `
 
 
 class CaseStudyGridView extends Component {
+
     render(){
         return(
             <div>
