@@ -12,6 +12,7 @@ interface MRState {
     isEdit: boolean;
     disabled: boolean;
     dischargedAlive_shared: number;
+    stayedinward_shared: number;
 }
 
 
@@ -24,6 +25,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
             isEdit: true,
             disabled: false,
             dischargedAlive_shared: 0,
+            stayedinward_shared: 0,
         };
     }
 
@@ -43,10 +45,12 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
         });
     }
 
-    updateShared = (dischargedAlive_shared_value: number) => {
+    updateShared = (e: React.ChangeEvent<HTMLInputElement>) => {
+        var name = e.target.getAttribute('name') + '_shared';
+        // console.log(name);
         this.setState({
-            dischargedAlive_shared: dischargedAlive_shared_value
-        });
+            [name]: +e.target.value,
+        } as unknown as Pick<MRState, keyof MRState>);
     }
 
     render() {
@@ -62,6 +66,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
                                 nextStep={this.nextStep}
                                 disabled={this.state.disabled} 
                                 dischargedAlive_shared={this.state.dischargedAlive_shared}
+                                stayedinward_shared={this.state.stayedinward_shared}
                                 updateShared={this.updateShared}
                             />                     
                         </Container>  
@@ -75,6 +80,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
                                 prevStep={this.prevStep}
                                 disabled={this.state.disabled} 
                                 dischargedAlive_shared={this.state.dischargedAlive_shared}
+                                stayedinward_shared={this.state.stayedinward_shared}
                             />                 
                         </Container>  
                     </div>
