@@ -20,13 +20,15 @@ interface CSSState {
     type: string;
     content: string;// TODO: picture state variable
     isSubmit: boolean;
+    selectedImages: any;
     
 }
-const initialState: CSSState = {
+state: const initialState: CSSState = {
     title: 'Title of Case Study',
     type: 'Patient Story',
     content: 'Test',
-    isSubmit: false
+    isSubmit: false,
+    selectedImages: null
 }
 
  
@@ -44,20 +46,34 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
     }
 
     submitClick = () => {
-        this.setState({ isSubmit: true}) 
-        //window.alert("submit is successful")
+        this.setState({ isSubmit: true})
         this.uploadCaseStudy();
     }
 
+    handleImageUpload = (event:any) => {
+        if(event.target.files[0]){
+            this.setState({selectedImages: event.target.files[0]||[]})
+            console.log(event.target.files[0]);
+        }
+        if(!event.target.files[0]){
+            return;
+        }
+    }
+
     uploadCaseStudy = () =>{
-        axios.post('http://127.0.0.1:8000/api/case_study/', {title:this.state.title,type:this.state.type, content:this.state.content})
+        const formData = new FormData();
+        formData.append('image', this.state.selectedImages,this.state.selectedImages.name);
+        formData.append('title', this.state.title);
+        formData.append('type', this.state.type);
+        formData.append('description',this.state.content);
+        axios.post(endpoint + 'api/case_study/', formData)
             .then(res=>{
-                notifySuccess("case study added :D");
+                notifySuccess("Case Study Saved Successfully");
                 console.log(res)
             })
             .catch((error)=> {
-                notifyFail("Submission failed D:");
-                //console.error(error)
+                notifyFail("Failed to Save Case Study");
+                console.error(error)
             }
         );
 
@@ -148,8 +164,10 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
                     >
                         <h3>Upload Pictures</h3>
                         <input
+                        accept="image/*"
                         type="file"
                         name="file"
+                        onChange={this.handleImageUpload}
                         />
 
                     </Box>
