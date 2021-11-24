@@ -37,7 +37,7 @@ const DepartmentHome: React.FC = () => {
                         <ActionCard backgroundImage={'/static/data-entry-icon.svg'} 
                                     fromColor={'#4AA08B'}
                                     toColor={'#6081BA'}
-                                    title={'Data Entry'}/>
+                                    title={'Monthly Record'}/>
                         <ActionCard backgroundImage={'/static/bio-support-icon.svg'} 
                                     fromColor={'#49159F'}
                                     toColor={'#5F80BA'}
