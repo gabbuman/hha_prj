@@ -3,29 +3,31 @@ import { Box, TextField, Typography, Stack, Button,
     FormControl, MenuItem, InputLabel, Select, Grid, Container} from '@mui/material';
 import VerNavbar from '../layout/VerNavbar';
 import Header from '../layout/Header';
+import { useLocation } from 'react-router';
 
 
 interface DptProps{
-    dptName: string,
+   dptName: string,
   }
 interface DptState{
     dptName: string,
   }
 
   const initialState: DptState = {
-    dptName: "Rehab"
+    dptName: ""
 }
 
-class DptRecordPage extends Component <DptProps, DptState>  {
-    constructor(props: DptProps){
-        super(props); 
+class DptRecordPage extends Component <DptProps, DptState>{
+    constructor(props:DptProps){
+        super(props);  
         this.state = initialState;
-        //this.setState({dptName: this.props.dptName});
+        //this.setState({dptName: props.dptName});
     }
     render() {
+       
         return (
             <div>
-                <Header title={this.state.dptName} />
+                <Header title={this.state.dptName} />   
                 <VerNavbar dptName={this.state.dptName}/>
             </div>
         );

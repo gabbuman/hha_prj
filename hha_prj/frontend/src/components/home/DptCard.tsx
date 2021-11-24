@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import DptRecordPage from '../dpt/DptRecordPage';
 
 export interface dptData {
     name: string;
@@ -115,19 +117,25 @@ export const DptOverview: React.FC<DptCardProps> = ({departmentData}: DptCardPro
     </div>
 }
 
-const DptCard: React.FC<dptData> = ({name, perc_of_data_entered, num_of_case_studies, bg_img, main_color}: dptData) =>  {
+class DptCard extends Component<dptData> {
+    constructor(props: dptData){
+        super(props);
+    }
+
+    render(){
     return (
-        <a href="/dptrecordpage" style={{ textDecoration: 'none' }}>
+        <Link to={{ pathname: "/dptrecordpage", state: {dptName: this.props.name}}} >
             <div className="DptCard">
-                <DptCardGroup main_color={main_color}>
-                    <CardBackground src={bg_img} />
-                    <CardTitle>{name}</CardTitle>
+                <DptCardGroup main_color={this.props.main_color}>
+                    <CardBackground src={this.props.bg_img} />
+                    <CardTitle>{this.props.name}</CardTitle>
                     <DptProgressBar description={"Data Entered"} percentage={30} color={"#78FF04"} />
                     <DptProgressBar description={"Case Studied"} percentage={60} color={"#DBFF00"} />
                 </DptCardGroup> 
             </div>
-        </a>
+    </Link>
     )
+    }
 }
 
 export default DptCard
