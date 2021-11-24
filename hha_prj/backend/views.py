@@ -6,7 +6,7 @@ from rest_framework import permissions
 from django.http import HttpResponse
 from .serializers import CustomTokenPairSerializer
 from django.http import HttpResponse
-from datetime import datetime
+import datetime
 from .models import  MonthlyRecord
 
 from rest_framework.parsers import JSONParser
@@ -38,29 +38,22 @@ def GetRecordDataByDateRange(request, min_year, min_month, max_year, max_month, 
     record_list = list(MonthlyRecord.objects.filter(Q(year__gte=min_year), Q(month__gte=min_month),
         Q(year__lte=max_year), Q(month__lte=max_month)).values())
 
-    years = [dictionary['year'] for dictionary in record_list]
-    months = [dictionary['month'] for dictionary in record_list]
-
-    # dates = []
-    # for dictionary in record_list:
-    #     year = dictionary['year']
-    #     month = dictionary['month']
-    #     date = datetime.date(year,month,1)
-    #     dates.append(date)
-
-    nested_question_answer_lists = [dictionary['question_answer_list'] for dictionary in record_list]
-    question_answer_lists = nested_question_answer_lists[0]
-
     formatted_field = field.replace("$$$", " ") # Enable white space passing by an alias "$$$"
-    question_specific_list = [dictionary for dictionary in question_answer_lists if formatted_field in dictionary.values()]
 
-    # date_and_question = {
-    #     "date": date,
-    #     field: 30,
-    # }
+    response = []
+    for dictionary in record_list:
+        year = dictionary['year']
+        month = dictionary['month']
+        date = datetime.date(year,month,1)
 
-    data = json.dumps(question_specific_list)
-    # data = json.dumps(record_list)
+        nested_question_answer_list = dictionary['question_answer_list']
+        nested_question_answer = [dictionary for dictionary in nested_question_answer_list if formatted_field in dictionary.values()]
+        question_answer_pair = nested_question_answer[0]
+        answer = question_answer_pair["answer"]
+
+        response.append({ "date":date, "question":formatted_field, "answer":answer })
+
+    data = json.dumps(response,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
 
 
