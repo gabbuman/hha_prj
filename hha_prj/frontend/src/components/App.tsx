@@ -55,9 +55,10 @@ class App extends Component {
 					<Route path='/csinput' component={CaseStudySubmissionForm}/>
 					<Route path='/csindividual' component={CaseStudyIndividual}/>	
 					<Route path='/actioncard' component={() => 
-						<DptGraphCard width={500} 
-									  height={300} 
-									  recordDataSet={sampleData} />
+						<ActionCard backgroundImage={'/static/rehab-bg.png'} 
+									fromColor={'#254E9F'}
+									toColor={'#6081BA'}
+									title={'Case Study'}/>
 					}/>	
 				</Switch>
 				<ToastContainer/>

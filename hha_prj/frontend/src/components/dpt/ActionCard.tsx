@@ -27,18 +27,22 @@ const ActionCardGroup = styled.div `
     }
 `
 
-// Change background to white when done testing
-const ActionCardLowerHalfGroup = styled.div `
+const ActionCardIcon = styled.img `
     background-color: red;
+    height: 100%;
+    display: cover;
+`
+
+const ActionCardLowerHalfGroup = styled.div `
     display: grid;
-    padding: 14px;
+    padding: 8px;
     grid-template-rows: 1fr 1fr;
 `
 
 const ActionCardTitle = styled.h3 `
     color: black;
     font-size: 18px;
-    font-weight: 400;
+    font-weight: 600;
 `
 
 const ActionCard: React.FC<ActionCardData> = ({backgroundImage, 
@@ -48,8 +52,10 @@ const ActionCard: React.FC<ActionCardData> = ({backgroundImage,
     return (
         <a href="/" style={{ textDecoration: 'none' }}>
             <ActionCardGroup>
-                <img src={backgroundImage}/>
-                <ActionCardTitle>{title}</ActionCardTitle>
+                <ActionCardIcon src={backgroundImage}/>
+                <ActionCardLowerHalfGroup>
+                    <ActionCardTitle>{title}</ActionCardTitle>
+                </ActionCardLowerHalfGroup>
             </ActionCardGroup>
         </a>
     )
