@@ -56,17 +56,23 @@ def GetRecordDataByDateRange(request):
     if (not isValidDate):
         return HttpResponseBadRequest("Invalid date range selected, start date must be earlier than end date.")
 
-    records_in_date_range = list(MonthlyRecord.objects.filter(Q(year__gte=min_year), Q(month__gte=min_month),
+    records_in_date_range_and_dept = list(MonthlyRecord.objects.filter(Q(year__gte=min_year), Q(month__gte=min_month),
         Q(year__lte=max_year), Q(month__lte=max_month), Q(department=target_dept)).values())
 
+    if (len(records_in_date_range_and_dept) <= 0):
+            return HttpResponseBadRequest("No data in this date range and or department to be displayed.")
+    
     responses = []
-    for record in records_in_date_range:
+    for record in records_in_date_range_and_dept:
         year = record['year']
         month = record['month']
         date = datetime.date(year,month,1)
 
         field_answer_list = record['question_answer_list']
         field_answer_selection = [record for record in field_answer_list if target_field in record.values()]
+        
+        if (len(field_answer_selection) <= 0):
+            return HttpResponseBadRequest("No data in this field to be displayed.")
         field_answer_pair = field_answer_selection[0]
         answer = field_answer_pair["answer"]
 
