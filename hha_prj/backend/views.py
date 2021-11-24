@@ -28,17 +28,11 @@ def CheckCurrentMonthAdmissionStatus(request):
     return HttpResponse(json.dumps(response), content_type="application/json")
 
 def GetCurrentFieldList(request,department_name):
-
     response = []
-    
-    if (not CurrentFieldsList.objects.filter(department = department_name).exists()):
-        data = json.dumps(response)
-        return HttpResponse(data, content_type="application/json")
+    if (CurrentFieldsList.objects.filter(department = department_name).exists()):
+        field_list = CurrentFieldsList.objects.filter(department = department_name).values()
+        question_list = field_list[0]['list']
+        response = question_list
 
-    field_list = CurrentFieldsList.objects.filter(department = department_name).values()
-
-    question_list = field_list[0]['list']
-    response.append({"list": question_list})
-
-    data = json.dumps(response,indent=4,default=str)
+    data = json.dumps(response)
     return HttpResponse(data, content_type="application/json")
