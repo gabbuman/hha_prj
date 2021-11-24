@@ -19,8 +19,7 @@ import { sampleData } from './home/Department Card/RecordData';
 import CreateDepartment from './dpt/CreateDepartment';
 import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
 import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
-import ParentSize from '@visx/responsive/lib/components/ParentSize';
-import ActionCard from './dpt/ActionCard';
+import DepartmentHome from './dpt/DepartmentHome';
 
 class App extends Component {
     render() {
@@ -54,12 +53,7 @@ class App extends Component {
 					<Route path='/createdepartment' component={CreateDepartment} />	
 					<Route path='/csinput' component={CaseStudySubmissionForm}/>
 					<Route path='/csindividual' component={CaseStudyIndividual}/>	
-					<Route path='/actioncard' component={() => 
-						<ActionCard backgroundImage={'/static/case-study-icon.svg'} 
-									fromColor={'#254E9F'}
-									toColor={'#6081BA'}
-									title={'Case Study'}/>
-					}/>	
+					<Route path='/actioncard' component={DepartmentHome}/>	
 				</Switch>
 				<ToastContainer/>
 			</Router>

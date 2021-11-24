@@ -16,7 +16,6 @@ interface GradientColors {
 
 const ActionCardGroup = styled.div `
     width: 100%;
-    max-width: 200px;
     height: 225px;
     overflow: hidden;
     border-radius: 10px;
@@ -26,8 +25,7 @@ const ActionCardGroup = styled.div `
     transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 
     &:hover {
-        transform: scale(1.07, 1.07);
-        box-shadow: 0 10px 20px #00000005;
+        box-shadow: 0 15px 20px #0000000f;
     }
 `
 
