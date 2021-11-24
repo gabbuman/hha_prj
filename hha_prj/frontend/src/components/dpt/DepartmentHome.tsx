@@ -6,19 +6,19 @@ import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import ActionCard from './ActionCard';
 
 const PageContainer = styled.div `
-    width: 100%;
-    max-width: 700px;
     display: grid;
     grid-template-rows: 300px 1fr;
     grid-gap: 30px;
+    justify-items: center;
 `
 
 const ActionCardContainer = styled.div `
-    width: 100% - 30px;
+    max-width: 730px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 15px;
-    margin: 0 15px 0 15px;
+    margin-left: 15px;
+    margin-right: 15px;
 `
 
 const DepartmentHome: React.FC = () => {
@@ -26,10 +26,9 @@ const DepartmentHome: React.FC = () => {
         <ParentSize>
             {({width, height}) => 
                 <PageContainer>
-                    <DptGraphCard width={width - 30} 
+                    <DptGraphCard width={width > 700 ? 635 : width-30} 
                                         height={300} 
                                         recordDataSet={sampleData} />
-                        
                     <ActionCardContainer>
                         <ActionCard backgroundImage={'/static/case-study-icon.svg'} 
                                     fromColor={'#254E9F'}
