@@ -1,4 +1,3 @@
-import { string } from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -21,14 +20,14 @@ const ActionCardGroup = styled.div `
     height: 225px;
     overflow: hidden;
     border-radius: 10px;
-    box-shadow: 0 10px 20px #0000000a;
+    box-shadow: 0 5px 10px #0000000a;
     display: grid;
     grid-template-rows: 60% 1fr;
     transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 
     &:hover {
-        transform: scale(1.1, 1.1);
-        box-shadow: 0 20px 40px #00000005;
+        transform: scale(1.07, 1.07);
+        box-shadow: 0 10px 20px #00000005;
     }
 `
 
