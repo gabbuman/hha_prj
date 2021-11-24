@@ -3,11 +3,13 @@ from django.shortcuts import render
 from django.core import serializers
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import permissions
-from django.http import HttpResponse
+from rest_framework.decorators import api_view
+from django.http import HttpResponse, request
 from .serializers import CustomTokenPairSerializer
 from django.http import HttpResponse, HttpResponseBadRequest
 import datetime
 from .models import  MonthlyRecord
+
 
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
@@ -29,10 +31,26 @@ def CheckCurrentMonthAdmissionStatus(request):
 
     return HttpResponse(json.dumps(response), content_type="application/json")
 
-def GetRecordDataByDateRange(request, dept, min_year, min_month, max_year, max_month, field):
+@api_view(['GET'])
+def GetRecordDataByDateRange(request):
 
-    target_field = field.replace("$$$", " ") # Enable white space passing by an alias "$$$"
-    target_dept = dept.replace("$$$", " ") # Enable white space passing by an alias "$$$"
+    target_field = request.query_params.get("field")
+    target_dept = request.query_params.get("department")
+    min_year = request.query_params.get("min_year")
+    max_year = request.query_params.get("max_year")
+    min_month = request.query_params.get("min_month")
+    max_month = request.query_params.get("max_month")
+
+    if (target_field or target_dept or min_year or max_year or min_month or max_month) is None:
+        return HttpResponseBadRequest("Parameters are missing.")
+
+    try:
+        min_year = int(request.query_params.get("min_year"))
+        max_year = int(request.query_params.get("max_year"))
+        min_month = int(request.query_params.get("min_month"))
+        max_month = int(request.query_params.get("max_month"))
+    except:
+        return HttpResponseBadRequest("Date range months and years must be numerical values.")
 
     isValidDate = (min_year < max_year) or ((min_year is max_year) and (min_month < max_month))
     if (not isValidDate):
