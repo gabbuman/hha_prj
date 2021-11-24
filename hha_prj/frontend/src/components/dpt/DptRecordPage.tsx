@@ -5,12 +5,27 @@ import VerNavbar from '../layout/VerNavbar';
 import Header from '../layout/Header';
 
 
+interface DptProps{
+    dptName: string,
+  }
+interface DptState{
+    dptName: string,
+  }
 
-class DptRecordPage extends Component  {
+  const initialState: DptState = {
+    dptName: "Rehab"
+}
+
+class DptRecordPage extends Component <DptProps, DptState>  {
+    constructor(props: DptProps){
+        super(props); 
+        this.state = initialState;
+        //this.setState({dptName: this.props.dptName});
+    }
     render() {
         return (
             <div>
-                <Header title={`Hope Health Action/Rehab Department`} />
+                <Header title={this.state.dptName} />
                 <VerNavbar />
             </div>
         );

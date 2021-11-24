@@ -4,6 +4,7 @@ import RedDataForm from '../dpt/RedDataForm';
 import GreenDataForm from '../dpt/GreenDataForm';
 
 interface MRProps {
+    dptName: string;
 }
 
 interface MRState {
@@ -13,6 +14,7 @@ interface MRState {
     disabled: boolean;
     dischargedAlive_shared: number;
     stayedinward_shared: number;
+    dptName: string
 }
 
 
@@ -26,6 +28,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
             disabled: false,
             dischargedAlive_shared: 0,
             stayedinward_shared: 0,
+            dptName: this.props.dptName
         };
     }
 
@@ -68,6 +71,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
                                 dischargedAlive_shared={this.state.dischargedAlive_shared}
                                 stayedinward_shared={this.state.stayedinward_shared}
                                 updateShared={this.updateShared}
+                                dptName={this.state.dptName}
                             />                     
                         </Container>  
                     </div>
@@ -81,6 +85,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
                                 disabled={this.state.disabled} 
                                 dischargedAlive_shared={this.state.dischargedAlive_shared}
                                 stayedinward_shared={this.state.stayedinward_shared}
+                                dptName={this.state.dptName}
                             />                 
                         </Container>  
                     </div>

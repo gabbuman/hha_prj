@@ -55,8 +55,12 @@ const ContentGroup = styled.div `
     }
 `
 
+interface csprops{
+    dptName: string;
+}
 
-class CaseStudyGridView extends Component {
+class CaseStudyGridView extends Component<csprops> {
+
     render(){
         return(
             <div>

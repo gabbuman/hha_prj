@@ -8,6 +8,7 @@ interface RDFProps {
     dischargedAlive_shared: number;
     stayedinward_shared: number;
     updateShared: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    dptName: string;
 }
 
 interface RDFState {

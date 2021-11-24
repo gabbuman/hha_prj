@@ -110,7 +110,7 @@ export default function VerticalTabs() {
 
       <Grid item xs={10}>
         <TabPanel  value={value} index={1}>
-          <MonthlyRecord />
+          <MonthlyRecord dptName={'Rehab'}/>
         </TabPanel>
         <TabPanel value={value} index={2}>
           Item Three
@@ -119,17 +119,18 @@ export default function VerticalTabs() {
           Item Four
         </TabPanel>
         <TabPanel value={value} index={4}>
-          <CaseStudyGridView/>
+          <CaseStudyGridView dptName={'Rehab'}/>
         </TabPanel>
         <TabPanel value={value} index={5}>
-          <DptTableView />
+          <DptTableView dptName={'Rehab'}/>
         </TabPanel>
         <TabPanel value={value} index={6}>
             <ParentSize>
 							  {({width, height}) => 
 								    <DptGraphCard width={width} 
 											            height={300} 
-											            recordDataSet={sampleData} />
+											            recordDataSet={sampleData} 
+                                  dptName={'Rehab'}/>
 							  }
 						</ParentSize>
         </TabPanel>
