@@ -55,7 +55,7 @@ class App extends Component {
 					<Route path='/csinput' component={CaseStudySubmissionForm}/>
 					<Route path='/csindividual' component={CaseStudyIndividual}/>	
 					<Route path='/actioncard' component={() => 
-						<ActionCard backgroundImage={'/static/rehab-bg.png'} 
+						<ActionCard backgroundImage={'/static/case-study-icon.svg'} 
 									fromColor={'#254E9F'}
 									toColor={'#6081BA'}
 									title={'Case Study'}/>

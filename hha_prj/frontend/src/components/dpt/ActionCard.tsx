@@ -32,10 +32,16 @@ const ActionCardGroup = styled.div `
     }
 `
 
-const ActionCardIcon = styled.img<GradientColors> `
+const ActionCardIconContainer = styled.div<GradientColors> `
     background-image: linear-gradient(${props => props.fromColor}, ${props => props.toColor});
+`
+
+const ActionCardIcon = styled.img `
     height: 100%;
-    display: cover;
+    padding: 30px 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 `
 
 const ActionCardLowerHalfGroup = styled.div `
@@ -57,7 +63,9 @@ const ActionCard: React.FC<ActionCardData> = ({backgroundImage,
     return (
         <a href="/" style={{ textDecoration: 'none' }}>
             <ActionCardGroup>
-                <ActionCardIcon fromColor={fromColor} toColor={toColor} src={backgroundImage}/>
+                <ActionCardIconContainer fromColor={fromColor} toColor={toColor}>
+                    <ActionCardIcon src={backgroundImage}/>
+                </ActionCardIconContainer>
                 <ActionCardLowerHalfGroup>
                     <ActionCardTitle>{title}</ActionCardTitle>
                 </ActionCardLowerHalfGroup>
