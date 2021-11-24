@@ -10,6 +10,11 @@ interface ActionCardData {
     title: string;
 }
 
+interface GradientColors {
+    fromColor: string;
+    toColor: string;
+}
+
 const ActionCardGroup = styled.div `
     width: 100%;
     max-width: 200px;
@@ -27,8 +32,8 @@ const ActionCardGroup = styled.div `
     }
 `
 
-const ActionCardIcon = styled.img `
-    background-color: red;
+const ActionCardIcon = styled.img<GradientColors> `
+    background-image: linear-gradient(${props => props.fromColor}, ${props => props.toColor});
     height: 100%;
     display: cover;
 `
@@ -52,7 +57,7 @@ const ActionCard: React.FC<ActionCardData> = ({backgroundImage,
     return (
         <a href="/" style={{ textDecoration: 'none' }}>
             <ActionCardGroup>
-                <ActionCardIcon src={backgroundImage}/>
+                <ActionCardIcon fromColor={fromColor} toColor={toColor} src={backgroundImage}/>
                 <ActionCardLowerHalfGroup>
                     <ActionCardTitle>{title}</ActionCardTitle>
                 </ActionCardLowerHalfGroup>
