@@ -26,7 +26,7 @@ class DptRecordPage extends Component <DptProps, DptState>  {
         return (
             <div>
                 <Header title={this.state.dptName} />
-                <VerNavbar />
+                <VerNavbar dptName={this.state.dptName}/>
             </div>
         );
     }
