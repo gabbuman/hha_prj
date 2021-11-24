@@ -5,6 +5,7 @@ from .api import CurrentFieldListViewSet, MonthlyRecordViewSet
 from .api import CustomUserViewSet
 from .api import DepartmentViewSet, RoleViewSet
 from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus
+from .views import GetCurrentFieldList
 from django.urls import path
 from django.urls.conf import include
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -28,5 +29,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api/token/refresh', TokenRefreshView),
     path('api/token/obtain', ObtainTokenPairWithUsernameView.as_view()),
-    path('api/check_current_month_submission_status', CheckCurrentMonthAdmissionStatus)
+    path('api/check_current_month_submission_status', CheckCurrentMonthAdmissionStatus),
+    path('api/get_current_field_list/department_name/<str:department_name>', GetCurrentFieldList)
 ]
