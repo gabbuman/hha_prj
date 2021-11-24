@@ -31,31 +31,32 @@ def CheckCurrentMonthAdmissionStatus(request):
 
 def GetRecordDataByDateRange(request, dept, min_year, min_month, max_year, max_month, field):
 
+    target_field = field.replace("$$$", " ") # Enable white space passing by an alias "$$$"
+    target_dept = dept.replace("$$$", " ") # Enable white space passing by an alias "$$$"
+
     isValidDate = (min_year < max_year) or ((min_year is max_year) and (min_month < max_month))
     if (not isValidDate):
-        return HttpResponseBadRequest("Invalid date range selected")
+        return HttpResponseBadRequest("Invalid date range selected, start date must be earlier than end date.")
 
-    record_list = list(MonthlyRecord.objects.filter(Q(year__gte=min_year), Q(month__gte=min_month),
-        Q(year__lte=max_year), Q(month__lte=max_month), Q(department=dept)).values())
+    records_in_date_range = list(MonthlyRecord.objects.filter(Q(year__gte=min_year), Q(month__gte=min_month),
+        Q(year__lte=max_year), Q(month__lte=max_month), Q(department=target_dept)).values())
 
-    target_field = field.replace("$$$", " ") # Enable white space passing by an alias "$$$"
-
-    response = []
-    for dictionary in record_list:
-        year = dictionary['year']
-        month = dictionary['month']
+    responses = []
+    for record in records_in_date_range:
+        year = record['year']
+        month = record['month']
         date = datetime.date(year,month,1)
 
-        question_answer_list = dictionary['question_answer_list']
-        question_answer_selection = [dictionary for dictionary in question_answer_list if target_field in dictionary.values()]
-        question_answer_pair = question_answer_selection[0]
-        answer = question_answer_pair["answer"]
+        field_answer_list = record['question_answer_list']
+        field_answer_selection = [record for record in field_answer_list if target_field in record.values()]
+        field_answer_pair = field_answer_selection[0]
+        answer = field_answer_pair["answer"]
 
-        response.append({ "date":date, "answer":answer })
+        responses.append({ "date":date, "answer":answer })
 
-    question_and_response = {"question": target_field, "response" : response}
+    field_and_responses = {"field": target_field, "department":target_dept, "responses" : responses}
 
-    data = json.dumps(question_and_response,indent=4,sort_keys=True,default=str)
+    data = json.dumps(field_and_responses,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
 
 
