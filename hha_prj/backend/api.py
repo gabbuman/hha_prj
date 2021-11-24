@@ -35,6 +35,7 @@ class MonthlyRecordViewSet(viewsets.ModelViewSet):
     serializer_class = MonthlyRecordSerializer
     lookup_fields = ('month','year')
     lookup_url_kwargs = ('month','year')
+    
 class CurrentFieldListViewSet(viewsets.ModelViewSet):
     queryset = CurrentFieldsList.objects.all()
     permissions_classes = [
