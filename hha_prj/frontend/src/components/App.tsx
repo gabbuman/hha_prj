@@ -18,6 +18,7 @@ import {DptGraphCard, GraphProps} from './home/Department Card/DptGraphCard';
 import CreateDepartment from './dpt/CreateDepartment';
 import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
 import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
+import DepartmentHome from './dpt/DepartmentHome';
 
 class App extends Component {
     render() {
@@ -46,7 +47,8 @@ class App extends Component {
 					<Route path='/dptrecordpage' component={DptRecordPage} />	
 					<Route path='/createdepartment' component={CreateDepartment} />	
 					<Route path='/case_study_form' component={CaseStudySubmissionForm}/>
-					<Route path='/case_studyindividual' component={CaseStudyIndividual}/>		 	
+					<Route path='/case_studyindividual' component={CaseStudyIndividual}/>
+					<Route path='/actioncard' component={DepartmentHome}/>	
 				</Switch>
 				<ToastContainer/>
 			</Router>

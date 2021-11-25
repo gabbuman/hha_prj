@@ -17,5 +17,6 @@ urlpatterns = [
     path('dpttableview', views.index),    
     path('dptgraphview', views.index),
     path('csinput', views.index),
-    path('csindividual', views.index)    
+    path('csindividual', views.index),
+    path('actioncard', views.index)    
 ]
