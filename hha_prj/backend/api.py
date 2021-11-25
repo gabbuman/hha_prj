@@ -1,6 +1,6 @@
-from backend.models import MonthlyRecord, CustomUser, Department, Role, CurrentFieldsList, CaseStudy, CaseStudyType
+from backend.models import MonthlyRecord, CustomUser, Department, Role, CurrentFieldsList, CaseStudy, CaseStudyType,DischargedAliveRehabGreenData
 from rest_framework import viewsets, permissions
-from .serializers import CaseStudySerializer, CaseStudyTypeSerializer, CurrentFieldListSerializer, DepartmentSerializer, MonthlyRecordSerializer, CustomUserSerializer, RoleSerializer
+from .serializers import CaseStudySerializer, CaseStudyTypeSerializer, CurrentFieldListSerializer, DepartmentSerializer, MonthlyRecordSerializer, CustomUserSerializer, RoleSerializer,DischargedAliveRehabGreenDataSerializer
 
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
@@ -35,6 +35,14 @@ class MonthlyRecordViewSet(viewsets.ModelViewSet):
     serializer_class = MonthlyRecordSerializer
     lookup_fields = ('month','year')
     lookup_url_kwargs = ('month','year')
+
+class DischargedAliveRehabGreenDataViewSet(viewsets.ModelViewSet):
+    queryset = DischargedAliveRehabGreenData.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = DischargedAliveRehabGreenDataSerializer
+    
 class CurrentFieldListViewSet(viewsets.ModelViewSet):
     queryset = CurrentFieldsList.objects.all()
     permissions_classes = [

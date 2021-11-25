@@ -39,8 +39,7 @@
             }
     },
     {
-      "model": "backend.MonthlyRecord", 
-      "pk": 1,
+      "model": "backend.MonthlyRecord",
       "fields": {
         "month": 1,
         "year": 2021,
@@ -103,7 +102,6 @@
   },
   {
     "model": "backend.MonthlyRecord", 
-    "pk": 1,
     "fields": {
       "department": "Rehab",
       "month": 2,
@@ -162,9 +160,38 @@
           "answer": 5
         }
       ]
-        }
+    }
+},
+{
+    "model": "backend.DischargedAliveRehabGreenData", 
+    "pk": 1,
+    "fields": {
+      "monthly_record_id": 1,
+      "patient_discharged_diagnosis": "SCI",
+      "patient_num_days_in_rehab": 230,
+      "discharge_reason": "All goals met",
+      "discharge_outcome_ADLs_self_care": "Modified Independent",
+      "discharge_outcome_transfers_mobility": "Minimum Assitance",
+      "mobility_aid_device_given": "Wheelchair",
+      "discharge_location": "Return home, with family",
+      "discharge_employment_status": "Unemployed, due to condition"
+    }
+},
+{
+    "model": "backend.DischargedAliveRehabGreenData", 
+    "pk": 2,
+    "fields": {
+      "monthly_record_id": 1,
+      "patient_discharged_diagnosis": "SCI",
+      "patient_num_days_in_rehab": 240,
+      "discharge_reason": "All goals met",
+      "discharge_outcome_ADLs_self_care": "Modified Independent",
+      "discharge_outcome_transfers_mobility": "Minimum Assitance",
+      "mobility_aid_device_given": "Wheelchair",
+      "discharge_location": "Return home, with family",
+      "discharge_employment_status": "Unemployed, due to condition"
+    }
 }
-  
 
 
 ]
