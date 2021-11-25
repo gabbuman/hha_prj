@@ -8,7 +8,7 @@ from django.http import HttpResponse, request
 from .serializers import CustomTokenPairSerializer
 from django.http import HttpResponse, HttpResponseBadRequest
 import datetime
-from .models import  MonthlyRecord
+from .models import  Department, MonthlyRecord
 
 
 from rest_framework.parsers import JSONParser
@@ -43,6 +43,10 @@ def GetRecordDataByDateRange(request):
 
     if (target_field or target_dept or min_year or max_year or min_month or max_month) is None:
         return HttpResponseBadRequest("Parameters are missing.")
+    
+    department_exists = len(list(Department.objects.filter(Q(name=target_dept)))) >= 1
+    if not department_exists:
+        return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
 
     try:
         min_year = int(request.query_params.get("min_year"))
@@ -60,7 +64,7 @@ def GetRecordDataByDateRange(request):
         Q(year__lte=max_year), Q(month__lte=max_month), Q(department=target_dept)).values())
 
     if (len(records_in_date_range_and_dept) <= 0):
-            return HttpResponseBadRequest("No data in this date range and or department to be displayed.")
+        return HttpResponse(json.dumps([],indent=4,sort_keys=True,default=str))
     
     responses = []
     for record in records_in_date_range_and_dept:
@@ -72,7 +76,8 @@ def GetRecordDataByDateRange(request):
         field_answer_selection = [record for record in field_answer_list if target_field in record.values()]
         
         if (len(field_answer_selection) <= 0):
-            return HttpResponseBadRequest("No data in this field to be displayed.")
+            return HttpResponse(json.dumps([],indent=4,sort_keys=True,default=str))
+
         field_answer_pair = field_answer_selection[0]
         answer = field_answer_pair["answer"]
 
