@@ -19,7 +19,7 @@ import { sampleData } from './home/Department Card/RecordData';
 import CreateDepartment from './dpt/CreateDepartment';
 import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
 import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
-import ParentSize from '@visx/responsive/lib/components/ParentSize';
+import DepartmentHome from './dpt/DepartmentHome';
 
 class App extends Component {
     render() {
@@ -52,7 +52,8 @@ class App extends Component {
 					<Route path='/dptrecordpage' component={DptRecordPage} />	
 					<Route path='/createdepartment' component={CreateDepartment} />	
 					<Route path='/csinput' component={CaseStudySubmissionForm}/>
-					<Route path='/csindividual' component={CaseStudyIndividual}/>		 	
+					<Route path='/csindividual' component={CaseStudyIndividual}/>	
+					<Route path='/actioncard' component={DepartmentHome}/>	
 				</Switch>
 				<ToastContainer/>
 			</Router>
