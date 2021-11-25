@@ -28,7 +28,8 @@ const DepartmentHome: React.FC = () => {
                 <PageContainer>
                     <DptGraphCard width={width > 700 ? 635 : width-30} 
                                         height={300} 
-                                        recordDataSet={sampleData} />
+                                        recordDataSet={sampleData} 
+                                        dptName= {""}/>
                     <ActionCardContainer>
                         <ActionCard backgroundImage={'/static/case-study-icon.svg'} 
                                     fromColor={'#254E9F'}
