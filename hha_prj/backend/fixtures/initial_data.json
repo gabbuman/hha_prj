@@ -90,7 +90,7 @@
           },
           {
             "question":"Stayed in the ward",
-            "answer": 4
+            "answer": 10
           },
           {
             "question":"Admissions",
@@ -125,7 +125,7 @@
         },
         {
           "question":"Discharged alive",
-          "answer": 3
+          "answer": 1
         },
         {
           "question":"Died before 48h",
@@ -153,7 +153,7 @@
         },
         {
           "question":"Stayed in the ward",
-          "answer": 4
+          "answer": 13
         },
         {
           "question":"Admissions",
@@ -191,7 +191,54 @@
       "discharge_location": "Return home, with family",
       "discharge_employment_status": "Unemployed, due to condition"
     }
+},
+{
+  "model": "backend.DischargedAliveRehabGreenData", 
+  "pk": 3,
+  "fields": {
+    "monthly_record_id": 2,
+    "patient_discharged_diagnosis": "SCI",
+    "patient_num_days_in_rehab": 150,
+    "discharge_reason": "Goals Partially met",
+    "discharge_outcome_ADLs_self_care": "Supervision",
+    "discharge_outcome_transfers_mobility": "Minimum Assitance",
+    "mobility_aid_device_given": "Cane",
+    "discharge_location": "Return home, with family",
+    "discharge_employment_status": "Unemployed, due to condition"
+  }
+},
+{
+    "model": "backend.StayedInWardRehabGreenData", 
+    "pk": 1,
+    "fields": {
+      "monthly_record_id": 1,
+      "not_ready_from_therapy_standpoint": 2,
+      "wound_care": 5,
+      "other_medical_reason": 2,
+      "financial_or_no_place_to_discharge": 1,
+      "_1_to_3_months": 2,
+      "_3_to_6_months": 3,
+      "_6_months_to_1_year": 1,
+      "_1_to_2_years": 2,
+      "_2_to_3_years": 1,
+      "more_than_3_years": 1
+    }
+},
+{
+    "model": "backend.StayedInWardRehabGreenData", 
+    "pk": 2,
+    "fields": {
+      "monthly_record_id": 2,
+      "not_ready_from_therapy_standpoint": 2,
+      "wound_care": 5,
+      "other_medical_reason": 3,
+      "financial_or_no_place_to_discharge": 1,
+      "_1_to_3_months": 2,
+      "_3_to_6_months": 5,
+      "_6_months_to_1_year": 2,
+      "_1_to_2_years": 2,
+      "_2_to_3_years": 1,
+      "more_than_3_years": 1
+    }
 }
-
-
 ]

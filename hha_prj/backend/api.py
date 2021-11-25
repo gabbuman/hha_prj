@@ -1,6 +1,6 @@
-from backend.models import MonthlyRecord, CustomUser, Department, Role, CurrentFieldsList, CaseStudy, CaseStudyType,DischargedAliveRehabGreenData
+from backend.models import MonthlyRecord, CustomUser, Department, Role, CurrentFieldsList, CaseStudy, CaseStudyType,DischargedAliveRehabGreenData,StayedInWardRehabGreenData
 from rest_framework import viewsets, permissions
-from .serializers import CaseStudySerializer, CaseStudyTypeSerializer, CurrentFieldListSerializer, DepartmentSerializer, MonthlyRecordSerializer, CustomUserSerializer, RoleSerializer,DischargedAliveRehabGreenDataSerializer
+from .serializers import CaseStudySerializer, CaseStudyTypeSerializer, CurrentFieldListSerializer, DepartmentSerializer, MonthlyRecordSerializer, CustomUserSerializer, RoleSerializer,DischargedAliveRehabGreenDataSerializer, StayedInWardRehabGreenDataSerializer,StayedInWardRehabGreenDataSerializer
 
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
@@ -42,7 +42,12 @@ class DischargedAliveRehabGreenDataViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = DischargedAliveRehabGreenDataSerializer
-    
+class StayedInWardRehabGreenDataViewSet(viewsets.ModelViewSet):
+    queryset = StayedInWardRehabGreenData.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = StayedInWardRehabGreenDataSerializer
 class CurrentFieldListViewSet(viewsets.ModelViewSet):
     queryset = CurrentFieldsList.objects.all()
     permissions_classes = [
