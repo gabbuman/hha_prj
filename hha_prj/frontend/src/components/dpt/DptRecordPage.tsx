@@ -9,13 +9,10 @@ import { useLocation } from 'react-router';
 interface DptProps{
    dptName: string,
   }
+
 interface DptState{
     dptName: string,
   }
-
-  const initialState: DptState = {
-    dptName: ""
-}
 
 class DptRecordPage extends Component <DptProps, DptState>{
     constructor(props:any){
@@ -24,11 +21,11 @@ class DptRecordPage extends Component <DptProps, DptState>{
             dptName: props.location.state};
     }
     render() {
-       
+       var dpt_name = this.state.dptName;
         return (
             <div>
-                <Header title= {this.state.dptName}/>  
-                <VerNavbar dptName={this.state.dptName}/>
+                <Header title= {"Hope Health Action / " + dpt_name}/>  
+                <VerNavbar dptName={dpt_name}/>
             </div>
         );
     }

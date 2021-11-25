@@ -15,11 +15,9 @@ import {DptTableView} from './home/DptTableView';
 import Homepage from './home/Homepage';
 import { ToastContainer } from 'react-toastify';
 import {DptGraphCard, GraphProps} from './home/Department Card/DptGraphCard';
-import { sampleData } from './home/Department Card/RecordData';
 import CreateDepartment from './dpt/CreateDepartment';
 import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
 import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
-import ParentSize from '@visx/responsive/lib/components/ParentSize';
 
 class App extends Component {
     render() {
@@ -43,12 +41,12 @@ class App extends Component {
 					<Route path='/cspreview' component={CSPreview} />
 					<Route path='/vernavbar' component={VerNavbar} />
 					<Route path='/monthlyrecord' component={MonthlyRecord} />			
-					<Route path='/dpttableview' component={DptTableView} />		 	
-					<Route path='/dptgraphview' component={DptGraphCard}/>
+					<Route path='/datarecordarchive' component={DptTableView} />		 	
+					<Route path='/graph' component={DptGraphCard}/>
 					<Route path='/dptrecordpage' component={DptRecordPage} />	
 					<Route path='/createdepartment' component={CreateDepartment} />	
-					<Route path='/csinput' component={CaseStudySubmissionForm}/>
-					<Route path='/csindividual' component={CaseStudyIndividual}/>		 	
+					<Route path='/case_study_form' component={CaseStudySubmissionForm}/>
+					<Route path='/case_studyindividual' component={CaseStudyIndividual}/>		 	
 				</Switch>
 				<ToastContainer/>
 			</Router>
