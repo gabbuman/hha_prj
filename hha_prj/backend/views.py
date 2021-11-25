@@ -75,13 +75,10 @@ def GetRecordDataByDateRange(request):
         field_answer_list = record['question_answer_list']
         field_answer_selection = [record for record in field_answer_list if target_field in record.values()]
         
-        if (len(field_answer_selection) <= 0):
-            return HttpResponse(json.dumps([],indent=4,sort_keys=True,default=str))
-
-        field_answer_pair = field_answer_selection[0]
-        answer = field_answer_pair["answer"]
-
-        responses.append({ "date":date, "answer":answer })
+        if (len(field_answer_selection) >= 1):
+            field_answer_pair = field_answer_selection[0]
+            answer = field_answer_pair["answer"]
+            responses.append({ "date":date, "answer":answer })
 
     field_and_responses = {"field": target_field, "department":target_dept, "responses" : responses}
 
