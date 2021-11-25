@@ -18,16 +18,16 @@ interface DptState{
 }
 
 class DptRecordPage extends Component <DptProps, DptState>{
-    constructor(props:DptProps){
-        super(props);  
-        this.state = initialState;
-        //this.setState({dptName: props.dptName});
+    constructor(props:any){
+        super(props); 
+        this.state = {
+            dptName: props.location.state};
     }
     render() {
        
         return (
             <div>
-                <Header title={this.state.dptName} />   
+                <Header title= {this.state.dptName}/>  
                 <VerNavbar dptName={this.state.dptName}/>
             </div>
         );

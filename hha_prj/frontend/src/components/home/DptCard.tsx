@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import DptRecordPage from '../dpt/DptRecordPage';
 
 export interface dptData {
     name: string;
@@ -124,7 +123,7 @@ class DptCard extends Component<dptData> {
 
     render(){
     return (
-        <Link to={{ pathname: "/dptrecordpage", state: {dptName: this.props.name}}} >
+        <Link to={{ pathname: "/dptrecordpage", state: this.props.name}} >
             <div className="DptCard">
                 <DptCardGroup main_color={this.props.main_color}>
                     <CardBackground src={this.props.bg_img} />
