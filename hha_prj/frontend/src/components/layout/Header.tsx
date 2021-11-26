@@ -48,10 +48,10 @@ class Header extends React.Component<Props, HeaderState> {
             <div className={this.state.hasScrolled ? 'Header HeaderScrolled' : 'Header'}>
                 <div className="HeaderGroup">
                     <img src="/static/logo.png" 
-                         width="30" height="25"
-                         className="d-inline-block align-top" 
-                         alt="hha logo"/>
-                    <a className="TitleLabel" href="#">{this.state.title}</a>
+                        width="30" height="25"
+                        className="d-inline-block align-top" 
+                        alt="hha logo"/>
+                    <a className="navbar-brand" href="#">{this.state.title}</a>
                 </div>
             </div>
         )
