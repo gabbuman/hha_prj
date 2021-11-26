@@ -47,7 +47,7 @@ class App extends Component {
 					<Route path='/dptrecordpage' component={DptRecordPage} />	
 					<Route path='/createdepartment' component={CreateDepartment} />	
 					<Route path='/case_study_form' component={CaseStudySubmissionForm}/>
-					<Route path='/case_studyindividual' component={CaseStudyIndividual}/>
+					<Route path='/case_study_individual' component={CaseStudyIndividual}/>
 					<Route path='/actioncard' component={DepartmentHome}/>	
 				</Switch>
 				<ToastContainer/>

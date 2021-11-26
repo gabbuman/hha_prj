@@ -88,7 +88,7 @@ const CaseStudyGridView: React.FC = () =>{
                     <CardGroup>
                         {caseStudies.map(item => {
                             return (
-                                <Link to = "/csindividual" style={{ textDecoration: 'none' }}>
+                                <Link to = "/case_study_individual" style={{ textDecoration: 'none' }}>
                                     <CSCard  
                                     title={item.title}
                                     type={item.type}
