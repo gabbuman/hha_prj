@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Box, TextField, Typography, Stack, Button, 
     FormControl, MenuItem, InputLabel, Select, Grid, Container} from '@mui/material';
 import VerNavbar from '../layout/VerNavbar';
@@ -9,9 +9,12 @@ import {case_data} from './CSData';
 import CSCard from './CaseStudyCard';
 import styled from 'styled-components';
 import AddCard from './CaseStudyAddCard';
+import { endpoint } from '../Endpoint'
 import CaseStudyIndividual from './CaseStudyIndividual';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import ReactDOM from 'react-dom';
+import CaseStudyDataFields from '../../types/CaseStudy';
+import CaseStudyService from '../../services/CaseStudyServices'
 
 const HeaderLabel = styled.h3 `
     font-weight: 800;
@@ -59,34 +62,48 @@ interface csprops{
     dptName: string;
 }
 
-class CaseStudyGridView extends Component<csprops> {
 
-    render(){
-        return(
-            <div>
-                <ContentGroup>
-                    <TitledCardGroup>
-                        <CardGroup>
-                            {case_data.map(item => {
-                                return (
-                                    <Link to = "/case_studyindividual" style={{ textDecoration: 'none' }}>
-                                        <CSCard  
-                                        title={item.title}
-                                        type={item.type}
-                                        content={item.content}></CSCard>
-                                    </Link>
-                                    )
-                            })}
-                            <Link to = "/case_study_form" style={{ textDecoration: 'none' }} >
-                                <AddCard/>
-                            </Link>
-                        </CardGroup>
-                    </TitledCardGroup>
-                </ContentGroup>
-            </div>
-        );
-    }
+const CaseStudyGridView: React.FC = () =>{  
+    const[caseStudies, setCaseStudies] = useState<Array<CaseStudyDataFields>>([]);
+
+    useEffect( ()=> {
+        retrieveCaseStudies();
+    }, []);
+
+    const retrieveCaseStudies = () => {
+        CaseStudyService.getAll()
+            .then((response: any) => {
+            setCaseStudies(response.data);
+            console.log(response.data);
+        })
+            .catch((e: Error) => {
+            console.log(e);
+        });
+    };
+
+    return(
+        <div>
+            <ContentGroup>
+                <TitledCardGroup>
+                    <CardGroup>
+                        {caseStudies.map(item => {
+                            return (
+                                <Link to = "/csindividual" style={{ textDecoration: 'none' }}>
+                                    <CSCard  
+                                    title={item.title}
+                                    type={item.type}
+                                    content={item.description}></CSCard>
+                                </Link>
+                                )
+                        })}
+                        <Link to = "/csinput" style={{ textDecoration: 'none' }} >
+                            <AddCard/>
+                        </Link>
+                    </CardGroup>
+                </TitledCardGroup>
+            </ContentGroup>
+        </div>
+    );
 }
 
-
-export default CaseStudyGridView
+export default CaseStudyGridView;
