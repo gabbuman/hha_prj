@@ -71,6 +71,7 @@ class CaseStudyType(models.Model):
         return self.name 
 
 class CaseStudy(models.Model):
+    department = models.ForeignKey(Department, on_delete=models.PROTECT, default="Rehab", blank=True)
     type = models.ForeignKey(CaseStudyType, on_delete=models.PROTECT, default="Patient Story", blank=True)
     title = models.CharField(max_length=50, null=False, blank=False, default="Case Study Title")
     description = models.CharField(max_length=50, null=False, blank=False, default="This is a description of a case study")

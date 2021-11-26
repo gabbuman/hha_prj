@@ -12,7 +12,7 @@ export const case_data: CSData[] = [
         type: 'Other Story',
         content: 'Matthew was brought in the facility asphyxiating and got his life saved by the new Unasphyxiating machine and was later put on the Unoverdosing machine',
     }
-    ,
+    /* ,
     {
         title: 'Jacuzzi',
         type: 'Equipment Received',
@@ -23,5 +23,5 @@ export const case_data: CSData[] = [
         title: 'Calvin, Age 45',
         type: 'Other Story',
         content: 'Got life saved on Life support equipment',
-    }
+    } */
 ]

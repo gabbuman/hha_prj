@@ -13,6 +13,8 @@ import { endpoint } from '../Endpoint'
 import CaseStudyIndividual from './CaseStudyIndividual';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import ReactDOM from 'react-dom';
+import CaseStudyDataFields from './types/CaseStudy';
+import CaseStudyService from './services/CaseStudyServices'
 
 const HeaderLabel = styled.h3 `
     font-weight: 800;
@@ -57,34 +59,50 @@ const ContentGroup = styled.div `
 `
 
 
-class CaseStudyGridView extends Component {
 
-    render(){
-        return(
-            <div>
-                <ContentGroup>
-                    <TitledCardGroup>
-                        <CardGroup>
-                            {case_data.map(item => {
-                                return (
-                                    <Link to = "/csindividual" style={{ textDecoration: 'none' }}>
-                                        <CSCard  
-                                        title={item.title}
-                                        type={item.type}
-                                        content={item.content}></CSCard>
-                                    </Link>
-                                    )
-                            })}
-                            <Link to = "/csinput" style={{ textDecoration: 'none' }} >
-                                <AddCard/>
-                            </Link>
-                        </CardGroup>
-                    </TitledCardGroup>
-                </ContentGroup>
-            </div>
-        );
-    }
+const CaseStudyGridView: React.FC = () =>{  
+    const[caseStudies, setCaseStudies] = useState<Array<CaseStudyDataFields>>([]);
+
+    useEffect( ()=> {
+        retrieveCaseStudies();
+    }, []);
+
+    const retrieveCaseStudies = () => {
+        CaseStudyService.getAll()
+            .then((response: any) => {
+            setCaseStudies(response.data);
+            console.log(response.data);
+        })
+            .catch((e: Error) => {
+            console.log(e);
+        });
+    };
+
+    return(
+        <div>
+            <ContentGroup>
+                <TitledCardGroup>
+                    <CardGroup>
+                        {case_data.map(item => {
+                            return (
+                                <Link to = "/csindividual" style={{ textDecoration: 'none' }}>
+                                    <CSCard  
+                                    title={item.title}
+                                    type={item.type}
+                                    content={item.content}></CSCard>
+                                </Link>
+                                )
+                        })}
+                        <Link to = "/csinput" style={{ textDecoration: 'none' }} >
+                            <AddCard/>
+                        </Link>
+                    </CardGroup>
+                </TitledCardGroup>
+            </ContentGroup>
+        </div>
+    );
 }
+
 
 
 export default CaseStudyGridView
