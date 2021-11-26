@@ -10,13 +10,15 @@ const getAll= () => {
 /* const get= (id: any) => {
     return http.get<CaseStudyData>(`/case_study/${id}`);
 };
+*/
 
 const remove= (id: any) => {
-    return http.delete<any>(`/case_study/${id}`);
-}; */
+    return http.delete<any>("/case_study/"+ id + "/");
+}; 
 
 const CaseStudyServices = {
     getAll,
+    remove,
     /* get,
     remove, */
 };

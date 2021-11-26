@@ -5,7 +5,6 @@ import VerNavbar from '../layout/VerNavbar';
 import Header from '../layout/Header';
 import CSPreview from '../home/CSPreview';
 import Rank from '../home/Rank';
-import {case_data} from './CSData';
 import CSCard from './CaseStudyCard';
 import styled from 'styled-components';
 import AddCard from './CaseStudyAddCard';
@@ -63,7 +62,7 @@ interface csprops{
 }
 
 
-const CaseStudyGridView: React.FC = () =>{  
+const CaseStudyGridView: React.FC<csprops> = ({dptName}: csprops) =>{  
     const[caseStudies, setCaseStudies] = useState<Array<CaseStudyDataFields>>([]);
 
     useEffect( ()=> {
@@ -89,14 +88,15 @@ const CaseStudyGridView: React.FC = () =>{
                         {caseStudies && caseStudies.map(item => {
                             return (
                                 <Link to = "/case_study_individual" style={{ textDecoration: 'none' }}>
-                                    <CSCard  
+                                    <CSCard
+                                    id={item.id}  
                                     title={item.title}
                                     type={item.type}
                                     content={item.description}></CSCard>
                                 </Link>
                                 )
                         })}
-                        <Link to = "/csinput" style={{ textDecoration: 'none' }} >
+                        <Link to = "/case_study_form" style={{ textDecoration: 'none' }} >
                             <AddCard/>
                         </Link>
                     </CardGroup>

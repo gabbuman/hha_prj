@@ -8,8 +8,14 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import CaseStudySubmissionForm from './CaseStudyInputForm';
+import CaseStudyDataFields from '../../types/CaseStudy';
+import CaseStudyServices from '../../services/CaseStudyServices';
+import axios from 'axios';
+import { endpoint } from '../Endpoint';
+
 
 export interface CSData {
+    id: any;
     title: string;
     type: string;
     content: string;
@@ -71,7 +77,20 @@ const CardBackground = styled.img `
     transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 `
 
-const CSCard: React.FC<CSData> = ({title, type, content}: CSData) =>  {
+
+
+const CSCard: React.FC<CSData> = ({id, title, type, content}: CSData) =>  {
+
+    const deleteCaseStudy = () => {
+        CaseStudyServices.remove(id)
+            .then((response: any)=>{
+                console.log(response);
+            })
+            .catch((e: Error) =>{
+                console.log(e);
+            });
+    };
+    // TODO: Prompt refresh on delete
     return (
         <a href="/CaseStudy" style={{ textDecoration: 'none' }}>
             <div className="CSCard">
@@ -88,7 +107,7 @@ const CSCard: React.FC<CSData> = ({title, type, content}: CSData) =>  {
                         <Link to = "/case_study_form" style={{ textDecoration: 'none' }}>
                             <Button variant="contained" color="warning" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Edit</Button>
                         </Link>
-                        <Button variant="contained" color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
+                        <Button variant="contained" onClick={deleteCaseStudy} color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
                     </EditDelGrid>  
                 </CSCardGroup>
             </div>
