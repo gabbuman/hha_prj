@@ -1,5 +1,5 @@
 import axios from "axios";
-import { endpoint } from '../Endpoint';
+import { endpoint } from './components/Endpoint';
 
 export default axios.create({
   baseURL: endpoint + "api",

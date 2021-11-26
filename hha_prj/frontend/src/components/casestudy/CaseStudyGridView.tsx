@@ -13,8 +13,8 @@ import { endpoint } from '../Endpoint'
 import CaseStudyIndividual from './CaseStudyIndividual';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import CaseStudyDataFields from './types/CaseStudy';
-import CaseStudyService from './services/CaseStudyServices'
+import CaseStudyDataFields from '../../types/CaseStudy';
+import CaseStudyService from '../../services/CaseStudyServices'
 
 const HeaderLabel = styled.h3 `
     font-weight: 800;
@@ -83,13 +83,13 @@ const CaseStudyGridView: React.FC = () =>{
             <ContentGroup>
                 <TitledCardGroup>
                     <CardGroup>
-                        {case_data.map(item => {
+                        {caseStudies.map(item => {
                             return (
                                 <Link to = "/csindividual" style={{ textDecoration: 'none' }}>
                                     <CSCard  
                                     title={item.title}
                                     type={item.type}
-                                    content={item.content}></CSCard>
+                                    content={item.description}></CSCard>
                                 </Link>
                                 )
                         })}
