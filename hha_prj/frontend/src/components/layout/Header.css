@@ -1,0 +1,28 @@
+.Header {
+    position: fixed;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 100;
+    transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.HeaderScrolled {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 0;
+    backdrop-filter: blur(20px);
+}
+
+.HeaderGroup {
+    max-width: 800;
+    display: grid;
+    grid-template-columns: 40px auto;
+    margin: 0 auto;
+    align-items: center;
+    justify-items: left;
+    padding: 20px;
+}
+
+.Header a {
+    color: black;
+    font-weight: 700;
+}
