@@ -1,7 +1,7 @@
 import React, { ReactElement, FC } from 'react';
 
 interface Props {
-    title: String
+    title: string
 }
 
 const Header: FC<Props> = ({title}): ReactElement => {
@@ -18,12 +18,18 @@ const Header: FC<Props> = ({title}): ReactElement => {
 
 export default Header
 
-class AnimatedHeader extends React.Component {
+interface HeaderState {
+    hasScrolled: boolean;
+    title: string;
+}
+
+class AnimatedHeader extends React.Component<Props, HeaderState> {
     constructor(props: Props) {
         super(props)
 
         this.state = {
-            hasScrolled: false
+            hasScrolled: false,
+            title: props.title
         }
     }
 
@@ -32,6 +38,19 @@ class AnimatedHeader extends React.Component {
     }
 
     handleScroll = (event: Event) => {
-        
+        const scrollTop = window.pageYOffset
+        this.setState({ hasScrolled: scrollTop > 50 })
+    }
+
+    render() {
+        return (
+            <div className={this.state.hasScrolled ? 'Header HeaderScrolled' : 'Header'}>
+                <div className="HeaderGroup">
+                    <img src="/static/logo.png" width="60" height="50"
+                        className="d-inline-block align-top" alt="hha logo"/>
+                    <a className="navbar-brand" href="#">{this.state.title}</a>
+                </div>
+            </div>
+        )
     }
 }
