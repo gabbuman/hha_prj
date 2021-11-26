@@ -4,7 +4,7 @@ import CaseStudyData from "../types/CaseStudy"
 
 
 const getAll= () => {
-    return http.get<Array<CaseStudyData>>("/case_study");
+    return http.get<Array<CaseStudyData>>("/case_study/");
 };
 
 /* const get= (id: any) => {
