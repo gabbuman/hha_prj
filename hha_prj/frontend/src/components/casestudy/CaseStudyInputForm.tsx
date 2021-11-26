@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import Header from '../layout/Header';
 import VerNavbar from '../layout/VerNavbar';
 import { Box, TextField, Typography, Stack, Button, 
@@ -23,7 +23,9 @@ interface CSSState {
     selectedImages: any;
     
 }
-state: const initialState: CSSState = {
+
+
+const initialState: CSSState = {
     title: 'Title of Case Study',
     type: 'Patient Story',
     content: 'Test',
