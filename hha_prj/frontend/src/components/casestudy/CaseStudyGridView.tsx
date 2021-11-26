@@ -86,7 +86,7 @@ const CaseStudyGridView: React.FC = () =>{
             <ContentGroup>
                 <TitledCardGroup>
                     <CardGroup>
-                        {caseStudies.map(item => {
+                        {caseStudies && caseStudies.map(item => {
                             return (
                                 <Link to = "/case_study_individual" style={{ textDecoration: 'none' }}>
                                     <CSCard  
