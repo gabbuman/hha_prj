@@ -6,7 +6,7 @@
             "name": "Rehab",
             "created_at":"2021-11-07 12:12:12"
         }
-    },
+    },   
     {
         "model": "backend.Role", 
         "pk": 1,
@@ -22,19 +22,19 @@
           "department": "Rehab",
           "created_at":"2021-11-07 12:12:12",
           "list": [
-                "beds_available",
-                "bed_days",
-                "patient_days",
-                "hospitalized",
-                "discharged_alive",
-                "died_before_48h",
-                "died_after_48h",
-                "days_hospitalised",
-                "referrals",
-                "transfers",
-                "self_discharged",
-                "stayed_in_the_ward",
-                "admissions"
+                "Beds Available",
+                "Bed Days",
+                "Patient Days",
+                "Hospitalized",
+                "Discharged Alive",
+                "Died Before 48hr",
+                "Died After 48hr",
+                "Days Hospitalized",
+                "Referrals",
+                "Transfers",
+                "Self-Discharged",
+                "Stayed in Ward",
+                "Admissions"
           ]
             }
     },
@@ -103,7 +103,7 @@
   },
   {
     "model": "backend.MonthlyRecord", 
-    "pk": 1,
+    "pk": 2,
     "fields": {
       "department": "Rehab",
       "month": 2,

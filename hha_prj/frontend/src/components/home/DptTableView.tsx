@@ -50,7 +50,7 @@ const months = [
 ]
 
 interface tableProps{
-   
+   dptName: string;
 }
 
 interface tableState {
@@ -142,7 +142,7 @@ export class DptTableView extends Component<tableProps, tableState> {
                             }                   
                         </Grid>                             
                         <Grid item xs={12}>
-                            <TableData  ref={this.tabledataElement} dptName={"Rehab"} newMonth={months.indexOf(this.state.month) + 1} newYear={parseInt(this.state.year)}/>
+                            <TableData  ref={this.tabledataElement} dptName={this.props.dptName} newMonth={months.indexOf(this.state.month) + 1} newYear={parseInt(this.state.year)}/>
                         </Grid>
                         </Grid>
                         </Container>  
