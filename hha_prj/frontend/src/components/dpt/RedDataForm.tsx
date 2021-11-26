@@ -6,7 +6,9 @@ interface RDFProps {
     nextStep: () => void;
     disabled: boolean;
     dischargedAlive_shared: number;
-    updateShared: (updateValue: number) => void;
+    stayedinward_shared: number;
+    updateShared: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    dptName: string;
 }
 
 interface RDFState {
@@ -28,7 +30,7 @@ interface RDFState {
 class RedDataForm extends Component <RDFProps, RDFState> {
     constructor(props: RDFProps){
         super(props);       
-        const {dischargedAlive_shared} = props;
+        const {dischargedAlive_shared, stayedinward_shared} = props;
         this.state = {
             bedsAvailable: 0,
             bedDays: 0,
@@ -41,7 +43,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
             referrals: 0,
             transfers: 0,
             selfdischarged: 0,
-            stayedinward: 0,
+            stayedinward: stayedinward_shared,
             admissions: 0,   // NaN could be empty input
         };    
     }
@@ -53,9 +55,9 @@ class RedDataForm extends Component <RDFProps, RDFState> {
 
     updateShared = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
-            dischargedAlive: +e.target.value
-        })
-        this.props.updateShared(+e.target.value);
+            [e.target.name]: +e.target.value,
+        } as unknown as Pick<RDFState, keyof RDFState>);
+        this.props.updateShared(e);
     }
 
     render() {
@@ -121,6 +123,7 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         inputProps={{ min: 0}}
                         id=""
                         label="Discharged Alive"
+                        name="dischargedAlive"
                         value={this.state.dischargedAlive}
                         onChange={this.updateShared}
                         />          
@@ -201,8 +204,9 @@ class RedDataForm extends Component <RDFProps, RDFState> {
                         inputProps={{ min: 0}}
                         id=""
                         label="Stayed in Ward"
+                        name="stayedinward"
                         value={this.state.stayedinward}
-                        onChange={(e)=>{this.setState({stayedinward: +e.target.value})}}
+                        onChange={this.updateShared}
                         />  
                         <TextField
                         required
