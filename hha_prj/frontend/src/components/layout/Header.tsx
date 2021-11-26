@@ -1,19 +1,37 @@
 import React, { ReactElement, FC } from 'react';
 
 interface Props {
-  title: String
+    title: String
 }
 
 const Header: FC<Props> = ({title}): ReactElement => {
-  return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <img src="/static/logo.png" width="60" height="50"
-          className="d-inline-block align-top" alt="hha logo"/>
-        <a className="navbar-brand" href="#">{title}</a>
-      </nav>
-    </div>
-  )
+    return (
+        <div>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <img src="/static/logo.png" width="60" height="50"
+                     className="d-inline-block align-top" alt="hha logo"/>
+                <a className="navbar-brand" href="#">{title}</a>
+            </nav>
+        </div>
+    )
 }
 
 export default Header
+
+class AnimatedHeader extends React.Component {
+    constructor(props: Props) {
+        super(props)
+
+        this.state = {
+            hasScrolled: false
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.handleScroll)
+    }
+
+    handleScroll = (event: Event) => {
+        
+    }
+}
