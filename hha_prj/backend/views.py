@@ -8,14 +8,10 @@ from django.http import HttpResponse, request
 from .serializers import CustomTokenPairSerializer
 from django.http import HttpResponse, HttpResponseBadRequest
 import datetime
-from .models import  Department, MonthlyRecord
-
-
-from rest_framework.parsers import JSONParser
-from django.http.response import JsonResponse
+# from datetime import datetime
+from .models import  Department, MonthlyRecord, CurrentFieldsList
 import json
-from rest_framework import viewsets
-
+from django.db.models import Q
 class ObtainTokenPairWithUsernameView(TokenObtainPairView):
     permission_classes = (permissions.AllowAny,)
     serializer_class = CustomTokenPairSerializer
@@ -87,3 +83,12 @@ def GetRecordDataByDateRange(request):
 
 
 
+def GetCurrentFieldList(request,department_name):
+    response = []
+    if (CurrentFieldsList.objects.filter(department = department_name).exists()):
+        field_list = CurrentFieldsList.objects.filter(department = department_name).values()
+        question_list = field_list[0]['list']
+        response = question_list
+
+    data = json.dumps(response)
+    return HttpResponse(data, content_type="application/json")

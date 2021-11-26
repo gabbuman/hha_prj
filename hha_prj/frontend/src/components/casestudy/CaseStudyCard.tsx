@@ -85,7 +85,7 @@ const CSCard: React.FC<CSData> = ({title, type, content}: CSData) =>  {
                     </TitleGrid>
                     <CardContent>{content}</CardContent>
                     <EditDelGrid>
-                        <Link to = "/csinput" style={{ textDecoration: 'none' }}>
+                        <Link to = "/case_study_form" style={{ textDecoration: 'none' }}>
                             <Button variant="contained" color="warning" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Edit</Button>
                         </Link>
                         <Button variant="contained" color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
