@@ -19,6 +19,7 @@ export interface CSData {
     title: string;
     type: string;
     content: string;
+    //retreiveCaseStudies: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const main_color = "#b7b5b6"

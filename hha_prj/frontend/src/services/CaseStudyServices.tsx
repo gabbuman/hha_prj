@@ -3,8 +3,8 @@ import axios from 'axios';
 import CaseStudyData from "../types/CaseStudy"
 
 
-const getAll= () => {
-    return http.get<Array<CaseStudyData>>("/case_study/");
+const getAll= (dept: string) => {
+    return http.get<Array<CaseStudyData>>("/case_study/?department=" + dept +"/");
 };
 
 /* const get= (id: any) => {

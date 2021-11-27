@@ -70,7 +70,7 @@ const CaseStudyGridView: React.FC<csprops> = ({dptName}: csprops) =>{
     }, []);
 
     const retrieveCaseStudies = () => {
-        CaseStudyService.getAll()
+        CaseStudyService.getAll(dptName)
             .then((response: any) => {
             setCaseStudies(response.data);
             console.log(response.data);
