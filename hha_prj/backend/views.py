@@ -116,11 +116,11 @@ def retrieveCaseStudiesForPreview(request):
 @api_view(['GET'])
 def GetCaseStudies(request):
 
-    case_study_type = request.query_params.get("type")
+    case_study_department = request.query_params.get("department")
     case_studies_list = []
 
-    if (CaseStudy.objects.filter(type = case_study_type).exists()):
-        case_studies_queryset = CaseStudy.objects.filter(type = case_study_type).values()
+    if (CaseStudy.objects.filter(department = case_study_department).exists()):
+        case_studies_queryset = CaseStudy.objects.filter(department = case_study_department).values()
 
         for record in case_studies_queryset:
             case_studies_list.append(record)
