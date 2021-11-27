@@ -24,7 +24,7 @@ const CaseStudyIndividual: React.FC = () =>{
     }, []);
 
     const retrieveIndividualCaseStudy = () => {
-        axios.get(endpoint + 'api/case_study/' + 'test1/')
+        axios.get(endpoint + 'api/case_study/' + 'dwaeqeq/')
             .then(res=>{
                 setIndividualCaseStudy(res.data);
                 console.log(res.data)
