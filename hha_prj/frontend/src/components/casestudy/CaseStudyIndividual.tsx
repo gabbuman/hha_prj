@@ -1,6 +1,5 @@
 import React, { Component, useState, useEffect } from 'react'
 import Header from '../layout/Header';
-import VerNavbar from '../layout/VerNavbar';
 import { Box, TextField, Typography, Stack, Button,
     FormControl, MenuItem, InputLabel, Select, Grid, Container, 
     CardMedia, Card, CardActions, CardActionArea, CardContent} from '@mui/material';
@@ -8,30 +7,13 @@ import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import DptRecordPage from '../dpt/DptRecordPage';
 import { endpoint } from '../Endpoint';
-import { notifyFail, notifySuccess } from '../login/Notifications';
 import axios from 'axios';
-
-
-const user = "admin";
-const userPassword = "pword";
-const cluster = "hhadb.tm3pa";
-const dbName = "HHA"
-const url = `mongodb+srv://${user}:${userPassword}@${cluster}.mongodb.net`;
-
-
-/*interface CSProps {
-
-}*/
-
-
 
 
 
 interface csprops{
     dptName: string;
 }
-
-
 
 
 
@@ -45,12 +27,10 @@ const CaseStudyIndividual: React.FC = () =>{
         axios.get(endpoint + 'api/case_study/' + 'test1/')
             .then(res=>{
                 setIndividualCaseStudy(res.data);
-                notifySuccess("Case Study Saved Successfully");
                 console.log(res.data)
                 console.log({individualCaseStudy})
             })
             .catch((error)=> {
-                notifyFail("Failed to Save Case Study");
                 console.error(error)
             }
         );

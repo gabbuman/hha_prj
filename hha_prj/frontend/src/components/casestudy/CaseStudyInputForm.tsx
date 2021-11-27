@@ -18,7 +18,7 @@ interface CSSProps {
 interface CSSState {
     title: string;
     type: string;
-    content: string;// TODO: picture state variable
+    content: string;
     isSubmit: boolean;
     selectedImages: any;
     
@@ -49,35 +49,52 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
 
     submitClick = () => {
         this.setState({ isSubmit: true})
+        //console.log(this.state.selectedImages);
         this.uploadCaseStudy();
     }
 
     handleImageUpload = (event:any) => {
         if(event.target.files[0]){
             this.setState({selectedImages: event.target.files[0]||[]})
-            console.log(event.target.files[0]);
-        }
-        if(!event.target.files[0]){
-            return;
+            //console.log(event.target.files[0]);
         }
     }
 
+
+
     uploadCaseStudy = () =>{
         const formData = new FormData();
-        formData.append('image', this.state.selectedImages,this.state.selectedImages.name);
-        formData.append('title', this.state.title);
-        formData.append('type', this.state.type);
-        formData.append('description',this.state.content);
-        axios.post(endpoint + 'api/case_study/', formData)
-            .then(res=>{
-                notifySuccess("Case Study Saved Successfully");
-                console.log(res)
-            })
-            .catch((error)=> {
-                notifyFail("Failed to Save Case Study");
-                console.error(error)
-            }
-        );
+        if(this.state.selectedImages == null){
+            formData.append('title', this.state.title);
+            formData.append('type', this.state.type);
+            formData.append('description',this.state.content);
+            axios.post(endpoint + 'api/case_study/', formData)
+                .then(res=>{
+                    notifySuccess("Case Study Saved Successfully");
+                    console.log(res)
+                })
+                .catch((error)=> {
+                    notifyFail("Failed to Save Case Study");
+                    console.error(error)
+                }
+            );
+        }
+        else if (this.state.selectedImages != null){
+            formData.append('image', this.state.selectedImages,this.state.selectedImages.name);
+            formData.append('title', this.state.title);
+            formData.append('type', this.state.type);
+            formData.append('description',this.state.content);
+            axios.post(endpoint + 'api/case_study/', formData)
+                .then(res=>{
+                    notifySuccess("Case Study Saved Successfully");
+                    console.log(res)
+                })
+                .catch((error)=> {
+                    notifyFail("Failed to Save Case Study");
+                    console.error(error)
+                }
+            );
+        }
 
 
     }
