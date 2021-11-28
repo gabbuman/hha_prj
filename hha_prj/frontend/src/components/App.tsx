@@ -19,6 +19,7 @@ import CreateDepartment from './dpt/CreateDepartment';
 import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
 import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
 import DepartmentHome from './dpt/DepartmentHome';
+import QuestionList from './questions/QuestionList';
 
 class App extends Component {
     render() {
@@ -49,6 +50,7 @@ class App extends Component {
 					<Route path='/case_study_form' component={CaseStudySubmissionForm}/>
 					<Route path='/case_studyindividual' component={CaseStudyIndividual}/>
 					<Route path='/actioncard' component={DepartmentHome}/>	
+					<Route path='/questionlist' component={QuestionList} />
 				</Switch>
 				<ToastContainer/>
 			</Router>

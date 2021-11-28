@@ -7,17 +7,16 @@ import { endpoint } from '../Endpoint';
 import { ThreeSixtyTwoTone } from '@mui/icons-material';
 
 interface MRProps {
-    // dptName: string;
+    dptName: string;
 }
 
 interface MRState {
-    // month: string;
     step: number;
     isEdit: boolean;
     disabled: boolean;
     dischargedAlive_shared: number;
     stayedinward_shared: number;
-    // dptName: string;
+    dptName: string;
     default_questions: string[];
     // red_data_shared: {[key:string]: number};
 }
@@ -27,13 +26,12 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
     constructor(props: MRProps){
         super(props);
         this.state = {
-            // month: "9",
             step: 1,
             isEdit: true,
             disabled: false,
             dischargedAlive_shared: 0,
             stayedinward_shared: 0,
-            //dptName: this.props.dptName,
+            dptName: this.props.dptName,
             default_questions: [],
         };
     }
