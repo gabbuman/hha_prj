@@ -104,4 +104,5 @@ class CaseStudy(models.Model):
     type = models.ForeignKey(CaseStudyType, on_delete=models.PROTECT, default="Patient Story", blank=True)
     title = models.CharField(max_length=50, null=False, blank=False, default="Case Study Title")
     description = models.CharField(max_length=50, null=False, blank=False, default="This is a description of a case study")
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
     image = models.ImageField(upload_to="uploads/", null=True, default="uploads/default.jpg")

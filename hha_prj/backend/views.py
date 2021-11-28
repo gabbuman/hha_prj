@@ -9,7 +9,7 @@ from .serializers import CustomTokenPairSerializer
 from django.http import HttpResponse, HttpResponseBadRequest
 import datetime
 # from datetime import datetime
-from .models import  Department, MonthlyRecord, CurrentFieldsList
+from .models import  Department, MonthlyRecord, CurrentFieldsList, CaseStudy
 import json
 from django.db.models import Q
 class ObtainTokenPairWithUsernameView(TokenObtainPairView):
@@ -91,4 +91,24 @@ def GetCurrentFieldList(request,department_name):
         response = question_list
 
     data = json.dumps(response)
+    return HttpResponse(data, content_type="application/json")
+
+def retrieveCaseStudiesForPreview(request):
+    
+    case_studies_list = []
+
+    if (CaseStudy.objects.all().count() == 0):
+        return HttpResponse(case_studies_list, content_type="application/json")
+
+    case_studies_queryset = CaseStudy.objects.all().values()
+
+    index_of_latest_case_study = CaseStudy.objects.all().count() - 1
+    num_of_case_studies_to_retrieve = 4
+
+    while(index_of_latest_case_study >= 0 and num_of_case_studies_to_retrieve != 0):
+        case_studies_list.append(case_studies_queryset[index_of_latest_case_study])
+        index_of_latest_case_study = index_of_latest_case_study - 1
+        num_of_case_studies_to_retrieve = num_of_case_studies_to_retrieve - 1
+
+    data = json.dumps(case_studies_list,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
