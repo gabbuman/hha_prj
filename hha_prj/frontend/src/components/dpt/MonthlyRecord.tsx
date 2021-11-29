@@ -50,7 +50,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
                     step: 3
                 });
             } else {
-                self.getDefaultQustions();
+                self.getDefaultQuestions();
             }
         })
         .catch(function (error){
@@ -58,7 +58,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
         })
     }
 
-    getDefaultQustions = () => {
+    getDefaultQuestions = () => {
         var self = this;
         const questions = ["beds_available", "bed_days", "patient_days", "hospitalized", "discharged_alive", "died_before_48h", "died_after_48h", "days_hospitalised", "referrals", "transfers", "self_discharged", "stayed_in_the_ward", "admissions"]
         axios.get( endpoint + 'api/current_field_list/' + 'Rehab/')
