@@ -7,8 +7,7 @@ from rest_framework.decorators import api_view
 from django.http import HttpResponse, request
 from .serializers import CustomTokenPairSerializer
 from django.http import HttpResponse, HttpResponseBadRequest
-import datetime
-# from datetime import datetime
+from datetime import datetime
 from .models import  Department, MonthlyRecord, CurrentFieldsList, CaseStudy
 import json
 from django.db.models import Q
@@ -81,9 +80,10 @@ def GetRecordDataByDateRange(request):
     data = json.dumps(field_and_responses,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
 
+@api_view(['GET'])
+def GetCurrentFieldList(request):
 
-
-def GetCurrentFieldList(request,department_name):
+    department_name = request.query_params.get("department")
     response = []
     if (CurrentFieldsList.objects.filter(department = department_name).exists()):
         field_list = CurrentFieldsList.objects.filter(department = department_name).values()
@@ -112,3 +112,19 @@ def retrieveCaseStudiesForPreview(request):
 
     data = json.dumps(case_studies_list,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
+
+@api_view(['GET'])
+def GetCaseStudies(request):
+
+    case_study_department = request.query_params.get("department")
+    case_studies_list = []
+
+    if (CaseStudy.objects.filter(department = case_study_department).exists()):
+        case_studies_queryset = CaseStudy.objects.filter(department = case_study_department).values()
+
+        for record in case_studies_queryset:
+            case_studies_list.append(record)
+
+    data = json.dumps(case_studies_list,indent=4,sort_keys=True,default=str)
+    return HttpResponse(data, content_type="application/json")
+   
