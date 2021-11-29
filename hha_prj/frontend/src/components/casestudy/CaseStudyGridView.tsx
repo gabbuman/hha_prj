@@ -69,7 +69,7 @@ class CaseStudyGridView extends Component<csprops> {
                         <CardGroup>
                             {case_data.map(item => {
                                 return (
-                                    <Link to = "/case_studyindividual" style={{ textDecoration: 'none' }}>
+                                    <Link to = "/csindividual" style={{ textDecoration: 'none' }}>
                                         <CSCard  
                                         title={item.title}
                                         type={item.type}
@@ -77,7 +77,7 @@ class CaseStudyGridView extends Component<csprops> {
                                     </Link>
                                     )
                             })}
-                            <Link to = "/case_study_form" style={{ textDecoration: 'none' }} >
+                            <Link to = "/csinput" style={{ textDecoration: 'none' }} >
                                 <AddCard/>
                             </Link>
                         </CardGroup>
