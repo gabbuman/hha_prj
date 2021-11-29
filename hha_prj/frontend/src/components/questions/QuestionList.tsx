@@ -26,23 +26,26 @@ const QuestionList = (props: QLProps, state: QLState) => {
     const [dptName, setDptName] = useState(props.dptName);
     const [questions, setQuestions] = useState([{
         id: 1,
-        question: ""
+        question: ''
     }])
 
-    const handleChangeInput = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChangeInput: any = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
         // console.log(e.target.name);
-        const values:any = [...questions]
+        const values: any = [...questions]
         // console.log(values[i])
         values[i][e.target.name] = e.target.value
         setQuestions(values)
     }
 
     const addClick: any = () => {
-
+        console.log(questions.length);
+        setQuestions([...questions, {id: questions.length + 1, question: ''}])
     }
 
-    const removeClick: any = () => {
-
+    const removeClick: any = (i: number) => {
+        const values: any = [...questions]
+        values.splice(i, 1)
+        setQuestions(values)
     }
 
     return (             
@@ -60,14 +63,13 @@ const QuestionList = (props: QLProps, state: QLState) => {
                 >
                     <Typography variant="h5">Customize Questions</Typography>
                     <Box>
-
                             <Form>
                                 <FormGroup>
                                     {questions.map((question, i) => (
                                         <div key={question.id}>
-                                            <Row className="mt-5">
+                                            <Row className="mt-2">
                                                 <Col md>
-                                                    <Form.Label>Question</Form.Label>
+                                                    <Form.Label>Question {i+1}</Form.Label>
                                                     <Form.Control type="text" 
                                                     placeholder="Enter question"
                                                     name = "question"
@@ -79,7 +81,7 @@ const QuestionList = (props: QLProps, state: QLState) => {
                                                     <IconButton className="mt-4" sx={{ color: green[500] }} onClick={() => addClick()}>
                                                         <AddBoxIcon/>
                                                     </IconButton>
-                                                    <IconButton className="mt-4" sx={{ color: orange[500] }} onClick={() => removeClick()}>
+                                                    <IconButton className="mt-4" sx={{ color: orange[500] }} onClick={() => removeClick(i)}>
                                                         <IndeterminateCheckBoxIcon/>
                                                     </IconButton>
                                                 </Col>
@@ -87,8 +89,7 @@ const QuestionList = (props: QLProps, state: QLState) => {
                                         </div>
                                     ))}
                                 </FormGroup>
-                            </Form>
-               
+                            </Form>              
                     </Box>
                 </Box>
                 </Paper>
