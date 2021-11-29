@@ -69,6 +69,19 @@ const QuestionList = (props: QLProps, state: QLState) => {
         setQuestions(values)
     }
 
+    const submitClick: any = () => {
+        axios.post( endpoint + 'api/current_field_list', {
+            department: props.dptName,
+            list: questions
+        })
+        .then(function (res){
+            console.log(res);
+        })
+        .catch(function (error){
+            console.log(error);
+        })
+    }
+
     return (             
         <div>
             <Container >                   
@@ -116,7 +129,7 @@ const QuestionList = (props: QLProps, state: QLState) => {
                 </Paper>
                 <Box>              
                     <Stack direction="row" spacing={2} justifyContent="flex-end">
-                    <Button variant="contained" color="success" >Submit</Button>
+                    <Button variant="contained" color="success" onClick={() => submitClick()}>Submit</Button>
                     </Stack>
                 </Box>      
             </div>              
