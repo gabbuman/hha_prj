@@ -28,17 +28,17 @@ const QuestionList = (props: QLProps, state: QLState) => {
     //     question: ''
     // }])
 
-    const [questions, setQuestions] = useState([''])
+    const [questions, setQuestions] = useState([])
 
     // similar as componentDidMount
+    // Reference: https://stackoverflow.com/questions/53120972/how-to-call-loading-function-with-react-useeffect-only-once
     useEffect(() => {
         getRecentQuestions();
-    })
+    }, []);
 
     const getRecentQuestions = () => {
-        axios.get( endpoint + 'api/current_field_list/' + props.dptName + '/')
+        axios.get( endpoint + 'api/get_current_field_list/department_name/' + props.dptName)
         .then(function (res){
-            console.log(res.data);
             setQuestions(res.data);
         })
         .catch(function (error){
@@ -59,7 +59,7 @@ const QuestionList = (props: QLProps, state: QLState) => {
     // }
 
     const addClick: any = () => {
-        console.log(questions.length);
+        // console.log(questions.length);
         setQuestions([...questions, ''])
     }
 
