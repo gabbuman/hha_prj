@@ -4,7 +4,11 @@ import CaseStudyData from "../types/CaseStudy"
 
 
 const getAll= (dept: string) => {
-    return http.get<Array<CaseStudyData>>("/case_study/?department=" + dept +"/");
+    return http.get<Array<CaseStudyData>>("/get_case_studies/", {
+        params: {
+            department: dept
+        }
+    });
 };
 
 /* const get= (id: any) => {

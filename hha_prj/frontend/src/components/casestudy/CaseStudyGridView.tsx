@@ -74,8 +74,10 @@ const CaseStudyGridView: React.FC<csprops> = ({dptName}: csprops) =>{
             .then((response: any) => {
             setCaseStudies(response.data);
             console.log(response.data);
+            console.log(dptName);
         })
             .catch((e: Error) => {
+            console.log(dptName);
             console.log(e);
         });
     };

@@ -93,7 +93,7 @@ const CSCard: React.FC<CSData> = ({stateChanger, id, title, type, content}: CSDa
             });
         stateChanger();
     };
-    // TODO: Prompt refresh on delete
+    
     return (
         <a href="/CaseStudy" style={{ textDecoration: 'none' }}>
             <div className="CSCard">
