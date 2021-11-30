@@ -6,6 +6,7 @@ from backend.models import Department, Role, CurrentFieldsList
 from backend.models import DischargedAliveRehabGreenData,StayedInWardRehabGreenData
 from rest_framework.validators import UniqueValidator
 from backend.models import CaseStudyType, CaseStudy
+from backend.models import BiomechanicalSupport
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 class CustomUserSerializer(serializers.ModelSerializer):
     username = serializers.CharField(
@@ -90,4 +91,9 @@ class CaseStudyTypeSerializer(serializers.ModelSerializer):
 class CaseStudySerializer(serializers.ModelSerializer):
     class Meta:
         model = CaseStudy
+        fields = '__all__'
+
+class BiomechanicalSupportSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BiomechanicalSupport
         fields = '__all__'
