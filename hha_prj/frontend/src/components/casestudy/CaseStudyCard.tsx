@@ -108,9 +108,7 @@ const CSCard: React.FC<CSData> = ({stateChanger, id, title, type, content}: CSDa
                     <Link to = "/case_study_form" style={{ textDecoration: 'none' }}>
                         <Button variant="contained" color="warning" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Edit</Button>
                     </Link>
-                    <Link to = "/dptrecordpage" style={{ textDecoration: 'none' }}>
-                        <Button variant="contained" onClick={deleteCaseStudy} color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
-                    </Link>
+                    <Button variant="contained" onClick={deleteCaseStudy} color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
                 </EditDelGrid>  
             </CSCardGroup>
         </div>
