@@ -15,7 +15,7 @@ import { endpoint } from '../Endpoint';
 
 
 export interface CSData {
-    stateChanger: any;
+    stateChanger: () => void;
     id: any;
     title: string;
     type: string;
@@ -92,7 +92,6 @@ const CSCard: React.FC<CSData> = ({stateChanger, id, title, type, content}: CSDa
                 console.log(e);
             });
         stateChanger();
-        window.location.reload();
     };
     // TODO: Prompt refresh on delete
     return (
