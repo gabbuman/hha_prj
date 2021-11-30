@@ -4,8 +4,10 @@ from .api import CaseStudyTypeViewSet, CaseStudyViewSet, DischargedAliveRehabGre
 from .api import CurrentFieldListViewSet, MonthlyRecordViewSet 
 from .api import CustomUserViewSet
 from .api import DepartmentViewSet, RoleViewSet
+from .api import BiomechanicalSupportViewSet
 from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus
 from .views import GetRecordDataByDateRange, GetCurrentFieldList, retrieveCaseStudiesForPreview, GetCaseStudies
+from .views import GetBiomechanicalforms
 
 from django.urls import path
 from django.urls.conf import include
@@ -26,6 +28,7 @@ router.register('api/role', RoleViewSet, 'role')
 router.register('api/case_study_type', CaseStudyTypeViewSet, 'case_study_type')
 router.register('api/case_study', CaseStudyViewSet, 'case_study')
 router.register('api/stayed_in_ward_rehab_green_data', StayedInWardRehabGreenDataViewSet, 'stayed_in_ward_rehab_green_data')
+router.register('api/bio_support', BiomechanicalSupportViewSet, 'bio_support')
 
 urlpatterns = [
     path('', include(router.urls)),
@@ -36,4 +39,5 @@ urlpatterns = [
     path('api/get_current_field_list/', GetCurrentFieldList),
     path('api/retrieve_case_studies_for_preview', retrieveCaseStudiesForPreview),
     path('api/get_case_studies/', GetCaseStudies)
+    path('api/get_bio_forms/', GetBiomechanicalforms)
 ]
