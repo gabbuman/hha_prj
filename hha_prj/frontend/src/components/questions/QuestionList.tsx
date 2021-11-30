@@ -1,15 +1,13 @@
-import React, { useState, Component, useEffect } from 'react';
-import { Grid, Container, Box, Card, CardMedia, CardContent, Typography, 
+import React, { useState, useEffect } from 'react';
+import { Container, Box,  Typography, 
     Paper, Stack, Button, IconButton  } from '@mui/material';
 import {Row, Col, Form, FormGroup} from "react-bootstrap";
 import { endpoint } from '../Endpoint';
-import { ThreeSixtyTwoTone } from '@mui/icons-material';
 import { green, orange } from '@mui/material/colors';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
-import { SentimentSatisfiedAltSharp } from '@material-ui/icons';
 import axios, { AxiosResponse } from 'axios';
-
+import { notifyFail, notifySuccess } from '../login/Notifications';
 
 interface QLProps {
     dptName: string
@@ -17,17 +15,10 @@ interface QLProps {
 
 interface QLState {
     dptName: string;
-    // questions: {[key: string]: any}[];
     questions: string [];
 }
 
 const QuestionList = (props: QLProps, state: QLState) => {
-    // const [dptName, setDptName] = useState(props.dptName);
-    // const [questions, setQuestions] = useState([{
-    //     id: 1,
-    //     question: ''
-    // }])
-
     const [questions, setQuestions] = useState([])
 
     // similar as componentDidMount
@@ -57,11 +48,6 @@ const QuestionList = (props: QLProps, state: QLState) => {
         setQuestions(values)
     }
 
-    // const addClick: any = () => {
-    //     console.log(questions.length);
-    //     setQuestions([...questions, {id: questions.length + 1, question: ''}])
-    // }
-
     const addClick: any = () => {
         // console.log(questions.length);
         setQuestions([...questions, ''])
@@ -73,15 +59,40 @@ const QuestionList = (props: QLProps, state: QLState) => {
         setQuestions(values)
     }
 
+    const isDuplicates = (arr: string []) => {
+        var duplicates = []
+        duplicates = arr.filter((item, index) => arr.indexOf(item) != index)
+        return (duplicates.length > 0)
+    }
+
+    const isEmpty = (arr: string []) => {
+        var empty = []
+        empty = arr.filter(item => item == '')
+        return (empty.length > 0)
+    }
+
     const submitClick: any = () => {
-        axios.put( endpoint + 'api/current_field_list/' + props.dptName, {
-            list: questions
+        // console.log(isDuplicates(questions));
+        if (isDuplicates(questions)){
+            notifyFail('Sorry, Submit fails with duplicated questions.');
+            // console.log(questions)
+            return
+        }   
+        if (isEmpty(questions)){
+            notifyFail('Sorry, Submit fails with empty questions.');
+            return
+        }            
+        axios.put( endpoint + 'api/current_field_list/' + props.dptName + '/', {
+            list: questions,
+            department: props.dptName
         })
         .then(function (res){
-            console.log(res);
+            notifySuccess('Submit success!');
+            // console.log(res.data);
         })
         .catch(function (error){
-            console.log(error);
+            notifyFail('Sorry, Submit fails.');
+            // console.log(error);
         })
     }
 
