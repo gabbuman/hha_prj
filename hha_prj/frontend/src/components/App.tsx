@@ -47,8 +47,8 @@ class App extends Component {
 					<Route path='/graph' component={DptGraphCard}/>
 					<Route path='/dptrecordpage' component={DptRecordPage} />	
 					<Route path='/createdepartment' component={CreateDepartment} />	
-					<Route path='/case_study_form' component={CaseStudySubmissionForm}/>
-					<Route path='/case_studyindividual' component={CaseStudyIndividual}/>
+					<Route path='/csinput' component={CaseStudySubmissionForm}/>
+					<Route path='/csindividual' component={CaseStudyIndividual}/>
 					<Route path='/actioncard' component={DepartmentHome}/>	
 					<Route path='/questionlist' component={QuestionList} />
 				</Switch>
