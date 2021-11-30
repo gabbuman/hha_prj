@@ -2,7 +2,7 @@ import React, { useState, Component } from 'react';
 import { Grid, Container, Box, Card, CardMedia, CardContent, Typography } from '@mui/material';
 import RedDataForm from '../dpt/RedDataForm';
 import GreenDataForm from '../dpt/GreenDataForm';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { endpoint } from '../Endpoint';
 import { ThreeSixtyTwoTone } from '@mui/icons-material';
 
@@ -42,6 +42,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
 
     initializeMonthlyRecordPage = () => {
         var self = this;
+        // TODO - add dptName
         axios.get( endpoint + 'api/check_current_month_submission_status')
         .then(function (res){
             // console.log(typeof(res.data)); // boolean
@@ -60,10 +61,17 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
 
     getDefaultQuestions = () => {
         var self = this;
-        const questions = ["beds_available", "bed_days", "patient_days", "hospitalized", "discharged_alive", "died_before_48h", "died_after_48h", "days_hospitalised", "referrals", "transfers", "self_discharged", "stayed_in_the_ward", "admissions"]
-        axios.get( endpoint + 'api/current_field_list/' + 'Rehab/')
-        .then(function (res){
-            console.log(res.data);
+        // const questions = ["beds_available", "bed_days", "patient_days", "hospitalized", "discharged_alive"...]
+        var questions = []
+        axios.get( endpoint + 'api/current_field_list/', {
+            params: {
+                department: self.props.dptName
+            }
+        })
+        // axios.get( endpoint + 'api/current_field_list/' + 'Rehab/')
+        .then(function (res: AxiosResponse<any>){
+            console.log(res.data[0].list); 
+            questions = res.data[0].list;
             self.setState({
                 default_questions: questions
             })
