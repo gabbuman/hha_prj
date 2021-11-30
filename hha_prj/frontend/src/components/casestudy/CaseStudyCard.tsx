@@ -54,10 +54,10 @@ const TitleGrid = styled.div `
 `
 const EditDelGrid = styled.div `
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 2fr 2fr 2fr;
     grid-gap: 0;
     margin: 0 0;
-    justify-items: flex-end;
+    justify-items: center;
 `
 
 const CardTitle = styled.h3 `
@@ -93,7 +93,7 @@ const CSCard: React.FC<CSData> = ({stateChanger, id, title, type, content}: CSDa
             });
         stateChanger();
     };
-    
+
     return (
         <a href="/CaseStudy" style={{ textDecoration: 'none' }}>
             <div className="CSCard">
@@ -111,7 +111,7 @@ const CSCard: React.FC<CSData> = ({stateChanger, id, title, type, content}: CSDa
                             <Button variant="contained" color="warning" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Edit</Button>
                         </Link>
                         <Link to = "/dptrecordpage" style={{ textDecoration: 'none' }}>
-                        <Button variant="contained" onClick={deleteCaseStudy} color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
+                            <Button variant="contained" onClick={deleteCaseStudy} color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
                         </Link>
                     </EditDelGrid>  
                 </CSCardGroup>
