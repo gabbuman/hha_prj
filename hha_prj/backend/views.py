@@ -115,22 +115,20 @@ def GetQuestionsListByDateRange(request):
     if (len(records_in_date_range_and_dept) <= 0):
         return HttpResponse(json.dumps([],indent=4,sort_keys=True,default=str))
     
-    data = json.dumps(records_in_date_range_and_dept[0]["question_answer_list"],indent=4,sort_keys=True,default=str)
-    return HttpResponse(data, content_type="application/json")
+    record_question_lists = [record["question_answer_list"] for record in records_in_date_range_and_dept]
 
-    question_list = []
-    for record in records_in_date_range_and_dept:
-        field_answer_list = record['question_answer_list']
-        
-        if (len(field_answer_list) >= 1):
-            field_answer_pair = field_answer_list[0]
-            question = field_answer_pair["question"]
-            question_list.append(question)
-    question_set = set(question_list)
+    all_questions_in_range_list = []
+    for question_list in record_question_lists:
+        extracted_question_list = [question_answer["question"] for question_answer in question_list]
+        if len(all_questions_in_range_list) is 0:
+            all_questions_in_range_list = extracted_question_list
+        else:
+            all_questions_in_range_list = all_questions_in_range_list + extracted_question_list
 
-    response = {"questions" : question_set}
-
-    data = json.dumps(response,indent=4,sort_keys=True,default=str)
+    all_questions_in_range_set_list = list(set(all_questions_in_range_list))
+    all_questions_in_range_set_list.sort()
+    
+    data = json.dumps(all_questions_in_range_set_list,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
 
 @api_view(['GET'])
