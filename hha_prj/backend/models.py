@@ -107,3 +107,10 @@ class CaseStudy(models.Model):
     description = models.CharField(max_length=1000, null=False, blank=False, default="This is a description of a case study")
     image = models.ImageField(upload_to="uploads/", null=True, default="uploads/default.jpg")
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
+
+class BiomechanicalSupport(models.Model):
+    department = models.ForeignKey(Department, on_delete=models.PROTECT, default="Rehab", blank=True)
+    Equipment_name = models.CharField(max_length=50, null=False, blank=False, default="Biomechanical Equipment name")
+    description = models.CharField(max_length=1000, null=False, blank=False, default="A description of Biomechanical issue)
+    image = models.ImageField(upload_to="uploads/", null=True, default="uploads/default.jpg")
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
