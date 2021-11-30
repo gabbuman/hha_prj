@@ -2,13 +2,13 @@ import React, { useState, Component, useEffect } from 'react';
 import { Grid, Container, Box, Card, CardMedia, CardContent, Typography, 
     Paper, Stack, Button, IconButton  } from '@mui/material';
 import {Row, Col, Form, FormGroup} from "react-bootstrap";
-import axios from 'axios';
 import { endpoint } from '../Endpoint';
 import { ThreeSixtyTwoTone } from '@mui/icons-material';
 import { green, orange } from '@mui/material/colors';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import IndeterminateCheckBoxIcon from '@mui/icons-material/IndeterminateCheckBox';
 import { SentimentSatisfiedAltSharp } from '@material-ui/icons';
+import axios, { AxiosResponse } from 'axios';
 
 
 interface QLProps {
@@ -37,9 +37,13 @@ const QuestionList = (props: QLProps, state: QLState) => {
     }, []);
 
     const getRecentQuestions = () => {
-        axios.get( endpoint + 'api/get_current_field_list/department_name/' + props.dptName)
-        .then(function (res){
-            setQuestions(res.data);
+        axios.get( endpoint + 'api/current_field_list/', {
+            params: {
+                department: props.dptName
+            }
+        })
+        .then(function (res: AxiosResponse<any>){
+            setQuestions(res.data[0].list);
         })
         .catch(function (error){
             console.log(error);
@@ -49,7 +53,7 @@ const QuestionList = (props: QLProps, state: QLState) => {
         // console.log(e.target.name);
         const values: any = [...questions]
         // console.log(values[i])
-        values[i][e.target.name] = e.target.value
+        values[i] = e.target.value
         setQuestions(values)
     }
 
@@ -70,8 +74,7 @@ const QuestionList = (props: QLProps, state: QLState) => {
     }
 
     const submitClick: any = () => {
-        axios.post( endpoint + 'api/current_field_list', {
-            department: props.dptName,
+        axios.put( endpoint + 'api/current_field_list/' + props.dptName, {
             list: questions
         })
         .then(function (res){
@@ -100,7 +103,7 @@ const QuestionList = (props: QLProps, state: QLState) => {
                             <Form>
                                 <FormGroup>
                                     {questions.map((question, i) => (
-                                        <div key={question}>
+                                        <div key={i+1}>
                                             <Row className="mt-2">
                                                 <Col md>
                                                     <Form.Label>Question {i+1}</Form.Label>
@@ -108,7 +111,7 @@ const QuestionList = (props: QLProps, state: QLState) => {
                                                     placeholder="Enter question"
                                                     name = "question"
                                                     value={question}
-                                                    onChange={e => handleChangeInput(i, e as any)} 
+                                                    onChange={e => handleChangeInput(i, e)} 
                                                     />
                                                 </Col>
                                                 <Col md>
