@@ -253,7 +253,7 @@
   "model": "backend.CaseStudyType",
   "pk":1,
   "fields": {
-    "name": "PatientStory",
+    "name": "Patient Story",
     "created_at":"2021-11-07 12:12:12"
       }
 },
@@ -266,62 +266,190 @@
       }
 },
 {
-  "model": "backend.CaseStudy", 
-  "pk": 1,
+  "model": "backend.CaseStudyType",
+  "pk":3,
+  "fields": {
+    "name": "Training Session",
+    "created_at":"2021-11-07 12:12:12"
+      }
+},
+{
+  "model": "backend.CaseStudyType", 
+  "pk":4,
+  "fields": {
+    "name": "Equipment Received",
+    "created_at":"2021-11-07 12:12:12"
+      }
+},
+{
+  "model": "backend.CaseStudyType",
+  "pk":5,
+  "fields": {
+    "name": "Other Story",
+    "created_at":"2021-11-07 12:12:12"
+      }
+},
+{
+    "model": "backend.CaseStudyFieldsList", 
+    "pk": 1,
+    "fields": {
+      "type": "Patient Story",
+      "question_list": [
+            "Patient's Name",
+            "Patient's Age",
+            "Where is the patient from?",
+            "Reason patient chose to come to HCBH?",
+            "How long were they at HCBH?",
+            "Diagnosis?"
+      ]
+        }
+},
+{
+    "model": "backend.CaseStudyFieldsList", 
+    "pk": 2,
+    "fields": {
+      "type": "Staff Recognition",
+      "question_list": [
+            "Staff Name",
+            "Role/Job Title",
+            "Staff member Department",
+            "Duration of work at HCBH",
+            "What do they enjoy most about working at HCBH?"
+      ]
+        }
+},
+{
+    "model": "backend.CaseStudyFieldsList", 
+    "pk": 3,
+    "fields": {
+      "type": "Training Session",
+      "question_list": [
+            "Training Date",
+            "What was the training on?",
+            "Who conducted the training?",
+            "Who attended the training?",
+            "How will the training benefit HCBH and it's staff?"
+      ]
+        }
+},
+{
+    "model": "backend.CaseStudyFieldsList", 
+    "pk": 4,
+    "fields": {
+      "type": "Equipment Received",
+      "question_list": [
+            "What equipment was received?",
+            "What department received the equipment?",
+            "Equipment received from?",
+            "Equipment donated or purchased?",
+            "Function of the Equipment?"
+      ]
+        }
+},
+{
+    "model": "backend.CaseStudyFieldsList", 
+    "pk": 5,
+    "fields": {
+      "type": "Other Story",
+      "question_list": []
+        }
+},
+{
+  "model": "backend.CaseStudy",
   "fields": {
     "department":"Rehab",
-    "type": "PatientStory",
-    "title":"PatientStory 1",
-    "description":"This is a false description for patient story 1",
-    "created_at":"2021-11-08 12:12:12",
+    "type": "Patient Story",
+    "title":"Patient Story 1 - Rehab",
+    "question_answer_list":[
+      {
+        "question":"Patient's Name",
+        "answer": "Person 1"
+      },
+      {
+        "question":"Patient's Age",
+        "answer": 40
+      },
+      {
+        "question":"Where is the patient from?",
+        "answer": "Vancouver"
+      },
+      {
+        "question":"Reason patient chose to come to HCBH?",
+        "answer": "Random reason for Person 1"
+      },
+      {
+        "question":"Diagnosis?",
+        "answer": "Random diagnosis for Person 1"
+      }
+    ],
+    "story":"This is a false story for rehab patient story 1",
+    "created_at":"2021-11-12 12:12:12",
     "image":"uploads/default.jpg"
       }
 },
 {
   "model": "backend.CaseStudy", 
-  "pk": 2,
-  "fields": {
-    "department":"Rehab",
-    "type": "Staff Recognition",
-    "title":"Staff Recognition 1",
-    "description":"This is a false description for staff recognition 1",
-    "created_at":"2021-11-09 12:12:12",
-    "image":"uploads/default.jpg"
-      }
-},
-{
-  "model": "backend.CaseStudy", 
-  "pk": 3,
-  "fields": {
-    "department":"Rehab",
-    "type": "Staff Recognition",
-    "title":"Staff Recognition 2",
-    "description":"This is a false description for staff recognition 2",
-    "created_at":"2021-11-10 12:12:12",
-    "image":"uploads/default.jpg"
-      }
-},
-{
-  "model": "backend.CaseStudy", 
-  "pk": 4,
-  "fields": {
-    "department":"Rehab",
-    "type": "PatientStory",
-    "title":"PatientStory 2",
-    "description":"This is a false description for patient story 2",
-    "created_at":"2021-11-10 12:12:12",
-    "image":"uploads/default.jpg"
-      }
-},
-{
-  "model": "backend.CaseStudy", 
-  "pk": 5,
   "fields": {
     "department":"Maternity",
+    "type": "Patient Story",
+    "title":"Patient Story 2 - Maternity",
+    "question_answer_list":[
+      {
+        "question":"Patient's Name",
+        "answer": "Person 2"
+      },
+      {
+        "question":"Patient's Age",
+        "answer": 50
+      },
+      {
+        "question":"Where is the patient from?",
+        "answer": "Burnaby"
+      },
+      {
+        "question":"Reason patient chose to come to HCBH?",
+        "answer": "Random reason for Person 2"
+      },
+      {
+        "question":"Diagnosis?",
+        "answer": "Random diagnosis for Person 2"
+      }
+    ],
+    "story":"This is an false story for Maternity patient story 2",
+    "created_at":"2021-11-13 12:12:12",
+    "image":"uploads/default.jpg"
+      }
+},
+{
+  "model": "backend.CaseStudy", 
+  "fields": {
+    "department":"Rehab",
     "type": "Staff Recognition",
-    "title":"Staff Recognition 3",
-    "description":"This is an false description for staff recognition 3",
-    "created_at":"2021-11-11 12:12:12",
+    "title":"Staff Recognition 1 - Rehab",
+    "question_answer_list":[
+      {
+        "question":"Staff Name",
+        "answer": "Staff 1"
+      },
+      {
+        "question":"Role/Job Title",
+        "answer": "Random Tiele for Staff Member 1"
+      },
+      {
+        "question":"Staff member Department",
+        "answer": "Rehab"
+      },
+      {
+        "question":"Duration of work at HCBH",
+        "answer": "5 years"
+      },
+      {
+        "question":"What do they enjoy most about working at HCBH?",
+        "answer": "Random reason for staff member 1"
+      }
+    ],
+    "story":"This is a false story for Rehab Staff Recognition 1",
+    "created_at":"2021-11-14 12:12:12",
     "image":"uploads/default.jpg"
       }
 }

@@ -1,6 +1,6 @@
 from django.utils.module_loading import import_string
 from rest_framework import routers
-from .api import CaseStudyTypeViewSet, CaseStudyViewSet, DischargedAliveRehabGreenDataViewSet,StayedInWardRehabGreenDataViewSet
+from .api import CaseStudyFieldsListViewSet, CaseStudyTypeViewSet, CaseStudyViewSet, DischargedAliveRehabGreenDataViewSet,StayedInWardRehabGreenDataViewSet
 from .api import CurrentFieldListViewSet, MonthlyRecordViewSet 
 from .api import CustomUserViewSet
 from .api import DepartmentViewSet, RoleViewSet
@@ -24,6 +24,7 @@ router.register('api/user', CustomUserViewSet, 'user'),
 router.register('api/department', DepartmentViewSet, 'department'),
 router.register('api/role', RoleViewSet, 'role')
 router.register('api/case_study_type', CaseStudyTypeViewSet, 'case_study_type')
+router.register('api/case_study_fields_list', CaseStudyFieldsListViewSet, 'case_study_fields_list')
 router.register('api/case_study', CaseStudyViewSet, 'case_study')
 router.register('api/stayed_in_ward_rehab_green_data', StayedInWardRehabGreenDataViewSet, 'stayed_in_ward_rehab_green_data')
 

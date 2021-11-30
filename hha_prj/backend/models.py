@@ -99,11 +99,22 @@ class CaseStudyType(models.Model):
     
     def __str__(self):
         return self.name 
+class CaseStudyFieldsList(models.Model):
+    type = models.OneToOneField(CaseStudyType, on_delete=models.PROTECT, default="Patient Story", blank=True)
+    question_list = models.JSONField()
+
+    def __str__(self):
+        return self.type
 
 class CaseStudy(models.Model):
+    case_study_id = models.AutoField(primary_key=True)
     department = models.ForeignKey(Department, on_delete=models.PROTECT, default="Rehab", blank=True)
     type = models.ForeignKey(CaseStudyType, on_delete=models.PROTECT, default="Patient Story", blank=True)
     title = models.CharField(max_length=50, null=False, blank=False, default="Case Study Title")
-    description = models.CharField(max_length=50, null=False, blank=False, default="This is a description of a case study")
+    question_answer_list = models.JSONField()
+    story = models.CharField(max_length=200, null=False, blank=False, default="This is a description of a case study")
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     image = models.ImageField(upload_to="uploads/", null=True, default="uploads/default.jpg")
+
+    def __str__(self):
+        return self.title
