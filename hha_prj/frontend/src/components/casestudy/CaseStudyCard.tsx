@@ -20,7 +20,6 @@ export interface CSData {
     title: string;
     type: string;
     content: string;
-    //retreiveCaseStudies: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const main_color = "#b7b5b6"
@@ -95,28 +94,26 @@ const CSCard: React.FC<CSData> = ({stateChanger, id, title, type, content}: CSDa
     };
 
     return (
-        <a href="/CaseStudy" style={{ textDecoration: 'none' }}>
-            <div className="CSCard">
-                <CSCardGroup>
-                    <TitleGrid>
-                        <Icon src='/static/rehab-bg.png'/>
-                        <CardTitle>{title}</CardTitle>
-                    </TitleGrid>
-                    <CardContent>{content}</CardContent>
-                    <EditDelGrid>
-                        <Link to = "/case_study_individual" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>View</Button>
-                        </Link>
-                        <Link to = "/case_study_form" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" color="warning" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Edit</Button>
-                        </Link>
-                        <Link to = "/dptrecordpage" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" onClick={deleteCaseStudy} color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
-                        </Link>
-                    </EditDelGrid>  
-                </CSCardGroup>
-            </div>
-        </a>
+        <div className="CSCard">
+            <CSCardGroup>
+                <TitleGrid>
+                    <Icon src='/static/rehab-bg.png'/>
+                    <CardTitle>{title}</CardTitle>
+                </TitleGrid>
+                <CardContent>{content}</CardContent>
+                <EditDelGrid>
+                    <Link to = "/case_study_individual" style={{ textDecoration: 'none' }}>
+                        <Button variant="contained" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>View</Button>
+                    </Link>
+                    <Link to = "/case_study_form" style={{ textDecoration: 'none' }}>
+                        <Button variant="contained" color="warning" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Edit</Button>
+                    </Link>
+                    <Link to = "/dptrecordpage" style={{ textDecoration: 'none' }}>
+                        <Button variant="contained" onClick={deleteCaseStudy} color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
+                    </Link>
+                </EditDelGrid>  
+            </CSCardGroup>
+        </div>
     )
 }
 

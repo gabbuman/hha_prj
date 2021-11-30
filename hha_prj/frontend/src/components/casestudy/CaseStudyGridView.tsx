@@ -88,14 +88,14 @@ const CaseStudyGridView: React.FC<csprops> = ({dptName}: csprops) =>{
                 <TitledCardGroup>
                     <CardGroup>
                         {caseStudies && caseStudies.map(item => {
-                            return ( 
+                            return (
                                 <CSCard
                                 stateChanger={retrieveCaseStudies}
                                 id={item.id}  
                                 title={item.title}
                                 type={item.type}
                                 content={item.description}></CSCard>
-                                )
+                            )
                         })}
                         <Link to = "/case_study_form" style={{ textDecoration: 'none' }} >
                             <AddCard/>
