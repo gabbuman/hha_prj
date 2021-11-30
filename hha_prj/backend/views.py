@@ -8,6 +8,7 @@ from django.http import HttpResponse, request
 from .serializers import CustomTokenPairSerializer
 from django.http import HttpResponse, HttpResponseBadRequest
 from datetime import datetime
+import datetime as dt
 from .models import  Department, MonthlyRecord, CurrentFieldsList, CaseStudy
 import json
 from django.db.models import Q
@@ -65,7 +66,7 @@ def GetRecordDataByDateRange(request):
     for record in records_in_date_range_and_dept:
         year = record['year']
         month = record['month']
-        date = datetime.date(year,month,1)
+        date = dt.date(year,month,1)
 
         field_answer_list = record['question_answer_list']
         field_answer_selection = [record for record in field_answer_list if target_field in record.values()]
@@ -78,6 +79,58 @@ def GetRecordDataByDateRange(request):
     field_and_responses = {"field": target_field, "department":target_dept, "responses" : responses}
 
     data = json.dumps(field_and_responses,indent=4,sort_keys=True,default=str)
+    return HttpResponse(data, content_type="application/json")
+
+@api_view(['GET'])
+def GetQuestionsListByDateRange(request):
+
+    target_dept = request.query_params.get("department")
+    min_year = request.query_params.get("min_year")
+    max_year = request.query_params.get("max_year")
+    min_month = request.query_params.get("min_month")
+    max_month = request.query_params.get("max_month")
+
+    if (target_dept or min_year or max_year or min_month or max_month) is None:
+        return HttpResponseBadRequest("Parameters are missing.")
+    
+    department_exists = len(list(Department.objects.filter(Q(name=target_dept)))) >= 1
+    if not department_exists:
+        return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
+
+    try:
+        min_year = int(request.query_params.get("min_year"))
+        max_year = int(request.query_params.get("max_year"))
+        min_month = int(request.query_params.get("min_month"))
+        max_month = int(request.query_params.get("max_month"))
+    except:
+        return HttpResponseBadRequest("Date range months and years must be numerical values.")
+
+    isValidDate = (min_year < max_year) or ((min_year is max_year) and (min_month < max_month))
+    if (not isValidDate):
+        return HttpResponseBadRequest("Invalid date range selected, start date must be earlier than end date.")
+
+    records_in_date_range_and_dept = list(MonthlyRecord.objects.filter(Q(year__gte=min_year), Q(month__gte=min_month),
+        Q(year__lte=max_year), Q(month__lte=max_month), Q(department=target_dept)).values())
+
+    if (len(records_in_date_range_and_dept) <= 0):
+        return HttpResponse(json.dumps([],indent=4,sort_keys=True,default=str))
+    
+    data = json.dumps(records_in_date_range_and_dept[0]["question_answer_list"],indent=4,sort_keys=True,default=str)
+    return HttpResponse(data, content_type="application/json")
+
+    question_list = []
+    for record in records_in_date_range_and_dept:
+        field_answer_list = record['question_answer_list']
+        
+        if (len(field_answer_list) >= 1):
+            field_answer_pair = field_answer_list[0]
+            question = field_answer_pair["question"]
+            question_list.append(question)
+    question_set = set(question_list)
+
+    response = {"questions" : question_set}
+
+    data = json.dumps(response,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
 
 @api_view(['GET'])
@@ -127,4 +180,3 @@ def GetCaseStudies(request):
 
     data = json.dumps(case_studies_list,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
-   

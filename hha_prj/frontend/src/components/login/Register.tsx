@@ -183,7 +183,7 @@ export default function Register() {
                 }}
               >
                 {roleList.map((item, i) => {
-                  return <MenuItem key={"dept-"+i} value={item.name}>{item.name}</MenuItem>
+                  return <MenuItem key={"role-"+i} value={item.name}>{item.name}</MenuItem>
                 })}
               </Select>
               <FormHelperText>{roleError}</FormHelperText>
