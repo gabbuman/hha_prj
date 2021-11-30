@@ -99,12 +99,12 @@ const CSCard: React.FC<CSData> = ({id, title, type, content}: CSData) =>  {
                     <TitleGrid>
                         <Icon src='/static/rehab-bg.png'/>
                         <CardTitle>{title}</CardTitle>
-                        <IconButton aria-label="thumb" size="small" style={{height:"50px",width:"50px",backgroundColor: '#FFFFFF', color:"#0E4DA4"}} >
-                            <ThumbUpIcon fontSize="medium"/>
-                        </IconButton>
                     </TitleGrid>
                     <CardContent>{content}</CardContent>
                     <EditDelGrid>
+                        <Link to = "/case_study_individual" style={{ textDecoration: 'none' }}>
+                            <Button variant="contained" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>View</Button>
+                        </Link>
                         <Link to = "/case_study_form" style={{ textDecoration: 'none' }}>
                             <Button variant="contained" color="warning" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Edit</Button>
                         </Link>
