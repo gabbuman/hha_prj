@@ -1,5 +1,5 @@
 import { grid } from '@mui/system';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import styled from 'styled-components';
 import { StringLiteralLike } from 'typescript';
 import { Box, TextField, Typography, Stack, IconButton, Button,
@@ -15,6 +15,7 @@ import { endpoint } from '../Endpoint';
 
 
 export interface CSData {
+    stateChanger: any;
     id: any;
     title: string;
     type: string;
@@ -80,7 +81,7 @@ const CardBackground = styled.img `
 
 
 
-const CSCard: React.FC<CSData> = ({id, title, type, content}: CSData) =>  {
+const CSCard: React.FC<CSData> = ({stateChanger, id, title, type, content}: CSData) =>  {
 
     const deleteCaseStudy = () => {
         CaseStudyServices.remove(id)
@@ -90,6 +91,8 @@ const CSCard: React.FC<CSData> = ({id, title, type, content}: CSData) =>  {
             .catch((e: Error) =>{
                 console.log(e);
             });
+        stateChanger();
+        window.location.reload();
     };
     // TODO: Prompt refresh on delete
     return (
@@ -108,7 +111,9 @@ const CSCard: React.FC<CSData> = ({id, title, type, content}: CSData) =>  {
                         <Link to = "/case_study_form" style={{ textDecoration: 'none' }}>
                             <Button variant="contained" color="warning" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Edit</Button>
                         </Link>
+                        <Link to = "/dptrecordpage" style={{ textDecoration: 'none' }}>
                         <Button variant="contained" onClick={deleteCaseStudy} color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
+                        </Link>
                     </EditDelGrid>  
                 </CSCardGroup>
             </div>

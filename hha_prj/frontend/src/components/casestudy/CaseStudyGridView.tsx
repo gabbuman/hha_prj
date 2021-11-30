@@ -88,6 +88,7 @@ const CaseStudyGridView: React.FC<csprops> = ({dptName}: csprops) =>{
                         {caseStudies && caseStudies.map(item => {
                             return ( 
                                 <CSCard
+                                stateChanger={retrieveCaseStudies}
                                 id={item.id}  
                                 title={item.title}
                                 type={item.type}
