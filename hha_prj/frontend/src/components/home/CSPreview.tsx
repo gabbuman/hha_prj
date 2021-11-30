@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
@@ -39,7 +40,7 @@ export class CSPreview extends Component<{}, { caseStudyList: any }> {
                     {this.state?.caseStudyList.map((item:any, i:number) => {
                         return  <div>
                             <ListItem alignItems="center" key={i}>
-                                <ListItemButton>
+                                <ListItemButton component={Link as any} to={{pathname:"/csindividual", state:item?.id}}>
                                     <ListItemText
                                     primary={item?.title}
                                     secondary={
@@ -50,7 +51,7 @@ export class CSPreview extends Component<{}, { caseStudyList: any }> {
                                             variant="body2"
                                             color="#B46FBC"
                                         >
-                                            {item?.department_id} | {item?.type_id}
+                                            {item?.department_id} - {item?.type_id}
                                         </Typography>
                                         <br></br>{item?.description}
                                         </React.Fragment>
