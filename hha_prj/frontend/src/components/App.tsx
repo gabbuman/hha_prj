@@ -19,6 +19,7 @@ import CreateDepartment from './dpt/CreateDepartment';
 import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
 import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
 import DepartmentHome from './dpt/DepartmentHome';
+import CaseStudyGridView from './casestudy/CaseStudyGridView';
 
 class App extends Component {
     render() {
@@ -46,8 +47,9 @@ class App extends Component {
 					<Route path='/graph' component={DptGraphCard}/>
 					<Route path='/dptrecordpage' component={DptRecordPage} />	
 					<Route path='/createdepartment' component={CreateDepartment} />	
-					<Route path='/csinput' component={CaseStudySubmissionForm}/>
-					<Route path='/csindividual' component={CaseStudyIndividual}/>
+					<Route path='/case_study_form' component={CaseStudySubmissionForm}/>
+					<Route path='/case_study_individual' component={CaseStudyIndividual}/>
+					<Route path='/case_study_grid' component={CaseStudyGridView}/>
 					<Route path='/actioncard' component={DepartmentHome}/>	
 				</Switch>
 				<ToastContainer/>
