@@ -1,4 +1,4 @@
-from backend.models import MonthlyRecord, CustomUser, Department, Role, CurrentFieldsList, CaseStudy, CaseStudyType,DischargedAliveRehabGreenData,StayedInWardRehabGreenData
+from backend.models import MonthlyRecord, CustomUser, Department, Role, CurrentFieldsList, CaseStudy, CaseStudyType,DischargedAliveRehabGreenData,StayedInWardRehabGreenData, BiomechanicalSupport
 from rest_framework import viewsets, permissions
 from .serializers import BiomechanicalSupportSerializer, CaseStudySerializer, CaseStudyTypeSerializer, CurrentFieldListSerializer, DepartmentSerializer, MonthlyRecordSerializer, CustomUserSerializer, RoleSerializer,DischargedAliveRehabGreenDataSerializer, StayedInWardRehabGreenDataSerializer,StayedInWardRehabGreenDataSerializer
 

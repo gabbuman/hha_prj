@@ -38,6 +38,6 @@ urlpatterns = [
     path('api/graph_data/', GetRecordDataByDateRange),  
     path('api/get_current_field_list/', GetCurrentFieldList),
     path('api/retrieve_case_studies_for_preview', retrieveCaseStudiesForPreview),
-    path('api/get_case_studies/', GetCaseStudies)
+    path('api/get_case_studies/', GetCaseStudies),
     path('api/get_bio_forms/', GetBiomechanicalforms)
 ]
