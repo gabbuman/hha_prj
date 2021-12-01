@@ -131,7 +131,7 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
           <MonthlyRecord dptName={this.props.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={2}>
-          <Biosuptform />
+          <Biosuptform dptName={this.props.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={3}>
           Item Four

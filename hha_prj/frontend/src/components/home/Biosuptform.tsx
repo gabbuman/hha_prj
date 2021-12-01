@@ -1,26 +1,22 @@
 import React, { Component, useState, useEffect } from 'react'
 import Header from '../layout/Header';
-import VerNavbar from '../layout/VerNavbar';
 import { Box, TextField, Typography, Stack, Button, 
     FormControl, MenuItem, InputLabel, Select, Grid, Container} from '@mui/material';
 import axios from 'axios';
-import { useButtonProps } from '@restart/ui/esm/Button';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
-import ReactDOM from 'react-dom';
-import DptRecordPage from '../dpt/DptRecordPage';
 import { endpoint } from '../Endpoint';
 import { notifyFail, notifySuccess } from '../login/Notifications';
+
 interface CSSProps {
-
+    dptName: string;
 }
-
     
 interface CSSState {
     name: string;
     description: string;
     isSubmit: boolean;
     selectedImages: any;
-    deptname: string;
+    department: string;
 }
 
 
@@ -29,10 +25,8 @@ const initialState: CSSState = {
     description: '',
     isSubmit: false,
     selectedImages: null,
-    deptname: 'Rehab'
+    department: ''
 }
-
- 
     
 export default class BiomechanicalSupportForm extends Component <CSSProps, CSSState>{
     
@@ -60,6 +54,7 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
         if(this.state.selectedImages == null){
             formData.append('name', this.state.name);
             formData.append('description',this.state.description);
+            formData.append('department',this.props.dptName);
             axios.post(endpoint + 'api/bio_support/', formData)
                 .then(res=>{
                     notifySuccess("Biomechanical issue reported");
@@ -67,6 +62,7 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
                 })
                 .catch((error)=> {
                     notifyFail("Failed to report Biomechanical issue");
+                    console.log(formData)
                     console.error(error)
                 }
             );
@@ -75,6 +71,7 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
             formData.append('image', this.state.selectedImages,this.state.selectedImages.name);
             formData.append('name', this.state.name);
             formData.append('description',this.state.description);
+            formData.append('department',this.props.dptName);
             axios.post(endpoint + 'api/bio_support/', formData)
                 .then(res=>{
                     notifySuccess("Biomechanical issue reported");
@@ -94,6 +91,7 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
 
         return(
             <div>
+                <Header title={`Biomechanical Support Form`} />
                 <Box
                 sx={{m:4}}>
                     <Box
