@@ -1,5 +1,5 @@
 import { grid } from '@mui/system';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import styled from 'styled-components';
 import { StringLiteralLike } from 'typescript';
 import { Box, TextField, Typography, Stack, IconButton, Button,
@@ -8,8 +8,15 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import CaseStudySubmissionForm from './CaseStudyInputForm';
+import CaseStudyDataFields from '../../types/CaseStudy';
+import CaseStudyServices from '../../services/CaseStudyServices';
+import axios from 'axios';
+import { endpoint } from '../Endpoint';
+
 
 export interface CSData {
+    stateChanger: () => void;
+    id: any;
     title: string;
     type: string;
     content: string;
@@ -46,10 +53,10 @@ const TitleGrid = styled.div `
 `
 const EditDelGrid = styled.div `
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 2fr 2fr 2fr;
     grid-gap: 0;
     margin: 0 0;
-    justify-items: flex-end;
+    justify-items: center;
 `
 
 const CardTitle = styled.h3 `
@@ -71,28 +78,40 @@ const CardBackground = styled.img `
     transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
 `
 
-const CSCard: React.FC<CSData> = ({title, type, content}: CSData) =>  {
+
+
+const CSCard: React.FC<CSData> = ({stateChanger, id, title, type, content}: CSData) =>  {
+
+    const deleteCaseStudy = () => {
+        CaseStudyServices.remove(id)
+            .then((response: any)=>{
+                console.log(response);
+            })
+            .catch((e: Error) =>{
+                console.log(e);
+            });
+        stateChanger();
+    };
+
     return (
-        <a href="/CaseStudy" style={{ textDecoration: 'none' }}>
-            <div className="CSCard">
-                <CSCardGroup>
-                    <TitleGrid>
-                        <Icon src='/static/rehab-bg.png'/>
-                        <CardTitle>{title}</CardTitle>
-                        <IconButton aria-label="thumb" size="small" style={{height:"50px",width:"50px",backgroundColor: '#FFFFFF', color:"#0E4DA4"}} >
-                            <ThumbUpIcon fontSize="medium"/>
-                        </IconButton>
-                    </TitleGrid>
-                    <CardContent>{content}</CardContent>
-                    <EditDelGrid>
-                        <Link to = "/csindividual" style={{ textDecoration: 'none' }}>
-                            <Button variant="contained" color="warning" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Edit</Button>
-                        </Link>
-                        <Button variant="contained" color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
-                    </EditDelGrid>  
-                </CSCardGroup>
-            </div>
-        </a>
+        <div className="CSCard">
+            <CSCardGroup>
+                <TitleGrid>
+                    <Icon src='/static/rehab-bg.png'/>
+                    <CardTitle>{title}</CardTitle>
+                </TitleGrid>
+                <CardContent>{content}</CardContent>
+                <EditDelGrid>
+                    <Link to = "/case_study_individual" style={{ textDecoration: 'none' }}>
+                        <Button variant="contained" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>View</Button>
+                    </Link>
+                    <Link to = "/case_study_form" style={{ textDecoration: 'none' }}>
+                        <Button variant="contained" color="warning" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Edit</Button>
+                    </Link>
+                    <Button variant="contained" onClick={deleteCaseStudy} color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
+                </EditDelGrid>  
+            </CSCardGroup>
+        </div>
     )
 }
 
