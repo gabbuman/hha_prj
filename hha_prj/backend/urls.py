@@ -37,5 +37,5 @@ urlpatterns = [
     path('api/get_current_field_list/', GetCurrentFieldList),
     path('api/retrieve_case_studies_for_preview', retrieveCaseStudiesForPreview),
     path('api/get_case_studies/', GetCaseStudies),
-    path('api/questions_by_date_range/', GetQuestionsListByDateRange)
+    path('api/get_uestions_by_date_range/', GetQuestionsListByDateRange)
 ]
