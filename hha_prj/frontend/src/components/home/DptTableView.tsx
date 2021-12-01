@@ -144,9 +144,7 @@ export class DptTableView extends Component<tableProps, tableState> {
                             { 
                                 <Stack direction="row" justifyContent="flex-end">
                                     <ThemeProvider theme={theme}>
-                                          { <Button variant="contained" color="neutral" onClick = {exportPDFWithComponent}>Export</Button>  }
-                                         
-                                         
+                                          { <Button variant="contained" color="neutral" onClick = {exportPDFWithComponent}>Export</Button>  }  
                                     </ThemeProvider>
                                 </Stack>
                             }                   
@@ -154,7 +152,7 @@ export class DptTableView extends Component<tableProps, tableState> {
                         <Grid item xs={12}>
                             <PDFExport
                             ref={pdfExportComponent}
-                            paperSize="auto"
+                            paperSize="A2"
                             margin={'4cm'}
                             fileName={`MonthlyReport_` + this.props.dptName + '_' + this.state.month +this.state.year}
                             >
