@@ -61,7 +61,6 @@ interface csprops{
     dptName: string;
 }
 
-
 const CaseStudyGridView: React.FC<csprops> = ({dptName}: csprops) =>{  
     const[caseStudies, setCaseStudies] = useState<Array<CaseStudyDataFields>>([]);
 
