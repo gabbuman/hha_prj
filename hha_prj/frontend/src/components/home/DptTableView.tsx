@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Component } from 'react';
 import Button from '@mui/material/Button';
 import { Box, Container, Grid, Stack, FormControl, InputLabel, Select, MenuItem, createTheme, ThemeProvider} from '@mui/material';
-import Pdf from "react-to-pdf";
 import TableData from './DptTableData';
+import { PDFExport} from '@progress/kendo-react-pdf';
 
 
 
@@ -78,6 +78,7 @@ export class DptTableView extends Component<tableProps, tableState> {
         this.setState({year: event.target.value});
     }
 
+     
     
 
     render (){
@@ -85,15 +86,17 @@ export class DptTableView extends Component<tableProps, tableState> {
         let maxOffset = 10;
         let thisYear = (new Date()).getFullYear();
         let years: number[] = [];
-        let element = document.getElementById('monthlyData');
         for(let x = 0; x <= maxOffset; x++) {
             years.push(thisYear - x)
         }
-        const options = {
-            orientation: 'landscape',
-            unit: 'in',
-            format: [4,2]
-        };
+        
+        const pdfExportComponent = React.createRef<PDFExport>();
+        const exportPDFWithComponent = () => {
+            if (pdfExportComponent.current) {
+              pdfExportComponent.current.save();
+            }
+        }
+
         return(
             <div> 
                     <Box m={5}>
@@ -141,20 +144,22 @@ export class DptTableView extends Component<tableProps, tableState> {
                             { 
                                 <Stack direction="row" justifyContent="flex-end">
                                     <ThemeProvider theme={theme}>
-                                        <Pdf document={element} filename= {'monthlyData' + this.state.month  + this.state.year + '.pdf'} >
-                                            {(toPdf) => (  <Button variant="contained" color="neutral" onClick = {toPdf}>Export</Button> )}
-                                         </Pdf>
-                                         <div id = "monthlyData"> 
-                            jdinsicnducnd jcnsjncis cnsjn
-                            </div>
+                                          { <Button variant="contained" color="neutral" onClick = {exportPDFWithComponent}>Export</Button>  }
+                                         
+                                         
                                     </ThemeProvider>
                                 </Stack>
                             }                   
                         </Grid>                             
                         <Grid item xs={12}>
-                            
-                            <TableData ref={this.tabledataElement} dptName={this.props.dptName} newMonth={months.indexOf(this.state.month) + 1} newYear={parseInt(this.state.year)} />
-                           
+                            <PDFExport
+                            ref={pdfExportComponent}
+                            paperSize="auto"
+                            margin={'4cm'}
+                            fileName={`MonthlyReport_` + this.props.dptName + '_' + this.state.month +this.state.year}
+                            >
+                                <TableData ref={this.tabledataElement} dptName={this.props.dptName} newMonth={months.indexOf(this.state.month) + 1} newYear={parseInt(this.state.year)} />
+                            </PDFExport>
                         </Grid>
                         </Grid> 
                         </Container>  
