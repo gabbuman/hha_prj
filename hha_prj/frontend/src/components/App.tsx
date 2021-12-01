@@ -20,6 +20,7 @@ import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
 import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
 import DepartmentHome from './dpt/DepartmentHome';
 import QuestionList from './questions/QuestionList';
+import CaseStudyGridView from './casestudy/CaseStudyGridView';
 
 class App extends Component {
     render() {
