@@ -19,6 +19,7 @@ import CreateDepartment from './dpt/CreateDepartment';
 import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
 import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
 import DepartmentHome from './dpt/DepartmentHome';
+import QuestionList from './questions/QuestionList';
 import CaseStudyGridView from './casestudy/CaseStudyGridView';
 
 class App extends Component {
@@ -51,6 +52,7 @@ class App extends Component {
 					<Route path='/case_study_individual' component={CaseStudyIndividual}/>
 					<Route path='/case_study_grid' component={CaseStudyGridView}/>
 					<Route path='/actioncard' component={DepartmentHome}/>	
+					<Route path='/questionlist' component={QuestionList} />
 				</Switch>
 				<ToastContainer/>
 			</Router>

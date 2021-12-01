@@ -19,5 +19,6 @@ urlpatterns = [
     path('csinput', views.index),
     path('csindividual', views.index),
     path('actioncard', views.index),
-    path('csgridview', views.index)    
+    path('questionlist', views.index),    
+    path('csgridview', views.index)  
 ]
