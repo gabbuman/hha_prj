@@ -1,5 +1,5 @@
 import { grid } from '@mui/system';
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { StringLiteralLike } from 'typescript';
 import { Box, TextField, Typography, Stack, IconButton, Button,
@@ -82,6 +82,8 @@ const CardBackground = styled.img `
 
 const CSCard: React.FC<CSData> = ({stateChanger, id, title, type, content}: CSData) =>  {
 
+    const[icon, setIcon] = useState<string>("/static/other_story_icon.png");
+
     const deleteCaseStudy = () => {
         CaseStudyServices.remove(id)
             .then((response: any)=>{
@@ -93,11 +95,37 @@ const CSCard: React.FC<CSData> = ({stateChanger, id, title, type, content}: CSDa
         stateChanger();
     };
 
+    const assignIcon = () => {
+        switch (type) {
+            case "Patient Story":
+                setIcon("/static/patient_story_icon.png");
+                break;
+            case "Equipment Received":
+                setIcon("/static/equipment_received.png");
+                break;
+            case "Other Story":
+                setIcon("/static/other_story_icon.png");
+                break;
+            case "Training Session":
+                setIcon("/static/training_session_icon.png");
+                break;
+            case "Staff Recognition":
+                setIcon("/static/staff_recognition_icon.png");     
+                break;
+            default:
+                setIcon("/static/patient_story_icon.png");
+                break;
+        }
+    }
+
+    useEffect(() => {
+        assignIcon;
+    }, [])
     return (
         <div className="CSCard">
             <CSCardGroup>
                 <TitleGrid>
-                    <Icon src='/static/rehab-bg.png'/>
+                    <Icon src={"/static/" + type + ".png"}/>
                     <CardTitle>{title}</CardTitle>
                 </TitleGrid>
                 <CardContent>{content}</CardContent>
