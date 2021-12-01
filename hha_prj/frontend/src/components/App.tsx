@@ -20,6 +20,7 @@ import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
 import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
 import DepartmentHome from './dpt/DepartmentHome';
 import CaseStudyGridView from './casestudy/CaseStudyGridView';
+import Biosuptform from './home/Biosuptform';
 
 class App extends Component {
     render() {
@@ -50,7 +51,9 @@ class App extends Component {
 					<Route path='/case_study_form' component={CaseStudySubmissionForm}/>
 					<Route path='/case_study_individual' component={CaseStudyIndividual}/>
 					<Route path='/case_study_grid' component={CaseStudyGridView}/>
-					<Route path='/actioncard' component={DepartmentHome}/>	
+					<Route path='/actioncard' component={DepartmentHome}/>
+					<Route path='/bio_support_form' component={Biosuptform}/>		
+
 				</Switch>
 				<ToastContainer/>
 			</Router>

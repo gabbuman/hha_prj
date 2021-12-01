@@ -17,6 +17,7 @@ import { sampleData } from '../home/Department Card/RecordData';
 import {DptGraphCard, GraphProps} from '../home/Department Card/DptGraphCard';
 import { render } from 'react-dom';
 import { Component } from 'react';
+import Biosuptform from '../home/Biosuptform';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -130,7 +131,7 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
           <MonthlyRecord dptName={this.props.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={2}>
-          Item Three
+          <Biosuptform />
         </TabPanel>
         <TabPanel value={this.state.value} index={3}>
           Item Four

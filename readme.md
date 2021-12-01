@@ -12,7 +12,7 @@ Here are steps to run the local version
 - install frontend dependencies with `npm i`
 - remove any cached migrations such as `0001_initial.py`, excluding `__init__.py`, from 'prj/hha_prj/backend/migrations/'
 - run `pip install -r requirements.txt` to install backend dependencies in 'prj/hha_prj/'
-- run `python manage.py makemigrations` in the same folder as above
+- run `cd` in the same folder as above
 - run `python manage.py migrate` in the same folder as above
 - Lastly, in two separate terminals, run `npm run dev` in the root directory and `python manage.py runserver` in 'prj/hha_prj' to have live updates to frontend applied and server the api respectively.
 
