@@ -93,7 +93,7 @@ const CaseStudyGridView: React.FC<csprops> = ({dptName}: csprops) =>{
                                 stateChanger={retrieveCaseStudies}
                                 id={item.id}  
                                 title={item.title}
-                                type={item.type}
+                                type={item.type_id}
                                 content={item.description}></CSCard>
                             )
                         })}
