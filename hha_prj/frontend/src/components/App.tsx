@@ -14,7 +14,6 @@ import DptRecordPage from './dpt/DptRecordPage';
 import {DptTableView} from './home/DptTableView';
 import Homepage from './home/Homepage';
 import { ToastContainer } from 'react-toastify';
-import {DptGraphCard, GraphProps} from './home/Department Card/DptGraphCard';
 import CreateDepartment from './dpt/CreateDepartment';
 import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
 import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
@@ -45,7 +44,6 @@ class App extends Component {
 					<Route path='/vernavbar' component={VerNavbar} />
 					<Route path='/monthlyrecord' component={MonthlyRecord} />			
 					<Route path='/datarecordarchive' component={DptTableView} />		 	
-					<Route path='/graph' component={DptGraphCard}/>
 					<Route path='/dptrecordpage' component={DptRecordPage} />	
 					<Route path='/createdepartment' component={CreateDepartment} />	
 					<Route path='/case_study_form' component={CaseStudySubmissionForm}/>

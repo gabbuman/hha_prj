@@ -32,12 +32,12 @@ const GraphSubTitle = styled.h3 `
     margin: 0 0 0 14px;
 `
 
-export interface GraphProps {
-    width: number;
-    height: number;
-    recordDataSet: RecordDataSet;
-    dptName: string;
-}
+// export interface GraphProps {
+//     width: number;
+//     height: number;
+//     recordDataSet: RecordDataSet;
+//     dptName: string;
+// }
 
 // export const DptGraphCard = (props: GraphProps) => {
 //     return (
@@ -50,7 +50,7 @@ export interface GraphProps {
 // };
 
 // New implementation
-// TODO: Update card to use this instead
+
 interface GraphCardProps {
     // Fetching Data
     department: string;
@@ -93,6 +93,7 @@ export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData
             }
         };
         
+        console.log(props);
         graphApi.get('/', {params: {
             department: props.department,
             field: props.field,
@@ -101,8 +102,6 @@ export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData
             max_month: props.maxMonth,
             max_year: props.maxYear
         }}).then( (result: any) => {
-            console.log(result.data);
-
             this.setState({
                 recordDataSet: {
                     recordType: result.data.field,
@@ -134,7 +133,7 @@ export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData
                             <GraphTitle>{this.state.recordDataSet.recordType}</GraphTitle>
                             <GraphSubTitle>From {this.state.recordDataSet.startDate} to {this.state.recordDataSet.endDate}</GraphSubTitle>
                             <DptGraph width={this.state.width == 0 ? 600 : this.state.width} 
-                                      height={this.state.height} 
+                                      height={this.state.height == 0 ? 300 : this.state.height} 
                                       recordsToRender={this.state.recordDataSet.data}/>
                         </GraphContainer>
                 )
