@@ -32,25 +32,6 @@ const GraphSubTitle = styled.h3 `
     margin: 0 0 0 14px;
 `
 
-// export interface GraphProps {
-//     width: number;
-//     height: number;
-//     recordDataSet: RecordDataSet;
-//     dptName: string;
-// }
-
-// export const DptGraphCard = (props: GraphProps) => {
-//     return (
-//         <GraphContainer>
-//             <GraphTitle>{props.recordDataSet.recordType}</GraphTitle>
-//             <GraphSubTitle>From {props.recordDataSet.startDate} to {props.recordDataSet.endDate}</GraphSubTitle>
-//             <DptGraph width={props.width} height={props.height} recordsToRender={props.recordDataSet.data}/>
-//         </GraphContainer>
-//     )
-// };
-
-// New implementation
-
 interface GraphCardProps {
     // Fetching Data
     department: string;
@@ -77,8 +58,6 @@ const graphApi = axios.create({
 
 export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData> {
     constructor(props: GraphCardProps) {
-// export class DptGraphCard extends Component<GraphProps, GraphCardData> {
-//     constructor(props: GraphProps) {
         super(props);
 
         // The default loading state
