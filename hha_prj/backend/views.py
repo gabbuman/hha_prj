@@ -178,3 +178,28 @@ def GetCaseStudies(request):
 
     data = json.dumps(case_studies_list,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
+
+@api_view(['GET'])
+def DepartmentHomepageReminders(request):
+    
+    # Case Study Count
+    today_date = dt.datetime.now() # now() to include time in the datetime object
+    start_date = dt.datetime.today().replace(day=1) # today() used to set time of datetime to 0 implicitly
+    case_studies_completed = list(CaseStudy.objects.filter(Q(created_at__range=(start_date,today_date))))
+
+    # Monthly Record Status
+    current_year = dt.datetime.now().year
+    current_month = dt.datetime.now().month
+    monthly_record_submitted = list(MonthlyRecord.objects.filter(Q(year=current_year), Q(month=current_month)).values())
+
+    # Biomechanical Form Status - TBD
+
+    # Compile response
+    response = dict()
+    response["case_studies_completed"] = len(case_studies_completed)
+    response["monthly_record_subbmited"] = True if len(monthly_record_submitted) > 0 else False
+
+    data = json.dumps(response,indent=4,sort_keys=True,default=str)
+    return HttpResponse(data, content_type="application/json")
+
+
