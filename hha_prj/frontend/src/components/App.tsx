@@ -45,7 +45,7 @@ class App extends Component {
 					<Route path='/vernavbar' component={VerNavbar} />
 					<Route path='/monthlyrecord' component={MonthlyRecord} />			
 					<Route path='/datarecordarchive' component={DptTableView} />		 	
-					<Route path='/graph' component={DptGraphCard}/>
+					<Route path='/dptgraphview' component={DptGraphCard}/>
 					<Route path='/dptrecordpage' component={DptRecordPage} />	
 					<Route path='/createdepartment' component={CreateDepartment} />	
 					<Route path='/case_study_form' component={CaseStudySubmissionForm}/>

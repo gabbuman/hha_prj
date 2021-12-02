@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DptGraph from './DptGraph';
 import styled from 'styled-components'
-import { RecordDataSet } from './RecordData';
+import { RecordDataSet, sampleData } from './RecordData';
 import axios from 'axios';
 import { Api } from '@mui/icons-material';
 
@@ -39,15 +39,17 @@ export interface GraphProps {
     dptName: string;
 }
 
-export const DptGraphCard = (props: GraphProps) => {
-    return (
-        <GraphContainer>
-            <GraphTitle>{props.recordDataSet.recordType}</GraphTitle>
-            <GraphSubTitle>From {props.recordDataSet.startDate} to {props.recordDataSet.endDate}</GraphSubTitle>
-            <DptGraph width={props.width} height={props.height} recordsToRender={props.recordDataSet.data}/>
-        </GraphContainer>
-    )
-};
+// export const DptGraphCard = (props: GraphProps) => {
+//     return (
+//         <GraphContainer>
+//             <GraphTitle>{props.recordDataSet.recordType}</GraphTitle>
+//             <GraphSubTitle>From {props.recordDataSet.startDate} to {props.recordDataSet.endDate}</GraphSubTitle>
+//             <DptGraph width={props.width} height={props.height} recordsToRender={props.recordDataSet.data}/>
+//         </GraphContainer>
+//     )
+// };
+
+// New implementation
 
 interface GraphCardProps {
     // Fetching Data
@@ -70,27 +72,37 @@ interface GraphCardData {
 }
 
 const graphApi = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api/monthly_record_data/'
+    baseURL: 'http://127.0.0.1:8000/api/graph_data/'
 })
 
-class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData> {
-    constructor(props: GraphCardProps) {
+// class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData> {
+//     constructor(props: GraphCardProps) {
+export class DptGraphCard extends Component<GraphProps, GraphCardData> {
+    constructor(props: GraphProps) {
         super(props);
 
-        graphApi.get('/').then( result => {
-
-        })
-
-        this.setState({
+        this.state = {
             width: props.width, 
             height: props.height, 
             recordDataSet: {
-                recordType: 'Loading', 
-                startDate: null,
-                endDate: null,
-                data: null
+                recordType: 'Loading...', 
+                startDate: 'N/A',
+                endDate: 'N/A',
+                data: [{dateRecorded: "0000-00-00T00:00:00.000Z", value: 1}]
             }
-        });
+        };
+
+        graphApi.get('/', {params: {
+            
+            field: 'Bed days',
+            min_month: 1,
+            min_year: 2021,
+            max_month: 12,
+            max_year: 2022
+        }}).then( result => {
+            console.log(result);
+        })
+        // TODO: show error
     }
 
     render() {
@@ -98,7 +110,7 @@ class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData> {
             <GraphContainer>
                 <GraphTitle>{this.state.recordDataSet.recordType}</GraphTitle>
                 <GraphSubTitle>From {this.state.recordDataSet.startDate} to {this.state.recordDataSet.endDate}</GraphSubTitle>
-                <DptGraph width={this.state.width} height={this.state.height} recordsToRender={this.state.recordDataSet.data}/>
+                <DptGraph width={500} height={300} recordsToRender={this.state.recordDataSet.data}/>
             </GraphContainer>
         )
     }
