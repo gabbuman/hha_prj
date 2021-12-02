@@ -12,6 +12,7 @@ import datetime as dt
 from .models import  Department, MonthlyRecord, CurrentFieldsList, CaseStudy
 import json
 from django.db.models import Q
+import csv
 class ObtainTokenPairWithUsernameView(TokenObtainPairView):
     permission_classes = (permissions.AllowAny,)
     serializer_class = CustomTokenPairSerializer
@@ -212,6 +213,18 @@ def GetDepartmentReminders(request):
     data = json.dumps(response,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
 
-# @api_view(['GET'])
-# def DepartmentHomepageReminders(request):
+@api_view(['GET'])
+def GetAllMonhtlyRecordDataInCSV(request):
+
+    all_records = MonthlyRecord.objects.all()
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="monthly_records_export.csv"'
+    writer = csv.writer(response)
+    writer.writerow(['ID','Month','Year','Questions and Answers List','Department'])
+    records_list = all_records.values_list('monthly_record_id','month','year','question_answer_list','department')
+
+    for record in records_list:
+        writer.writerow(record)
+
+    return response
 
