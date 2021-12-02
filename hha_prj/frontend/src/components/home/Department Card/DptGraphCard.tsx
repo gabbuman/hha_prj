@@ -50,7 +50,7 @@ export interface GraphProps {
 // };
 
 // New implementation
-
+// TODO: Update card to use this instead
 interface GraphCardProps {
     // Fetching Data
     department: string;
@@ -107,7 +107,7 @@ export class DptGraphCard extends Component<GraphProps, GraphCardData> {
                     recordType: result.data.field,
                     startDate: result.data.responses[0].date,
                     endDate: result.data.responses[this.getLastIndex(result.data.responses)].date,
-                    data: sampleData.data
+                    data: result.data.responses
                 }
             });
         })
