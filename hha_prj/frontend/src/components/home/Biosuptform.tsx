@@ -20,7 +20,6 @@ interface CSSState {
     issue: string;
     isSubmit: boolean;
     selectedImages: any;
-    department: string;
 }
 
 const initialState: CSSState = {
@@ -28,7 +27,6 @@ const initialState: CSSState = {
     issue: '',
     isSubmit: false,
     selectedImages: null,
-    department: ''
 }
 
 export default class BiomechanicalSupportForm extends Component <CSSProps, CSSState>{
@@ -89,6 +87,7 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
 
         return(
             <div>
+                <Typography variant="h5">Biomechanical Support Form</Typography>
                 <Box
                 sx={{m:4}}>
                     <Box
