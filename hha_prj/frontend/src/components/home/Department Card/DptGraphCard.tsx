@@ -88,30 +88,58 @@ export class DptGraphCard extends Component<GraphProps, GraphCardData> {
                 recordType: 'Loading...', 
                 startDate: 'N/A',
                 endDate: 'N/A',
-                data: [{dateRecorded: "0000-00-00T00:00:00.000Z", value: 1}]
+                data: []
             }
         };
 
         graphApi.get('/', {params: {
-            
+            department: 'Rehab',
             field: 'Bed days',
             min_month: 1,
             min_year: 2021,
             max_month: 12,
             max_year: 2022
-        }}).then( result => {
-            console.log(result);
+        }}).then( (result: any) => {
+            console.log(result.data);
+            this.setState({
+                recordDataSet: {
+                    recordType: result.data.field,
+                    startDate: result.data.responses[0].date,
+                    endDate: result.data.responses[result.data.responses.length - 1],
+                    data: sampleData.data
+                }
+            });
         })
+
         // TODO: show error
+    }
+
+    getComponent() {
+        switch(this.state.recordDataSet.recordType) {
+            case 'Loading...':
+                return (
+                    <div>
+                        <h1>Loading...</h1>
+                    </div>
+                )
+            default:
+                return (
+                        <GraphContainer>
+                            <GraphTitle>{this.state.recordDataSet.recordType}</GraphTitle>
+                            <GraphSubTitle>From {this.state.recordDataSet.startDate} to {this.state.recordDataSet.endDate}</GraphSubTitle>
+                            <DptGraph width={this.state.width == 0 ? 600 : this.state.width} 
+                                      height={this.state.height} 
+                                      recordsToRender={this.state.recordDataSet.data}/>
+                        </GraphContainer>
+                )
+        }
     }
 
     render() {
         return (
-            <GraphContainer>
-                <GraphTitle>{this.state.recordDataSet.recordType}</GraphTitle>
-                <GraphSubTitle>From {this.state.recordDataSet.startDate} to {this.state.recordDataSet.endDate}</GraphSubTitle>
-                <DptGraph width={500} height={300} recordsToRender={this.state.recordDataSet.data}/>
-            </GraphContainer>
+            <div>
+                {this.getComponent()}
+            </div>
         )
     }
 }
