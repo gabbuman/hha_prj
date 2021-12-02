@@ -13,7 +13,7 @@ interface CSSProps {
     
 interface CSSState {
     name: string;
-    description: string;
+    issue: string;
     isSubmit: boolean;
     selectedImages: any;
     department: string;
@@ -22,7 +22,7 @@ interface CSSState {
 
 const initialState: CSSState = {
     name: '',
-    description: '',
+    issue: '',
     isSubmit: false,
     selectedImages: null,
     department: ''
@@ -50,7 +50,7 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
         const formData = new FormData();
         if(this.state.selectedImages == null){
             formData.append('name', this.state.name);
-            formData.append('description',this.state.description);
+            formData.append('issue',this.state.issue);
             formData.append('department',this.props.dptName);
             axios.post(endpoint + 'api/bio_support/', formData)
                 .then(res=>{
@@ -67,7 +67,7 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
         else if (this.state.selectedImages != null){
             formData.append('image', this.state.selectedImages,this.state.selectedImages.name);
             formData.append('name', this.state.name);
-            formData.append('description',this.state.description);
+            formData.append('issue',this.state.issue);
             formData.append('department',this.props.dptName);
             axios.post(endpoint + 'api/bio_support/', formData)
                 .then(res=>{
@@ -84,7 +84,6 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
 
 
     render(){
-        let types = [];
 
         return(
             <div>
@@ -123,8 +122,8 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
                         variant="outlined"
                         multiline
                         rows={20}
-                        value={this.state.description}
-                        onChange={(e)=>{this.setState({description: e.target.value})}}
+                        value={this.state.issue}
+                        onChange={(e)=>{this.setState({issue: e.target.value})}}
                     />
                     </Box>
                     <Box
