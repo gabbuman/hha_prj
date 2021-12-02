@@ -59,9 +59,9 @@ const tooltipBottomStyles = {
 };
 
 const formatDate = timeFormat("%b, '%y");
-const getDate = (record: RecordData) => new Date(record.dateRecorded);
-const getRecordValue = (record: RecordData) => record.value;
-const bisectDate = bisector<RecordData, Date>((record) => new Date(record.dateRecorded)).left;
+const getDate = (record: RecordData) => new Date(record.date);
+const getRecordValue = (record: RecordData) => record.answer;
+const bisectDate = bisector<RecordData, Date>((record) => new Date(record.date)).left;
 
 export type AreaProps = {
     width: number;

@@ -101,17 +101,22 @@ export class DptGraphCard extends Component<GraphProps, GraphCardData> {
             max_year: 2022
         }}).then( (result: any) => {
             console.log(result.data);
+
             this.setState({
                 recordDataSet: {
                     recordType: result.data.field,
                     startDate: result.data.responses[0].date,
-                    endDate: result.data.responses[result.data.responses.length - 1],
+                    endDate: result.data.responses[this.getLastIndex(result.data.responses)].date,
                     data: sampleData.data
                 }
             });
         })
 
         // TODO: show error
+    }
+
+    getLastIndex(array: any) {
+        return array.length - 1 < 0 ? 0 : array.length - 1;
     }
 
     getComponent() {
