@@ -41,8 +41,7 @@ def GetRecordDataByDateRange(request):
     if (target_field or target_dept or min_year or max_year or min_month or max_month) is None:
         return HttpResponseBadRequest("Parameters are missing.")
     
-    department_exists = len(list(Department.objects.filter(Q(name=target_dept)))) >= 1
-    if not department_exists:
+    if not checkDepartmentExists(target_dept):
         return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
 
     try:
@@ -94,8 +93,7 @@ def GetQuestionsListByDateRange(request):
     if (target_dept or min_year or max_year or min_month or max_month) is None:
         return HttpResponseBadRequest("Parameters are missing.")
     
-    department_exists = len(list(Department.objects.filter(Q(name=target_dept)))) >= 1
-    if not department_exists:
+    if not checkDepartmentExists(target_dept):
         return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
 
     try:
@@ -188,8 +186,7 @@ def GetDepartmentReminders(request):
     if target_dept is None:
         return HttpResponseBadRequest("Parameters are missing.")
     
-    department_exists = len(list(Department.objects.filter(Q(name=target_dept)))) >= 1
-    if not department_exists:
+    if not checkDepartmentExists(target_dept):
         return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
 
     # Case Study Count
@@ -216,7 +213,14 @@ def GetDepartmentReminders(request):
 @api_view(['GET'])
 def GetAllMonhtlyRecordDataInCSV(request):
 
+    target_dept = request.query_params.get("department")
+    
     all_records = MonthlyRecord.objects.all()
+    if target_dept:
+        if not checkDepartmentExists(target_dept):
+            return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
+        all_records = MonthlyRecord.objects.filter(Q(department=target_dept))
+       
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="monthly_records_export.csv"'
     writer = csv.writer(response)
@@ -228,3 +232,5 @@ def GetAllMonhtlyRecordDataInCSV(request):
 
     return response
 
+def checkDepartmentExists(department):
+    return len(list(Department.objects.filter(Q(name=department)))) >= 1
