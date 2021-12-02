@@ -19,15 +19,16 @@ interface csprops{
 
 const CaseStudyIndividual: React.FC = () =>{
     const[individualCaseStudy, setIndividualCaseStudy] = useState<any>([]);
-    //const id = useParams();
+    const params:any = useParams();
     const history = useHistory();
 
     useEffect( () => {
+        console.log(params.id);
         retrieveIndividualCaseStudy();
     }, []);
 
     const retrieveIndividualCaseStudy = () => {
-        axios.get(endpoint + 'api/case_study/' + 'dwaeqeq/')
+        axios.get(endpoint + 'api/case_study/' + params.id + "/")
             .then(res=>{
                 setIndividualCaseStudy(res.data);
                 console.log(res.data)
