@@ -55,8 +55,8 @@ interface GraphCardProps {
     // Fetching Data
     department: string;
     field: string;
-    minMonth: number;
-    minYear: number;
+    minMonth: number | null;
+    minYear: number | null;
     maxMonth: number;
     maxYear: number;
 
@@ -75,12 +75,13 @@ const graphApi = axios.create({
     baseURL: 'http://127.0.0.1:8000/api/graph_data/'
 })
 
-// class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData> {
-//     constructor(props: GraphCardProps) {
-export class DptGraphCard extends Component<GraphProps, GraphCardData> {
-    constructor(props: GraphProps) {
+export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData> {
+    constructor(props: GraphCardProps) {
+// export class DptGraphCard extends Component<GraphProps, GraphCardData> {
+//     constructor(props: GraphProps) {
         super(props);
 
+        // The default loading state
         this.state = {
             width: props.width, 
             height: props.height, 
@@ -91,14 +92,14 @@ export class DptGraphCard extends Component<GraphProps, GraphCardData> {
                 data: []
             }
         };
-
+        
         graphApi.get('/', {params: {
-            department: 'Rehab',
-            field: 'Bed days',
-            min_month: 1,
-            min_year: 2021,
-            max_month: 12,
-            max_year: 2022
+            department: props.department,
+            field: props.field,
+            min_month: props.minMonth != null ? props.minMonth : props.maxMonth,
+            min_year: props.maxMonth != null ? props.minYear : props.maxYear - 1,
+            max_month: props.maxMonth,
+            max_year: props.maxYear
         }}).then( (result: any) => {
             console.log(result.data);
 
