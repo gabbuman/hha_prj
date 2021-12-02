@@ -180,17 +180,26 @@ def GetCaseStudies(request):
     return HttpResponse(data, content_type="application/json")
 
 @api_view(['GET'])
-def DepartmentHomepageReminders(request):
+def GetDepartmentReminders(request):
+
+    target_dept = request.query_params.get("department")
+
+    if target_dept is None:
+        return HttpResponseBadRequest("Parameters are missing.")
     
+    department_exists = len(list(Department.objects.filter(Q(name=target_dept)))) >= 1
+    if not department_exists:
+        return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
+
     # Case Study Count
     today_date = dt.datetime.now() # now() to include time in the datetime object
     start_date = dt.datetime.today().replace(day=1) # today() used to set time of datetime to 0 implicitly
-    case_studies_completed = list(CaseStudy.objects.filter(Q(created_at__range=(start_date,today_date))))
+    case_studies_completed = list(CaseStudy.objects.filter(Q(created_at__range=(start_date,today_date)),Q(department=(target_dept))))
 
     # Monthly Record Status
     current_year = dt.datetime.now().year
     current_month = dt.datetime.now().month
-    monthly_record_submitted = list(MonthlyRecord.objects.filter(Q(year=current_year), Q(month=current_month)).values())
+    monthly_record_submitted = list(MonthlyRecord.objects.filter(Q(year=current_year), Q(month=current_month), Q(department=(target_dept))).values())
 
     # Biomechanical Form Status - TBD
 
@@ -198,8 +207,11 @@ def DepartmentHomepageReminders(request):
     response = dict()
     response["case_studies_completed"] = len(case_studies_completed)
     response["monthly_record_subbmited"] = True if len(monthly_record_submitted) > 0 else False
+    response["outstanding_biomech_issues"] = "Waiting for biomechanical form model to get this"
 
     data = json.dumps(response,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
 
+# @api_view(['GET'])
+# def DepartmentHomepageReminders(request):
 
