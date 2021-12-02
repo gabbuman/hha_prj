@@ -21,6 +21,7 @@ import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
 import DepartmentHome from './dpt/DepartmentHome';
 import QuestionList from './questions/QuestionList';
 import CaseStudyGridView from './casestudy/CaseStudyGridView';
+import CaseStudyEdit from './casestudy/CaseStudyEdit';
 
 class App extends Component {
     render() {
@@ -53,6 +54,7 @@ class App extends Component {
 					<Route path='/case_study_grid' component={CaseStudyGridView}/>
 					<Route path='/actioncard' component={DepartmentHome}/>	
 					<Route path='/questionlist' component={QuestionList} />
+					<Route path='/csedit' component={CaseStudyEdit}/>
 				</Switch>
 				<ToastContainer/>
 			</Router>
