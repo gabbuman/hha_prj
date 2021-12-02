@@ -78,10 +78,19 @@ class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData> {
         super(props);
 
         graphApi.get('/').then( result => {
-            
+
         })
 
-        this.setState({width: props.width, height: props.height});
+        this.setState({
+            width: props.width, 
+            height: props.height, 
+            recordDataSet: {
+                recordType: 'Loading', 
+                startDate: null,
+                endDate: null,
+                data: null
+            }
+        });
     }
 
     render() {
