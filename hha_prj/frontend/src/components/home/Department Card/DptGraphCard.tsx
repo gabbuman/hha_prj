@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import DptGraph from './DptGraph';
 import styled from 'styled-components'
 import { RecordDataSet } from './RecordData';
+import axios from 'axios';
+import { Api } from '@mui/icons-material';
 
 const GraphContainer = styled.div `
     display: grid;
@@ -47,4 +49,48 @@ export const DptGraphCard = (props: GraphProps) => {
     )
 };
 
+interface GraphCardProps {
+    // Fetching Data
+    department: string;
+    field: string;
+    minMonth: number;
+    minYear: number;
+    maxMonth: number;
+    maxYear: number;
 
+    // Rendering Card
+    width: number;
+    height: number;
+}
+
+interface GraphCardData {
+    width: number;
+    height: number;
+    recordDataSet: RecordDataSet;
+}
+
+const graphApi = axios.create({
+    baseURL: 'http://127.0.0.1:8000/api/monthly_record_data/'
+})
+
+class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData> {
+    constructor(props: GraphCardProps) {
+        super(props);
+
+        graphApi.get('/').then( result => {
+            
+        })
+
+        this.setState({width: props.width, height: props.height});
+    }
+
+    render() {
+        return (
+            <GraphContainer>
+                <GraphTitle>{this.state.recordDataSet.recordType}</GraphTitle>
+                <GraphSubTitle>From {this.state.recordDataSet.startDate} to {this.state.recordDataSet.endDate}</GraphSubTitle>
+                <DptGraph width={this.state.width} height={this.state.height} recordsToRender={this.state.recordDataSet.data}/>
+            </GraphContainer>
+        )
+    }
+}
