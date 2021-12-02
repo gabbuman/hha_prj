@@ -29,7 +29,6 @@ const initialState: CSSState = {
 }
     
 export default class BiomechanicalSupportForm extends Component <CSSProps, CSSState>{
-    
 
     constructor(props: CSSProps){
         super(props);
@@ -47,8 +46,6 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
         }
     }
 
-
-
     uploadBioForm = () =>{
         const formData = new FormData();
         if(this.state.selectedImages == null){
@@ -57,7 +54,7 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
             formData.append('department',this.props.dptName);
             axios.post(endpoint + 'api/bio_support/', formData)
                 .then(res=>{
-                    notifySuccess("Biomechanical issue reported");
+                    notifySuccess("Biomechanical issue Reported");
                     console.log(res)
                 })
                 .catch((error)=> {
@@ -74,7 +71,7 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
             formData.append('department',this.props.dptName);
             axios.post(endpoint + 'api/bio_support/', formData)
                 .then(res=>{
-                    notifySuccess("Biomechanical issue reported");
+                    notifySuccess("Biomechanical issue Reported");
                     console.log(res)
                 })
                 .catch((error)=> {
