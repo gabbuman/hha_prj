@@ -18,6 +18,7 @@ import {DptGraphCard, GraphProps} from '../home/Department Card/DptGraphCard';
 import { render } from 'react-dom';
 import { Component } from 'react';
 import Biosuptform from '../home/Biosuptform';
+import ViewBioform from '../home/ViewBioform';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -123,7 +124,8 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Employee Of the Month" {...a11yProps(3)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Case Study" {...a11yProps(4)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Data Record Archive" {...a11yProps(5)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Graphs" {...a11yProps(6)} /> 
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Graphs" {...a11yProps(6)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="View Biomechanical Requests" {...a11yProps(7)} /> 
        </Tabs>
 
       <Grid item xs={10}>
@@ -151,6 +153,9 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
                                   dptName={this.props.dptName}/>
 							  }
 						</ParentSize>
+        </TabPanel>
+        <TabPanel value={this.state.value} index={7}>
+          <ViewBioform dptName={this.props.dptName}/>
         </TabPanel>
       </Grid>
     </Box>
