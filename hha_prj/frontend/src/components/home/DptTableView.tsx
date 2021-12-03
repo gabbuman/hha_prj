@@ -144,7 +144,7 @@ export class DptTableView extends Component<tableProps, tableState> {
                             { 
                                 <Stack direction="row" justifyContent="flex-end">
                                     <ThemeProvider theme={theme}>
-                                          { <Button variant="contained" color="neutral" onClick = {exportPDFWithComponent}>Export</Button>  }  
+                                          { <Button variant="contained" color="neutral" onClick = {exportPDFWithComponent}>Export toPDF</Button>  }  
                                     </ThemeProvider>
                                 </Stack>
                             }                   
