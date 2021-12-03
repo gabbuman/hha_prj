@@ -4,16 +4,14 @@ import styled from 'styled-components';
 import { endpoint } from '../Endpoint'
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import BioformDataFields from '../../types/Biomechanicalsupt';
-import BioformServices from '../../services/BioformServices'
+import BioformData from '../../types/Biomechanicalsupt';
+import BioformServices from '../../services/BioformServices';
 
 const HeaderLabel = styled.h3 `
     font-weight: 800;
     font-size: 30px;
     width: 350px;
 `
-
-
 
 const CardGroup = styled.div `
     display: grid;
@@ -53,16 +51,15 @@ interface bsprops{
     dptName: string;
 }
 
-
 const ViewBioform: React.FC<bsprops> = ({dptName}: bsprops) =>{  
-    const[BioformServices, setBioform] = useState<Array<BioformDataFields>>([]);
+    const[Bioforms, setBioform] = useState<Array<BioformData>>([]);
 
     useEffect( ()=> {
         retrieveBioform();
     }, []);
 
     const retrieveBioform = () => {
-        BioformServices.getdeptAll(dptName)
+        BioformServices.getAll(dptName)
             .then((response: any) => {
             setBioform(response.data);
             console.log(response.data);
@@ -79,7 +76,7 @@ const ViewBioform: React.FC<bsprops> = ({dptName}: bsprops) =>{
             <ContentGroup>
                 <TitledCardGroup>
                     <CardGroup>
-                        {BioformServices && BioformServices.map(item => {
+                        {Bioforms && Bioforms.map(item => {
                             return (
                                 <BSCard
                                 stateChanger={retrieveBioform}

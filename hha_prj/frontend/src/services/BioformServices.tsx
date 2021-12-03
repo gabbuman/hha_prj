@@ -3,7 +3,7 @@ import axios from 'axios';
 import BioformData from "../types/Biomechanicalsupt"
 
 
-const getdeptAll= (dept: string) => {
+const getAll= (dept: string) => {
     return http.get<Array<BioformData>>("/get_bio_forms/", {
         params: {
             department: dept
@@ -16,7 +16,7 @@ const remove= (id: any) => {
 }; 
 
 const BioformServices = {
-    getdeptAll,
+    getAll,
     remove,
 };
 
