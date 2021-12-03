@@ -3,7 +3,6 @@ import DptGraph from './DptGraph';
 import styled from 'styled-components'
 import { RecordDataSet, sampleData } from './RecordData';
 import axios from 'axios';
-import { Api } from '@mui/icons-material';
 
 const GraphContainer = styled.div `
     display: grid;
@@ -47,6 +46,7 @@ interface GraphCardProps {
 }
 
 interface GraphCardData {
+    dataState: 'Loading' | 'No data' | 'Loaded';
     width: number;
     height: number;
     recordDataSet: RecordDataSet;
@@ -62,6 +62,7 @@ export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData
 
         // The default loading state
         this.state = {
+            dataState: 'Loading',
             width: props.width, 
             height: props.height, 
             recordDataSet: {
@@ -81,17 +82,30 @@ export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData
             max_month: props.maxMonth,
             max_year: props.maxYear
         }}).then( (result: any) => {
-            this.setState({
-                recordDataSet: {
-                    recordType: result.data.field,
-                    startDate: result.data.responses[0].date,
-                    endDate: result.data.responses[this.getLastIndex(result.data.responses)].date,
-                    data: result.data.responses
-                }
-            });
+            if (result.data.responses.length == 0) {
+                this.setState({
+                    dataState: 'No data',
+                    recordDataSet: {
+                        recordType: 'No data recorded', 
+                        startDate: 'N/A',
+                        endDate: 'N/A',
+                        data: []
+                    }
+                })
+            } else {
+                this.setState({
+                    dataState: 'Loaded',
+                    recordDataSet: {
+                        recordType: result.data.field,
+                        startDate: result.data.responses[0].date,
+                        endDate: result.data.responses[this.getLastIndex(result.data.responses)].date,
+                        data: result.data.responses
+                    }
+                });
+            }
         })
 
-        // TODO: show error
+        // TODO: Show error
     }
 
     getLastIndex(array: any) {
@@ -99,11 +113,17 @@ export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData
     }
 
     getComponent() {
-        switch(this.state.recordDataSet.recordType) {
-            case 'Loading...':
+        switch(this.state.dataState) {
+            case 'Loading':
                 return (
                     <div>
                         <h1>Loading...</h1>
+                    </div>
+                )
+            case 'No data':
+                return (
+                    <div>
+                        <h1>No data recorded</h1>
                     </div>
                 )
             default:
