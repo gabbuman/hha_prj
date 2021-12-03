@@ -7,6 +7,7 @@ interface GDFProps {
     disabled: boolean;
     dischargedAlive_shared: number;
     stayedinward_shared: number;
+    // dptName: string;
 }
 
 interface GDFState {

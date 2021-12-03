@@ -15,6 +15,9 @@ import DptRecordPage from '../dpt/DptRecordPage';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import { sampleData } from '../home/Department Card/RecordData';
 import {DptGraphCard, GraphProps} from '../home/Department Card/DptGraphCard';
+import { render } from 'react-dom';
+import { Component } from 'react';
+import QuestionList from '../questions/QuestionList';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -75,12 +78,28 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-export default function VerticalTabs() {
-  const [value, setValue] = React.useState(1);
+  interface verNavProps{
+    dptName: string
+  }
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
+  interface verNavState{
+    value: number
+  }
+
+  const initialState: verNavState = {
+    value: 1,
+  }
+export default class verNavbar extends Component<verNavProps, verNavState> {
+  constructor(props: verNavProps){
+    super(props);
+    this.state = initialState;
+}
+  render(){
+
+     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+       {newValue}
+      this.setState({value: newValue});
+    };
 
   return (
       
@@ -90,50 +109,55 @@ export default function VerticalTabs() {
       <Tabs
         orientation="vertical"
         variant="scrollable"
-        value={value}
+        value={this.state.value}
         onChange={handleChange}
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider'}}
 
       >
-       
         <Button sx={{justifyContent: 'flex-start', textTransform: 'none' , color: "black"}} variant="outlined" startIcon={<ArrowBackIcon />} href="/homepage">
             Back to Home
         </Button>
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Monthly Records" {...a11yProps(1)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Biomechanical Support" {...a11yProps(2)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Employee Of the Month" {...a11yProps(3)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Case Study" {...a11yProps(4)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Past Data Record" {...a11yProps(5)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Past Data Record (Graphs)" {...a11yProps(6)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Data Record Archive" {...a11yProps(1)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Graphs" {...a11yProps(2)} /> 
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Monthly Records" {...a11yProps(3)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Question List Template" {...a11yProps(4)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Case Study" {...a11yProps(5)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Biomechanical Support" {...a11yProps(6)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Employee Of the Month" {...a11yProps(7)} /> 
       </Tabs>
 
       <Grid item xs={10}>
-        <TabPanel  value={value} index={1}>
-          <MonthlyRecord />
+        <TabPanel value={this.state.value} index={1}>
+          <DptTableView dptName={this.props.dptName}/>
         </TabPanel>
-        <TabPanel value={value} index={2}>
-          Item Three
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          Item Four
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          <CaseStudyGridView/>
-        </TabPanel>
-        <TabPanel value={value} index={5}>
-          <DptTableView />
-        </TabPanel>
-        <TabPanel value={value} index={6}>
+        <TabPanel value={this.state.value} index={2}>
             <ParentSize>
 							  {({width, height}) => 
 								    <DptGraphCard width={width} 
 											            height={300} 
-											            recordDataSet={sampleData} />
+											            recordDataSet={sampleData} 
+                                  dptName={this.props.dptName}/>
 							  }
 						</ParentSize>
+        </TabPanel>
+        <TabPanel  value={this.state.value} index={3}>
+          <MonthlyRecord dptName={this.props.dptName}/>
+        </TabPanel>
+        <TabPanel  value={this.state.value} index={4}>
+          <QuestionList dptName={this.props.dptName}/>
+        </TabPanel>
+        <TabPanel value={this.state.value} index={5}>
+          <CaseStudyGridView dptName={this.props.dptName}/>
+        </TabPanel>
+        <TabPanel value={this.state.value} index={6}>
+          Item Biomechanical
+        </TabPanel>
+        <TabPanel value={this.state.value} index={7}>
+          Item Employee
         </TabPanel>
       </Grid>
     </Box>
   );
+  }
 }

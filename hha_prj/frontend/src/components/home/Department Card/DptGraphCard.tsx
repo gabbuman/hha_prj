@@ -34,6 +34,7 @@ export interface GraphProps {
     width: number;
     height: number;
     recordDataSet: RecordDataSet;
+    dptName: string;
 }
 
 export const DptGraphCard = (props: GraphProps) => {
