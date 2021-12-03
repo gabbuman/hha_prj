@@ -3,8 +3,6 @@ import Header from '../layout/Header';
 import { Box, TextField, Typography, Stack, Button,
     FormControl, MenuItem, InputLabel, Select, Grid, Container, 
     CardMedia, Card, CardActions, CardActionArea, CardContent} from '@mui/material';
-import ReactDOM from 'react-dom';
-import DptRecordPage from '../dpt/DptRecordPage';
 import { endpoint } from '../Endpoint';
 import axios from 'axios';
 import { Link, BrowserRouter as Router, useParams, useHistory} from 'react-router-dom';
@@ -22,13 +20,11 @@ const CaseStudyEdit: React.FC = () =>{
     const params:any = useParams();
     const history = useHistory();
     useEffect( () => {
-        //console.log(params.id);
         retrieveIndividualCaseStudy();
     }, []);
 
     const editClick = () => {
-        //console.log(individualCaseStudy)
-        //handleImageUpload();
+        console.log(individualCaseStudy)
         axios.put(endpoint + 'api/case_study/' + params.id + '/', individualCaseStudy)
             .then(res=>{
                 notifySuccess("Case Study Saved Successfully");
@@ -39,16 +35,15 @@ const CaseStudyEdit: React.FC = () =>{
                 //console.error(error)
             }
         );
+
         const formData = new FormData();
         formData.append('image', individualCaseStudy.selectedImages, individualCaseStudy.name);
         axios.put(endpoint + 'api/case_study/' + params.id + '/', formData)
             .then(res=>{
-                notifySuccess("Case Study Picture added Successfully");
-                //console.log(res)
+                console.log(res)
             })
             .catch((error)=> {
-                notifyFail("Failed to Edit Case Study");
-                //console.error(error)
+                console.error(error)
             }
         );
     }
@@ -61,16 +56,13 @@ const CaseStudyEdit: React.FC = () =>{
             setIndividualCaseStudy({selectedImages: event.target.files[0]||[]})
             console.log(event.target.files[0]);
         }
-        //console.log("case study object is " + individualCaseStudy);
-        //console.log("the image is " +individualCaseStudy.selectedImages)
     }
 
     const retrieveIndividualCaseStudy = () => {
         axios.get(endpoint + 'api/case_study/' + params.id + '/')
             .then(res=>{
                 setIndividualCaseStudy(res.data);
-                //console.log(res.data)
-                //console.log({individualCaseStudy})
+                console.log(res.data)
             })
             .catch((error)=> {
                 console.error(error)
@@ -83,7 +75,6 @@ const CaseStudyEdit: React.FC = () =>{
         types.push("Training Session");
         types.push("Staff Recognition");
         types.push("Other Story");
-        //console.log(individualCaseStudy);
 
         return(
             <div>
@@ -173,9 +164,7 @@ const CaseStudyEdit: React.FC = () =>{
                             width:"170ch"
                         }}>
                             <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="primary"onClick={editClick}>Submit</Button>
-                            <Link to = "/dptrecordpage" style={{ textDecoration: 'none' }} >
-                                <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
-                            </Link>
+                            <Button onClick={() => history.goBack()} style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
                         </Stack>
 
                     </Grid>

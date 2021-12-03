@@ -16,7 +16,7 @@ import Homepage from './home/Homepage';
 import { ToastContainer } from 'react-toastify';
 import {DptGraphCard, GraphProps} from './home/Department Card/DptGraphCard';
 import CreateDepartment from './dpt/CreateDepartment';
-import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
+import CaseStudyInputForm from './casestudy/CaseStudyInputForm';
 import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
 import DepartmentHome from './dpt/DepartmentHome';
 import QuestionList from './questions/QuestionList';
@@ -49,7 +49,7 @@ class App extends Component {
 					<Route path='/graph' component={DptGraphCard}/>
 					<Route path='/dptrecordpage' component={DptRecordPage} />	
 					<Route path='/createdepartment' component={CreateDepartment} />	
-					<Route path='/case_study_form' component={CaseStudySubmissionForm}/>
+					<Route path='/case_study_form' component={CaseStudyInputForm}/>
 					<Route path='/case_study_individual/:id' component={CaseStudyIndividual}/>
 					<Route path='/case_study_grid' component={CaseStudyGridView}/>
 					<Route path='/actioncard' component={DepartmentHome}/>	

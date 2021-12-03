@@ -32,7 +32,6 @@ const CaseStudyIndividual: React.FC = () =>{
             .then(res=>{
                 setIndividualCaseStudy(res.data);
                 console.log(res.data)
-                console.log({individualCaseStudy})
             })
             .catch((error)=> {
                 console.error(error)

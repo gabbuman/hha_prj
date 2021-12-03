@@ -7,7 +7,6 @@ import { Box, TextField, Typography, Stack, IconButton, Button,
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import CaseStudySubmissionForm from './CaseStudyInputForm';
 import CaseStudyIndividual from '../casestudy/CaseStudyIndividual';
 import CaseStudyDataFields from '../../types/CaseStudy';
 import CaseStudyServices from '../../services/CaseStudyServices';
