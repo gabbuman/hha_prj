@@ -127,20 +127,40 @@ class TableData extends Component <tableProps, tableState> {
             filename: 'MonthlyReport_' + this.state.dptName + '_' + this.state.month  + '_' + this.state.year + '.csv'
           };
 
+        const CsvReportAll= {
+            data: this.state.dataRecords,
+            filename: 'MonthlyReport_' + this.state.dptName + '_' + this.state.month  + '_' + this.state.year + '.csv'
+          };
+
         return(
             <><div>
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid item xs={12}>
                     <Stack direction="row" justifyContent="flex-end">
                             <ThemeProvider theme={theme}>
                                 <CSVLink {...CsvReport} >
-                                <Button variant="contained" color="neutral"> Export to CSV </Button>
+                                <Button variant="contained" color="neutral"> Export current to CSV </Button>
                                 </CSVLink>
                             </ThemeProvider>
                         
                     </Stack>
                 </Grid>
+                
+                <Grid item xs={12}>
+                    <Stack direction="row" justifyContent="flex-end">
+                            <ThemeProvider theme={theme}>
+                                <CSVLink {...CsvReportAll} >
+                                <Button variant="contained" color="neutral"> Export All records to CSV </Button>
+                                </CSVLink>
+                            </ThemeProvider>
+                        
+                    </Stack>
+                </Grid>
+
+                
+                </Grid>
             </div>
-            
+            <Grid item xs={12}>
             <TableContainer component={Paper}>
                     <Table sx={{ width: "auto" }} aria-label="simple table">
                         <TableBody>
@@ -173,7 +193,9 @@ class TableData extends Component <tableProps, tableState> {
                                 ))}
                         </TableBody>
                     </Table>
-                </TableContainer></>
+                    
+                </TableContainer>
+                </Grid></>
             )
            
         
