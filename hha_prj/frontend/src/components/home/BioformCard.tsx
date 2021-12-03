@@ -99,7 +99,7 @@ const CSCard: React.FC<BSData> = ({stateChanger, id, name, issue}: BSData) =>  {
                 </TitleGrid>
                 <CardContent>{issue}</CardContent>
                 <EditDelGrid>
-                    <Button variant="contained" onClick={deleteBioform} color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
+                    <Button variant="contained" onClick={deleteBioform} style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Fixed</Button>
                 </EditDelGrid>  
             </CSCardGroup>
         </div>
