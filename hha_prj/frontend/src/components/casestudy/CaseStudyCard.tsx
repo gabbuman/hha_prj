@@ -106,7 +106,7 @@ const CSCard: React.FC<CSData> = ({stateChanger, id, title, type, content}: CSDa
                     <Link to = {"/case_study_individual/"+id} style={{ textDecoration: 'none' }}>
                         <Button variant="contained" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>View</Button>
                     </Link>
-                    <Link to = {"/case_study_form/"+id} style={{ textDecoration: 'none' }} >
+                    <Link to = {"/csedit/"+id} style={{ textDecoration: 'none' }} >
                         <Button variant="contained" color="warning" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Edit</Button>
                     </Link>
                     <Button variant="contained" onClick={deleteCaseStudy} color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>
