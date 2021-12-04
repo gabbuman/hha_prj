@@ -9,7 +9,7 @@ from .serializers import CustomTokenPairSerializer
 from django.http import HttpResponse, HttpResponseBadRequest
 from datetime import datetime
 import datetime as dt
-from .models import  Department, MonthlyRecord, CurrentFieldsList, CaseStudy
+from .models import  Department, MonthlyRecord, CurrentFieldsList, CaseStudy, Points
 import json
 from django.db.models import Q
 import csv
@@ -234,3 +234,28 @@ def GetAllMonhtlyRecordDataInCSV(request):
 
 def checkDepartmentExists(department):
     return len(list(Department.objects.filter(Q(name=department)))) >= 1
+
+@api_view(['GET'])
+def UpdateCaseStudyPoints(request):
+    case_study_points = Points.objects.get(id = 1).case_studies
+    case_study_department = request.query_params.get("name")
+
+    if case_study_department is None:
+        return HttpResponseBadRequest("Parameters are missing.")
+    
+    if not checkDepartmentExists(case_study_department):
+        return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
+
+
+    department = Department.objects.get(name = case_study_department)
+    department.points = department.points + case_study_points
+    department.save()
+
+    #Just to view the department after it's points have been updated
+    department_list = []
+    department_queryset = Department.objects.filter(name = "Rehab").values()
+    department_list.append(department_queryset[0])
+    data = json.dumps(department_list,indent=4,sort_keys=True,default=str)
+    return HttpResponse(data, content_type="application/json")
+
+

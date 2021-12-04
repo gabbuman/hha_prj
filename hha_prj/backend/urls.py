@@ -1,10 +1,10 @@
 from django.utils.module_loading import import_string
 from rest_framework import routers
-from .api import CaseStudyTypeViewSet, CaseStudyViewSet, DischargedAliveRehabGreenDataViewSet,StayedInWardRehabGreenDataViewSet
+from .api import CaseStudyTypeViewSet, CaseStudyViewSet, DischargedAliveRehabGreenDataViewSet, PointsViewSet,StayedInWardRehabGreenDataViewSet
 from .api import CurrentFieldListViewSet, MonthlyRecordViewSet 
 from .api import CustomUserViewSet
 from .api import DepartmentViewSet, RoleViewSet
-from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus
+from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus, UpdateCaseStudyPoints
 from .views import GetRecordDataByDateRange, GetCurrentFieldList, retrieveCaseStudiesForPreview, GetCaseStudies
 from .views import GetQuestionsListByDateRange, GetDepartmentReminders, GetAllMonhtlyRecordDataInCSV
 
@@ -27,6 +27,7 @@ router.register('api/role', RoleViewSet, 'role')
 router.register('api/case_study_type', CaseStudyTypeViewSet, 'case_study_type')
 router.register('api/case_study', CaseStudyViewSet, 'case_study')
 router.register('api/stayed_in_ward_rehab_green_data', StayedInWardRehabGreenDataViewSet, 'stayed_in_ward_rehab_green_data')
+router.register('api/points', PointsViewSet, 'points')
 
 urlpatterns = [
     path('', include(router.urls)),
@@ -39,5 +40,6 @@ urlpatterns = [
     path('api/get_case_studies/', GetCaseStudies),
     path('api/questions_by_date_range/', GetQuestionsListByDateRange),
     path('api/get_department_reminders/', GetDepartmentReminders),
-    path('api/get_all_monhtly_data_csv/', GetAllMonhtlyRecordDataInCSV)
+    path('api/get_all_monhtly_data_csv/', GetAllMonhtlyRecordDataInCSV),
+    path('api/update_case_studies_points/',UpdateCaseStudyPoints)
 ]

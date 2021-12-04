@@ -5,12 +5,14 @@ from django.db.models.fields.related import ForeignKey
 from django.utils.translation import gettext as _ # aliasing gettext as _
 from .managers import CustomUserManager
 
-
+class Points(models.Model):
+    monthly_record = models.PositiveSmallIntegerField(default=5)
+    case_studies = models.PositiveSmallIntegerField(default = 2)
 class Department(models.Model):
     name = models.CharField(unique=True, primary_key=True, max_length=50)
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     image = models.ImageField(upload_to="uploads/", null=True, default="uploads/default.jpg")
-    
+    points = models.PositiveIntegerField(default=0)
     def __str__(self):
         return self.name 
 
