@@ -6,7 +6,7 @@ from .api import CustomUserViewSet
 from .api import DepartmentViewSet, RoleViewSet
 from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus
 from .views import GetRecordDataByDateRange, GetCurrentFieldList, retrieveCaseStudiesForPreview, GetCaseStudies
-from .views import GetQuestionsListByDateRange
+from .views import GetQuestionsListByDateRange, GetDepartmentReminders, GetAllMonhtlyRecordDataInCSV
 
 from django.urls import path
 from django.urls.conf import include
@@ -37,5 +37,7 @@ urlpatterns = [
     path('api/get_current_field_list/', GetCurrentFieldList),
     path('api/retrieve_case_studies_for_preview', retrieveCaseStudiesForPreview),
     path('api/get_case_studies/', GetCaseStudies),
-    path('api/get_questions_by_date_range/', GetQuestionsListByDateRange)
+    path('api/questions_by_date_range/', GetQuestionsListByDateRange),
+    path('api/get_department_reminders/', GetDepartmentReminders),
+    path('api/get_all_monhtly_data_csv/', GetAllMonhtlyRecordDataInCSV)
 ]

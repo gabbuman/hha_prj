@@ -2,10 +2,8 @@ import * as React from 'react';
 import { Component } from 'react';
 import Button from '@mui/material/Button';
 import { Box, Container, Grid, Stack, FormControl, InputLabel, Select, MenuItem, createTheme, ThemeProvider} from '@mui/material';
-import TableRow from '@mui/material/TableRow';
-import { grey } from '@mui/material/colors';
-import { createStyles, Theme, withStyles } from '@material-ui/core';
 import TableData from './DptTableData';
+import { PDFExport} from '@progress/kendo-react-pdf';
 
 
 
@@ -79,7 +77,10 @@ export class DptTableView extends Component<tableProps, tableState> {
     dropdownHandleYearChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({year: event.target.value});
     }
-   
+
+     
+    
+
     render (){
 
         let maxOffset = 10;
@@ -89,6 +90,13 @@ export class DptTableView extends Component<tableProps, tableState> {
             years.push(thisYear - x)
         }
         
+        const pdfExportComponent = React.createRef<PDFExport>();
+        const exportPDFWithComponent = () => {
+            if (pdfExportComponent.current) {
+              pdfExportComponent.current.save();
+            }
+        }
+
         return(
             <div> 
                     <Box m={5}>
@@ -136,21 +144,28 @@ export class DptTableView extends Component<tableProps, tableState> {
                             { 
                                 <Stack direction="row" justifyContent="flex-end">
                                     <ThemeProvider theme={theme}>
-                                    <Button variant="contained" color="neutral">Export</Button>
+                                          { <Button variant="contained" color="neutral" onClick = {exportPDFWithComponent}>Export toPDF</Button>  }  
                                     </ThemeProvider>
                                 </Stack>
                             }                   
                         </Grid>                             
                         <Grid item xs={12}>
-                            <TableData  ref={this.tabledataElement} dptName={this.props.dptName} newMonth={months.indexOf(this.state.month) + 1} newYear={parseInt(this.state.year)}/>
+                            <PDFExport
+                            ref={pdfExportComponent}
+                            paperSize="A2"
+                            margin={'4cm'}
+                            fileName={`MonthlyReport_` + this.props.dptName + '_' + this.state.month +this.state.year}
+                            >
+                                <TableData ref={this.tabledataElement} dptName={this.props.dptName} newMonth={months.indexOf(this.state.month) + 1} newYear={parseInt(this.state.year)} />
+                            </PDFExport>
                         </Grid>
-                        </Grid>
+                        </Grid> 
                         </Container>  
                     </Box>      
                 </div>
         )
     }
-}
+} 
 
 export default DptTableView
 
