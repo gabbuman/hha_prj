@@ -1,17 +1,8 @@
 import React, { Component, useState, useEffect } from 'react';
-import { Box, TextField, Typography, Stack, Button, 
-    FormControl, MenuItem, InputLabel, Select, Grid, Container} from '@mui/material';
-import VerNavbar from '../layout/VerNavbar';
-import Header from '../layout/Header';
-import CSPreview from '../home/CSPreview';
-import Rank from '../home/Rank';
 import CSCard from './CaseStudyCard';
 import styled from 'styled-components';
 import AddCard from './CaseStudyAddCard';
-import { endpoint } from '../Endpoint'
-import CaseStudyIndividual from './CaseStudyIndividual';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
-import ReactDOM from 'react-dom';
 import CaseStudyDataFields from '../../types/CaseStudy';
 import CaseStudyService from '../../services/CaseStudyServices'
 
