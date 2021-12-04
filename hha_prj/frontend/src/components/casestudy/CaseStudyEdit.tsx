@@ -180,21 +180,34 @@ const CaseStudyEdit: React.FC = () =>{
                         rows={20}
                         value={description}
                         onChange={handleDesciptionChange}
-                    />
+                        
+                        />
+                        <Box
+                        component="img"
+                        m={2}
+                        sx={{
+                        height: 400,
+                        width: 400,
+                        maxHeight: { xs: 400, md: 400 },
+                        maxWidth: { xs: 400, md: 400 },
+                        }}
+                        alt=""
+                        src={imageUrl}
+                        />
                     </Box>
                     <Box
                     sx={{
                         m:2
                     }}
                     >
-                        <h3>Upload Pictures</h3>
+                        <h3>Upload Pictures/Preview Image</h3>
                         <input
                         accept="image/*"
                         type="file"
                         name="file"
                         onChange={handleImageUpload}
                         />
-                        {imageUrl ? 
+                        {imageUrl !="http://127.0.0.1:8000/uploads/default.jpg" ? 
                             <div style={{marginTop:'10px'}}>
                               <Paper elevation={3}>
                                 <img src={imageUrl} 

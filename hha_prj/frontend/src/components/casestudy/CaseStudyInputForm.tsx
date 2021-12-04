@@ -19,27 +19,34 @@ const CaseStudyInputForm: React.FC<CSSProps> = ({dptName}: CSSProps)=>{
     useEffect( () => {
         setDepartment();
     }, []);
-    const[caseStudyInputPicture, setCaseStudyInputPicture] = useState<any>([]);
-    const[caseStudyInputTitle, setCaseStudyInputTitle] = useState<any>();
-    const[caseStudyInputType, setCaseStudyInputType] = useState<any>();
-    const[caseStudyInputDescription, setCaseStudyInputDescription] = useState<any>();
-    const[caseStudyInputDepartment, setCaseStudyInputDepartment] = useState<any>();
+    const[picture, setPicture] = useState<any>([]);
+    const[title, setTitle] = useState<string>('');
+    const[type, setType] = useState<string>('');
+    const[description, setDescription] = useState<string>('');
+    const[inputDepartment, setInputDepartment] = useState<any>();
     const history = useHistory();
 
     const setDepartment = () => {
-        setCaseStudyInputDepartment({department: dptName})
+        setInputDepartment(dptName)
     }
     const submitClick = () => {
         uploadCaseStudy();
     }
 
     const dropDownHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(event.target.value)
+        setType(event.target.value)
+    }
+    const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setTitle(event.target.value)
 
-        setCaseStudyInputType({type: event.target.value});
+    }
+    const handleDesciptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setDescription(event.target.value)
     }
     const handleImageUpload = (event:any) => {
         if(event.target.files[0]){
-            setCaseStudyInputPicture({selectedImages: event.target.files[0]||[]})
+            setPicture({selectedImages: event.target.files[0]||[]})
         }
     }
 
@@ -47,11 +54,11 @@ const CaseStudyInputForm: React.FC<CSSProps> = ({dptName}: CSSProps)=>{
 
     const uploadCaseStudy = () =>{
         const formData = new FormData();
-        if(caseStudyInputPicture.selectedImages == null){
-            formData.append('title', caseStudyInputTitle.title);
-            formData.append('type', caseStudyInputType.type);
-            formData.append('description',caseStudyInputDescription.description);
-            formData.append('department', caseStudyInputDepartment.department);
+        if(picture.selectedImages == null){
+            formData.append('title', title);
+            formData.append('type', type);
+            formData.append('description',description);
+            formData.append('department', inputDepartment);
             axios.post(endpoint + 'api/case_study/', formData)
                 .then(res=>{
                     notifySuccess("Case Study Saved Successfully");
@@ -63,12 +70,12 @@ const CaseStudyInputForm: React.FC<CSSProps> = ({dptName}: CSSProps)=>{
                 }
             );
         }
-        else if (caseStudyInputPicture.selectedImages != null){
-            formData.append('image', caseStudyInputPicture.selectedImages, caseStudyInputPicture.selectedImages.name);
-            formData.append('title', caseStudyInputTitle.title);
-            formData.append('type', caseStudyInputType.type);
-            formData.append('description', caseStudyInputDescription.description);
-            formData.append('department', caseStudyInputDepartment.department);
+        else if (picture.selectedImages != null){
+            formData.append('image', picture.selectedImages, picture.selectedImages.name);
+            formData.append('title', title);
+            formData.append('type', type);
+            formData.append('description', description);
+            formData.append('department', inputDepartment);
             axios.post(endpoint + 'api/case_study/', formData)
                 .then(res=>{
                     notifySuccess("Case Study Saved Successfully");
@@ -107,7 +114,7 @@ const CaseStudyInputForm: React.FC<CSSProps> = ({dptName}: CSSProps)=>{
                         variant = 'outlined'
                         id="title-case-study"
                         label="Title"
-                        onChange={(e)=>setCaseStudyInputTitle({title: e.target.value})}
+                        onChange={handleTitleChange}
                         
                         sx={{
                             width: '50ch', '& .MuiTextField-root': { m: 2}
@@ -155,7 +162,7 @@ const CaseStudyInputForm: React.FC<CSSProps> = ({dptName}: CSSProps)=>{
                         variant="outlined"
                         multiline
                         rows={20}
-                        onChange={(e)=>setCaseStudyInputDescription({description: e.target.value})}
+                        onChange={handleDesciptionChange}
                     />
                     </Box>
                     <Box
