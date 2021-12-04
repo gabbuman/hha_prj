@@ -32,7 +32,7 @@ declare module '@mui/material/Button' {
     }
 }
 
-const months = [
+export const months = [
     'JAN',
     'FEB',
     'MAR',
@@ -57,8 +57,8 @@ interface tableState {
 }
 
 const initialState: tableState = {    
-    month: months[1],
-    year: "2021", 
+    month: months[(new Date()).getMonth()],
+    year: (new Date()).getFullYear().toString(), 
 }
 
 export class DptTableView extends Component<tableProps, tableState> {
@@ -77,9 +77,6 @@ export class DptTableView extends Component<tableProps, tableState> {
     dropdownHandleYearChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({year: event.target.value});
     }
-
-     
-    
 
     render (){
 
@@ -144,7 +141,7 @@ export class DptTableView extends Component<tableProps, tableState> {
                             { 
                                 <Stack direction="row" justifyContent="flex-end">
                                     <ThemeProvider theme={theme}>
-                                          { <Button variant="contained" color="neutral" onClick = {exportPDFWithComponent}>Export toPDF</Button>  }  
+                                          { <Button variant="contained" color="neutral" onClick = {exportPDFWithComponent}>Export Current to PDF</Button>  }  
                                     </ThemeProvider>
                                 </Stack>
                             }                   

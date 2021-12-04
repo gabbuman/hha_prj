@@ -13,6 +13,7 @@ import { grey } from '@mui/material/colors';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
 import { Button, createTheme, ThemeProvider, Grid, IconButton, Stack } from '@mui/material';
 import { CSVLink } from "react-csv";
+import { months } from './DptTableView';
 
 const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
@@ -35,6 +36,9 @@ interface tableProps{
     month: number;
     year: number;
     dataRecords: {question: string, answer: number}[]
+    dptDataAll: {question: any, answer: any}[]
+    dptData: {question: any, answer: any}[]
+    getAllData: boolean
 }
 
 const theme = createTheme({
@@ -76,9 +80,11 @@ const secondaryDataQuestions = [
     dptName: "",
     month: null,
     year: null,
-    dataRecords: []
+    dataRecords: [],
+    dptDataAll: [],
+    dptData:[],
+    getAllData: true
 }
-
 
 
 class TableData extends Component <tableProps, tableState> {
@@ -88,12 +94,15 @@ class TableData extends Component <tableProps, tableState> {
     constructor(props: tableProps){
         super(props);  
         this.state = initialState;
+        
+        console.log(this.state.getAllData)
     }
    
     componentDidMount() {
         this._isMounted = true;
-        this.setState({dptName: this.props.dptName, month: this.props.newMonth, year: this.props.newYear})
+        this.setState({dptName: this.props.dptName, month: this.props.newMonth, year: this.props.newYear});
         this.getDptData();
+        
     }
 
     componentDidUpdate(prevProps: tableProps){
@@ -110,13 +119,21 @@ class TableData extends Component <tableProps, tableState> {
          .then(  (result)=>{ 
             result.map((data: any)=> (
                 data.department == this.state.dptName && data.month == this.state.month && data.year== this.state.year ? this.setState({dataRecords: data.question_answer_list})
-                :{}
+                :{},
+                this.state.getAllData && (data.department == this.state.dptName )? this.setState({dptDataAll: this.state.dptDataAll.concat({question:"Month/Year", answer:""+ months[data.month] + "/"+ data.year}), dptData: data.question_answer_list})
+                :{dptData: []},
+                console.log(this.state.dptData),
+                console.log(this.state.getAllData),
+                this.state.getAllData && (data.department == this.state.dptName)? this.setState({dptDataAll: this.state.dptDataAll.concat(this.state.dptData)}): {},
+                console.log(this.state.dptDataAll)
             ))
+            this.setState({getAllData: false});
         })
         .catch((error) => {
             console.error(error)
           }
         )
+        
     }
 
     static months: number[]=[]; 
@@ -124,23 +141,43 @@ class TableData extends Component <tableProps, tableState> {
 
         const CsvReport = {
             data: this.state.dataRecords,
-            filename: 'MonthlyReport_' + this.state.dptName + '_' + this.state.month  + '_' + this.state.year + '.csv'
+            filename: 'MonthlyReport_' + this.state.dptName + '_' + months[this.state.month]  + '_' + this.state.year + '.csv'
+          };
+
+        const CsvReportAll= {
+            data: this.state.dptDataAll,
+            filename: 'MonthlyReport_all_' + this.state.dptName + '.csv'
           };
 
         return(
             <><div>
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid item xs={12}>
                     <Stack direction="row" justifyContent="flex-end">
                             <ThemeProvider theme={theme}>
                                 <CSVLink {...CsvReport} >
-                                <Button variant="contained" color="neutral"> Export to CSV </Button>
+                                <Button variant="contained" color="neutral"> Export current to CSV </Button>
                                 </CSVLink>
                             </ThemeProvider>
                         
                     </Stack>
                 </Grid>
+                
+                <Grid item xs={12}>
+                    <Stack direction="row" justifyContent="flex-end">
+                            <ThemeProvider theme={theme}>
+                                <CSVLink {...CsvReportAll} >
+                                <Button variant="contained" color="neutral" > Export All records to CSV </Button>
+                                </CSVLink>
+                            </ThemeProvider>
+                        
+                    </Stack>
+                </Grid>
+
+                
+                </Grid>
             </div>
-            
+            <Grid item xs={12}>
             <TableContainer component={Paper}>
                     <Table sx={{ width: "auto" }} aria-label="simple table">
                         <TableBody>
@@ -173,7 +210,9 @@ class TableData extends Component <tableProps, tableState> {
                                 ))}
                         </TableBody>
                     </Table>
-                </TableContainer></>
+                    
+                </TableContainer>
+                </Grid></>
             )
            
         
