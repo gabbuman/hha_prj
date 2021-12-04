@@ -89,7 +89,7 @@ const modalStyle = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 650,
+    width: 700,
     bgcolor: 'background.paper',
     outline: 0,
     border: '2px solid #000',
@@ -215,17 +215,12 @@ class TableData extends Component <tableProps, tableState> {
                 >
                     <Box sx={modalStyle}>
                     
-                    <div id="modal-modal-description">
-                                <DptGraphCard width={500} 
-									height={300} 
+                                <DptGraphCard width={600} 
+									height={450} 
 									recordDataSet={sampleData} 
                                   dptName={this.props.dptName}/>
-                    </div>
                     </Box>
                 </Modal>
-                
-                
-              
                 </>
             )
            
