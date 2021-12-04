@@ -32,7 +32,7 @@ declare module '@mui/material/Button' {
     }
 }
 
-const months = [
+export const months = [
     'JAN',
     'FEB',
     'MAR',
