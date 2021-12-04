@@ -224,8 +224,8 @@ const CaseStudyEdit: React.FC = () =>{
                         sx={{
                             width:"170ch"
                         }}>
-                            <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="primary"onClick={editClick}>Submit</Button>
                             <Button onClick={() => history.goBack()} style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
+                            <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="primary"onClick={editClick}>Submit</Button>
                         </Stack>
 
                     </Grid>
