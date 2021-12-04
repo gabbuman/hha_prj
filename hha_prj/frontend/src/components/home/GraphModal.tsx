@@ -77,7 +77,7 @@ class GraphModal extends Component <ModalProps, ModalState> {
             <><div>
                 bhjjkbjkjhv bn
             </div><Modal
-                open={open}
+                open={true}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
