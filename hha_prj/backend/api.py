@@ -72,5 +72,3 @@ class CaseStudyViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = CaseStudySerializer
-    lookup_field = 'title'
-    lookup_url_kwarg = 'title'

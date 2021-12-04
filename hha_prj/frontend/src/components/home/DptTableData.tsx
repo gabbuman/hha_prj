@@ -11,8 +11,8 @@ import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
 import { endpoint } from '../Endpoint';
 import { grey } from '@mui/material/colors';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
-import { IconButton } from '@mui/material';
-
+import { Button, createTheme, ThemeProvider, Grid, IconButton, Stack } from '@mui/material';
+import { CSVLink } from "react-csv";
 
 const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
@@ -37,6 +37,30 @@ interface tableProps{
     dataRecords: {question: string, answer: number}[]
 }
 
+const theme = createTheme({
+    palette: {
+      neutral: {
+        main: '#ffffff',
+        contrastText: '#ff',
+      },
+    },
+});
+
+declare module '@mui/material/styles' {
+    interface Palette {
+      neutral: Palette['primary'];
+}
+
+interface PaletteOptions {
+        neutral?: PaletteOptions['primary'];
+    }
+}
+
+declare module '@mui/material/Button' {
+    interface ButtonPropsColorOverrides {
+      neutral: true;
+    }
+}
 
 const secondaryDataQuestions = [
     "Discharged alive",
@@ -78,7 +102,7 @@ class TableData extends Component <tableProps, tableState> {
             this.setState({dataRecords: initialState.dataRecords});
             this.getDptData();
           }
-    }
+    }    
 
     async getDptData() {
         fetch(endpoint + 'api/monthly_records/')
@@ -97,42 +121,59 @@ class TableData extends Component <tableProps, tableState> {
 
     static months: number[]=[]; 
     render (){ 
+
+        const CsvReport = {
+            data: this.state.dataRecords,
+            filename: 'MonthlyReport_' + this.state.dptName + '_' + this.state.month  + '_' + this.state.year + '.csv'
+          };
+
         return(
+            <><div>
+                <Grid item xs={12}>
+                    <Stack direction="row" justifyContent="flex-end">
+                            <ThemeProvider theme={theme}>
+                                <CSVLink {...CsvReport} >
+                                <Button variant="contained" color="neutral"> Export to CSV </Button>
+                                </CSVLink>
+                            </ThemeProvider>
+                        
+                    </Stack>
+                </Grid>
+            </div>
             
             <TableContainer component={Paper}>
-                <Table sx={{ width: "auto" }} aria-label="simple table">
-                    <TableBody>
-                        {
-                        this.state.dataRecords.length == 0 ?
-                        <div > <h3>No Records To View</h3> </div>:
-                        this.state.dataRecords.map((row) => (
-                            <StyledTableRow
-                                key={row.question}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell component="th" scope="row" width="15%" style={{ fontWeight: 700 }}>
-                                    {row.question}
-                                </TableCell>
-                                <TableCell align="left" width="15%">
-                                    {row.answer}
-                                </TableCell>
-                                <TableCell align="right" width="100%">
-                                    {secondaryDataQuestions.includes(row.question) &&
-                                        <IconButton>
-                                            <NotesOutlinedIcon sx={{ color: grey[500] }} />
-                                        </IconButton>}
-                                </TableCell>
-                                <TableCell align="right" width="100%">
-                                    <IconButton>
-                                        <TimelineIcon sx={{ color: grey[500] }} />
-                                    </IconButton>
-                                </TableCell>
+                    <Table sx={{ width: "auto" }} aria-label="simple table">
+                        <TableBody>
+                            {this.state.dataRecords.length == 0 ?
+                                <div> <h3>No Records To View</h3> </div> :
+                                this.state.dataRecords.map((row) => (
+                                    <StyledTableRow
+                                        key={row.question}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell component="th" scope="row" width="15%" style={{ fontWeight: 700 }}>
+                                            {row.question}
+                                        </TableCell>
+                                        <TableCell align="left" width="15%">
+                                            {row.answer}
+                                        </TableCell>
+                                        <TableCell align="right" width="100%">
+                                            {secondaryDataQuestions.includes(row.question) &&
+                                                <IconButton>
+                                                    <NotesOutlinedIcon sx={{ color: grey[500] }} />
+                                                </IconButton>}
+                                        </TableCell>
+                                        <TableCell align="right" width="100%">
+                                            <IconButton>
+                                                <TimelineIcon sx={{ color: grey[500] }} />
+                                            </IconButton>
+                                        </TableCell>
 
-                            </StyledTableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                                    </StyledTableRow>
+                                ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer></>
             )
            
         
