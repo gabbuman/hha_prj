@@ -136,12 +136,6 @@ export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData
     getComponent() {
         switch(this.state.dataState) {
             case 'Loading':
-                return (
-                    <CardContainerForNoDataStates width={this.state.width == 0 ? 600 : this.state.width} 
-                                                  height={this.state.height == 0 ? 300 : this.state.height}>
-                        <h1>{this.state.recordDataSet.recordType}</h1>
-                    </CardContainerForNoDataStates>
-                )
             case 'No data':
                 return (
                     <CardContainerForNoDataStates width={this.state.width == 0 ? 600 : this.state.width} 
