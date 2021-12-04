@@ -11,8 +11,9 @@ import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
 import { endpoint } from '../Endpoint';
 import { grey } from '@mui/material/colors';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
-import { Button, createTheme, ThemeProvider, Grid, IconButton, Stack, Modal, Box } from '@mui/material';
+import { Button, createTheme, ThemeProvider, Grid, IconButton, Stack, Modal, Box, autocompleteClasses } from '@mui/material';
 import { CSVLink } from "react-csv";
+import GraphModal from './GraphModal';
 
 const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
@@ -79,22 +80,18 @@ const secondaryDataQuestions = [
     dataRecords: []
 }
 
+
+
 let modalIsOpen = false;
 
-const modalStyle = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    outline: 0,
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
+  let graphStartMonth;
+  let graphEndMonth;
+  let graphStartYear;
+  let graphEndYear;
+  let graphQuestion;
 
 class TableData extends Component <tableProps, tableState> {
+    private graphModalElement: React.RefObject<GraphModal>;
     _isMounted = false;
     prevProps: any;
     prevProp: any;
@@ -142,16 +139,18 @@ class TableData extends Component <tableProps, tableState> {
             data: this.state.dataRecords,
             filename: 'MonthlyReport_' + this.state.dptName + '_' + this.state.month  + '_' + this.state.year + '.csv'
           };
-          
+
+        
         const handleOpen = () => {
+            graphStartMonth = this.state.month - 6;
+            graphEndMonth = this.state.month + 6;
+            graphStartYear = this.state.year -1;
+            graphEndYear = this.state.year;
             modalIsOpen = true;
             console.log("button pressed");
             this.forceUpdate();
         }
-        const handleClose = () => {
-            modalIsOpen = false;
-            this.forceUpdate();
-        }
+        
         
       
         return(
@@ -204,26 +203,7 @@ class TableData extends Component <tableProps, tableState> {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <Modal
-                    open={modalIsOpen}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={modalStyle}>
-                    <div id="modal-modal-title" >
-                        Text in a modal jcgfzhxgkhj
-                        hgchjvb
-                        hj
-
-                    </div>
-                    <div id="modal-modal-description">
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </div>
-                    </Box>
-                </Modal>
-                
-                
+                <GraphModal ref={this.graphModalElement} isOpen={modalIsOpen} dptName={this.state.dptName}/>
               
                 </>
             )
