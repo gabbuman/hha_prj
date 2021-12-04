@@ -7,6 +7,8 @@ import { endpoint } from '../Endpoint';
 import axios from 'axios';
 import { Link, BrowserRouter as Router, useParams, useHistory} from 'react-router-dom';
 import { notifyFail, notifySuccess } from '../login/Notifications';
+import Paper from '@mui/material/Paper';
+import { type } from 'os';
 
 
 
@@ -16,7 +18,11 @@ interface csprops{
 
 
 const CaseStudyEdit: React.FC = () =>{
-    const[individualCaseStudy, setIndividualCaseStudy] = useState<any>([]);
+    const[imageUrl, setImageUrl] = useState<string>('');
+    const[title, Title] = useState<string>('');
+    const[type, Type] = useState<string>('');
+    const[description, Description] = useState<string>('');
+    const[imageObject, setImageObject] = useState<any>([]);
     const params:any = useParams();
     const history = useHistory();
     useEffect( () => {
@@ -24,44 +30,74 @@ const CaseStudyEdit: React.FC = () =>{
     }, []);
 
     const editClick = () => {
-        console.log(individualCaseStudy)
-        axios.put(endpoint + 'api/case_study/' + params.id + '/', individualCaseStudy)
-            .then(res=>{
-                notifySuccess("Case Study Saved Successfully");
-                //console.log(res)
-            })
-            .catch((error)=> {
-                notifyFail("Failed to Edit Case Study");
-                //console.error(error)
-            }
-        );
-
         const formData = new FormData();
-        formData.append('image', individualCaseStudy.selectedImages, individualCaseStudy.name);
-        axios.put(endpoint + 'api/case_study/' + params.id + '/', formData)
-            .then(res=>{
-                console.log(res)
-            })
-            .catch((error)=> {
-                console.error(error)
-            }
-        );
+        if(imageObject.selectedImages == null){
+            formData.append('title', title);
+            formData.append('type', type);
+            formData.append('description', description);
+            axios.put(endpoint + 'api/case_study/' + params.id + '/', formData)
+                .then(res=>{
+                    notifySuccess("Case Study Saved Successfully");
+                    console.log(res)
+                })
+                .catch((error)=> {
+                    notifyFail("Failed to Save Case Study");
+                    console.error(error)
+                }
+            );
+        }
+        else if (imageObject.selectedImages != null){
+            formData.append('image', imageObject.selectedImages, imageObject.selectedImages.name);
+            formData.append('title', title);
+            formData.append('type', type);
+            formData.append('description', description);
+            axios.put(endpoint + 'api/case_study/' + params.id + '/', formData)
+                .then(res=>{
+                    notifySuccess("Case Study Saved Successfully");
+                    console.log(res)
+                })
+                .catch((error)=> {
+                    notifyFail("Failed to Save Case Study");
+                    console.error(error)
+                    console.log(formData);
+                }
+            );
+        }
+
     }
+
+
     const dropDownHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setIndividualCaseStudy({type: event.target.value});
+        console.log(event.target.value)
+        Type(event.target.value)
+    }
+    const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        Title(event.target.value)
+
+    }
+    const handleDesciptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        Description(event.target.value)
     }
     const handleImageUpload = (event:any) => {
         console.log("event triggered");
         if(event.target.files[0]){
-            setIndividualCaseStudy({selectedImages: event.target.files[0]||[]})
+            setImageObject({selectedImages: event.target.files[0]||[]})
+            setImageUrl(URL.createObjectURL(event.target.files[0]));
             console.log(event.target.files[0]);
+        }
+        else{
+            setImageObject({selectedImages:null})
+            setImageUrl(null)
         }
     }
 
     const retrieveIndividualCaseStudy = () => {
         axios.get(endpoint + 'api/case_study/' + params.id + '/')
             .then(res=>{
-                setIndividualCaseStudy(res.data);
+                Description(res.data['description']);
+                setImageUrl(res.data['image']);
+                Title(res.data['title'])
+                Type(res.data['type'])
                 console.log(res.data)
             })
             .catch((error)=> {
@@ -69,6 +105,8 @@ const CaseStudyEdit: React.FC = () =>{
             }
         );
     }
+
+
     let types = [];
         types.push("Patient Story");
         types.push("Equipment Received");
@@ -90,8 +128,8 @@ const CaseStudyEdit: React.FC = () =>{
                         variant = 'outlined'
                         id="title-case-study"
                         label="Title"
-                        value={individualCaseStudy.title}
-                        onChange={(e)=>setIndividualCaseStudy({title: e.target.value})}
+                        value={title}
+                        onChange={handleTitleChange}
                         
                         sx={{
                             width: '50ch', '& .MuiTextField-root': { m: 2}
@@ -106,11 +144,11 @@ const CaseStudyEdit: React.FC = () =>{
                             id = "case-study-type">Type Of Case Study</InputLabel>
                             <Select
                                 sx={{
-                                    left:'50px'
+                                    left:'50px', width: '21ch', '& .MuiTextField-root': { m: 2}
                                 }}
                                 labelId = "case-study-type"
                                 id="caseStudyType"
-                                value = {individualCaseStudy.type}
+                                value = {type}
                                 label="typeCaseStudy"
                                 onChange = {dropDownHandleChange}
                                 
@@ -140,8 +178,8 @@ const CaseStudyEdit: React.FC = () =>{
                         variant="outlined"
                         multiline
                         rows={20}
-                        value={individualCaseStudy.description}
-                        onChange={(e)=>setIndividualCaseStudy({description: e.target.value})}
+                        value={description}
+                        onChange={handleDesciptionChange}
                     />
                     </Box>
                     <Box
@@ -156,6 +194,16 @@ const CaseStudyEdit: React.FC = () =>{
                         name="file"
                         onChange={handleImageUpload}
                         />
+                        {imageUrl ? 
+                            <div style={{marginTop:'10px'}}>
+                              <Paper elevation={3}>
+                                <img src={imageUrl} 
+                                  style={{maxWidth:'800px', width:'100%', height:'auto', padding:'5%'}}>
+                                </img>
+                              </Paper>
+                            </div>
+                            :
+                            <div></div>}
 
                     </Box>
                     <Grid item xs={12}>

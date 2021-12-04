@@ -13,6 +13,7 @@ import axios from 'axios';
 
 interface csprops{
     id: any;
+    dptName: string;
 }
 
 

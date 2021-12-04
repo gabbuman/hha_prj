@@ -3,26 +3,38 @@ import Header from '../layout/Header';
 import { Box, TextField, Typography, Stack, Button, 
     FormControl, MenuItem, InputLabel, Select, Grid, Container} from '@mui/material';
 import axios from 'axios';
-import { Link, BrowserRouter as Router, useHistory} from 'react-router-dom';
+import { Link, BrowserRouter as Router, useHistory, useLocation} from 'react-router-dom';
 import { endpoint } from '../Endpoint';
 import { notifyFail, notifySuccess } from '../login/Notifications';
-interface CSSProps {
 
+interface CSSProps {
+    dptName: any;
 }
 
  
     
-const CaseStudyInputForm: React.FC = () =>{
+const CaseStudyInputForm: React.FC<CSSProps> = ({dptName}: CSSProps)=>{
+    const department = useLocation()
+    dptName = department.state
+    useEffect( () => {
+        setDepartment();
+    }, []);
     const[caseStudyInputPicture, setCaseStudyInputPicture] = useState<any>([]);
     const[caseStudyInputTitle, setCaseStudyInputTitle] = useState<any>();
     const[caseStudyInputType, setCaseStudyInputType] = useState<any>();
     const[caseStudyInputDescription, setCaseStudyInputDescription] = useState<any>();
+    const[caseStudyInputDepartment, setCaseStudyInputDepartment] = useState<any>();
     const history = useHistory();
+
+    const setDepartment = () => {
+        setCaseStudyInputDepartment({department: dptName})
+    }
     const submitClick = () => {
         uploadCaseStudy();
     }
 
     const dropDownHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
         setCaseStudyInputType({type: event.target.value});
     }
     const handleImageUpload = (event:any) => {
@@ -39,6 +51,7 @@ const CaseStudyInputForm: React.FC = () =>{
             formData.append('title', caseStudyInputTitle.title);
             formData.append('type', caseStudyInputType.type);
             formData.append('description',caseStudyInputDescription.description);
+            formData.append('department', caseStudyInputDepartment.department);
             axios.post(endpoint + 'api/case_study/', formData)
                 .then(res=>{
                     notifySuccess("Case Study Saved Successfully");
@@ -55,7 +68,7 @@ const CaseStudyInputForm: React.FC = () =>{
             formData.append('title', caseStudyInputTitle.title);
             formData.append('type', caseStudyInputType.type);
             formData.append('description', caseStudyInputDescription.description);
-            console.log(formData)
+            formData.append('department', caseStudyInputDepartment.department);
             axios.post(endpoint + 'api/case_study/', formData)
                 .then(res=>{
                     notifySuccess("Case Study Saved Successfully");

@@ -85,7 +85,7 @@ const CaseStudyGridView: React.FC<csprops> = ({dptName}: csprops) =>{
                                 content={item.description}></CSCard>
                             )
                         })}
-                        <Link to = "/case_study_form" style={{ textDecoration: 'none' }} >
+                        <Link to ={{ pathname: "/case_study_form", state:dptName }} >
                             <AddCard/>
                         </Link>
                     </CardGroup>
