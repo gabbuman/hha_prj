@@ -31,6 +31,27 @@ const GraphSubTitle = styled.h3 `
     margin: 0 0 0 14px;
 `
 
+interface CardSizeProps {
+    width: number,
+    height: number
+}
+
+const CardContainerForNoDataStates = styled.div<CardSizeProps> `
+    width: ${props => props.width}px;
+    height: ${props => props.height}px;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+    padding: repeat(4, auto);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 14px;
+    transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    &:hover {
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.18);
+    }
+`
+
 interface GraphCardProps {
     // Fetching Data
     department: string;
@@ -86,7 +107,7 @@ export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData
                 this.setState({
                     dataState: 'No data',
                     recordDataSet: {
-                        recordType: 'No data recorded', 
+                        recordType: 'No data recorded for ' + result.data.field, 
                         startDate: 'N/A',
                         endDate: 'N/A',
                         data: []
@@ -115,26 +136,22 @@ export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData
     getComponent() {
         switch(this.state.dataState) {
             case 'Loading':
-                return (
-                    <div>
-                        <h1>Loading...</h1>
-                    </div>
-                )
             case 'No data':
                 return (
-                    <div>
-                        <h1>No data recorded</h1>
-                    </div>
+                    <CardContainerForNoDataStates width={this.state.width == 0 ? 600 : this.state.width} 
+                                                  height={this.state.height == 0 ? 300 : this.state.height}>
+                        <h1>{this.state.dataState}</h1>
+                    </CardContainerForNoDataStates>
                 )
             default:
                 return (
-                        <GraphContainer>
-                            <GraphTitle>{this.state.recordDataSet.recordType}</GraphTitle>
-                            <GraphSubTitle>From {this.state.recordDataSet.startDate} to {this.state.recordDataSet.endDate}</GraphSubTitle>
-                            <DptGraph width={this.state.width == 0 ? 600 : this.state.width} 
-                                      height={this.state.height == 0 ? 300 : this.state.height} 
-                                      recordsToRender={this.state.recordDataSet.data}/>
-                        </GraphContainer>
+                    <GraphContainer>
+                        <GraphTitle>{this.state.recordDataSet.recordType}</GraphTitle>
+                        <GraphSubTitle>From {this.state.recordDataSet.startDate} to {this.state.recordDataSet.endDate}</GraphSubTitle>
+                        <DptGraph width={this.state.width == 0 ? 600 : this.state.width} 
+                                    height={this.state.height == 0 ? 300 : this.state.height} 
+                                    recordsToRender={this.state.recordDataSet.data}/>
+                    </GraphContainer>
                 )
         }
     }
