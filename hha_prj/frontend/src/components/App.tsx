@@ -9,7 +9,7 @@ import  { DptOverview } from './home/DptCard';
 import CSPreview from './home/CSPreview';
 import Rank from './home/Rank';
 import {dpts_Data} from './home/DptData';
-import MonthlyRecord from './dataentry/MonthlyRecord';
+import DataEntry from './dataentry/DataEntry';
 import DptPage from './dpt/DptPage';
 import {DptTableView} from './home/DptTableView';
 import Homepage from './home/Homepage';
@@ -43,7 +43,7 @@ class App extends Component {
 					<Route path='/homepage' component={Homepage}/>
 					<Route path='/cspreview' component={CSPreview} />
 					<Route path='/vernavbar' component={VerNavbar} />
-					<Route path='/monthlyrecord' component={MonthlyRecord} />			
+					<Route path='/dataentry' component={DataEntry} />			
 					<Route path='/datarecordarchive' component={DptTableView} />		 	
 					<Route path='/graph' component={DptGraphCard}/>
 					<Route path='/dptpage' component={DptPage} />	

@@ -6,11 +6,11 @@ import axios, { AxiosResponse } from 'axios';
 import { endpoint } from '../Endpoint';
 import { ThreeSixtyTwoTone } from '@mui/icons-material';
 
-interface MRProps {
+interface DEProps {
     dptName: string;
 }
 
-interface MRState {
+interface DEState {
     step: number;
     isEdit: boolean;
     disabled: boolean;
@@ -22,8 +22,8 @@ interface MRState {
 }
 
 
-export class MonthlyRecord extends Component <MRProps, MRState> {
-    constructor(props: MRProps){
+export class DataEntry extends Component <DEProps, DEState> {
+    constructor(props: DEProps){
         super(props);
         this.state = {
             step: 1,
@@ -37,10 +37,10 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
     }
 
     componentDidMount = () => {
-        this.initializeMonthlyRecordPage();
+        this.initializeDataEntryPage();
     }
 
-    initializeMonthlyRecordPage = () => {
+    initializeDataEntryPage = () => {
         var self = this;
         // TODO - add dptName
         axios.get( endpoint + 'api/check_current_month_submission_status')
@@ -102,7 +102,7 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
         // console.log(name);
         this.setState({
             [name]: +e.target.value,
-        } as unknown as Pick<MRState, keyof MRState>);
+        } as unknown as Pick<DEState, keyof DEState>);
     }
 
     render() {
@@ -160,4 +160,5 @@ export class MonthlyRecord extends Component <MRProps, MRState> {
         }
     }
 
-export default MonthlyRecord
+export default DataEntry
+

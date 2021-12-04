@@ -11,7 +11,7 @@ urlpatterns = [
     path('homepage', views.index),
     path('cspreview', views.index),
     path('vernavbar', views.index),
-    path('monthlyrecord', views.index),  
+    path('dataentry', views.index),  
     path('dptpage', views.index),
     path('createdepartment', views.index), 
     path('dpttableview', views.index),    
