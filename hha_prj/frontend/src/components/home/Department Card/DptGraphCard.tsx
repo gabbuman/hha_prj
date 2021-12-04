@@ -94,7 +94,6 @@ export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData
             }
         };
         
-        console.log(props);
         graphApi.get('/', {params: {
             department: props.department,
             field: props.field,
@@ -103,11 +102,12 @@ export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData
             max_month: props.maxMonth,
             max_year: props.maxYear
         }}).then( (result: any) => {
-            if (result.data.responses.length == 0) {
+            console.log('Responses:' + JSON.stringify(result));
+            if (result.data.length == 0) {
                 this.setState({
                     dataState: 'No data',
                     recordDataSet: {
-                        recordType: 'No data recorded for ' + result.data.field, 
+                        recordType: 'No data recorded for ' + props.field, 
                         startDate: 'N/A',
                         endDate: 'N/A',
                         data: []
@@ -136,11 +136,17 @@ export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData
     getComponent() {
         switch(this.state.dataState) {
             case 'Loading':
+                return (
+                    <CardContainerForNoDataStates width={this.state.width == 0 ? 600 : this.state.width} 
+                                                  height={this.state.height == 0 ? 300 : this.state.height}>
+                        <h1>{this.state.recordDataSet.recordType}</h1>
+                    </CardContainerForNoDataStates>
+                )
             case 'No data':
                 return (
                     <CardContainerForNoDataStates width={this.state.width == 0 ? 600 : this.state.width} 
                                                   height={this.state.height == 0 ? 300 : this.state.height}>
-                        <h1>{this.state.dataState}</h1>
+                        <h1>{this.state.recordDataSet.recordType}</h1>
                     </CardContainerForNoDataStates>
                 )
             default:
