@@ -207,7 +207,7 @@ const CaseStudyEdit: React.FC = () =>{
                         name="file"
                         onChange={handleImageUpload}
                         />
-                        {imageUrl !="http://127.0.0.1:8000/uploads/default.jpg" ? 
+                        {imageUrl !="http://127.0.0.1:8000/uploads/default.jpeg" ? 
                             <div style={{marginTop:'10px'}}>
                               <Paper elevation={3}>
                                 <img src={imageUrl} 
