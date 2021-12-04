@@ -9,8 +9,8 @@ import  { DptOverview } from './home/DptCard';
 import CSPreview from './home/CSPreview';
 import Rank from './home/Rank';
 import {dpts_Data} from './home/DptData';
-import MonthlyRecord from './dpt/MonthlyRecord';
-import DptRecordPage from './dpt/DptRecordPage';
+import MonthlyRecord from './dataentry/MonthlyRecord';
+import DptPage from './dpt/DptPage';
 import {DptTableView} from './home/DptTableView';
 import Homepage from './home/Homepage';
 import { ToastContainer } from 'react-toastify';
@@ -46,7 +46,7 @@ class App extends Component {
 					<Route path='/monthlyrecord' component={MonthlyRecord} />			
 					<Route path='/datarecordarchive' component={DptTableView} />		 	
 					<Route path='/graph' component={DptGraphCard}/>
-					<Route path='/dptrecordpage' component={DptRecordPage} />	
+					<Route path='/dptpage' component={DptPage} />	
 					<Route path='/createdepartment' component={CreateDepartment} />	
 					<Route path='/case_study_form' component={CaseStudySubmissionForm}/>
 					<Route path='/case_study_individual' component={CaseStudyIndividual}/>

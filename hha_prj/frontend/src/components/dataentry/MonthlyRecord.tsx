@@ -1,7 +1,7 @@
 import React, { useState, Component } from 'react';
 import { Grid, Container, Box, Card, CardMedia, CardContent, Typography } from '@mui/material';
-import RedDataForm from '../dpt/RedDataForm';
-import GreenDataForm from '../dpt/GreenDataForm';
+import RedDataForm from './RedDataForm';
+import GreenDataForm from './GreenDataForm';
 import axios, { AxiosResponse } from 'axios';
 import { endpoint } from '../Endpoint';
 import { ThreeSixtyTwoTone } from '@mui/icons-material';
