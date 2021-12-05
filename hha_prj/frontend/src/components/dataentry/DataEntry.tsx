@@ -1,6 +1,6 @@
 import React, { useState, Component, useEffect } from 'react';
 import { Container, Card, CardMedia, CardContent, Box,  Typography, 
-    Paper, Stack, Button, IconButton, Collapse } from '@mui/material';
+    Paper, Stack, Button, IconButton, Collapse, Divider } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {Row, Col, Form, FormGroup} from "react-bootstrap";
@@ -184,7 +184,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
                                 <div key={ele.id}>
                                     <Row className="mt-2">
                                         <Col md>
-                                            <Form.Label>Question {element.id}</Form.Label>
+                                            {/* <Form.Label>Question {ele.id}</Form.Label> */}
                                             <Form.Control 
                                             type="text" 
                                             disabled
@@ -193,7 +193,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
                                             />
                                         </Col>
                                         <Col md>
-                                            <Form.Label>Answer {element.id}</Form.Label>
+                                            {/* <Form.Label>Answer {ele.id}</Form.Label> */}
                                             <Form.Control 
                                             type="number"  
                                             min="0"
@@ -266,12 +266,12 @@ const DataEntry = (props: DEProps, state: DEState) => {
                                                 </IconButton>
                                             </Col>
                                         </Row>
-                                        <Row className="ml-4">
+                                        <div className="ml-4">
                                             {element.question != "Stayed In Ward"? 
                                                 <div></div> :
                                                 stayedInWard(element)
                                             }
-                                        </Row>
+                                        </div>
                                     </div>
                                 ))}
                             </FormGroup>
