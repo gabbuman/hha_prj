@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import url
 from . import views
 
 urlpatterns = [
@@ -20,5 +21,6 @@ urlpatterns = [
     path('csindividual', views.index),
     path('actioncard', views.index),
     path('questionlist', views.index),    
-    path('csgridview', views.index)  
+    path('csgridview', views.index),
+    url(r'^.*', views.index),
 ]
