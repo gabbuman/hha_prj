@@ -5,7 +5,7 @@
         "fields": {
             "name": "Rehab",
             "created_at":"2021-11-07 12:12:12",
-            "points": 2
+            "points": 0
         }
     },
     {
@@ -14,7 +14,27 @@
       "fields": {
           "name": "Maternity",
           "created_at":"2021-11-07 12:12:12",
-          "points": 1
+          "points": 0
+
+      }
+  },
+    {
+      "model": "backend.Department", 
+      "pk": 3,
+      "fields": {
+          "name": "NICU",
+          "created_at":"2021-11-07 12:12:12",
+          "points": 0
+
+      }
+  },
+    {
+      "model": "backend.Department", 
+      "pk": 4,
+      "fields": {
+          "name": "Community",
+          "created_at":"2021-11-07 12:12:12",
+          "points": 0
 
       }
   },
@@ -22,8 +42,9 @@
       "model": "backend.Points", 
       "pk": 1,
       "fields": {
-          "monthly_record": 5,
-          "case_studies":2
+          "monthly_record": 4,
+          "case_studies":2,
+          "last_update_month":12
       }
   },   
     {
@@ -60,7 +81,7 @@
     {
       "model": "backend.MonthlyRecord",
       "fields": {
-        "month": 11,
+        "month": 10,
         "year": 2021,
         "question_answer_list": [
           {
@@ -123,7 +144,7 @@
     "model": "backend.MonthlyRecord", 
     "fields": {
       "department": "Rehab",
-      "month": 12,
+      "month": 11,
       "year": 2021,
       "question_answer_list": [
         {
@@ -185,7 +206,6 @@
     "model": "backend.DischargedAliveRehabGreenData", 
     "pk": 1,
     "fields": {
-      "monthly_record_id": 1,
       "patient_discharged_diagnosis": "SCI",
       "patient_num_days_in_rehab": 230,
       "discharge_reason": "All goals met",
@@ -200,7 +220,6 @@
     "model": "backend.DischargedAliveRehabGreenData", 
     "pk": 2,
     "fields": {
-      "monthly_record_id": 1,
       "patient_discharged_diagnosis": "SCI",
       "patient_num_days_in_rehab": 240,
       "discharge_reason": "All goals met",
@@ -215,7 +234,6 @@
   "model": "backend.DischargedAliveRehabGreenData", 
   "pk": 3,
   "fields": {
-    "monthly_record_id": 2,
     "patient_discharged_diagnosis": "SCI",
     "patient_num_days_in_rehab": 150,
     "discharge_reason": "Goals Partially met",
@@ -230,7 +248,6 @@
     "model": "backend.StayedInWardRehabGreenData", 
     "pk": 1,
     "fields": {
-      "monthly_record_id": 1,
       "not_ready_from_therapy_standpoint": 2,
       "wound_care": 5,
       "other_medical_reason": 2,
@@ -247,7 +264,6 @@
     "model": "backend.StayedInWardRehabGreenData", 
     "pk": 2,
     "fields": {
-      "monthly_record_id": 2,
       "not_ready_from_therapy_standpoint": 2,
       "wound_care": 5,
       "other_medical_reason": 3,

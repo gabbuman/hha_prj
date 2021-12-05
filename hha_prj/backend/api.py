@@ -35,8 +35,8 @@ class MonthlyRecordViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = MonthlyRecordSerializer
-    lookup_fields = ('month','year')
-    lookup_url_kwargs = ('month','year')
+    lookup_fields = ('department')
+    lookup_url_kwargs = ('department')
 
 class DischargedAliveRehabGreenDataViewSet(viewsets.ModelViewSet):
     queryset = DischargedAliveRehabGreenData.objects.all()

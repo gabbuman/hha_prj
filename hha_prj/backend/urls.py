@@ -4,7 +4,7 @@ from .api import CaseStudyTypeViewSet, CaseStudyViewSet, DischargedAliveRehabGre
 from .api import CurrentFieldListViewSet, MonthlyRecordViewSet 
 from .api import CustomUserViewSet
 from .api import DepartmentViewSet, RoleViewSet
-from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus, UpdateCaseStudyPoints
+from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus, UpdateCaseStudyPoints, UpdateMonthlyRecordPoints
 from .views import GetRecordDataByDateRange, GetCurrentFieldList, retrieveCaseStudiesForPreview, GetCaseStudies
 from .views import GetQuestionsListByDateRange, GetDepartmentReminders, GetAllMonhtlyRecordDataInCSV
 
@@ -41,5 +41,6 @@ urlpatterns = [
     path('api/questions_by_date_range/', GetQuestionsListByDateRange),
     path('api/get_department_reminders/', GetDepartmentReminders),
     path('api/get_all_monhtly_data_csv/', GetAllMonhtlyRecordDataInCSV),
-    path('api/update_case_studies_points/',UpdateCaseStudyPoints)
+    path('api/update_case_studies_points/',UpdateCaseStudyPoints),
+    path('api/update_monthly_record_points/',UpdateMonthlyRecordPoints)
 ]

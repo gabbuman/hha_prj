@@ -6,8 +6,9 @@ from django.utils.translation import gettext as _ # aliasing gettext as _
 from .managers import CustomUserManager
 
 class Points(models.Model):
-    monthly_record = models.PositiveSmallIntegerField(default=5)
+    monthly_record = models.PositiveSmallIntegerField(default=4)
     case_studies = models.PositiveSmallIntegerField(default = 2)
+    last_update_month = models.PositiveSmallIntegerField()
 class Department(models.Model):
     name = models.CharField(unique=True, primary_key=True, max_length=50)
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
@@ -57,7 +58,7 @@ class MonthlyRecord(models.Model):
 
     question_answer_list = models.JSONField()
     class Meta:
-        unique_together = ('month', 'year',)
+        unique_together = ('month', 'year','department')
         
 class CurrentFieldsList(models.Model):
     list = models.JSONField(null=False,blank=False)
@@ -67,7 +68,7 @@ class CurrentFieldsList(models.Model):
     def __str__(self):
         return self.name 
 class DischargedAliveRehabGreenData(models.Model):
-    monthly_record_id = models.ForeignKey(MonthlyRecord, on_delete=models.PROTECT)
+    #monthly_record_id = models.ForeignKey(MonthlyRecord, on_delete=models.PROTECT)
 
     patient_discharged_diagnosis = models.CharField(max_length=20)
     patient_num_days_in_rehab = models.PositiveSmallIntegerField() 
@@ -79,7 +80,7 @@ class DischargedAliveRehabGreenData(models.Model):
     discharge_employment_status = models.CharField(max_length=50)
 
 class StayedInWardRehabGreenData(models.Model):
-    monthly_record_id = models.ForeignKey(MonthlyRecord, on_delete=models.PROTECT)
+    #monthly_record_id = models.ForeignKey(MonthlyRecord, on_delete=models.PROTECT)
 
     # Reason Not Yet Discharged
     not_ready_from_therapy_standpoint = models.PositiveSmallIntegerField()
