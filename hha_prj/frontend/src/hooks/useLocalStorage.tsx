@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const PREFIX = "cmpt373-";
 
-export default function useLocalStorage(key, initialValue) {
+export default function useLocalStorage(key:string, initialValue:any) {
   const prefixKey = PREFIX + key;
   const [value, setValue] = useState(() => {
     const jsonValue = localStorage.getItem(prefixKey);
