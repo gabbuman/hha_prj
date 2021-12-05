@@ -50,6 +50,7 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
             max_month: maxMonth,
             max_year: maxYear
         }}).then((result: any) => {
+            graphCardDictionary.clear();
             result.data.forEach((field: string) => {
                 graphCardDictionary.set(field, (
                     <DptGraphCard
@@ -74,7 +75,7 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
             setFields(result.data);
             setFilteredField(result.data);
         })
-    }, []);
+    }, [minMonth, minYear, maxMonth, maxYear]);
 
     const handleMinYearChange = (yearChangeEvent: SelectChangeEvent<number>) => {
         setMinYear(yearChangeEvent.target.value as number);
@@ -93,8 +94,9 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
     }
 
     // For future developers: 
-    // for the year selection, create an API to see what years are available. 
-    // Month selection is similar to it.
+    // * For the year selection, create an API to see what years are available. 
+    //     Month selection is similar to it.
+    // * Should prevent the user from selecting smaller max value than min values.
     return (
         <DepartmentGraphPageContainer numberOfGraphs={filteredFields.length}>
             <TimeRangeContainer>
@@ -104,6 +106,7 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
                         labelId="min-year-select-label"
                         id="min-year-select-label"
                         label="Min Year"
+                        defaultValue={2020}
                         onChange={handleMinYearChange}>
                             <MenuItem value={2020}>2020</MenuItem>
                             <MenuItem value={2021}>2021</MenuItem>
@@ -115,6 +118,7 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
                         labelId="min-month-select-label"
                         id="min-month-select-label"
                         label="Min Month"
+                        defaultValue={1}
                         onChange={handleMinMonthChange}>
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>
@@ -136,6 +140,7 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
                         labelId="max-year-select-label"
                         id="max-year-select-label"
                         label="Max Year"
+                        defaultValue={2021}
                         onChange={handleMaxYearChange}>
                             <MenuItem value={2020}>2020</MenuItem>
                             <MenuItem value={2021}>2021</MenuItem>
@@ -147,6 +152,7 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
                         labelId="max-month-select-label"
                         id="max-month-select-label"
                         label="Max Month"
+                        defaultValue={12}
                         onChange={handleMaxMonthChange}>
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>
