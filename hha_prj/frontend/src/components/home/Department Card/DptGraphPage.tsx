@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, Select, SelectChangeEvent } from '@mui/material';
-import { TextField } from '@mui/material';
+import { TextField, MenuItem } from '@mui/material';
 import React, { useState, useEffect, ReactElement } from 'react'
 import { DptGraphCard } from './DptGraphCard';
 import styled from 'styled-components'
@@ -14,6 +14,14 @@ const DepartmentGraphPageContainer = styled.div<NumberOfGraphsProp> `
     grid-gap: 10px;
     justify-items: center;
     padding: 14px;
+`
+
+const TimeRangeContainer = styled.div `
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    align-items: center;
 `
 
 interface GraphPageProps {
@@ -68,22 +76,93 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
         })
     }, []);
 
-    const handleYearChange = (yearChangeEvent: SelectChangeEvent<number>) => {
-        
+    const handleMinYearChange = (yearChangeEvent: SelectChangeEvent<number>) => {
+        setMinYear(yearChangeEvent.target.value as number);
     }
 
+    const handleMinMonthChange = (monthChangeEvent: SelectChangeEvent<number>) => {
+        setMinMonth(monthChangeEvent.target.value as number);
+    }
+
+    const handleMaxYearChange = (yearChangeEvent: SelectChangeEvent<number>) => {
+        setMaxYear(yearChangeEvent.target.value as number);
+    }
+
+    const handleMaxMonthChange = (monthChangeEvent: SelectChangeEvent<number>) => {
+        setMaxMonth(monthChangeEvent.target.value as number);
+    }
+
+    // For future developers: 
+    // for the year selection, create an API to see what years are available. 
+    // Month selection is similar to it.
     return (
         <DepartmentGraphPageContainer numberOfGraphs={filteredFields.length}>
-            <FormControl fullWidth>
-                <InputLabel id="year-select-label">Year</InputLabel>
-                <Select
-                    labelId="year-select-label"
-                    id="year-select-label"
-                    label="Year"
-                    onChange={handleYearChange}>
-
-                </Select>
-            </FormControl>
+            <TimeRangeContainer>
+                <FormControl fullWidth>
+                    <InputLabel id="min-year-select-label">Min Year</InputLabel>
+                    <Select
+                        labelId="min-year-select-label"
+                        id="min-year-select-label"
+                        label="Min Year"
+                        onChange={handleMinYearChange}>
+                            <MenuItem value={2020}>2020</MenuItem>
+                            <MenuItem value={2021}>2021</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl fullWidth>
+                    <InputLabel id="min-month-select-label">Min Month</InputLabel>
+                    <Select
+                        labelId="min-month-select-label"
+                        id="min-month-select-label"
+                        label="Min Month"
+                        onChange={handleMinMonthChange}>
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
+                            <MenuItem value={6}>6</MenuItem>
+                            <MenuItem value={7}>7</MenuItem>
+                            <MenuItem value={8}>8</MenuItem>
+                            <MenuItem value={9}>9</MenuItem>
+                            <MenuItem value={10}>10</MenuItem>
+                            <MenuItem value={11}>11</MenuItem>
+                            <MenuItem value={12}>12</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl fullWidth>
+                    <InputLabel id="max-year-select-label">Max Year</InputLabel>
+                    <Select
+                        labelId="max-year-select-label"
+                        id="max-year-select-label"
+                        label="Max Year"
+                        onChange={handleMaxYearChange}>
+                            <MenuItem value={2020}>2020</MenuItem>
+                            <MenuItem value={2021}>2021</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl fullWidth>
+                    <InputLabel id="max-month-select-label">Max Month</InputLabel>
+                    <Select
+                        labelId="max-month-select-label"
+                        id="max-month-select-label"
+                        label="Max Month"
+                        onChange={handleMaxMonthChange}>
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
+                            <MenuItem value={6}>6</MenuItem>
+                            <MenuItem value={7}>7</MenuItem>
+                            <MenuItem value={8}>8</MenuItem>
+                            <MenuItem value={9}>9</MenuItem>
+                            <MenuItem value={10}>10</MenuItem>
+                            <MenuItem value={11}>11</MenuItem>
+                            <MenuItem value={12}>12</MenuItem>
+                    </Select>
+                </FormControl>
+            </TimeRangeContainer>
             <TextField
                 fullWidth
                 id="filter-text-field"
@@ -105,32 +184,7 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
             />
             {filteredFields && filteredFields.length > 0 ? (
                 filteredFields.map((field) => {
-                    console.log('Fetching Size: ' + graphCardDictionary.size);
-
-                    // TODO: correct width and height
-
-                    // Note: If you create the card component here, it won't be updated
-                    // correctly after the search query is changed since only the props 
-                    // will be updated but not states. So the following won't work:
-                    // <DepartmentGraphCard
-                    //     department={props.departmentName}
-                    //     field={field}
-                    //     minMonth={minMonth}
-                    //     minYear={minYear}
-                    //     maxMonth={maxMonth}
-                    //     maxYear={maxYear}
-                    //     width={600}
-                    //     height={300}
-                    // />
-
-                    // console.log('Dictionary: ' + graphCardDictionary);
-                    // console.log('Field to fetch: ' + field);
-                    // console.log('Fetching: ' + graphCardDictionary[field]);
-                    
-                    // console.log('Fetching: ' + graphCardDictionary.get(field));
                     return graphCardDictionary.get(field);
-
-                    // <h1>{field}</h1>
                 })
             ) : (
                 <h1>No results found.</h1>
