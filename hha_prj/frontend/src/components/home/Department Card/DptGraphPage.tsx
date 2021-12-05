@@ -1,6 +1,6 @@
 import { FormControl, InputLabel, Select, SelectChangeEvent } from '@mui/material';
 import { TextField } from '@mui/material';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, ReactElement } from 'react'
 import { DepartmentGraphCard } from './DptGraphCard';
 import styled from 'styled-components'
 import axios from 'axios'
@@ -19,6 +19,8 @@ const DepartmentGraphPageContainer = styled.div<NumberOfGraphsProp> `
 interface GraphPageProps {
     departmentName: string
 }
+
+let graphCardDictionary = new Map();
 
 export default function DepartmentGraphPage(props: GraphPageProps) {
     const [fields, setFields] = useState<string[]>([]);
@@ -40,7 +42,27 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
             max_month: maxMonth,
             max_year: maxYear
         }}).then((result: any) => {
-            console.log(result.data);
+            result.data.forEach((field: string) => {
+                graphCardDictionary.set(field, (
+                    <DepartmentGraphCard
+                        key={field}
+                        department={props.departmentName}
+                        field={field}
+                        minMonth={minMonth}
+                        minYear={minYear}
+                        maxMonth={maxMonth}
+                        maxYear={maxYear}
+                        width={600}
+                        height={300}
+                    />
+                ))
+                console.log('Field to store: ' + field);
+                console.log('Storing: ' + graphCardDictionary.get(field));
+                console.log(graphCardDictionary.size);
+            })
+
+            console.log('Final Size: ' + graphCardDictionary.size);
+
             setFields(result.data);
             setFilteredField(result.data);
         })
@@ -82,19 +104,34 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
                 }}
             />
             {filteredFields && filteredFields.length > 0 ? (
-                filteredFields.map((field) => (
+                filteredFields.map((field) => {
+                    console.log('Fetching Size: ' + graphCardDictionary.size);
+
                     // TODO: correct width and height
-                    <DepartmentGraphCard
-                        department={props.departmentName}
-                        field={field}
-                        minMonth={minMonth}
-                        minYear={minYear}
-                        maxMonth={maxMonth}
-                        maxYear={maxYear}
-                        width={600}
-                        height={300}
-                    />
-                ))
+
+                    // Note: If you create the card component here, it won't be updated
+                    // correctly after the search query is changed since only the props 
+                    // will be updated but not states. So the following won't work:
+                    // <DepartmentGraphCard
+                    //     department={props.departmentName}
+                    //     field={field}
+                    //     minMonth={minMonth}
+                    //     minYear={minYear}
+                    //     maxMonth={maxMonth}
+                    //     maxYear={maxYear}
+                    //     width={600}
+                    //     height={300}
+                    // />
+
+                    // console.log('Dictionary: ' + graphCardDictionary);
+                    // console.log('Field to fetch: ' + field);
+                    // console.log('Fetching: ' + graphCardDictionary[field]);
+                    
+                    // console.log('Fetching: ' + graphCardDictionary.get(field));
+                    return graphCardDictionary.get(field);
+
+                    // <h1>{field}</h1>
+                })
             ) : (
                 <h1>No results found.</h1>
             )}
