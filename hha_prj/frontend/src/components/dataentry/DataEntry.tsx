@@ -59,7 +59,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
         axios.get( endpoint + 'api/check_current_month_submission_status')
         .then(function (res: AxiosResponse<any>){
             console.log("record exist: " + res.data);
-            if (res.data == false){
+            if (res.data == true){
                 setStep(2);
             } else {
                 setStep(1);
@@ -166,11 +166,11 @@ const DataEntry = (props: DEProps, state: DEState) => {
         // console.log(questionAndAswer);  
         var currentTime = new Date(); 
         // console.log(currentTime.getFullYear(), currentTime.getMonth()); 
-        console.log(stayedInWardData);
+        // console.log(stayedInWardData);
         addGreenInData();
-        console.log(questionAndAswer);
+        // console.log(questionAndAswer);
         if (isEmpty(questionAndAswer)){
-            notifyFail('Sorry, Submit fails with empty value.');
+            notifyFail('Sorry, Submit fails with empty input for red data.');
             return
         }  
         axios.post( endpoint + 'api/monthly_records/', {
