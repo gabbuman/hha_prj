@@ -13,7 +13,7 @@ import { grey } from '@mui/material/colors';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
 import { Button, createTheme, ThemeProvider, Grid, IconButton, Stack, Modal, Box, autocompleteClasses } from '@mui/material';
 import { CSVLink } from "react-csv";
-import { DptGraphCard } from './Department Card/DptGraphCard';
+import { DptGraphCard } from '../home/Department Card/DptGraphCard';
 
 import { sampleData } from '../home/Department Card/RecordData';
 
