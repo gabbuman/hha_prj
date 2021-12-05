@@ -5,7 +5,7 @@ import { Box, TextField, Typography, Stack, Button,
     CardMedia, Card, CardActions, CardActionArea, CardContent} from '@mui/material';
 import { Switch, Route, Link, BrowserRouter as Router, useParams, useHistory, useLocation} from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import DptRecordPage from '../dpt/DptRecordPage';
+import DptPage from '../dpt/DptPage';
 import { endpoint } from '../Endpoint';
 import axios from 'axios';
 
