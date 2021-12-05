@@ -18,6 +18,7 @@ import {DepartmentGraphCard} from '../home/Department Card/DptGraphCard';
 import { render } from 'react-dom';
 import { Component } from 'react';
 import QuestionList from '../questions/QuestionList';
+import Header from './Header';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -83,17 +84,21 @@ const useStyles = makeStyles((theme) => ({
   }
 
   interface verNavState{
-    value: number
+    value: number,
+    dptName: string
   }
 
   const initialState: verNavState = {
     value: 1,
+    dptName: ""
   }
 export default class verNavbar extends Component<verNavProps, verNavState> {
-  constructor(props: verNavProps){
-    super(props);
-    this.state = initialState;
-}
+  constructor(props:any){
+    super(props); 
+    this.state = {
+        value: props.location.state.value,
+        dptName: props.location.state.dptName};
+  }
   render(){
 
      const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -102,10 +107,12 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
     };
 
   return (
-      
+     <> 
+    <Header title= {"Hope Health Action / " + this.state.dptName}/> 
     <Box
       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 1000 }}
     >
+      
       <Tabs
         orientation="vertical"
         variant="scrollable"
@@ -129,18 +136,18 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
 
       <Grid item xs={10}>
         <TabPanel value={this.state.value} index={1}>
-          <DptTableView dptName={this.props.dptName}/>
+          <DptTableView dptName={this.state.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={2}>
             <ParentSize>
 							  {({width, height}) => 
 								    <DepartmentGraphCard 
-                      department='Rehab'
+                      department= {this.state.dptName}
                       field='Bed days'
-                      minMonth={1}
-                      minYear={2020}
-                      maxMonth={12}
-                      maxYear={2021}
+                      minMonth={(new Date()).getMonth() -12 }
+                      minYear={(new Date()).getFullYear() -1}
+                      maxMonth={(new Date()).getMonth()}
+                      maxYear={(new Date()).getFullYear()}
                       width={width} 
                       height={height}/>
 							  }
@@ -163,6 +170,7 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
         </TabPanel>
       </Grid>
     </Box>
+    </>
   );
   }
 }

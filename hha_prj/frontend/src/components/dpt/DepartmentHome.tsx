@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import { DepartmentGraphCard } from '../home/Department Card/DptGraphCard'
 import { sampleData } from '../home/Department Card/RecordData';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import ActionCard from './ActionCard';
+import { Link } from 'react-router-dom';
 
 const PageContainer = styled.div `
     display: grid;
@@ -20,39 +21,52 @@ const ActionCardContainer = styled.div `
     margin-left: 15px;
     margin-right: 15px;
 `
+interface dptHomeProps{
+    dptName: string
+}
+class DepartmentHome extends Component<dptHomeProps> {
 
-const DepartmentHome: React.FC = () => {
-    return (
-        <ParentSize>
-            {({width, height}) => 
-                <PageContainer>
-                    <DepartmentGraphCard 
-                        department='Rehab'
-                        field='Bed days'
-                        minMonth={null}
-                        minYear={null}
-                        maxMonth={1}
-                        maxYear={2021}
-                        width={width > 700 ? 635 : width-30} 
-                        height={300}/>
-                    <ActionCardContainer>
-                        <ActionCard backgroundImage={'/static/case-study-icon.svg'} 
-                                    fromColor={'#254E9F'}
-                                    toColor={'#6081BA'}
-                                    title={'Case Study'}/>
-                        <ActionCard backgroundImage={'/static/data-entry-icon.svg'} 
-                                    fromColor={'#4AA08B'}
-                                    toColor={'#6081BA'}
-                                    title={'Monthly Record'}/>
-                        <ActionCard backgroundImage={'/static/bio-support-icon.svg'} 
-                                    fromColor={'#49159F'}
-                                    toColor={'#5F80BA'}
-                                    title={'Biomechanical Support'}/>
-                    </ActionCardContainer>
-                </PageContainer>
-            }
-        </ParentSize>
-    )
+    render(){
+            return (
+                <ParentSize>
+                    {({width, height}) => 
+                        <PageContainer>
+                            <Link to={{ pathname: "/vernavbar", state: {dptName: this.props.dptName, value: 2}}} >
+                            <DepartmentGraphCard 
+                                department= {this.props.dptName}
+                                field='Bed days'
+                                minMonth={(new Date()).getMonth() -12 }
+                                minYear={(new Date()).getFullYear() -1}
+                                maxMonth={(new Date()).getMonth()}
+                                maxYear={(new Date()).getFullYear()}
+                                width={width} 
+                                height={height}/>
+                                </Link>
+                            <ActionCardContainer>
+                            <Link to={{ pathname: "/vernavbar", state: {dptName: this.props.dptName, value: 5}}} >
+                                <ActionCard backgroundImage={'/static/case-study-icon.svg'} 
+                                            fromColor={'#254E9F'}
+                                            toColor={'#6081BA'}
+                                            title={'Case Study'}/>
+                                            </Link>
+                            <Link to={{ pathname: "/vernavbar", state: {dptName: this.props.dptName, value: 1}}} >
+                                <ActionCard backgroundImage={'/static/data-entry-icon.svg'} 
+                                            fromColor={'#4AA08B'}
+                                            toColor={'#6081BA'}
+                                            title={'Monthly Record'}/>
+                                            </Link>
+                            <Link to={{ pathname: "/vernavbar", state: {dptName: this.props.dptName, value: 6}}} >
+                                <ActionCard backgroundImage={'/static/bio-support-icon.svg'} 
+                                            fromColor={'#49159F'}
+                                            toColor={'#5F80BA'}
+                                            title={'Biomechanical Support'}/>
+                            </Link>
+                            </ActionCardContainer>
+                        </PageContainer>
+                    }
+                </ParentSize>
+            )
+        }
 }
 
 export default DepartmentHome
