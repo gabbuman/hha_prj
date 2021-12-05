@@ -324,3 +324,19 @@ def UpdatePointsAfterDepartmentAdded():
     points_record  = Points.objects.get(id = 1)
     points_record.monthly_record = points_record.monthly_record + 1
     points_record.save()
+
+def RetrieveDepartmentRankingList(request):
+    department_query_set = Department.objects.all().order_by('-points')
+    departments = []
+    department_list = []
+
+    for department_record in department_query_set:
+        departments.append(department_record)
+
+    for department in departments:
+        department_query_set = Department.objects.filter(Q(name = department)).values()
+        points = department_query_set[0]['points']
+        department_list.append({"Department":department,"Points":points})
+
+    data = json.dumps(department_list,indent=4,sort_keys=True,default=str)
+    return HttpResponse(data, content_type="application/json")
