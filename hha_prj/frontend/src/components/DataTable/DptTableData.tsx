@@ -15,6 +15,8 @@ import { Button, createTheme, ThemeProvider, Grid, IconButton, Stack } from '@mu
 import { CSVLink } from "react-csv";
 import { months } from './DptTableView';
 
+import { PDFExport} from '@progress/kendo-react-pdf';
+
 const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -122,10 +124,7 @@ class TableData extends Component <tableProps, tableState> {
                 :{},
                 this.state.getAllData && (data.department == this.state.dptName )? this.setState({dptDataAll: this.state.dptDataAll.concat({question:"Month/Year", answer:""+ months[data.month] + "/"+ data.year}), dptData: data.question_answer_list})
                 :{dptData: []},
-                console.log(this.state.dptData),
-                console.log(this.state.getAllData),
-                this.state.getAllData && (data.department == this.state.dptName)? this.setState({dptDataAll: this.state.dptDataAll.concat(this.state.dptData)}): {},
-                console.log(this.state.dptDataAll)
+                this.state.getAllData && (data.department == this.state.dptName)? this.setState({dptDataAll: this.state.dptDataAll.concat(this.state.dptData)}): {}
             ))
             this.setState({getAllData: false});
         })
@@ -138,6 +137,13 @@ class TableData extends Component <tableProps, tableState> {
 
     static months: number[]=[]; 
     render (){ 
+
+        const pdfExportComponent = React.createRef<PDFExport>();
+        const exportPDFWithComponent = () => {
+            if (pdfExportComponent.current) {
+              pdfExportComponent.current.save();
+            }
+        }
 
         const CsvReport = {
             data: this.state.dataRecords,
@@ -152,7 +158,16 @@ class TableData extends Component <tableProps, tableState> {
         return(
             <><div>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={12}>
+                <Grid item xs={8}>
+                    { 
+                        <Stack direction="row" justifyContent="flex-end">
+                            <ThemeProvider theme={theme}>
+                                    { <Button variant="contained" color="neutral" onClick = {exportPDFWithComponent}>Export Current to PDF</Button>  }  
+                            </ThemeProvider>
+                        </Stack>
+                    }                   
+                </Grid> 
+                <Grid item xs={4}>
                     <Stack direction="row" justifyContent="flex-end">
                             <ThemeProvider theme={theme}>
                                 <CSVLink {...CsvReport} >
@@ -162,6 +177,7 @@ class TableData extends Component <tableProps, tableState> {
                         
                     </Stack>
                 </Grid>
+                
                 
                 <Grid item xs={12}>
                     <Stack direction="row" justifyContent="flex-end">
@@ -177,6 +193,12 @@ class TableData extends Component <tableProps, tableState> {
                 
                 </Grid>
             </div>
+            <PDFExport
+                ref={pdfExportComponent}
+                paperSize="A2"
+                margin={'4cm'}
+                fileName={`MonthlyReport_` + this.props.dptName + '_' + this.state.month +this.state.year}
+                >
             <Grid item xs={12}>
             <TableContainer component={Paper}>
                     <Table sx={{ width: "auto" }} aria-label="simple table">
@@ -212,7 +234,8 @@ class TableData extends Component <tableProps, tableState> {
                     </Table>
                     
                 </TableContainer>
-                </Grid></>
+                </Grid>
+                </PDFExport></>
             )
            
         
