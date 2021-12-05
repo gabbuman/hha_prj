@@ -6,15 +6,15 @@ import Box from '@mui/material/Box';
 import {Grid, Button} from '@mui/material';
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import MonthlyRecord from '../dpt/MonthlyRecord';
+import DataEntry from '../dataentry/DataEntry';
 import DptTableView from '../DataTable/DptTableView';
 import CaseStudyGridView from '../casestudy/CaseStudyGridView';
 import CaseStudyIndividual from '../casestudy/CaseStudyIndividual';
 import CaseStudySubmissionForm from '../casestudy/CaseStudyInputForm';
-import DptRecordPage from '../dpt/DptRecordPage';
+import DptPage from '../dpt/DptPage';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
-import { sampleData } from '../home/Department Card/RecordData';
-import {DepartmentGraphCard} from '../home/Department Card/DptGraphCard';
+import { RecordData } from '../home/Department Card/RecordData';
+import {DptGraphCard} from '../home/Department Card/DptGraphCard';
 import { render } from 'react-dom';
 import { Component } from 'react';
 import QuestionList from '../questions/QuestionList';
@@ -120,7 +120,7 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
         </Button>
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Data Record Archive" {...a11yProps(1)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Graphs" {...a11yProps(2)} /> 
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Monthly Records" {...a11yProps(3)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Data Entry" {...a11yProps(3)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Question List Template" {...a11yProps(4)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Case Study" {...a11yProps(5)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Biomechanical Support" {...a11yProps(6)} />
@@ -134,7 +134,7 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
         <TabPanel value={this.state.value} index={2}>
             <ParentSize>
 							  {({width, height}) => 
-								    <DepartmentGraphCard 
+								    <DptGraphCard 
                       department='Rehab'
                       field='Bed days'
                       minMonth={1}
@@ -147,7 +147,7 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
 						</ParentSize>
         </TabPanel>
         <TabPanel  value={this.state.value} index={3}>
-          <MonthlyRecord dptName={this.props.dptName}/>
+          <DataEntry dptName={this.props.dptName}/>
         </TabPanel>
         <TabPanel  value={this.state.value} index={4}>
           <QuestionList dptName={this.props.dptName}/>

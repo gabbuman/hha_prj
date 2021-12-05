@@ -9,11 +9,12 @@ import  { DptOverview } from './home/DptCard';
 import CSPreview from './home/CSPreview';
 import Rank from './home/Rank';
 import {dpts_Data} from './home/DptData';
-import MonthlyRecord from './dpt/MonthlyRecord';
-import DptRecordPage from './dpt/DptRecordPage';
-import {DptTableView} from './DataTable/DptTableView';
+import DataEntry from './dataentry/DataEntry';
+import DptPage from './dpt/DptPage';
 import Homepage from './home/Homepage';
 import { ToastContainer } from 'react-toastify';
+import {DptTableView} from './DataTable/DptTableView';
+import {DptGraphCard} from './home/Department Card/DptGraphCard';
 import CreateDepartment from './dpt/CreateDepartment';
 import CaseStudyInputForm from './casestudy/CaseStudyInputForm';
 import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
@@ -43,9 +44,10 @@ class App extends Component {
 					<Route path='/homepage' component={Homepage}/>
 					<Route path='/cspreview' component={CSPreview} />
 					<Route path='/vernavbar' component={VerNavbar} />
-					<Route path='/monthlyrecord' component={MonthlyRecord} />			
+					<Route path='/dataentry' component={DataEntry} />			
 					<Route path='/datarecordarchive' component={DptTableView} />		 	
-					<Route path='/dptrecordpage' component={DptRecordPage} />	
+					<Route path='/graph' component={DptGraphCard}/>
+					<Route path='/dptpage' component={DptPage} />	
 					<Route path='/createdepartment' component={CreateDepartment} />	
 					<Route path='/case_study_form' component={CaseStudyInputForm}/>
 					<Route path='/case_study_individual/:id' component={CaseStudyIndividual}/>
