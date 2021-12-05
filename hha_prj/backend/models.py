@@ -52,7 +52,6 @@ class MonthlyRecord(models.Model):
 
     month = models.IntegerField(choices=Months.choices)
     year = models.PositiveSmallIntegerField()
-    created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
     question_answer_list = models.JSONField()
     class Meta:
