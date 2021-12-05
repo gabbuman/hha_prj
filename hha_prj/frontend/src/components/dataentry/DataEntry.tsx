@@ -1,10 +1,9 @@
-import React, { useState, Component } from 'react';
-import { Grid, Container, Box, Card, CardMedia, CardContent, Typography } from '@mui/material';
-import RedDataForm from './RedDataForm';
-import GreenDataForm from './GreenDataForm';
+import React, { useState, Component, useEffect } from 'react';
+import { Container, Card, CardMedia, CardContent, Box,  Typography, 
+    Paper, Stack, Button, IconButton  } from '@mui/material';
+import {Row, Col, Form, FormGroup} from "react-bootstrap";
 import axios, { AxiosResponse } from 'axios';
 import { endpoint } from '../Endpoint';
-import { ThreeSixtyTwoTone } from '@mui/icons-material';
 
 interface DEProps {
     dptName: string;
@@ -14,44 +13,35 @@ interface DEState {
     step: number;
     isEdit: boolean;
     disabled: boolean;
-    dischargedAlive_shared: number;
-    stayedinward_shared: number;
-    dptName: string;
-    default_questions: string[];
-    // red_data_shared: {[key:string]: number};
+    questionAndAswer: {
+        id: number,
+        question: string,
+        answer: string,
+        greendata: []
+    }[];
 }
 
 
-export class DataEntry extends Component <DEProps, DEState> {
-    constructor(props: DEProps){
-        super(props);
-        this.state = {
-            step: 1,
-            isEdit: true,
-            disabled: false,
-            dischargedAlive_shared: 0,
-            stayedinward_shared: 0,
-            dptName: this.props.dptName,
-            default_questions: [],
-        };
-    }
 
-    componentDidMount = () => {
-        this.initializeDataEntryPage();
-    }
 
-    initializeDataEntryPage = () => {
-        var self = this;
+const DataEntry = (props: DEProps, state: DEState) => {
+    const [step, setStep] = useState(1);
+    const [questionAndAswer, setQuestionAndAswer] = useState([]);
+
+    useEffect(() => {
+        initializeDataEntryPage();
+    }, []);
+
+    const initializeDataEntryPage = () => {
         // TODO - add dptName
         axios.get( endpoint + 'api/check_current_month_submission_status')
-        .then(function (res){
-            // console.log(typeof(res.data)); // boolean
+        .then(function (res: AxiosResponse<any>){
+            console.log("record exist: " + res.data);
             if (res.data == true){
-                self.setState({
-                    step: 3
-                });
+                setStep(2);
             } else {
-                self.getDefaultQuestions();
+                setStep(1);
+                getRecentQuestions();
             }
         })
         .catch(function (error){
@@ -59,106 +49,142 @@ export class DataEntry extends Component <DEProps, DEState> {
         })
     }
 
-    getDefaultQuestions = () => {
-        var self = this;
-        // const questions = ["beds_available", "bed_days", "patient_days", "hospitalized", "discharged_alive"...]
-        var questions = []
+    const getRecentQuestions = () => {
+        var questions: any = [];
         axios.get( endpoint + 'api/current_field_list/', {
             params: {
-                department: self.props.dptName
+                department: props.dptName
             }
         })
-        // axios.get( endpoint + 'api/current_field_list/' + 'Rehab/')
         .then(function (res: AxiosResponse<any>){
-            console.log(res.data[0].list); 
-            questions = res.data[0].list;
-            self.setState({
-                default_questions: questions
-            })
+            questions = res.data[0].list
+            console.log(questions);
+            initializeQuestionAndAswer(questions);
+            console.log(questionAndAswer);
         })
         .catch(function (error){
             console.log(error);
         })
     }
 
-    // Proceed to next step
-    nextStep = () => {
-        const { step } = this.state;
-        this.setState({
-            step: step + 1
-        });
+    const initializeQuestionAndAswer = (questions: string[]) => {
+        questions.map((question: string, i) => {
+            setQuestionAndAswer((oldValue) => [...oldValue, 
+            {
+                id: i+1,
+                question: question,
+                answer: '',
+                greendata: []
+            }])
+        })
     }
 
-     // Go back to prev step
-     prevStep = () => {
-        const { step } = this.state;
-        this.setState({
-            step: step - 1
-        });
+    const submitClick: any = () => {          
+        // axios.put( endpoint + 'api/current_field_list/' + props.dptName + '/', {
+        //     list: questions,
+        //     department: props.dptName
+        // })
+        // .then(function (res){
+        //     notifySuccess('Submit success!');
+        //     // console.log(res.data);
+        // })
+        // .catch(function (error){
+        //     notifyFail('Sorry, Submit fails.');
+        //     // console.log(error);
+        // })
     }
 
-    updateShared = (e: React.ChangeEvent<HTMLInputElement>) => {
-        var name = e.target.getAttribute('name') + '_shared';
-        // console.log(name);
-        this.setState({
-            [name]: +e.target.value,
-        } as unknown as Pick<DEState, keyof DEState>);
+    const StepOne = () => {
+        return (
+                <Container >   
+                <div>
+                <Paper style={{width: '100%', height: 550, overflow: 'auto', padding: 10, margin: 10 }}>
+                    <Box
+                    component="form"
+                    sx={{
+                        '& .MuiFormControlroot': { m: 1, width: '25ch' },
+                    }}
+                    noValidate
+                    autoComplete="off"
+                    >
+                    <Typography variant="h5">Data Entry</Typography>
+                    <Box>
+                        <Form>
+                            <FormGroup>
+                                {questionAndAswer.map((element: any, i) => (
+                                    <div key={element.id}>
+                                        <Row className="mt-2">
+                                            <Col md>
+                                                <Form.Label>Question {element.id}</Form.Label>
+                                                <Form.Control 
+                                                type="text" 
+                                                disabled
+                                                name="question"
+                                                value={element.question}
+                                                />
+                                            </Col>
+                                            <Col md>
+                                                <Form.Label>Answer {element.id}</Form.Label>
+                                                <Form.Control 
+                                                type="number"  
+                                                placeholder="Enter answer"
+                                                name = "answer"
+                                                value={element.answer}
+                                                // onChange={e => handleChangeInput(i, e)} 
+                                                />
+                                            </Col>
+                                            <Col md>
+                                                {/* <IconButton className="mt-4" sx={{ color: green[500] }} onClick={() => addClick()}>
+                                                    <AddBoxIcon/>
+                                                </IconButton> */}
+                                            </Col>
+                                        </Row>
+                                    </div>
+                                ))}
+                            </FormGroup>
+                        </Form>              
+                    </Box>
+                    </Box>
+                </Paper>
+                <Box>              
+                    <Stack direction="row" spacing={2} justifyContent="flex-end">
+                    <Button variant="contained" color="success" onClick={() => submitClick()}>Submit</Button>
+                    </Stack>
+                </Box>      
+                </div>                  
+                </Container>  
+        )
     }
 
-    render() {
-        const { step } = this.state;
-
-        switch(step){
-            case 1:
-                return (
-                    <div>
-                        <Container >   
-                            {/* <div>The shared value is {this.state.dischargedAlive_shared}</div> */}
-                            <RedDataForm 
-                                nextStep={this.nextStep}
-                                disabled={this.state.disabled} 
-                                dischargedAlive_shared={this.state.dischargedAlive_shared}
-                                stayedinward_shared={this.state.stayedinward_shared}
-                                updateShared={this.updateShared}
-                                // dptName={this.state.dptName}
-                                
-                            />                     
-                        </Container>  
-                    </div>
-                )
-            case 2:
-                return (             
-                    <div>
-                        <Container >                   
-                            <GreenDataForm 
-                                prevStep={this.prevStep}
-                                disabled={this.state.disabled} 
-                                dischargedAlive_shared={this.state.dischargedAlive_shared}
-                                stayedinward_shared={this.state.stayedinward_shared}
-                                //dptName={this.state.dptName}
-                            />                 
-                        </Container>  
-                    </div>
-                )
-            case 3:
-                return (
-                    <Card style={{width: '100%', height: 550, overflow: 'auto', padding: 10, margin: 10 }}>
-                    <CardMedia
-                      component="img"
-                      alt="cong"
-                      height="450"
-                      image="/static/pikachu.png"
-                    />
-                    <CardContent>
-                      <Typography align="center" variant="h5" component="div">
-                        The recent month's record has been submitted!
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                )
-            }
-        }
+    const StepTwo = () => {
+        return (
+            <Card style={{width: '100%', height: 550, overflow: 'auto', padding: 10, margin: 10 }}>
+            <CardMedia
+              component="img"
+              alt="cong"
+              height="450"
+              image="/static/pikachu.png"
+            />
+            <CardContent>
+              <Typography align="center" variant="h5" component="div">
+                The recent month's data has been submitted!
+              </Typography>
+            </CardContent>
+          </Card>
+        )
     }
+        
+    if (step == 1)
+    {
+        return StepOne();
+    } else if (step == 2)
+    {
+        return StepTwo();
+    } else 
+    {
+        return (<div></div>);
+    }
+}
 
 export default DataEntry
 
