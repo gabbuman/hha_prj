@@ -12,7 +12,7 @@ export function AuthProvider({ children }:any) {
   const [auth, setAuth] = useLocalStorage("auth", false);
 
   useEffect(() => {
-    return () => localStorage.removeItem("cmpt354-auth");
+    return () => localStorage.removeItem("cmpt373-auth");
   }, []);
 
   return (
