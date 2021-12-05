@@ -142,11 +142,52 @@
             "greendata":[]
           },
           {
-            "open": false,
+            "open": true,
             "id": 11,
             "question":"Stayed in the ward",
             "answer": 10,
-            "greendata":[]
+            "greendata":[
+              {
+                "question": "Not ready from therapy standpoint",
+                "answer": 2
+              },
+              {
+                "question": "Wound care",
+                "answer": 1
+              },
+              {
+                "question": "Other medical reason (such as IV medication)",
+                "answer": 1
+              },
+              {
+                "question": "Financial/no place to discharge to",
+                "answer": 2
+              },
+              {
+                "question": "Stay length: 1-3 months",
+                "answer": 4
+              },
+              {    
+                "question": "Stay length: 3-6 months",
+                "answer": 2
+              },
+              {  
+                "question": "Stay length: 6 months-1 year",
+                "answer": 3
+              },
+              { 
+                "question": "Stay length: 1-2 years",
+                "answer": 2
+              },
+              { 
+                "question": "Stay length: 2-3 years",
+                "answer": 0
+              },
+              { 
+                "question": "Stay length: 3+ years",
+                "answer": 0
+              }
+            ]
           },
           {
             "open": false,

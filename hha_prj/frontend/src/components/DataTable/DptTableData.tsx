@@ -69,16 +69,6 @@ declare module '@mui/material/Button' {
     }
 }
 
-const secondaryDataQuestions = [
-    "Discharged alive",
-    "Died before 48h",
-    "Self-discharged",
-    "Stayed in the ward",
-    "Admissions",
-    "Hospitalized"
-  ];
-
-
   const initialState: tableState = {
     dptName: "",
     month: null,
@@ -230,14 +220,11 @@ class TableData extends Component <tableProps, tableState> {
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                             <TableCell align="left" width="100%">
-                                                {row.open &&
+                                                {row.greendata.length > 0 &&
 
                                                     <Table sx={{ width: "100%" }} aria-label="simple table2">
                                                         <TableBody>
                                                             {
-
-                                                                row.greendata.length == 0 ?
-                                                                {} :
                                                                 row.greendata.map((green_row) => ( 
                                                                     <StyledTableRow
                                                                         key={green_row.question}
