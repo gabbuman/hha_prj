@@ -1,6 +1,8 @@
 import React, { useState, Component, useEffect } from 'react';
 import { Container, Card, CardMedia, CardContent, Box,  Typography, 
-    Paper, Stack, Button, IconButton  } from '@mui/material';
+    Paper, Stack, Button, IconButton } from '@mui/material';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {Row, Col, Form, FormGroup} from "react-bootstrap";
 import axios, { AxiosResponse } from 'axios';
 import { endpoint } from '../Endpoint';
@@ -14,6 +16,7 @@ interface DEState {
     isEdit: boolean;
     disabled: boolean;
     questionAndAswer: {
+        open: boolean,
         id: number,
         question: string,
         answer: string,
@@ -71,6 +74,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
         questions.map((question: string, i) => {
             setQuestionAndAswer((oldValue) => [...oldValue, 
             {
+                open: false,
                 id: i+1,
                 question: question,
                 answer: '',
@@ -84,6 +88,12 @@ const DataEntry = (props: DEProps, state: DEState) => {
         const values: any = [...questionAndAswer]
         // console.log(values[i])
         values[i][e.target.name] = e.target.value
+        setQuestionAndAswer(values)
+    }
+
+    const handleChangeIcon: any = (i: number, openStatus: boolean) => {
+        const values: any = [...questionAndAswer]
+        values[i]["open"] = openStatus
         setQuestionAndAswer(values)
     }
 
@@ -143,9 +153,14 @@ const DataEntry = (props: DEProps, state: DEState) => {
                                                 />
                                             </Col>
                                             <Col md>
-                                                {/* <IconButton className="mt-4" sx={{ color: green[500] }} onClick={() => addClick()}>
-                                                    <AddBoxIcon/>
-                                                </IconButton> */}
+                                                <IconButton
+                                                    className="mt-4"
+                                                    aria-label="expand row"
+                                                    size="small"
+                                                    onClick={e => handleChangeIcon(i, !element.open)}
+                                                >
+                                                    {element.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                                </IconButton>
                                             </Col>
                                         </Row>
                                     </div>
