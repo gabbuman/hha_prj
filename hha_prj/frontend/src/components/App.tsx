@@ -11,7 +11,7 @@ import Rank from './home/Rank';
 import {dpts_Data} from './home/DptData';
 import MonthlyRecord from './dpt/MonthlyRecord';
 import DptRecordPage from './dpt/DptRecordPage';
-import {DptTableView} from './home/DptTableView';
+import {DptTableView} from './DataTable/DptTableView';
 import Homepage from './home/Homepage';
 import { ToastContainer } from 'react-toastify';
 import CreateDepartment from './dpt/CreateDepartment';
