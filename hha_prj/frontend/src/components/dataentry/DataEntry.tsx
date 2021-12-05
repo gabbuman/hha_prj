@@ -78,7 +78,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
                 open: false,
                 id: i+1,
                 question: question,
-                answer: 0,
+                answer: null,
                 greendata: []
             }])
         })
@@ -88,7 +88,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
         // console.log(e.target.name);
         const values: any = [...questionAndAswer]
         // console.log(values[i])
-        values[i][e.target.name] = e.target.value
+        values[i][e.target.name] = +e.target.value
         setQuestionAndAswer(values)
     }
 
@@ -98,10 +98,20 @@ const DataEntry = (props: DEProps, state: DEState) => {
         setQuestionAndAswer(values)
     }
 
+    const isEmpty = (arr: any []) => {
+        var empty = []
+        empty = arr.filter(item => item.answer == null)
+        return (empty.length > 0)
+    }
+
     const submitClick: any = () => {  
         // console.log(questionAndAswer);  
         var currentTime = new Date(); 
-        // console.log(currentTime.getFullYear(), currentTime.getMonth());  
+        // console.log(currentTime.getFullYear(), currentTime.getMonth()); 
+        if (isEmpty(questionAndAswer)){
+            notifyFail('Sorry, Submit fails with empty value.');
+            return
+        }  
         axios.post( endpoint + 'api/monthly_records/', {
             question_answer_list: questionAndAswer,
             department: props.dptName,
