@@ -41,7 +41,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
         axios.get( endpoint + 'api/check_current_month_submission_status')
         .then(function (res: AxiosResponse<any>){
             console.log("record exist: " + res.data);
-            if (res.data == false){
+            if (res.data == true){
                 setStep(2);
             } else {
                 setStep(1);
