@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, Select, SelectChangeEvent } from '@mui/material';
 import { TextField } from '@mui/material';
 import React, { useState, useEffect, ReactElement } from 'react'
-import { DepartmentGraphCard } from './DptGraphCard';
+import { DptGraphCard } from './DptGraphCard';
 import styled from 'styled-components'
 import axios from 'axios'
 
@@ -44,7 +44,7 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
         }}).then((result: any) => {
             result.data.forEach((field: string) => {
                 graphCardDictionary.set(field, (
-                    <DepartmentGraphCard
+                    <DptGraphCard
                         key={field}
                         department={props.departmentName}
                         field={field}
