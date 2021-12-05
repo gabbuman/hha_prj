@@ -1,13 +1,7 @@
-import React, { Component, useState, useEffect } from 'react'
-import Header from '../layout/Header';
-import VerNavbar from '../layout/VerNavbar';
-import { Box, TextField, Typography, Stack, Button, 
-    FormControl, MenuItem, InputLabel, Select, Grid, Container} from '@mui/material';
+import React, { Component } from 'react'
+import { Box, TextField, Typography, Stack, Button, Grid} from '@mui/material';
 import axios from 'axios';
-import { useButtonProps } from '@restart/ui/esm/Button';
-import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
-import ReactDOM from 'react-dom';
-import DptRecordPage from '../dpt/DptRecordPage';
+import { Link} from 'react-router-dom';
 import { endpoint } from '../Endpoint';
 import { notifyFail, notifySuccess } from '../login/Notifications';
 
@@ -121,7 +115,7 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
                         label="Issue Description"
                         variant="outlined"
                         multiline
-                        rows={20}
+                        rows={10}
                         value={this.state.issue}
                         onChange={(e)=>{this.setState({issue: e.target.value})}}
                     />

@@ -1,9 +1,6 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import BSCard from './BioformCard';
 import styled from 'styled-components';
-import { endpoint } from '../Endpoint'
-import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
-import ReactDOM from 'react-dom';
 import BioformData from '../../types/Biomechanicalsupt';
 import BioformServices from '../../services/BioformServices';
 
