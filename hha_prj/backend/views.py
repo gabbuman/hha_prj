@@ -38,7 +38,7 @@ def GetRecordDataByDateRange(request):
     min_month = request.query_params.get("min_month")
     max_month = request.query_params.get("max_month")
 
-    if (target_field or target_dept or min_year or max_year or min_month or max_month) is None:
+    if (target_field or target_dept or min_year or max_year or min_month or max_month) == None:
         return HttpResponseBadRequest("Parameters are missing.")
     
     if not checkDepartmentExists(target_dept):
@@ -52,7 +52,7 @@ def GetRecordDataByDateRange(request):
     except:
         return HttpResponseBadRequest("Date range months and years must be numerical values.")
 
-    isValidDate = (min_year < max_year) or ((min_year is max_year) and (min_month < max_month))
+    isValidDate = (min_year < max_year) or ((min_year == max_year) and (min_month < max_month))
     if (not isValidDate):
         return HttpResponseBadRequest("Invalid date range selected, start date must be earlier than end date.")
 
@@ -90,7 +90,7 @@ def GetQuestionsListByDateRange(request):
     min_month = request.query_params.get("min_month")
     max_month = request.query_params.get("max_month")
 
-    if (target_dept or min_year or max_year or min_month or max_month) is None:
+    if (target_dept or min_year or max_year or min_month or max_month) == None:
         return HttpResponseBadRequest("Parameters are missing.")
     
     if not checkDepartmentExists(target_dept):
@@ -119,7 +119,7 @@ def GetQuestionsListByDateRange(request):
     all_questions_in_range_list = []
     for question_list in record_question_lists:
         extracted_question_list = [question_answer["question"] for question_answer in question_list]
-        if len(all_questions_in_range_list) is 0:
+        if len(all_questions_in_range_list) == 0:
             all_questions_in_range_list = extracted_question_list
         else:
             all_questions_in_range_list = all_questions_in_range_list + extracted_question_list
@@ -183,7 +183,7 @@ def GetDepartmentReminders(request):
 
     target_dept = request.query_params.get("department")
 
-    if target_dept is None:
+    if target_dept == None:
         return HttpResponseBadRequest("Parameters are missing.")
     
     if not checkDepartmentExists(target_dept):
