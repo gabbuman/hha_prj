@@ -10,11 +10,16 @@ import ReactDOM from 'react-dom';
 import BioformServices from '../../services/BioformServices';
 import axios from 'axios';
 import { endpoint } from '../Endpoint';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 
 
 export interface BSData {
     stateChanger: () => void;
     id: any;
+    image: any;
     name: string;
     issue: string;
 }
@@ -63,10 +68,7 @@ const CardTitle = styled.h3 `
     margin: 0 0 0 0;
     
 `
-const CardContent = styled.p`
-    color: black;
-    font-size: 12px;
-`
+
 const CardBackground = styled.img `
     position: absolute;
     top: 0;
@@ -77,7 +79,7 @@ const CardBackground = styled.img `
 
 
 
-const CSCard: React.FC<BSData> = ({stateChanger, id, name, issue}: BSData) =>  {
+const CSCard: React.FC<BSData> = ({stateChanger, id, image, name, issue}: BSData) =>  {
 
     const deleteBioform = () => {
         BioformServices.remove(id)
@@ -92,16 +94,20 @@ const CSCard: React.FC<BSData> = ({stateChanger, id, name, issue}: BSData) =>  {
 
     return (
         <div className="BSCard">
-            <CSCardGroup>
-                <TitleGrid>
-                    <Icon src='/static/rehab-bg.png'/>
-                    <CardTitle>{name}</CardTitle>
-                </TitleGrid>
-                <CardContent>{issue}</CardContent>
-                <EditDelGrid>
+            <Card sx={{ maxWidth: 345 }}>
+                <CardMedia
+                    component="img"
+                    height="140"
+                    image={image}
+                />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">{name}</Typography>
+                    <Typography variant="body2" color="text.secondary">{issue}</Typography>
+                </CardContent>
+                <CardActions>
                     <Button variant="contained" onClick={deleteBioform} style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Fixed</Button>
-                </EditDelGrid>  
-            </CSCardGroup>
+                </CardActions>
+            </Card>
         </div>
     )
 }

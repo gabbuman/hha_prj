@@ -80,7 +80,8 @@ const ViewBioform: React.FC<bsprops> = ({dptName}: bsprops) =>{
                             return (
                                 <BSCard
                                 stateChanger={retrieveBioform}
-                                id={item.id}  
+                                id={item.id}
+                                image={item.image}  
                                 name={item.name}
                                 issue={item.issue}></BSCard>
                             )

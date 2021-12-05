@@ -145,10 +145,10 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
                         sx={{
                             width:"170ch"
                         }}>
-                            <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="primary"onClick={this.submitClick}>Submit</Button>
                             <Link to = "/homepage" style={{ textDecoration: 'none' }} >
                                 <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Cancel</Button>
                             </Link>
+                            <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="primary"onClick={this.submitClick}>Submit</Button>
                         </Stack>
 
                     </Grid>
