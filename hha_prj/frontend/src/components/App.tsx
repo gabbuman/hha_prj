@@ -44,13 +44,23 @@ class App extends Component {
 								<Route path='/dptcard' component={DptOverview}>
 									<DptOverview departmentData={dpts_Data}/>
 								</Route>
-								<Route path='/homepage' component={Homepage}/>
+								<ProtectedRoutes
+									exact
+									path='/homepage'
+									component={Homepage}
+									template={"accessibleAfterLogin"}
+								/>
+								<ProtectedRoutes
+									exact
+									path='/creatdepartment'
+									component={CreateDepartment}
+									template={"accessibleAfterLogin"}
+								/>
 								<Route path='/cspreview' component={CSPreview} />
 								<Route path='/vernavbar' component={VerNavbar} />
 								<Route path='/monthlyrecord' component={MonthlyRecord} />			
 								<Route path='/datarecordarchive' component={DptTableView} />		 	
 								<Route path='/dptrecordpage' component={DptRecordPage} />	
-								<Route path='/createdepartment' component={CreateDepartment} />	
 								<Route path='/case_study_form' component={CaseStudySubmissionForm}/>
 								<Route path='/case_study_individual' component={CaseStudyIndividual}/>
 								<Route path='/case_study_grid' component={CaseStudyGridView}/>
