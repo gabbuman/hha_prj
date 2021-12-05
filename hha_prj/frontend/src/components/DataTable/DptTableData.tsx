@@ -37,9 +37,10 @@ interface tableProps{
     dptName: string,
     month: number;
     year: number;
-    dataRecords: {question: string, answer: number}[]
-    dptDataAll: {question: any, answer: any}[]
-    dptData: {question: any, answer: any}[]
+    dataRecords: {open: boolean, id: number, question: string, answer: number, greendata: {question: any, answer: any}[]}[]
+    dptDataAll: {question: any, answer: any, greendata: {question: any, answer: any}[]}[]
+    dptData: {question: any, answer: any,  greendata: {question: any, answer: any}[]}[]
+    greendata: {question: any, answer: any}[]
     getAllData: boolean
 }
 
@@ -85,6 +86,7 @@ const secondaryDataQuestions = [
     dataRecords: [],
     dptDataAll: [],
     dptData:[],
+    greendata: [],
     getAllData: true
 }
 
@@ -96,8 +98,6 @@ class TableData extends Component <tableProps, tableState> {
     constructor(props: tableProps){
         super(props);  
         this.state = initialState;
-        
-        console.log(this.state.getAllData)
     }
    
     componentDidMount() {
@@ -122,8 +122,12 @@ class TableData extends Component <tableProps, tableState> {
             result.map((data: any)=> (
                 data.department == this.state.dptName && data.month == this.state.month && data.year== this.state.year ? this.setState({dataRecords: data.question_answer_list})
                 :{},
-                this.state.getAllData && (data.department == this.state.dptName )? this.setState({dptDataAll: this.state.dptDataAll.concat({question:"Month/Year", answer:""+ months[data.month] + "/"+ data.year}), dptData: data.question_answer_list})
+                this.state.getAllData && (data.department == this.state.dptName )
+                    ? this.setState({dptDataAll: this.state.dptDataAll.concat({question:"Month/Year", answer:""+ months[data.month] + "/"+ data.year,greendata: []}), 
+                                    dptData: data.question_answer_list
+                                })
                 :{dptData: []},
+                console.log(this.state.dptDataAll),
                 this.state.getAllData && (data.department == this.state.dptName)? this.setState({dptDataAll: this.state.dptDataAll.concat(this.state.dptData)}): {}
             ))
             this.setState({getAllData: false});
@@ -132,7 +136,6 @@ class TableData extends Component <tableProps, tableState> {
             console.error(error)
           }
         )
-        
     }
 
     static months: number[]=[]; 
@@ -206,8 +209,8 @@ class TableData extends Component <tableProps, tableState> {
                             {this.state.dataRecords.length == 0 ?
                                 <div> <h3>No Records To View</h3> </div> :
                                 this.state.dataRecords.map((row) => (
-                                    <StyledTableRow
-                                        key={row.question}
+                                    <><StyledTableRow
+                                        key={row.id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell component="th" scope="row" width="15%" style={{ fontWeight: 700 }}>
@@ -217,18 +220,47 @@ class TableData extends Component <tableProps, tableState> {
                                             {row.answer}
                                         </TableCell>
                                         <TableCell align="right" width="100%">
-                                            {secondaryDataQuestions.includes(row.question) &&
-                                                <IconButton>
-                                                    <NotesOutlinedIcon sx={{ color: grey[500] }} />
-                                                </IconButton>}
-                                        </TableCell>
-                                        <TableCell align="right" width="100%">
                                             <IconButton>
                                                 <TimelineIcon sx={{ color: grey[500] }} />
                                             </IconButton>
                                         </TableCell>
-
                                     </StyledTableRow>
+                                    <StyledTableRow
+                                        key={row.id}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                            <TableCell align="left" width="100%">
+                                                {row.open &&
+
+                                                    <Table sx={{ width: "100%" }} aria-label="simple table2">
+                                                        <TableBody>
+                                                            {
+
+                                                                row.greendata.length == 0 ?
+                                                                {} :
+                                                                row.greendata.map((green_row) => ( 
+                                                                    <StyledTableRow
+                                                                        key={green_row.question}
+                                                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                                    >
+                                                                        <TableCell component="th" scope="row" width="15%" style={{ fontWeight: 700 }}>
+                                                                            {green_row.question}
+                                                                        </TableCell>
+                                                                        <TableCell align="left" width="15%">
+                                                                            {green_row.answer}
+                                                                        </TableCell>
+
+                                                                    </StyledTableRow>
+                                                                ))
+                                                                
+                                                                }
+
+                                                        </TableBody>
+                                                    </Table>}
+                                            </TableCell>
+
+
+                                        </StyledTableRow></>
                                 ))}
                         </TableBody>
                     </Table>

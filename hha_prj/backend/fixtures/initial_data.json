@@ -53,56 +53,107 @@
         "year": 2021,
         "question_answer_list": [
           {
+            "open": false,
+            "id": 1,
             "question":"Beds available",
-            "answer": 10
+            "answer": 10,
+            "greendata":[]
           },
           {
+            "open": false,
+            "id": 2,
             "question":"Bed days",
-            "answer": 4
+            "answer": 4,
+            "greendata":[]
           },
           {
+            "open": false,
+            "id": 3,
             "question":"Patient days",
-            "answer": 5
+            "answer": 5,
+            "greendata":[]
           },
           {
+            "open": false,
+            "id": 4,
             "question":"Hospitalized",
-            "answer": 3
+            "answer": 3,
+            "greendata":[]
           },
           {
+            "open": true,
+            "id": 5,
             "question":"Discharged alive",
-            "answer": 2
+            "answer": 2,
+            "greendata":[
+              {"question":"Patient",
+              "answer": 1
+              },
+
+              {"question":"Beds available 1",
+                "answer": 10
+              },
+
+              {"question":"Beds available 2",
+                "answer": 10
+              }
+            ]
           },
           {
+            "open": false,
+            "id": 5,
             "question":"Died before 48h",
-            "answer": 5
+            "answer": 5,
+            "greendata":[]
           },
           {
+            "open": false,
+            "id": 6,
             "question":"Died after 48h",
-            "answer": 1
+            "answer": 1,
+            "greendata":[]
           },
           {
+            "open": false,
+            "id": 7,
             "question":"Days hospitalised",
-            "answer": 20
+            "answer": 20,
+            "greendata":[]
           },
           {
+            "open": false,
+            "id": 8,
             "question":"Referrals",
-            "answer": 2
+            "answer": 2,
+            "greendata":[]
           },
           {
+            "open": false,
+            "id": 9,
             "question":"Transfers",
-            "answer": 5
+            "answer": 5,
+            "greendata":[]
           },
           {
+            "open": false,
+            "id": 10,
             "question":"Self discharged",
-            "answer": 2
+            "answer": 2,
+            "greendata":[]
           },
           {
+            "open": false,
+            "id": 11,
             "question":"Stayed in the ward",
-            "answer": 10
+            "answer": 10,
+            "greendata":[]
           },
           {
+            "open": false,
+            "id": 12,
             "question":"Admissions",
-            "answer": 5
+            "answer": 5,
+            "greendata":[]
           }
         ],
         "department": "Rehab"
@@ -116,56 +167,95 @@
       "year": 2021,
       "question_answer_list": [
         {
+          "open": false,
+            "id": 1,
           "question":"Beds available",
-          "answer": 13
+          "answer": 13,
+          "greendata":[]
         },
         {
+          "open": false,
+            "id": 2,
           "question":"Bed days",
-          "answer": 2
+          "answer": 2,
+          "greendata":[]
         },
         {
+          "open": false,
+            "id": 3,
           "question":"Patient days",
-          "answer": 5
+          "answer": 5,
+          "greendata":[]
         },
         {
+          "open": false,
+            "id": 4,
           "question":"Hospitalized",
-          "answer": 4
+          "answer": 4,
+          "greendata":[]
         },
         {
+          "open": false,
+            "id": 5,
           "question":"Discharged alive",
-          "answer": 1
+          "answer": 1,
+          "greendata":[]
         },
         {
+          "open": false,
+            "id": 6,
           "question":"Died before 48h",
-          "answer": 2
+          "answer": 2,
+          "greendata":[]
         },
         {
+          "open": false,
+            "id": 7,
           "question":"Died after 48h",
-          "answer": 0
+          "answer": 0,
+          "greendata":[]
         },
         {
+          "open": false,
+            "id": 8,
           "question":"Days hospitalised",
-          "answer": 20
+          "answer": 20,
+          "greendata":[]
         },
         {
+          "open": false,
+            "id": 9,
           "question":"Referrals",
-          "answer": 2
+          "answer": 2,
+          "greendata":[]
         },
         {
+          "open": false,
+            "id": 10,
           "question":"Transfers",
-          "answer": 5
+          "answer": 5,
+          "greendata":[]
         },
         {
+          "open": false,
+            "id": 11,
           "question":"Self discharged",
-          "answer": 2
+          "answer": 2,
+          "greendata":[]
         },
         {
+          "open": false,
+            "id": 12,
           "question":"Stayed in the ward",
-          "answer": 13
+          "answer": 13,
+          "greendata":[]
         },
         {
+          "open": false,
+            "id": 13,
           "question":"Admissions",
-          "answer": 5
+          "answer": 5,
+          "greendata":[]
         }
       ]
     }
