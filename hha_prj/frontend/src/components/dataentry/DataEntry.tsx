@@ -1,6 +1,6 @@
 import React, { useState, Component, useEffect } from 'react';
 import { Container, Card, CardMedia, CardContent, Box,  Typography, 
-    Paper, Stack, Button, IconButton } from '@mui/material';
+    Paper, Stack, Button, IconButton, Collapse } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {Row, Col, Form, FormGroup} from "react-bootstrap";
@@ -23,6 +23,11 @@ interface DEState {
         answer: number,
         greendata: []
     }[];
+    stayedInWardData: {
+        id: number,
+        question: string,
+        answer: number
+    }[];  
 }
 
 
@@ -31,6 +36,19 @@ interface DEState {
 const DataEntry = (props: DEProps, state: DEState) => {
     const [step, setStep] = useState(1);
     const [questionAndAswer, setQuestionAndAswer] = useState([]);
+    const [stayedInWardData, setStayedInWardData] = useState([]);
+    const stayedInWardDataQuestions = [
+        "Not ready from therapy standpoint",
+        "Wound care",
+        "Other medical reason (such as IV medication)",
+        "Financial/no place to discharge to",
+        "Stay length: 1-3 months",
+        "Stay length: 3-6 months",
+        "Stay length: 6 months-1 year",
+        "Stay length: 1-2 years",
+        "Stay length: 2-3 years",
+        "Stay length: 3+ years",
+    ]
 
     useEffect(() => {
         initializeDataEntryPage();
@@ -41,7 +59,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
         axios.get( endpoint + 'api/check_current_month_submission_status')
         .then(function (res: AxiosResponse<any>){
             console.log("record exist: " + res.data);
-            if (res.data == true){
+            if (res.data == false){
                 setStep(2);
             } else {
                 setStep(1);
@@ -84,18 +102,42 @@ const DataEntry = (props: DEProps, state: DEState) => {
         })
     }
 
+    const initializeStayedInWardData = (questions: string[]) => {
+        setStayedInWardData([]);
+        questions.map((question: string, i) => {
+            setStayedInWardData((oldValue) => [...oldValue, 
+            {
+                id: i+1,
+                question: question,
+                answer: null
+            }])
+        })
+    }
+
     const handleChangeInput: any = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
         // console.log(e.target.name);
         const values: any = [...questionAndAswer]
         // console.log(values[i])
         values[i][e.target.name] = +e.target.value
         setQuestionAndAswer(values)
+        if(values[i]["question"] == "Stayed In Ward" && values[i]["answer"] > 0)
+        {
+            initializeStayedInWardData(stayedInWardDataQuestions);
+        }
     }
 
     const handleChangeIcon: any = (i: number, openStatus: boolean) => {
         const values: any = [...questionAndAswer]
         values[i]["open"] = openStatus
         setQuestionAndAswer(values)
+    }
+
+    const handleChangeInputStayedGreen: any = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
+        // console.log(e.target.name);
+        const values: any = [...stayedInWardData]
+        // console.log(values[i])
+        values[i][e.target.name] = +e.target.value
+        setStayedInWardData(values)
     }
 
     const isEmpty = (arr: any []) => {
@@ -127,6 +169,51 @@ const DataEntry = (props: DEProps, state: DEState) => {
             console.log(error);
         })
     }
+
+    const stayedInWard: any = (element: any) => {
+        if (element.answer == 0)
+        {
+            return (<div></div>)
+        } else {
+            return (
+                <Collapse in={element.open} timeout="auto" unmountOnExit>
+                  <Box>
+                    <Form>
+                        <FormGroup>
+                            {stayedInWardData.map((ele: any, i) => (
+                                <div key={ele.id}>
+                                    <Row className="mt-2">
+                                        <Col md>
+                                            <Form.Label>Question {element.id}</Form.Label>
+                                            <Form.Control 
+                                            type="text" 
+                                            disabled
+                                            name="question"
+                                            value={ele.question}
+                                            />
+                                        </Col>
+                                        <Col md>
+                                            <Form.Label>Answer {element.id}</Form.Label>
+                                            <Form.Control 
+                                            type="number"  
+                                            min="0"
+                                            placeholder="Enter answer"
+                                            name = "answer"
+                                            value={ele.answer}
+                                            onChange={e => handleChangeInputStayedGreen(i, e)} 
+                                            />
+                                        </Col>
+                                    </Row>
+                                </div>
+                            ))}
+                        </FormGroup>
+                    </Form>              
+                </Box>
+              </Collapse>
+            )
+        }
+    }
+
 
     const StepOne = () => {
         return (
@@ -178,6 +265,12 @@ const DataEntry = (props: DEProps, state: DEState) => {
                                                     {element.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                                                 </IconButton>
                                             </Col>
+                                        </Row>
+                                        <Row className="ml-4">
+                                            {element.question != "Stayed In Ward"? 
+                                                <div></div> :
+                                                stayedInWard(element)
+                                            }
                                         </Row>
                                     </div>
                                 ))}
