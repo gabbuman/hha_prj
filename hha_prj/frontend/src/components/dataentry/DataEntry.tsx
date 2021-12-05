@@ -151,10 +151,24 @@ const DataEntry = (props: DEProps, state: DEState) => {
         return (empty.length > 0)
     }
 
+    const addGreenInData = () => {
+        questionAndAswer.map((cell: any, i) => {
+            if( cell.question == "Stayed In Ward" && cell.answer > 0)
+            {
+                const values:any = [... questionAndAswer]
+                values[i]["greendata"] = stayedInWardData;
+                setStayedInWardData(values)
+            }
+        })
+    }
+
     const submitClick: any = () => {  
         // console.log(questionAndAswer);  
         var currentTime = new Date(); 
         // console.log(currentTime.getFullYear(), currentTime.getMonth()); 
+        console.log(stayedInWardData);
+        addGreenInData();
+        console.log(questionAndAswer);
         if (isEmpty(questionAndAswer)){
             notifyFail('Sorry, Submit fails with empty value.');
             return
