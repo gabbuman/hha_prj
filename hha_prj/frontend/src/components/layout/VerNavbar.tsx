@@ -135,7 +135,7 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
             <ParentSize>
 							  {({width, height}) => 
 								    <DepartmentGraphCard 
-                      department='Rehab'
+                      department={this.props.dptName}
                       field='Bed days'
                       minMonth={1}
                       minYear={2020}

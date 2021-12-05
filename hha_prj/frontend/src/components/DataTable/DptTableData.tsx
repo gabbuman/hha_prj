@@ -16,6 +16,7 @@ import { CSVLink } from "react-csv";
 import { months } from './DptTableView';
 
 import { PDFExport} from '@progress/kendo-react-pdf';
+import { DepartmentGraphCard } from '../home/Department Card/DptGraphCard';
 
 const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
@@ -40,7 +41,12 @@ interface tableProps{
     dataRecords: {question: string, answer: number}[]
     dptDataAll: {question: any, answer: any}[]
     dptData: {question: any, answer: any}[]
-    getAllData: boolean
+    getAllData: boolean;
+    min_month: number;
+    max_month:number;
+    max_year: number;
+    min_year: number;
+    graphQuestion: string;
 }
 
 const theme = createTheme({
@@ -85,7 +91,12 @@ const secondaryDataQuestions = [
     dataRecords: [],
     dptDataAll: [],
     dptData:[],
-    getAllData: true
+    getAllData: true,
+    min_month: (new Date()).getMonth() - 12,
+    max_month: (new Date()).getMonth(),
+    max_year: (new Date()).getFullYear(),
+    min_year: (new Date()).getFullYear() -1,
+    graphQuestion: "",
 }
 
 let modalIsOpen = false;
@@ -148,7 +159,15 @@ class TableData extends Component <tableProps, tableState> {
     }
 
     
+    handleOpen(question: string) {
+        this.setState({
+            graphQuestion: question
+        }),
+        modalIsOpen = true;
 
+        this.forceUpdate();
+    }
+    
     
     static months: number[]=[]; 
     render (){ 
@@ -169,54 +188,45 @@ class TableData extends Component <tableProps, tableState> {
             data: this.state.dptDataAll,
             filename: 'MonthlyReport_all_' + this.state.dptName + '.csv'
           };
-          
-        const handleOpen = () => {
-            modalIsOpen = true;
-            console.log("button pressed");
-            this.forceUpdate();
-        }
+        
         const handleClose = () => {
             modalIsOpen = false;
             this.forceUpdate();
         }
-        
       
         return(
             <><div>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={8}>
-                    { 
+                    <Grid item xs={8}>
+                        { 
+                            <Stack direction="row" justifyContent="flex-end">
+                                <ThemeProvider theme={theme}>
+                                        { <Button variant="contained" color="neutral" onClick = {exportPDFWithComponent}>Export Current to PDF</Button>  }  
+                                </ThemeProvider>
+                            </Stack>
+                        }                   
+                    </Grid> 
+                    <Grid item xs={4}>
                         <Stack direction="row" justifyContent="flex-end">
-                            <ThemeProvider theme={theme}>
-                                    { <Button variant="contained" color="neutral" onClick = {exportPDFWithComponent}>Export Current to PDF</Button>  }  
-                            </ThemeProvider>
+                                <ThemeProvider theme={theme}>
+                                    <CSVLink {...CsvReport} >
+                                    <Button variant="contained" color="neutral"> Export current to CSV </Button>
+                                    </CSVLink>
+                                </ThemeProvider>
+                            
                         </Stack>
-                    }                   
-                </Grid> 
-                <Grid item xs={4}>
-                    <Stack direction="row" justifyContent="flex-end">
-                            <ThemeProvider theme={theme}>
-                                <CSVLink {...CsvReport} >
-                                <Button variant="contained" color="neutral"> Export current to CSV </Button>
-                                </CSVLink>
-                            </ThemeProvider>
-                        
-                    </Stack>
-                </Grid>
-                
-                
-                <Grid item xs={12}>
-                    <Stack direction="row" justifyContent="flex-end">
-                            <ThemeProvider theme={theme}>
-                                <CSVLink {...CsvReportAll} >
-                                <Button variant="contained" color="neutral" > Export All records to CSV </Button>
-                                </CSVLink>
-                            </ThemeProvider>
-                        
-                    </Stack>
-                </Grid>
+                    </Grid>
 
-                
+                    <Grid item xs={12}>
+                        <Stack direction="row" justifyContent="flex-end">
+                                <ThemeProvider theme={theme}>
+                                    <CSVLink {...CsvReportAll} >
+                                    <Button variant="contained" color="neutral" > Export All records to CSV </Button>
+                                    </CSVLink>
+                                </ThemeProvider>
+                            
+                        </Stack>
+                    </Grid>
                 </Grid>
             </div>
             <PDFExport
@@ -226,7 +236,7 @@ class TableData extends Component <tableProps, tableState> {
                 fileName={`MonthlyReport_` + this.props.dptName + '_' + this.state.month +this.state.year}
                 >
             <Grid item xs={12}>
-            <TableContainer component={Paper}>
+                <TableContainer component={Paper}>
                     <Table sx={{ width: "auto" }} aria-label="simple table">
                         <TableBody>
                             {this.state.dataRecords.length == 0 ?
@@ -235,7 +245,8 @@ class TableData extends Component <tableProps, tableState> {
                                     <StyledTableRow
                                         key={row.question}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
+                                    >   
+                                        
                                         <TableCell component="th" scope="row" width="15%" style={{ fontWeight: 700 }}>
                                             {row.question}
                                         </TableCell>
@@ -249,40 +260,40 @@ class TableData extends Component <tableProps, tableState> {
                                                 </IconButton>}
                                         </TableCell>
                                         <TableCell align="right" width="100%">
-                                            <IconButton onClick = {handleOpen}>
+                                            <IconButton onClick = {() =>this.handleOpen(row.question)}>
                                                 <TimelineIcon sx={{ color: grey[500] }} />
-                                            </IconButton>
-                                            
-                                            
-                                         
+                                            </IconButton> 
                                         </TableCell>
-
                                     </StyledTableRow>
                                 ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
-                </Grid>
-                </PDFExport>
-                <Modal
-                    open={modalIsOpen}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
+            </Grid>
+            </PDFExport>
+            <Modal
+                open={modalIsOpen}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
                 >
-                    <Box sx={modalStyle}>
-                    
-                                {/* <DptGraphCard width={600} 
-									height={450} 
-									recordDataSet={sampleData} 
-                                  dptName={this.props.dptName}/> */}
-                    </Box>
-                </Modal>
-                </>
-            )
-           
-        
+                <Box sx={modalStyle}>
+                    <DepartmentGraphCard 
+                        department={this.state.dptName}
+                        field= {this.state.graphQuestion}
+                        minMonth={this.state.min_month}
+                        minYear={this.state.min_year}
+                        maxMonth={this.state.max_month}
+                        maxYear={this.state.max_year}
+                        width={550} 
+                        height={400}/>
+                        
+                </Box>
+            </Modal>
+            </>
+        )   
     }
+
     componentWillUnmount() {
         this._isMounted = false;
     }
