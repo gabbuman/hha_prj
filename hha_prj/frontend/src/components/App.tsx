@@ -11,7 +11,6 @@ import Rank from './home/Rank';
 import {dpts_Data} from './home/DptData';
 import DataEntry from './dataentry/DataEntry';
 import DptPage from './dpt/DptPage';
-import {DptTableView} from './home/DptTableView';
 import Homepage from './home/Homepage';
 import { ToastContainer } from 'react-toastify';
 import {DptGraphCard, GraphProps} from './home/Department Card/DptGraphCard';
