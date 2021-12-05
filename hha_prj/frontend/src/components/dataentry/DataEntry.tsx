@@ -102,16 +102,20 @@ const DataEntry = (props: DEProps, state: DEState) => {
         })
     }
 
-    const initializeStayedInWardData = (questions: string[]) => {
-        setStayedInWardData([]);
-        questions.map((question: string, i) => {
-            setStayedInWardData((oldValue) => [...oldValue, 
-            {
-                id: i+1,
-                question: question,
-                answer: null
-            }])
-        })
+    const updateStayedInWardData = (questions: string[]) => {
+        // console.log(stayedInWardData);
+        if (!stayedInWardData.length)
+        {
+            // console.log("check")
+            questions.map((question: string, i) => {
+                setStayedInWardData((oldValue) => [...oldValue, 
+                {
+                    id: i+1,
+                    question: question,
+                    answer: null
+                }])
+            })
+        }
     }
 
     const handleChangeInput: any = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
@@ -122,7 +126,8 @@ const DataEntry = (props: DEProps, state: DEState) => {
         setQuestionAndAswer(values)
         if(values[i]["question"] == "Stayed In Ward" && values[i]["answer"] > 0)
         {
-            initializeStayedInWardData(stayedInWardDataQuestions);
+            // console.log("check0")
+            updateStayedInWardData(stayedInWardDataQuestions);
         }
     }
 
