@@ -184,15 +184,8 @@ const CaseStudyInputForm: React.FC<CSSProps> = ({dptName}: CSSProps)=>{
                         sx={{
                             width:"170ch"
                         }}>
-<<<<<<< HEAD
                             <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="primary"onClick={submitClick}>Submit</Button>
                             <Button onClick={() => history.goBack()} style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
-=======
-                            <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="primary"onClick={this.submitClick}>Submit</Button>
-                            <Link to = "/dptpage" style={{ textDecoration: 'none' }} >
-                                <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
-                            </Link>
->>>>>>> 37c5ede9b2aa927df63b7715c76722fe8e6ae100
                         </Stack>
 
                     </Grid>
