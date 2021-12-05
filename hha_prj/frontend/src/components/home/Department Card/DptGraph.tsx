@@ -243,7 +243,7 @@ export default withTooltip<AreaProps, TooltipData>(
                     {`${getRecordValue(tooltipData)}`}
                     </TooltipWithBounds>
                     <Tooltip
-                        top={innerHeight + margin.top - 14}
+                        top={innerHeight + margin.top +11}
                         left={tooltipLeft}
                         style={tooltipBottomStyles}
                     >
