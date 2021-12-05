@@ -6,6 +6,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {Row, Col, Form, FormGroup} from "react-bootstrap";
 import axios, { AxiosResponse } from 'axios';
 import { endpoint } from '../Endpoint';
+import { notifyFail, notifySuccess } from '../login/Notifications';
 
 interface DEProps {
     dptName: string;
@@ -19,7 +20,7 @@ interface DEState {
         open: boolean,
         id: number,
         question: string,
-        answer: string,
+        answer: number,
         greendata: []
     }[];
 }
@@ -40,7 +41,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
         axios.get( endpoint + 'api/check_current_month_submission_status')
         .then(function (res: AxiosResponse<any>){
             console.log("record exist: " + res.data);
-            if (res.data == true){
+            if (res.data == false){
                 setStep(2);
             } else {
                 setStep(1);
@@ -77,7 +78,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
                 open: false,
                 id: i+1,
                 question: question,
-                answer: '',
+                answer: 0,
                 greendata: []
             }])
         })
@@ -97,19 +98,24 @@ const DataEntry = (props: DEProps, state: DEState) => {
         setQuestionAndAswer(values)
     }
 
-    const submitClick: any = () => {          
-        // axios.put( endpoint + 'api/current_field_list/' + props.dptName + '/', {
-        //     list: questions,
-        //     department: props.dptName
-        // })
-        // .then(function (res){
-        //     notifySuccess('Submit success!');
-        //     // console.log(res.data);
-        // })
-        // .catch(function (error){
-        //     notifyFail('Sorry, Submit fails.');
-        //     // console.log(error);
-        // })
+    const submitClick: any = () => {  
+        // console.log(questionAndAswer);  
+        var currentTime = new Date(); 
+        // console.log(currentTime.getFullYear(), currentTime.getMonth());  
+        axios.post( endpoint + 'api/monthly_records/', {
+            question_answer_list: questionAndAswer,
+            department: props.dptName,
+            year: currentTime.getFullYear(),
+            month: currentTime.getMonth()
+        })
+        .then(function (res){
+            notifySuccess('Submit success!');
+            console.log(res.data);
+        })
+        .catch(function (error){
+            notifyFail('Sorry, Submit fails.');
+            console.log(error);
+        })
     }
 
     const StepOne = () => {
