@@ -5,7 +5,7 @@ import { Box, TextField, Typography, Stack, Button,
     CardMedia, Card, CardActions, CardActionArea, CardContent} from '@mui/material';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import DptRecordPage from '../dpt/DptRecordPage';
+import DptPage from '../dpt/DptPage';
 import { endpoint } from '../Endpoint';
 import axios from 'axios';
 
@@ -108,7 +108,7 @@ const CaseStudyIndividual: React.FC = () =>{
                 <Stack direction="row" spacing={10} justifyContent="flex-end"  sx={{
                             width:"135ch"
                     }}>
-                    <Link to = "/dptrecordpage" style={{ textDecoration: 'none' }} >
+                    <Link to = "/dptpage" style={{ textDecoration: 'none' }} >
                         <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
                     </Link>
                 </Stack>

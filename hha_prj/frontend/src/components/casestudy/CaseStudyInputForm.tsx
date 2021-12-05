@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useButtonProps } from '@restart/ui/esm/Button';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import DptRecordPage from '../dpt/DptRecordPage';
+import DptPage from '../dpt/DptPage';
 import { endpoint } from '../Endpoint';
 import { notifyFail, notifySuccess } from '../login/Notifications';
 interface CSSProps {
@@ -196,7 +196,7 @@ export default class CaseStudySubmissionForm extends Component <CSSProps, CSSSta
                             width:"170ch"
                         }}>
                             <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="primary"onClick={this.submitClick}>Submit</Button>
-                            <Link to = "/dptrecordpage" style={{ textDecoration: 'none' }} >
+                            <Link to = "/dptpage" style={{ textDecoration: 'none' }} >
                                 <Button style={{maxWidth:'120px',maxHeight:'40px', minWidth:'120px',minHeight:'40px'}}variant="contained" color="warning">Back</Button>
                             </Link>
                         </Stack>

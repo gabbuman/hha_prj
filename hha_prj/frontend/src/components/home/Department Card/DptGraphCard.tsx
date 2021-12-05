@@ -77,7 +77,7 @@ const graphApi = axios.create({
     baseURL: 'http://127.0.0.1:8000/api/graph_data/'
 })
 
-export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData> {
+export class DptGraphCard extends Component<GraphCardProps, GraphCardData> {
     constructor(props: GraphCardProps) {
         super(props);
 
