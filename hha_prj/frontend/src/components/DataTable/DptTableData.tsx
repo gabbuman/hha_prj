@@ -11,7 +11,7 @@ import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
 import { endpoint } from '../Endpoint';
 import { grey } from '@mui/material/colors';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
-import { Button, createTheme, ThemeProvider, Grid, IconButton, Stack } from '@mui/material';
+import { Button, createTheme, ThemeProvider, Grid, IconButton, Stack, Box } from '@mui/material';
 import { CSVLink } from "react-csv";
 import { months } from './DptTableView';
 
@@ -156,9 +156,10 @@ class TableData extends Component <tableProps, tableState> {
           };
 
         return(
-            <><div>
+            <>
+                <Box m={5}>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={8}>
+                <Grid item xs={4} md={4}>
                     { 
                         <Stack direction="row" justifyContent="flex-end">
                             <ThemeProvider theme={theme}>
@@ -167,7 +168,8 @@ class TableData extends Component <tableProps, tableState> {
                         </Stack>
                     }                   
                 </Grid> 
-                <Grid item xs={4}>
+
+                <Grid item xs={4} md={4}>
                     <Stack direction="row" justifyContent="flex-end">
                             <ThemeProvider theme={theme}>
                                 <CSVLink {...CsvReport} >
@@ -178,8 +180,7 @@ class TableData extends Component <tableProps, tableState> {
                     </Stack>
                 </Grid>
                 
-                
-                <Grid item xs={12}>
+                <Grid item xs={4} md={4}>
                     <Stack direction="row" justifyContent="flex-end">
                             <ThemeProvider theme={theme}>
                                 <CSVLink {...CsvReportAll} >
@@ -189,17 +190,17 @@ class TableData extends Component <tableProps, tableState> {
                         
                     </Stack>
                 </Grid>
-
-                
-                </Grid>
-            </div>
+            </Grid>
+            </Box>
+            <Box m={5}>
             <PDFExport
                 ref={pdfExportComponent}
                 paperSize="A2"
                 margin={'4cm'}
                 fileName={`MonthlyReport_` + this.props.dptName + '_' + this.state.month +this.state.year}
                 >
-            <Grid item xs={12}>
+
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             <TableContainer component={Paper}>
                     <Table sx={{ width: "auto" }} aria-label="simple table">
                         <TableBody>
@@ -235,7 +236,9 @@ class TableData extends Component <tableProps, tableState> {
                     
                 </TableContainer>
                 </Grid>
-                </PDFExport></>
+                </PDFExport>
+                </Box>
+                </>
             )
            
         
