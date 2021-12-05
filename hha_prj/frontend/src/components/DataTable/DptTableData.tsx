@@ -199,6 +199,8 @@ class TableData extends Component <tableProps, tableState> {
                             {this.state.dataRecords.length == 0 ?
                                 <div> <h3>No Records To View</h3> </div> :
                                 this.state.dataRecords.map((row) => (
+                                    //React complains the parent to have one Jsx component where in this case it was 2, <StyledTableRow>. 
+                                    //For that case it needs to be wrapped inside one Jsx component i.e. <></>. 
                                     <><StyledTableRow
                                         key={row.id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
