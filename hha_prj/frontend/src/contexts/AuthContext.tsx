@@ -1,5 +1,6 @@
 import { useContext, createContext, useEffect } from "react";
-import useLocalStorage from "@hooks/useLocalStorage";
+import useLocalStorage from "./../hooks/useLocalStorage";
+import React from 'react'
 
 const AuthContext = createContext(null);
 
@@ -7,7 +8,7 @@ export function useAuthContext() {
   return useContext(AuthContext);
 }
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children }:any) {
   const [auth, setAuth] = useLocalStorage("auth", false);
 
   useEffect(() => {
