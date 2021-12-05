@@ -26,10 +26,15 @@ const DepartmentHome: React.FC = () => {
         <ParentSize>
             {({width, height}) => 
                 <PageContainer>
-                    <DptGraphCard width={width > 700 ? 635 : width-30} 
-                                        height={300} 
-                                        recordDataSet={sampleData} 
-                                        dptName= {""}/>
+                    <DptGraphCard 
+                        department='Rehab'
+                        field='Bed days'
+                        minMonth={null}
+                        minYear={null}
+                        maxMonth={1}
+                        maxYear={2021}
+                        width={width > 700 ? 635 : width-30} 
+                        height={300}/>
                     <ActionCardContainer>
                         <ActionCard backgroundImage={'/static/case-study-icon.svg'} 
                                     fromColor={'#254E9F'}
