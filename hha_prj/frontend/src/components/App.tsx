@@ -20,7 +20,7 @@ import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
 import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
 import DepartmentHome from './dpt/DepartmentHome';
 import CaseStudyGridView from './casestudy/CaseStudyGridView';
-import Biosuptform from './home/Biosuptform';
+import Biosuptform from './biomechanicalform/BioformCard';
 
 class App extends Component {
     render() {

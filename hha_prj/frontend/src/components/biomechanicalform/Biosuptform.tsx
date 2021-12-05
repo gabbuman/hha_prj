@@ -97,7 +97,7 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
                         onChange={(e)=>{this.setState({name: e.target.value})}}
                         
                         sx={{
-                            width: '50ch', '& .MuiTextField-root': { m: 2}
+                            width: '100ch', '& .MuiTextField-root': { m: 2}
                         }}
                         />
                     </Box>
@@ -115,7 +115,7 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
                         label="Issue Description"
                         variant="outlined"
                         multiline
-                        rows={10}
+                        rows={15}
                         value={this.state.issue}
                         onChange={(e)=>{this.setState({issue: e.target.value})}}
                     />

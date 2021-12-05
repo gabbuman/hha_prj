@@ -17,8 +17,8 @@ import { sampleData } from '../home/Department Card/RecordData';
 import {DptGraphCard, GraphProps} from '../home/Department Card/DptGraphCard';
 import { render } from 'react-dom';
 import { Component } from 'react';
-import Biosuptform from '../home/Biosuptform';
-import ViewBioform from '../home/ViewBioform';
+import Biosuptform from '../biomechanicalform/Biosuptform';
+import ViewBioform from '../biomechanicalform/ViewBioform';
 
 interface TabPanelProps {
   children?: React.ReactNode;
