@@ -12,6 +12,7 @@ import datetime as dt
 from .models import  Department, MonthlyRecord, CurrentFieldsList, CaseStudy
 import json
 from django.db.models import Q
+import csv
 class ObtainTokenPairWithUsernameView(TokenObtainPairView):
     permission_classes = (permissions.AllowAny,)
     serializer_class = CustomTokenPairSerializer
@@ -40,8 +41,7 @@ def GetRecordDataByDateRange(request):
     if (target_field or target_dept or min_year or max_year or min_month or max_month) is None:
         return HttpResponseBadRequest("Parameters are missing.")
     
-    department_exists = len(list(Department.objects.filter(Q(name=target_dept)))) >= 1
-    if not department_exists:
+    if not checkDepartmentExists(target_dept):
         return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
 
     try:
@@ -93,8 +93,7 @@ def GetQuestionsListByDateRange(request):
     if (target_dept or min_year or max_year or min_month or max_month) is None:
         return HttpResponseBadRequest("Parameters are missing.")
     
-    department_exists = len(list(Department.objects.filter(Q(name=target_dept)))) >= 1
-    if not department_exists:
+    if not checkDepartmentExists(target_dept):
         return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
 
     try:
@@ -105,7 +104,7 @@ def GetQuestionsListByDateRange(request):
     except:
         return HttpResponseBadRequest("Date range months and years must be numerical values.")
 
-    isValidDate = (min_year < max_year) or ((min_year is max_year) and (min_month < max_month))
+    isValidDate = (min_year < max_year) or ((min_year == max_year) and (min_month < max_month))
     if (not isValidDate):
         return HttpResponseBadRequest("Invalid date range selected, start date must be earlier than end date.")
 
@@ -178,3 +177,60 @@ def GetCaseStudies(request):
 
     data = json.dumps(case_studies_list,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
+
+@api_view(['GET'])
+def GetDepartmentReminders(request):
+
+    target_dept = request.query_params.get("department")
+
+    if target_dept is None:
+        return HttpResponseBadRequest("Parameters are missing.")
+    
+    if not checkDepartmentExists(target_dept):
+        return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
+
+    # Case Study Count
+    today_date = dt.datetime.now() # now() to include time in the datetime object
+    start_date = dt.datetime.today().replace(day=1) # today() used to set time of datetime to 0 implicitly
+    case_studies_completed = list(CaseStudy.objects.filter(Q(created_at__range=(start_date,today_date)),Q(department=(target_dept))))
+
+    # Monthly Record Status
+    current_year = dt.datetime.now().year
+    current_month = dt.datetime.now().month
+    monthly_record_submitted = list(MonthlyRecord.objects.filter(Q(year=current_year), Q(month=current_month), Q(department=(target_dept))).values())
+
+    # Biomechanical Form Status - TBD
+
+    # Compile response
+    response = dict()
+    response["case_studies_completed"] = len(case_studies_completed)
+    response["monthly_record_subbmited"] = True if len(monthly_record_submitted) > 0 else False
+    response["outstanding_biomech_issues"] = "Waiting for biomechanical form model to get this"
+
+    data = json.dumps(response,indent=4,sort_keys=True,default=str)
+    return HttpResponse(data, content_type="application/json")
+
+@api_view(['GET'])
+def GetAllMonhtlyRecordDataInCSV(request):
+
+    target_dept = request.query_params.get("department")
+    
+    all_records = MonthlyRecord.objects.all()
+    if target_dept:
+        if not checkDepartmentExists(target_dept):
+            return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
+        all_records = MonthlyRecord.objects.filter(Q(department=target_dept))
+       
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="monthly_records_export.csv"'
+    writer = csv.writer(response)
+    writer.writerow(['ID','Month','Year','Questions and Answers List','Department'])
+    records_list = all_records.values_list('monthly_record_id','month','year','question_answer_list','department')
+
+    for record in records_list:
+        writer.writerow(record)
+
+    return response
+
+def checkDepartmentExists(department):
+    return len(list(Department.objects.filter(Q(name=department)))) >= 1
