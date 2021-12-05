@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Box, TextField, Typography, Stack, Button, Grid} from '@mui/material';
+import { Box, TextField, Typography, Stack, Button, Grid, Paper} from '@mui/material';
 import axios from 'axios';
 import { Link} from 'react-router-dom';
 import { endpoint } from '../Endpoint';
@@ -14,6 +14,7 @@ interface CSSState {
     issue: string;
     isSubmit: boolean;
     selectedImages: any;
+    file: any;
 }
 
 const initialState: CSSState = {
@@ -21,10 +22,11 @@ const initialState: CSSState = {
     issue: '',
     isSubmit: false,
     selectedImages: null,
+    file: null,
 }
 
 export default class BiomechanicalSupportForm extends Component <CSSProps, CSSState>{
-
+    
     constructor(props: CSSProps){
         super(props);
         this.state = initialState;
@@ -38,6 +40,7 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
     handleImageUpload = (event:any) => {
         if(event.target.files[0]){
             this.setState({selectedImages: event.target.files[0]||[]})
+            this.setState({file: URL.createObjectURL(event.target.files[0])})
         }
     }
 
@@ -81,9 +84,15 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
 
         return(
             <div>
-                <Typography variant="h5">Biomechanical Support Form</Typography>
                 <Box
                 sx={{m:4}}>
+                    <Box
+                    sx={{
+                        m:2
+                    }}
+                    >
+                    <Typography component="h1" variant="h5">Biomechanical Support Form</Typography>
+                    </Box>
                     <Box
                     sx={{
                         m:2
@@ -132,7 +141,14 @@ export default class BiomechanicalSupportForm extends Component <CSSProps, CSSSt
                         name="file"
                         onChange={this.handleImageUpload}
                         />
-
+                        {this.state.file ? 
+                            <div style={{marginTop:'5px'}}>
+                                <img src={this.state.file} 
+                                    style={{maxWidth:'30ch', height:'30ch',padding:'2%'}}>
+                                </img>
+                            </div>
+                            :
+                            <div></div>}
                     </Box>
                     <Grid item xs={12}>
                         <Stack direction="row" spacing={5} justifyContent="center"
