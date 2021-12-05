@@ -7,14 +7,14 @@ import {Grid, Button} from '@mui/material';
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DataEntry from '../dataentry/DataEntry';
-import DptTableView from '../home/DptTableView';
+import DptTableView from '../DataTable/DptTableView';
 import CaseStudyGridView from '../casestudy/CaseStudyGridView';
 import CaseStudyIndividual from '../casestudy/CaseStudyIndividual';
 import CaseStudySubmissionForm from '../casestudy/CaseStudyInputForm';
 import DptPage from '../dpt/DptPage';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
-import { sampleData } from '../home/Department Card/RecordData';
-import {DepartmentGraphCard} from '../home/Department Card/DptGraphCard';
+import { RecordData } from '../home/Department Card/RecordData';
+import {DptGraphCard} from '../home/Department Card/DptGraphCard';
 import { render } from 'react-dom';
 import { Component } from 'react';
 import QuestionList from '../questions/QuestionList';
@@ -134,7 +134,7 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
         <TabPanel value={this.state.value} index={2}>
             <ParentSize>
 							  {({width, height}) => 
-								    <DepartmentGraphCard 
+								    <DptGraphCard 
                       department='Rehab'
                       field='Bed days'
                       minMonth={1}
