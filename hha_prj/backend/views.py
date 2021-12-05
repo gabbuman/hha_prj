@@ -104,7 +104,7 @@ def GetQuestionsListByDateRange(request):
     except:
         return HttpResponseBadRequest("Date range months and years must be numerical values.")
 
-    isValidDate = (min_year < max_year) or ((min_year is max_year) and (min_month < max_month))
+    isValidDate = (min_year < max_year) or ((min_year == max_year) and (min_month < max_month))
     if (not isValidDate):
         return HttpResponseBadRequest("Invalid date range selected, start date must be earlier than end date.")
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { DptGraphCard } from '../home/Department Card/DptGraphCard'
+import { DepartmentGraphCard } from '../home/Department Card/DptGraphCard'
 import { sampleData } from '../home/Department Card/RecordData';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import ActionCard from './ActionCard';
@@ -26,10 +26,15 @@ const DepartmentHome: React.FC = () => {
         <ParentSize>
             {({width, height}) => 
                 <PageContainer>
-                    <DptGraphCard width={width > 700 ? 635 : width-30} 
-                                        height={300} 
-                                        recordDataSet={sampleData} 
-                                        dptName= {""}/>
+                    <DepartmentGraphCard 
+                        department='Rehab'
+                        field='Bed days'
+                        minMonth={null}
+                        minYear={null}
+                        maxMonth={1}
+                        maxYear={2021}
+                        width={width > 700 ? 635 : width-30} 
+                        height={300}/>
                     <ActionCardContainer>
                         <ActionCard backgroundImage={'/static/case-study-icon.svg'} 
                                     fromColor={'#254E9F'}

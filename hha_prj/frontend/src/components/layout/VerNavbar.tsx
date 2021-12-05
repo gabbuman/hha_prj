@@ -14,7 +14,7 @@ import CaseStudySubmissionForm from '../casestudy/CaseStudyInputForm';
 import DptRecordPage from '../dpt/DptRecordPage';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import { sampleData } from '../home/Department Card/RecordData';
-import {DptGraphCard, GraphProps} from '../home/Department Card/DptGraphCard';
+import {DepartmentGraphCard} from '../home/Department Card/DptGraphCard';
 import { render } from 'react-dom';
 import { Component } from 'react';
 import QuestionList from '../questions/QuestionList';
@@ -134,10 +134,15 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
         <TabPanel value={this.state.value} index={2}>
             <ParentSize>
 							  {({width, height}) => 
-								    <DptGraphCard width={width} 
-											            height={300} 
-											            recordDataSet={sampleData} 
-                                  dptName={this.props.dptName}/>
+								    <DepartmentGraphCard 
+                      department='Rehab'
+                      field='Bed days'
+                      minMonth={1}
+                      minYear={2020}
+                      maxMonth={12}
+                      maxYear={2021}
+                      width={width} 
+                      height={height}/>
 							  }
 						</ParentSize>
         </TabPanel>
