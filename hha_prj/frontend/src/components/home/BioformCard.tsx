@@ -26,58 +26,13 @@ export interface BSData {
 
 const main_color = "#b7b5b6"
 
-const Icon = styled.img `
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-`
-
-export const CSCardGroup = styled.div `
-    width: 350px;
-    height: 225px;
-    padding: 15px 15px 15px 15px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px ${main_color}77;
-    display: grid;
-    grid-template-rows: auto;
-    transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-`
-
-const TitleGrid = styled.div `
-    display: grid;
-    grid-template-columns: 50px auto 50px;
-    grid-gap: 10px;
-    align-items: top;
-    margin: 0px 0;
-    justify-items: center;
-`
-const EditDelGrid = styled.div `
+const EditGrid = styled.div `
     display: grid;
     grid-template-columns: 2fr 2fr 2fr;
     grid-gap: 0;
     margin: 0 0;
-    justify-items: center;
+    justify-items: right;
 `
-
-const CardTitle = styled.h3 `
-    color: black;
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0 0 0 0;
-    
-`
-
-const CardBackground = styled.img `
-    position: absolute;
-    top: 0;
-    height: 105%;
-    z-index: -1;
-    transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-`
-
-
 
 const CSCard: React.FC<BSData> = ({stateChanger, id, image, name, issue}: BSData) =>  {
 
@@ -105,7 +60,12 @@ const CSCard: React.FC<BSData> = ({stateChanger, id, image, name, issue}: BSData
                     <Typography variant="body2" color="text.secondary">{issue}</Typography>
                 </CardContent>
                 <CardActions>
-                    <Button variant="contained" onClick={deleteBioform} style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Fixed</Button>
+                        <Stack direction="row" spacing={5} justifyContent="right"
+                        sx={{
+                            width:"170ch"
+                        }}>
+                            <Button variant="contained" onClick={deleteBioform} style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Fixed</Button>
+                        </Stack>           
                 </CardActions>
             </Card>
         </div>
