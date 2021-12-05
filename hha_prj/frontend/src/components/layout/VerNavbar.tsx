@@ -18,6 +18,7 @@ import {DepartmentGraphCard} from '../home/Department Card/DptGraphCard';
 import { render } from 'react-dom';
 import { Component } from 'react';
 import QuestionList from '../questions/QuestionList';
+import DepartmentGraphPage from '../home/Department Card/DptGraphPage'
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -125,6 +126,7 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Case Study" {...a11yProps(5)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Biomechanical Support" {...a11yProps(6)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Employee Of the Month" {...a11yProps(7)} /> 
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="All Graphs" {...a11yProps(8)} /> 
       </Tabs>
 
       <Grid item xs={10}>
@@ -160,6 +162,9 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
         </TabPanel>
         <TabPanel value={this.state.value} index={7}>
           Item Employee
+        </TabPanel>
+        <TabPanel value={this.state.value} index={8}>
+          <DepartmentGraphPage departmentName={this.props.dptName}/>
         </TabPanel>
       </Grid>
     </Box>
