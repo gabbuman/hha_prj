@@ -79,6 +79,14 @@ const DataEntry = (props: DEProps, state: DEState) => {
         })
     }
 
+    const handleChangeInput: any = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
+        // console.log(e.target.name);
+        const values: any = [...questionAndAswer]
+        // console.log(values[i])
+        values[i][e.target.name] = e.target.value
+        setQuestionAndAswer(values)
+    }
+
     const submitClick: any = () => {          
         // axios.put( endpoint + 'api/current_field_list/' + props.dptName + '/', {
         //     list: questions,
@@ -127,10 +135,11 @@ const DataEntry = (props: DEProps, state: DEState) => {
                                                 <Form.Label>Answer {element.id}</Form.Label>
                                                 <Form.Control 
                                                 type="number"  
+                                                min="0"
                                                 placeholder="Enter answer"
                                                 name = "answer"
                                                 value={element.answer}
-                                                // onChange={e => handleChangeInput(i, e)} 
+                                                onChange={e => handleChangeInput(i, e)} 
                                                 />
                                             </Col>
                                             <Col md>
