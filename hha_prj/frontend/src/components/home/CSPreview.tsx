@@ -21,8 +21,6 @@ export class CSPreview extends Component<{}, { caseStudyList: any }> {
     retrieveCaseStudies = () => {
         axios.get(endpoint + 'api/retrieve_case_studies_for_preview')
           .then(res => {
-            console.log("cspreview!!!!!!!!!")
-            console.log(res.data)
             this.setState({
                 caseStudyList:res.data,
             });

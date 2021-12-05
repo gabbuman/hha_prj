@@ -20,11 +20,16 @@ import { notifyFail, notifySuccess } from './Notifications';
 import { endpoint } from '../Endpoint'
 import { validatePassword, validateUsername } from './FormValidation';
 import { storeUser, printUser } from '../User';
+import { useUserContext } from '../../contexts/UserContext';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const theme = createTheme();
 
 export default function SignIn() {
   
+  const { user, setUser } = useUserContext();
+  const { setAuth } = useAuthContext();
+
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const history = useHistory();
@@ -43,9 +48,10 @@ export default function SignIn() {
   const sendUserLoginRequest = () => {
     axios.post(endpoint + 'api/token/obtain', {username, password} as any)
       .then(res => {
-        notifySuccess('Login success! Welcome back ' + username +'!');
-        storeUser(res.data)
-        printUser();
+        notifySuccess('Login success! Welcome back ' + username + '!');
+        setUser(res.data);
+        console.log(user);
+        setAuth(true);
         history.push("/homepage");
       })
       .catch((error) => {

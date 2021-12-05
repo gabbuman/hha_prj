@@ -22,5 +22,5 @@ urlpatterns = [
     path('actioncard', views.index),
     path('questionlist', views.index),    
     path('csgridview', views.index),
-    url(r'^.*', views.index),
+    # url(r'^.*', views.index),
 ]
