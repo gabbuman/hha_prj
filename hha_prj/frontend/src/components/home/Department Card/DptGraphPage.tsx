@@ -51,6 +51,7 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
             max_year: maxYear
         }}).then((result: any) => {
             graphCardDictionary.clear();
+            console.log("Questions: " + result.data);
             result.data.forEach((field: string) => {
                 graphCardDictionary.set(field, (
                     <DptGraphCard
@@ -65,12 +66,7 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
                         height={300}
                     />
                 ))
-                console.log('Field to store: ' + field);
-                console.log('Storing: ' + graphCardDictionary.get(field));
-                console.log(graphCardDictionary.size);
             })
-
-            console.log('Final Size: ' + graphCardDictionary.size);
 
             setFields(result.data);
             setFilteredField(result.data);
