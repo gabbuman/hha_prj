@@ -118,9 +118,10 @@ const QuestionList = (props: QLProps, state: QLState) => {
                                             <Row className="mt-2">
                                                 <Col md>
                                                     <Form.Label>Question {i+1}</Form.Label>
-                                                    <Form.Control type="text" 
+                                                    <Form.Control 
+                                                    type="text" 
                                                     placeholder="Enter question"
-                                                    name = "question"
+                                                    name="question"
                                                     value={question}
                                                     onChange={e => handleChangeInput(i, e)} 
                                                     />

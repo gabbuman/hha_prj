@@ -102,7 +102,7 @@ class TableData extends Component <tableProps, tableState> {
             this.setState({month: this.props.newMonth, year: this.props.newYear})
             this.setState({dataRecords: initialState.dataRecords});
             this.getDptData();
-          }
+          } 
     }    
 
     async getDptData() {
@@ -117,7 +117,7 @@ class TableData extends Component <tableProps, tableState> {
                                     dptData: data.question_answer_list
                                 })
                 :{dptData: []},
-                console.log(this.state.dptDataAll),
+                
                 this.state.getAllData && (data.department == this.state.dptName)? this.setState({dptDataAll: this.state.dptDataAll.concat(this.state.dptData)}): {}
             ))
             this.setState({getAllData: false});

@@ -123,7 +123,7 @@ class DptCard extends Component<dptData> {
 
     render(){
     return (
-        <Link to={{ pathname: "/dptrecordpage", state: this.props.name}} >
+        <Link to={{ pathname: "/dptpage", state: this.props.name}} >
             <div className="DptCard">
                 <DptCardGroup main_color={this.props.main_color}>
                     <CardBackground src={this.props.bg_img} />
