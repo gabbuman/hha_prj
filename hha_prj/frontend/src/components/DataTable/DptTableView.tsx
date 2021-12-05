@@ -2,12 +2,7 @@ import * as React from 'react';
 import { Component } from 'react';
 import Button from '@mui/material/Button';
 import { Box, Container, Grid, Stack, FormControl, InputLabel, Select, MenuItem, createTheme, ThemeProvider} from '@mui/material';
-import TableRow from '@mui/material/TableRow';
-import { grey } from '@mui/material/colors';
-import { createStyles, Theme, withStyles } from '@material-ui/core';
 import TableData from './DptTableData';
-
-
 
 const theme = createTheme({
     palette: {
@@ -34,7 +29,7 @@ declare module '@mui/material/Button' {
     }
 }
 
-const months = [
+export const months = [
     'JAN',
     'FEB',
     'MAR',
@@ -59,8 +54,8 @@ interface tableState {
 }
 
 const initialState: tableState = {    
-    month: months[1],
-    year: "2021", 
+    month: months[(new Date()).getMonth()],
+    year: (new Date()).getFullYear().toString(), 
 }
 
 export class DptTableView extends Component<tableProps, tableState> {
@@ -79,7 +74,7 @@ export class DptTableView extends Component<tableProps, tableState> {
     dropdownHandleYearChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({year: event.target.value});
     }
-   
+
     render (){
 
         let maxOffset = 10;
@@ -88,13 +83,13 @@ export class DptTableView extends Component<tableProps, tableState> {
         for(let x = 0; x <= maxOffset; x++) {
             years.push(thisYear - x)
         }
-        
+
         return(
             <div> 
                     <Box m={5}>
                     <Container maxWidth="md" > 
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                        <Grid item xs={8}>
+                        <Grid item xs={12}>
                         {   
                             <Stack direction="row" spacing={2} alignItems ="flex-end">
                             <h6>Viewing data from:</h6>  
@@ -132,25 +127,17 @@ export class DptTableView extends Component<tableProps, tableState> {
                             </Stack>
                             } 
                         </Grid>
-                        <Grid item xs={4}>
-                            { 
-                                <Stack direction="row" justifyContent="flex-end">
-                                    <ThemeProvider theme={theme}>
-                                    <Button variant="contained" color="neutral">Export</Button>
-                                    </ThemeProvider>
-                                </Stack>
-                            }                   
-                        </Grid>                             
-                        <Grid item xs={12}>
-                            <TableData  ref={this.tabledataElement} dptName={this.props.dptName} newMonth={months.indexOf(this.state.month) + 1} newYear={parseInt(this.state.year)}/>
+                                                   
+                        <Grid>
+                                <TableData ref={this.tabledataElement} dptName={this.props.dptName} newMonth={months.indexOf(this.state.month) + 1} newYear={parseInt(this.state.year)} />
                         </Grid>
-                        </Grid>
+                        </Grid> 
                         </Container>  
                     </Box>      
                 </div>
         )
     }
-}
+} 
 
 export default DptTableView
 
