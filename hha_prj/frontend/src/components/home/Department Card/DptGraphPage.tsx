@@ -55,7 +55,7 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
             result.data.forEach((field: string) => {
                 graphCardDictionary.set(field, (
                     <DptGraphCard
-                        key={field}
+                        key={field + minMonth + minYear + maxMonth + maxYear}
                         department={props.departmentName}
                         field={field}
                         minMonth={minMonth}
