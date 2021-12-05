@@ -60,7 +60,7 @@
     {
       "model": "backend.MonthlyRecord",
       "fields": {
-        "month": 1,
+        "month": 11,
         "year": 2021,
         "question_answer_list": [
           {
@@ -123,7 +123,7 @@
     "model": "backend.MonthlyRecord", 
     "fields": {
       "department": "Rehab",
-      "month": 2,
+      "month": 12,
       "year": 2021,
       "question_answer_list": [
         {

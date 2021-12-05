@@ -33,7 +33,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api/token/refresh', TokenRefreshView),
     path('api/token/obtain', ObtainTokenPairWithUsernameView.as_view()),
-    path('api/check_current_month_submission_status', CheckCurrentMonthAdmissionStatus),
+    path('api/check_current_month_submission_status/', CheckCurrentMonthAdmissionStatus),
     path('api/graph_data/', GetRecordDataByDateRange),  
     path('api/get_current_field_list/', GetCurrentFieldList),
     path('api/retrieve_case_studies_for_preview', retrieveCaseStudiesForPreview),

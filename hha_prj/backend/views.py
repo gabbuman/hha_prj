@@ -17,11 +17,19 @@ class ObtainTokenPairWithUsernameView(TokenObtainPairView):
     permission_classes = (permissions.AllowAny,)
     serializer_class = CustomTokenPairSerializer
 
+@api_view(['GET'])
 def CheckCurrentMonthAdmissionStatus(request):
+    target_department = request.query_params.get("department")
     current_year = datetime.now().strftime('%Y')
     current_month = datetime.now().strftime('%m')
 
-    if MonthlyRecord.objects.filter(year = current_year,month = current_month).exists():
+    if (target_department) is None:
+        return HttpResponseBadRequest("Parameters are missing.")
+    
+    if not checkDepartmentExists(target_department):
+        return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
+
+    if MonthlyRecord.objects.filter(Q(department = target_department), Q(year = current_year),Q(month = current_month)).exists():
         response = True
     else:
         response = False
@@ -237,8 +245,9 @@ def checkDepartmentExists(department):
 
 @api_view(['GET'])
 def UpdateCaseStudyPoints(request):
-    case_study_points = Points.objects.get(id = 1).case_studies
-    case_study_department = request.query_params.get("name")
+
+    case_study_points = Points.objects.get(id = 1).case_studies # retrieve the amount of case study points to be added
+    case_study_department = request.query_params.get("department")
 
     if case_study_department is None:
         return HttpResponseBadRequest("Parameters are missing.")
@@ -253,7 +262,7 @@ def UpdateCaseStudyPoints(request):
 
     #Just to view the department after it's points have been updated
     department_list = []
-    department_queryset = Department.objects.filter(name = "Rehab").values()
+    department_queryset = Department.objects.filter(name = case_study_department).values()
     department_list.append(department_queryset[0])
     data = json.dumps(department_list,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
