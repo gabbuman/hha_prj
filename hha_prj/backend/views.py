@@ -13,6 +13,8 @@ from .models import  Department, MonthlyRecord, CurrentFieldsList, CaseStudy
 import json
 from django.db.models import Q
 import csv
+from calendar import monthrange
+
 class ObtainTokenPairWithUsernameView(TokenObtainPairView):
     permission_classes = (permissions.AllowAny,)
     serializer_class = CustomTokenPairSerializer
@@ -52,12 +54,15 @@ def GetRecordDataByDateRange(request):
     except:
         return HttpResponseBadRequest("Date range months and years must be numerical values.")
 
-    isValidDate = (min_year < max_year) or ((min_year == max_year) and (min_month < max_month))
-    if (not isValidDate):
+    start_date = dt.date(min_year,min_month,1)
+    end_date = getLastDayOfMonth(dt.date(max_year,max_month,1))
+
+    isValidDateRange = (start_date <= end_date)
+    if (not isValidDateRange):
         return HttpResponseBadRequest("Invalid date range selected, start date must be earlier than end date.")
 
-    records_in_date_range_and_dept = list(MonthlyRecord.objects.filter(Q(year__gte=min_year), Q(month__gte=min_month),
-        Q(year__lte=max_year), Q(month__lte=max_month), Q(department=target_dept)).values())
+    records_in_date_range_and_dept = list(MonthlyRecord.objects.filter(Q(created_at__gte=start_date), 
+        Q(created_at__lte=end_date), Q(department=target_dept)).values())
 
     if (len(records_in_date_range_and_dept) <= 0):
         return HttpResponse(json.dumps([],indent=4,sort_keys=True,default=str))
@@ -104,12 +109,15 @@ def GetQuestionsListByDateRange(request):
     except:
         return HttpResponseBadRequest("Date range months and years must be numerical values.")
 
-    isValidDate = (min_year < max_year) or ((min_year == max_year) and (min_month < max_month))
-    if (not isValidDate):
+    start_date = dt.date(min_year,min_month,1)
+    end_date = getLastDayOfMonth(dt.date(max_year,max_month,1))
+
+    isValidDateRange = (start_date <= end_date)
+    if (not isValidDateRange):
         return HttpResponseBadRequest("Invalid date range selected, start date must be earlier than end date.")
 
-    records_in_date_range_and_dept = list(MonthlyRecord.objects.filter(Q(year__gte=min_year), Q(month__gte=min_month),
-        Q(year__lte=max_year), Q(month__lte=max_month), Q(department=target_dept)).values())
+    records_in_date_range_and_dept = list(MonthlyRecord.objects.filter(Q(created_at__gte=start_date), 
+        Q(created_at__lte=end_date), Q(department=target_dept)).values())
 
     if (len(records_in_date_range_and_dept) <= 0):
         return HttpResponse(json.dumps([],indent=4,sort_keys=True,default=str))
@@ -234,3 +242,6 @@ def GetAllMonhtlyRecordDataInCSV(request):
 
 def checkDepartmentExists(department):
     return len(list(Department.objects.filter(Q(name=department)))) >= 1
+
+def getLastDayOfMonth(date_value):
+    return date_value.replace(day = monthrange(date_value.year, date_value.month)[1])
