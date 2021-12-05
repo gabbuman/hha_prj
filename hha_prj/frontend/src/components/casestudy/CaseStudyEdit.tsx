@@ -130,7 +130,7 @@ const CaseStudyEdit: React.FC = () =>{
                         label="Title"
                         value={title}
                         onChange={handleTitleChange}
-                        
+                        InputLabelProps={{shrink : true}}
                         sx={{
                             width: '50ch', '& .MuiTextField-root': { m: 2}
                         }}
@@ -180,6 +180,7 @@ const CaseStudyEdit: React.FC = () =>{
                         rows={20}
                         value={description}
                         onChange={handleDesciptionChange}
+                        InputLabelProps={{shrink : true}}
                         
                         />
                         <Box

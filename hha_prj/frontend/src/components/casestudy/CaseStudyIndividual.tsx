@@ -3,7 +3,7 @@ import Header from '../layout/Header';
 import { Box, TextField, Typography, Stack, Button,
     FormControl, MenuItem, InputLabel, Select, Grid, Container, 
     CardMedia, Card, CardActions, CardActionArea, CardContent} from '@mui/material';
-import { Switch, Route, Link, BrowserRouter as Router, useParams, useHistory} from 'react-router-dom';
+import { Switch, Route, Link, BrowserRouter as Router, useParams, useHistory, useLocation} from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import DptRecordPage from '../dpt/DptRecordPage';
 import { endpoint } from '../Endpoint';
@@ -58,6 +58,7 @@ const CaseStudyIndividual: React.FC = () =>{
                 inputProps={
                     { readOnly: true, }
                 }
+                InputLabelProps={{shrink : true}}
                 sx={{
                     width: '75ch'
                 }}
@@ -70,6 +71,7 @@ const CaseStudyIndividual: React.FC = () =>{
                 inputProps={
                     { readOnly: true, }
                 }
+                InputLabelProps={{shrink : true}}
                 sx={{
                     width: '25ch'
                 }}
@@ -92,6 +94,7 @@ const CaseStudyIndividual: React.FC = () =>{
                 inputProps={
                     { readOnly: true, }
                 }
+                InputLabelProps={{shrink : true}}
                 value={individualCaseStudy.description}
                 />
 
