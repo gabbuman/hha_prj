@@ -11,12 +11,12 @@ import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
 import { endpoint } from '../Endpoint';
 import { grey } from '@mui/material/colors';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
-import { Button, createTheme, ThemeProvider, Grid, IconButton, Stack, Modal, Box, autocompleteClasses } from '@mui/material';
+import { Button, createTheme, ThemeProvider, Grid, IconButton, Stack, Box, Modal } from '@mui/material';
 import { CSVLink } from "react-csv";
 import { months } from './DptTableView';
 
 import { PDFExport} from '@progress/kendo-react-pdf';
-import { DepartmentGraphCard } from '../home/Department Card/DptGraphCard';
+import { DptGraphCard } from '../home/Department Card/DptGraphCard';
 
 const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
@@ -195,7 +195,8 @@ class TableData extends Component <tableProps, tableState> {
         }
       
         return(
-            <><div>
+            <>
+                <Box m={5}>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     <Grid item xs={8}>
                         { 
@@ -206,7 +207,8 @@ class TableData extends Component <tableProps, tableState> {
                             </Stack>
                         }                   
                     </Grid> 
-                    <Grid item xs={4}>
+                    <Grid item xs={4} md={4}>
+                    { 
                         <Stack direction="row" justifyContent="flex-end">
                                 <ThemeProvider theme={theme}>
                                     <CSVLink {...CsvReport} >
@@ -215,28 +217,42 @@ class TableData extends Component <tableProps, tableState> {
                                 </ThemeProvider>
                             
                         </Stack>
-                    </Grid>
+                    }                   
+                </Grid> 
 
-                    <Grid item xs={12}>
-                        <Stack direction="row" justifyContent="flex-end">
-                                <ThemeProvider theme={theme}>
-                                    <CSVLink {...CsvReportAll} >
-                                    <Button variant="contained" color="neutral" > Export All records to CSV </Button>
-                                    </CSVLink>
-                                </ThemeProvider>
-                            
-                        </Stack>
-                    </Grid>
+                <Grid item xs={4} md={4}>
+                    <Stack direction="row" justifyContent="flex-end">
+                            <ThemeProvider theme={theme}>
+                                <CSVLink {...CsvReport} >
+                                <Button variant="contained" color="neutral"> Export current to CSV </Button>
+                                </CSVLink>
+                            </ThemeProvider>
+                        
+                    </Stack>
                 </Grid>
-            </div>
+                
+                <Grid item xs={4} md={4}>
+                    <Stack direction="row" justifyContent="flex-end">
+                            <ThemeProvider theme={theme}>
+                                <CSVLink {...CsvReportAll} >
+                                <Button variant="contained" color="neutral" > Export All records to CSV </Button>
+                                </CSVLink>
+                            </ThemeProvider>
+                        
+                    </Stack>
+                </Grid>
+            </Grid>
+            </Box>
+            <Box m={5}>
             <PDFExport
                 ref={pdfExportComponent}
                 paperSize="A2"
                 margin={'4cm'}
                 fileName={`MonthlyReport_` + this.props.dptName + '_' + this.state.month +this.state.year}
                 >
-            <Grid item xs={12}>
-                <TableContainer component={Paper}>
+
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            <TableContainer component={Paper}>
                     <Table sx={{ width: "auto" }} aria-label="simple table">
                         <TableBody>
                             {this.state.dataRecords.length == 0 ?
@@ -278,7 +294,7 @@ class TableData extends Component <tableProps, tableState> {
                 aria-describedby="modal-modal-description"
                 >
                 <Box sx={modalStyle}>
-                    <DepartmentGraphCard 
+                    <DptGraphCard 
                         department={this.state.dptName}
                         field= {this.state.graphQuestion}
                         minMonth={this.state.min_month}
@@ -290,8 +306,11 @@ class TableData extends Component <tableProps, tableState> {
                         
                 </Box>
             </Modal>
-            </>
-        )   
+                </Box>
+                </>
+            )
+           
+        
     }
 
     componentWillUnmount() {

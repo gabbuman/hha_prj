@@ -9,6 +9,7 @@ from .managers import CustomUserManager
 class Department(models.Model):
     name = models.CharField(unique=True, primary_key=True, max_length=50)
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    color = models.CharField(max_length=50)
     image = models.ImageField(upload_to="uploads/", null=True, default="uploads/default.jpg")
     
     def __str__(self):
@@ -52,7 +53,7 @@ class MonthlyRecord(models.Model):
 
     month = models.IntegerField(choices=Months.choices)
     year = models.PositiveSmallIntegerField()
-
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
     question_answer_list = models.JSONField()
     class Meta:
         unique_together = ('month', 'year',)
@@ -105,5 +106,12 @@ class CaseStudy(models.Model):
     type = models.ForeignKey(CaseStudyType, on_delete=models.PROTECT, default="Patient Story", blank=True)
     title = models.CharField(max_length=50, null=False, blank=False, default="Case Study Title")
     description = models.CharField(max_length=1000, null=False, blank=False, default="This is a description of a case study")
+    image = models.ImageField(upload_to="uploads/", null=True, default="uploads/default.jpg")
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+
+class BiomechanicalSupport(models.Model):
+    department = models.ForeignKey(Department, on_delete=models.PROTECT, default="Rehab", blank=True)
+    name = models.CharField(max_length=100, null=False, blank=False, default="Biomechanical Equipment name")
+    issue = models.CharField(max_length=1000, null=False, blank=False, default="A description of Biomechanical issue")
     image = models.ImageField(upload_to="uploads/", null=True, default="uploads/default.jpg")
     created_at = models.DateTimeField(editable=False, auto_now_add=True)

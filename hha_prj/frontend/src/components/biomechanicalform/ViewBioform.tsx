@@ -1,10 +1,8 @@
-import React, { Component, useState, useEffect } from 'react';
-import CSCard from './CaseStudyCard';
+import React, { useState, useEffect } from 'react';
+import BSCard from './BioformCard';
 import styled from 'styled-components';
-import AddCard from './CaseStudyAddCard';
-import {Link, BrowserRouter as Router} from 'react-router-dom';
-import CaseStudyDataFields from '../../types/CaseStudy';
-import CaseStudyService from '../../services/CaseStudyServices'
+import BioformData from '../../types/Biomechanicalsupt';
+import BioformServices from '../../services/BioformServices';
 
 const HeaderLabel = styled.h3 `
     font-weight: 800;
@@ -46,21 +44,21 @@ const ContentGroup = styled.div `
     }
 `
 
-interface csprops{
-    dptName: string;    
+interface bsprops{
+    dptName: string;
 }
 
-const CaseStudyGridView: React.FC<csprops> = ({dptName}: csprops) =>{  
-    const[caseStudies, setCaseStudies] = useState<Array<CaseStudyDataFields>>([]);
+const ViewBioform: React.FC<bsprops> = ({dptName}: bsprops) =>{  
+    const[Bioforms, setBioform] = useState<Array<BioformData>>([]);
 
     useEffect( ()=> {
-        retrieveCaseStudies();
+        retrieveBioform();
     }, []);
 
-    const retrieveCaseStudies = () => {
-        CaseStudyService.getAll(dptName)
+    const retrieveBioform = () => {
+        BioformServices.getAll(dptName)
             .then((response: any) => {
-            setCaseStudies(response.data);
+            setBioform(response.data);
             console.log(response.data);
             console.log(dptName);
         })
@@ -75,19 +73,16 @@ const CaseStudyGridView: React.FC<csprops> = ({dptName}: csprops) =>{
             <ContentGroup>
                 <TitledCardGroup>
                     <CardGroup>
-                        {caseStudies && caseStudies.map(item => {
+                        {Bioforms && Bioforms.map(item => {
                             return (
-                                <CSCard
-                                stateChanger={retrieveCaseStudies}
-                                id={item.id}  
-                                title={item.title}
-                                type={item.type_id}
-                                content={item.description}></CSCard>
+                                <BSCard
+                                stateChanger={retrieveBioform}
+                                id={item.id}
+                                image={item.image}  
+                                name={item.name}
+                                issue={item.issue}></BSCard>
                             )
                         })}
-                        <Link to ={{ pathname: "/case_study_form", state:dptName }} >
-                            <AddCard/>
-                        </Link>
                     </CardGroup>
                 </TitledCardGroup>
             </ContentGroup>
@@ -95,4 +90,4 @@ const CaseStudyGridView: React.FC<csprops> = ({dptName}: csprops) =>{
     );
 }
 
-export default CaseStudyGridView;
+export default ViewBioform;

@@ -1,127 +1,89 @@
 [
-    {
-        "model": "backend.Department", 
-        "pk": 1,
-        "fields": {
-            "name": "Rehab",
-            "created_at":"2021-11-07 12:12:12"
-        }
-    },
-    {
-      "model": "backend.Department", 
-      "pk": 2,
+  {
+    "model": "backend.Department", 
+    "pk": 1,
+    "fields": {
+        "name": "Rehab",
+        "created_at":"2021-11-07 12:12:12",
+        "color":"#ef8364",
+        "image": "/static/rehab-bg.png"
+    }
+},
+{
+  "model": "backend.Department", 
+  "pk": 2,
+  "fields": {
+      "name": "Maternity",
+      "created_at":"2021-11-07 12:12:12",
+      "color": "#b46fbc",
+      "image": "/static/maternity-bg.png"
+  }
+},  
+{
+"model": "backend.Department", 
+"pk": 3,
+"fields": {
+    "name": "NICU / Pediatric",
+    "created_at":"2021-11-07 12:12:12",
+    "color":"#0aa8d1",
+    "image": "/static/nicu-bg.png"
+}
+},
+{
+"model": "backend.Department", 
+"pk": 4,
+"fields": {
+  "name": "Community Health",
+  "created_at":"2021-11-07 12:12:12",
+  "color": "#ee594a",
+  "image": "/static/community-health-bg.png"
+}
+},      
+  {
+      "model": "backend.Role", 
+      "pk": 1,
       "fields": {
-          "name": "Maternity",
-          "created_at":"2021-11-07 12:12:12"
-      }
-  },   
-    {
-        "model": "backend.Role", 
-        "pk": 1,
-        "fields": {
-          "name": "Staff",
-          "created_at":"2021-11-07 12:12:12"
-            }
-    },
-    {
-        "model": "backend.CurrentFieldsList", 
-        "pk": 1,
-        "fields": {
-          "department": "Rehab",
-          "created_at":"2021-11-07 12:12:12",
-          "list": [
-                "Beds Available",
-                "Bed Days",
-                "Patient Days",
-                "Hospitalized",
-                "Discharged Alive",
-                "Died Before 48hr",
-                "Died After 48hr",
-                "Days Hospitalized",
-                "Referrals",
-                "Transfers",
-                "Self-Discharged",
-                "Stayed in Ward",
-                "Admissions"
-          ]
-            }
-    },
-    {
-      "model": "backend.MonthlyRecord",
-      "fields": {
-        "month": 1,
-        "year": 2021,
-        "question_answer_list": [
-          {
-            "question":"Beds available",
-            "answer": 10
-          },
-          {
-            "question":"Bed days",
-            "answer": 4
-          },
-          {
-            "question":"Patient days",
-            "answer": 5
-          },
-          {
-            "question":"Hospitalized",
-            "answer": 3
-          },
-          {
-            "question":"Discharged alive",
-            "answer": 2
-          },
-          {
-            "question":"Died before 48h",
-            "answer": 5
-          },
-          {
-            "question":"Died after 48h",
-            "answer": 1
-          },
-          {
-            "question":"Days hospitalised",
-            "answer": 20
-          },
-          {
-            "question":"Referrals",
-            "answer": 2
-          },
-          {
-            "question":"Transfers",
-            "answer": 5
-          },
-          {
-            "question":"Self discharged",
-            "answer": 2
-          },
-          {
-            "question":"Stayed in the ward",
-            "answer": 10
-          },
-          {
-            "question":"Admissions",
-            "answer": 5
-          }
-        ],
-        "department": "Rehab"
+        "name": "Staff",
+        "created_at":"2021-11-07 12:12:12"
           }
   },
   {
-    "model": "backend.MonthlyRecord", 
+      "model": "backend.CurrentFieldsList", 
+      "pk": 1,
+      "fields": {
+        "department": "Rehab",
+        "created_at":"2021-11-07 12:12:12",
+        "list": [
+              "Beds Available",
+              "Bed Days",
+              "Patient Days",
+              "Hospitalized",
+              "Discharged Alive",
+              "Died Before 48hr",
+              "Died After 48hr",
+              "Days Hospitalized",
+              "Referrals",
+              "Transfers",
+              "Self-Discharged",
+              "Stayed In Ward",
+              "Admissions"
+        ]
+          }
+  },
+  {
+    "model": "backend.MonthlyRecord",
     "fields": {
-      "department": "Rehab",
-      "month": 2,
+      "month": 1,
       "year": 2021,
+      "created_at":"2021-01-07 12:12:12",
       "question_answer_list": [
         {
           "question":"Beds available",
-          "answer": 13
+          "answer": 10
         },
         {
           "question":"Bed days",
-          "answer": 2
+          "answer": 4
         },
         {
           "question":"Patient days",
@@ -129,19 +91,19 @@
         },
         {
           "question":"Hospitalized",
-          "answer": 4
+          "answer": 3
         },
         {
           "question":"Discharged alive",
-          "answer": 1
-        },
-        {
-          "question":"Died before 48h",
           "answer": 2
         },
         {
+          "question":"Died before 48h",
+          "answer": 5
+        },
+        {
           "question":"Died after 48h",
-          "answer": 0
+          "answer": 1
         },
         {
           "question":"Days hospitalised",
@@ -161,16 +123,18 @@
         },
         {
           "question":"Stayed in the ward",
-          "answer": 13
+          "answer": 10
         },
         {
           "question":"Admissions",
           "answer": 5
         }
-      ]
-    }
+      ],
+      "department": "Rehab"
+        }
 },
 {
+<<<<<<< HEAD
   "model": "backend.MonthlyRecord",
   "fields": {
     "month": 3,
@@ -199,6 +163,38 @@
       {
         "question":"Died before 48h",
         "answer": 1
+=======
+  "model": "backend.MonthlyRecord", 
+  "fields": {
+    "department": "Rehab",
+    "month": 2,
+    "year": 2021,
+    "created_at":"2021-02-07 12:12:12",
+    "question_answer_list": [
+      {
+        "question":"Beds available",
+        "answer": 13
+      },
+      {
+        "question":"Bed days",
+        "answer": 2
+      },
+      {
+        "question":"Patient days",
+        "answer": 5
+      },
+      {
+        "question":"Hospitalized",
+        "answer": 4
+      },
+      {
+        "question":"Discharged alive",
+        "answer": 1
+      },
+      {
+        "question":"Died before 48h",
+        "answer": 2
+>>>>>>> origin/master
       },
       {
         "question":"Died after 48h",
@@ -206,6 +202,7 @@
       },
       {
         "question":"Days hospitalised",
+<<<<<<< HEAD
         "answer": 17
       },
       {
@@ -308,146 +305,204 @@
       "discharge_location": "Return home, with family",
       "discharge_employment_status": "Unemployed, due to condition"
     }
-},
-{
-    "model": "backend.DischargedAliveRehabGreenData", 
-    "pk": 2,
-    "fields": {
-      "monthly_record_id": 1,
-      "patient_discharged_diagnosis": "SCI",
-      "patient_num_days_in_rehab": 240,
-      "discharge_reason": "All goals met",
-      "discharge_outcome_ADLs_self_care": "Modified Independent",
-      "discharge_outcome_transfers_mobility": "Minimum Assitance",
-      "mobility_aid_device_given": "Wheelchair",
-      "discharge_location": "Return home, with family",
-      "discharge_employment_status": "Unemployed, due to condition"
-    }
+=======
+        "answer": 20
+      },
+      {
+        "question":"Referrals",
+        "answer": 2
+      },
+      {
+        "question":"Transfers",
+        "answer": 5
+      },
+      {
+        "question":"Self discharged",
+        "answer": 2
+      },
+      {
+        "question":"Stayed in the ward",
+        "answer": 13
+      },
+      {
+        "question":"Admissions",
+        "answer": 5
+      }
+    ]
+  }
+>>>>>>> origin/master
 },
 {
   "model": "backend.DischargedAliveRehabGreenData", 
-  "pk": 3,
+  "pk": 1,
   "fields": {
-    "monthly_record_id": 2,
+    "monthly_record_id": 1,
     "patient_discharged_diagnosis": "SCI",
-    "patient_num_days_in_rehab": 150,
-    "discharge_reason": "Goals Partially met",
-    "discharge_outcome_ADLs_self_care": "Supervision",
+    "patient_num_days_in_rehab": 230,
+    "discharge_reason": "All goals met",
+    "discharge_outcome_ADLs_self_care": "Modified Independent",
     "discharge_outcome_transfers_mobility": "Minimum Assitance",
-    "mobility_aid_device_given": "Cane",
+    "mobility_aid_device_given": "Wheelchair",
     "discharge_location": "Return home, with family",
     "discharge_employment_status": "Unemployed, due to condition"
   }
 },
 {
-    "model": "backend.StayedInWardRehabGreenData", 
-    "pk": 1,
-    "fields": {
-      "monthly_record_id": 1,
-      "not_ready_from_therapy_standpoint": 2,
-      "wound_care": 5,
-      "other_medical_reason": 2,
-      "financial_or_no_place_to_discharge": 1,
-      "_1_to_3_months": 2,
-      "_3_to_6_months": 3,
-      "_6_months_to_1_year": 1,
-      "_1_to_2_years": 2,
-      "_2_to_3_years": 1,
-      "more_than_3_years": 1
-    }
-},
-{
-    "model": "backend.StayedInWardRehabGreenData", 
-    "pk": 2,
-    "fields": {
-      "monthly_record_id": 2,
-      "not_ready_from_therapy_standpoint": 2,
-      "wound_care": 5,
-      "other_medical_reason": 3,
-      "financial_or_no_place_to_discharge": 1,
-      "_1_to_3_months": 2,
-      "_3_to_6_months": 5,
-      "_6_months_to_1_year": 2,
-      "_1_to_2_years": 2,
-      "_2_to_3_years": 1,
-      "more_than_3_years": 1
-    }
-},
-{
-  "model": "backend.CaseStudyType",
-  "pk":1,
-  "fields": {
-    "name": "PatientStory",
-    "created_at":"2021-11-07 12:12:12"
-      }
-},
-{
-  "model": "backend.CaseStudyType", 
-  "pk":2,
-  "fields": {
-    "name": "Staff Recognition",
-    "created_at":"2021-11-07 12:12:12"
-      }
-},
-{
-  "model": "backend.CaseStudy", 
-  "pk": 1,
-  "fields": {
-    "department":"Rehab",
-    "type": "PatientStory",
-    "title":"PatientStory 1",
-    "description":"This is a false description for patient story 1",
-    "created_at":"2021-11-08 12:12:12",
-    "image":"uploads/default.jpg"
-      }
-},
-{
-  "model": "backend.CaseStudy", 
+  "model": "backend.DischargedAliveRehabGreenData", 
   "pk": 2,
   "fields": {
-    "department":"Rehab",
-    "type": "Staff Recognition",
-    "title":"Staff Recognition 1",
-    "description":"This is a false description for staff recognition 1",
-    "created_at":"2021-11-09 12:12:12",
-    "image":"uploads/default.jpg"
-      }
+    "monthly_record_id": 1,
+    "patient_discharged_diagnosis": "SCI",
+    "patient_num_days_in_rehab": 240,
+    "discharge_reason": "All goals met",
+    "discharge_outcome_ADLs_self_care": "Modified Independent",
+    "discharge_outcome_transfers_mobility": "Minimum Assitance",
+    "mobility_aid_device_given": "Wheelchair",
+    "discharge_location": "Return home, with family",
+    "discharge_employment_status": "Unemployed, due to condition"
+  }
 },
 {
-  "model": "backend.CaseStudy", 
-  "pk": 3,
-  "fields": {
-    "department":"Rehab",
-    "type": "Staff Recognition",
-    "title":"Staff Recognition 2",
-    "description":"This is a false description for staff recognition 2",
-    "created_at":"2021-11-10 12:12:12",
-    "image":"uploads/default.jpg"
-      }
+"model": "backend.DischargedAliveRehabGreenData", 
+"pk": 3,
+"fields": {
+  "monthly_record_id": 2,
+  "patient_discharged_diagnosis": "SCI",
+  "patient_num_days_in_rehab": 150,
+  "discharge_reason": "Goals Partially met",
+  "discharge_outcome_ADLs_self_care": "Supervision",
+  "discharge_outcome_transfers_mobility": "Minimum Assitance",
+  "mobility_aid_device_given": "Cane",
+  "discharge_location": "Return home, with family",
+  "discharge_employment_status": "Unemployed, due to condition"
+}
 },
 {
-  "model": "backend.CaseStudy", 
-  "pk": 4,
+  "model": "backend.StayedInWardRehabGreenData", 
+  "pk": 1,
   "fields": {
-    "department":"Rehab",
-    "type": "PatientStory",
-    "title":"PatientStory 2",
-    "description":"This is a false description for patient story 2",
-    "created_at":"2021-11-10 12:12:12",
-    "image":"uploads/default.jpg"
-      }
+    "monthly_record_id": 1,
+    "not_ready_from_therapy_standpoint": 2,
+    "wound_care": 5,
+    "other_medical_reason": 2,
+    "financial_or_no_place_to_discharge": 1,
+    "_1_to_3_months": 2,
+    "_3_to_6_months": 3,
+    "_6_months_to_1_year": 1,
+    "_1_to_2_years": 2,
+    "_2_to_3_years": 1,
+    "more_than_3_years": 1
+  }
 },
 {
-  "model": "backend.CaseStudy", 
-  "pk": 5,
+  "model": "backend.StayedInWardRehabGreenData", 
+  "pk": 2,
   "fields": {
-    "department":"Maternity",
-    "type": "Staff Recognition",
-    "title":"Staff Recognition 3",
-    "description":"This is an false description for staff recognition 3",
-    "created_at":"2021-11-11 12:12:12",
-    "image":"uploads/default.jpg"
-      }
+    "monthly_record_id": 2,
+    "not_ready_from_therapy_standpoint": 2,
+    "wound_care": 5,
+    "other_medical_reason": 3,
+    "financial_or_no_place_to_discharge": 1,
+    "_1_to_3_months": 2,
+    "_3_to_6_months": 5,
+    "_6_months_to_1_year": 2,
+    "_1_to_2_years": 2,
+    "_2_to_3_years": 1,
+    "more_than_3_years": 1
+  }
+},
+{
+"model": "backend.CaseStudyType",
+"pk":1,
+"fields": {
+  "name": "Patient Story",
+  "created_at":"2021-11-07 12:12:12"
+    }
+},
+{
+"model": "backend.CaseStudyType", 
+"pk":2,
+"fields": {
+  "name": "Staff Recognition",
+  "created_at":"2021-11-07 12:12:12"
+    }
+},
+{
+"model": "backend.CaseStudyType",
+"pk":1,
+"fields": {
+  "name": "Equipment Received",
+  "created_at":"2021-11-07 12:12:12"
+    }
+},
+{
+"model": "backend.CaseStudyType",
+"pk":1,
+"fields": {
+  "name": "Other Story",
+  "created_at":"2021-11-07 12:12:12"
+    }
+},
+
+{
+"model": "backend.CaseStudy", 
+"pk": 1,
+"fields": {
+  "department":"Rehab",
+  "type": "Patient Story",
+  "title":"PatientStory 1",
+  "description":"This is a false description for patient story 1",
+  "created_at":"2021-11-08 12:12:12",
+  "image":"uploads/default.jpeg"
+    }
+},
+{
+"model": "backend.CaseStudy", 
+"pk": 2,
+"fields": {
+  "department":"Rehab",
+  "type": "Staff Recognition",
+  "title":"Staff Recognition 1",
+  "description":"This is a false description for staff recognition 1",
+  "created_at":"2021-11-09 12:12:12",
+  "image":"uploads/default.jpeg"
+    }
+},
+{
+"model": "backend.CaseStudy", 
+"pk": 3,
+"fields": {
+  "department":"Rehab",
+  "type": "Staff Recognition",
+  "title":"Staff Recognition 2",
+  "description":"This is a false description for staff recognition 2",
+  "created_at":"2021-11-10 12:12:12",
+  "image":"uploads/default.jpeg"
+    }
+},
+{
+"model": "backend.CaseStudy", 
+"pk": 4,
+"fields": {
+  "department":"Rehab",
+  "type": "Patient Story",
+  "title":"PatientStory 2",
+  "description":"This is a false description for patient story 2",
+  "created_at":"2021-11-10 12:12:12",
+  "image":"uploads/default.jpeg"
+    }
+},
+{
+"model": "backend.CaseStudy", 
+"pk": 5,
+"fields": {
+  "department":"Maternity",
+  "type": "Staff Recognition",
+  "title":"Staff Recognition 3",
+  "description":"This is an false description for staff recognition 3",
+  "created_at":"2021-11-11 12:12:12",
+  "image":"uploads/default.jpeg"
+    }
 }
 
 
