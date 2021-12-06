@@ -222,13 +222,14 @@ def GetDepartmentReminders(request):
     current_month = dt.datetime.now().month
     monthly_record_submitted = list(MonthlyRecord.objects.filter(Q(year=current_year), Q(month=current_month), Q(department=(target_dept))).values())
 
-    # Biomechanical Form Status - TBD
+    # Biomechanical Form Status
+    outstanding_biomechanical_issues = list(BiomechanicalSupport.objects.filter(Q(department=target_dept)))
 
     # Compile response
     response = dict()
     response["case_studies_completed"] = len(case_studies_completed)
     response["monthly_record_subbmited"] = True if len(monthly_record_submitted) > 0 else False
-    response["outstanding_biomech_issues"] = "Waiting for biomechanical form model to get this"
+    response["outstanding_biomech_issues"] = len(outstanding_biomechanical_issues)
 
     data = json.dumps(response,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
