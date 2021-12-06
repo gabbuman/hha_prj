@@ -66,14 +66,14 @@ class App extends Component {
 								<Route path='/case_study_grid' component={CaseStudyGridView}/>
 								<Route path='/actioncard' component={DepartmentHome}/>	
 								<Route path='/questionlist' component={QuestionList} />
-								<Route
-									path="*"
-									component={() => <Error msg={"404 NOT FOUND"} />}
-								/>
 								<Route path='/dataentry' component={DataEntry} />				 	
 								<Route path='/graph' component={DptGraphCard}/>
 								<Route path='/dptpage' component={DptPage} />	
 								<Route path='/csedit/:id' component={CaseStudyEdit}/>
+								<Route
+									path="*"
+									component={() => <Error msg={"404 NOT FOUND"} />}
+								/>
 							</Switch>
 							<ToastContainer/>
 						</Router>

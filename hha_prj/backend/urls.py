@@ -29,7 +29,6 @@ router.register('api/case_study', CaseStudyViewSet, 'case_study')
 router.register('api/stayed_in_ward_rehab_green_data', StayedInWardRehabGreenDataViewSet, 'stayed_in_ward_rehab_green_data')
 
 urlpatterns = [
-    path('', include(router.urls)),
     path('api/token/refresh', TokenRefreshView),
     path('api/token/obtain', ObtainTokenPairWithUsernameView.as_view()),
     path('api/check_current_month_submission_status', CheckCurrentMonthAdmissionStatus),
@@ -39,5 +38,7 @@ urlpatterns = [
     path('api/get_case_studies/', GetCaseStudies),
     path('api/questions_by_date_range/', GetQuestionsListByDateRange),
     path('api/get_department_reminders/', GetDepartmentReminders),
-    path('api/get_all_monhtly_data_csv/', GetAllMonhtlyRecordDataInCSV)
+    path('api/get_all_monhtly_data_csv/', GetAllMonhtlyRecordDataInCSV),
 ]
+
+urlpatterns += router.urls
