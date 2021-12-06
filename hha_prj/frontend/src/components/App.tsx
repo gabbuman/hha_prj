@@ -7,7 +7,6 @@ import Login from './login/Login';
 import Register from './login/Register';
 import CSPreview from './home/CSPreview';
 import Rank from './home/Rank';
-import {dpts_Data} from './home/DptData';
 import DataEntry from './dataentry/DataEntry';
 import DptPage from './dpt/DptPage';
 import Homepage from './home/Homepage';
