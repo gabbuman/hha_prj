@@ -260,7 +260,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
                                 {questionAndAswer.map((element: any, i) => (
                                     <div key={element.id}>
                                         <Row className="mt-2">
-                                            <Col md>
+                                            <Col md={5}>
                                                 <Form.Label>Question {element.id}</Form.Label>
                                                 <Form.Control 
                                                 type="text" 
@@ -269,7 +269,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
                                                 value={element.question}
                                                 />
                                             </Col>
-                                            <Col md>
+                                            <Col md={5}>
                                                 <Form.Label>Answer {element.id}</Form.Label>
                                                 <Form.Control 
                                                 type="number"  
@@ -281,8 +281,8 @@ const DataEntry = (props: DEProps, state: DEState) => {
                                                 />
                                             </Col>
                                             {element.question != "Stayed In Ward"? 
-                                                <div></div> :
-                                                <Col md>
+                                                <Col md={2}></Col> :
+                                                <Col md={2}>
                                                     <IconButton
                                                         className="mt-4"
                                                         aria-label="expand row"
