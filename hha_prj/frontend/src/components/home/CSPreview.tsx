@@ -37,7 +37,7 @@ export class CSPreview extends Component<{}, { caseStudyList: any }> {
         return(
             <Card sx={{ maxWidth: 300, boxShadow:3}}>
                 <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                    {/* {this.state?.caseStudyList.map((item:any, i:number) => {
+                    {this.state?.caseStudyList.map((item:any, i:number) => {
                         return  <div>
                             <ListItem alignItems="center" key={i}>
                                 <ListItemButton component={Link as any} to={{pathname:"/case_study_individual/" + item?.id}}>
@@ -61,8 +61,8 @@ export class CSPreview extends Component<{}, { caseStudyList: any }> {
                                 </ListItemButton>
                             </ListItem>
                             {this.state?.caseStudyList.length - 1 === i ? <div></div> : <Divider component="li" /> }
-                        </div> */}
-                    {/* })} */}
+                        </div>
+                    })}
                 </List>
             </Card>
         )
