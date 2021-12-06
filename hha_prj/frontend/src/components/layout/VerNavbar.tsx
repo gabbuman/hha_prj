@@ -6,19 +6,21 @@ import Box from '@mui/material/Box';
 import {Grid, Button} from '@mui/material';
 import { makeStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import MonthlyRecord from '../dpt/MonthlyRecord';
-import DptTableView from '../home/DptTableView';
+import DataEntry from '../dataentry/DataEntry';
+import DptTableView from '../DataTable/DptTableView';
 import CaseStudyGridView from '../casestudy/CaseStudyGridView';
 import CaseStudyIndividual from '../casestudy/CaseStudyIndividual';
 import CaseStudySubmissionForm from '../casestudy/CaseStudyInputForm';
-import DptRecordPage from '../dpt/DptRecordPage';
+import DptPage from '../dpt/DptPage';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
-import { sampleData } from '../home/Department Card/RecordData';
-import {DptGraphCard, GraphProps} from '../home/Department Card/DptGraphCard';
+import { RecordData } from '../home/Department Card/RecordData';
+import {DptGraphCard} from '../home/Department Card/DptGraphCard';
 import { render } from 'react-dom';
 import { Component } from 'react';
 import Biosuptform from '../biomechanicalform/Biosuptform';
 import ViewBioform from '../biomechanicalform/ViewBioform';
+import QuestionList from '../questions/QuestionList';
+import DepartmentGraphPage from '../home/Department Card/DptGraphPage'
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -119,42 +121,55 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
         <Button sx={{justifyContent: 'flex-start', textTransform: 'none' , color: "black"}} variant="outlined" startIcon={<ArrowBackIcon />} href="/homepage">
             Back to Home
         </Button>
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Monthly Records" {...a11yProps(1)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Biomechanical Support" {...a11yProps(2)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Employee Of the Month" {...a11yProps(3)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Case Study" {...a11yProps(4)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Data Record Archive" {...a11yProps(5)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Graphs" {...a11yProps(6)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="View Biomechanical Requests" {...a11yProps(7)} /> 
-       </Tabs>
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Data Record Archive" {...a11yProps(1)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Graphs" {...a11yProps(2)} /> 
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Data Entry" {...a11yProps(3)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Question List Template" {...a11yProps(4)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Case Study" {...a11yProps(5)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Biomechanical Support" {...a11yProps(6)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Employee Of the Month" {...a11yProps(7)} /> 
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="All Graphs" {...a11yProps(8)} />
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="View Biomechanical Requests" {...a11yProps(9)} /> 
+      </Tabs>
 
       <Grid item xs={10}>
-        <TabPanel  value={this.state.value} index={1}>
-          <MonthlyRecord dptName={this.props.dptName}/>
-        </TabPanel>
-        <TabPanel value={this.state.value} index={2}>
-          <Biosuptform dptName={this.props.dptName}/>
-        </TabPanel>
-        <TabPanel value={this.state.value} index={3}>
-          Item Four
-        </TabPanel>
-        <TabPanel value={this.state.value} index={4}>
-          <CaseStudyGridView dptName={this.props.dptName}/>
-        </TabPanel>
-        <TabPanel value={this.state.value} index={5}>
+        <TabPanel value={this.state.value} index={1}>
           <DptTableView dptName={this.props.dptName}/>
         </TabPanel>
-        <TabPanel value={this.state.value} index={6}>
+        <TabPanel value={this.state.value} index={2}>
             <ParentSize>
 							  {({width, height}) => 
-								    <DptGraphCard width={width} 
-											            height={300} 
-											            recordDataSet={sampleData} 
-                                  dptName={this.props.dptName}/>
+								    <DptGraphCard 
+                      department='Rehab'
+                      field='Bed days'
+                      minMonth={1}
+                      minYear={2020}
+                      maxMonth={12}
+                      maxYear={2021}
+                      width={width} 
+                      height={height}/>
 							  }
 						</ParentSize>
         </TabPanel>
+        <TabPanel  value={this.state.value} index={3}>
+          <DataEntry dptName={this.props.dptName}/>
+        </TabPanel>
+        <TabPanel  value={this.state.value} index={4}>
+          <QuestionList dptName={this.props.dptName}/>
+        </TabPanel>
+        <TabPanel value={this.state.value} index={5}>
+          <CaseStudyGridView dptName={this.props.dptName}/>
+        </TabPanel>
+        <TabPanel value={this.state.value} index={6}>
+          <Biosuptform dptName={this.props.dptName}/>
+        </TabPanel>
         <TabPanel value={this.state.value} index={7}>
+          Item Employee
+        </TabPanel>
+        <TabPanel value={this.state.value} index={8}>
+          <DepartmentGraphPage departmentName={this.props.dptName}/>
+        </TabPanel>
+        <TabPanel value={this.state.value} index={9}>
           <ViewBioform dptName={this.props.dptName}/>
         </TabPanel>
       </Grid>

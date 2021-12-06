@@ -11,13 +11,15 @@ urlpatterns = [
     path('homepage', views.index),
     path('cspreview', views.index),
     path('vernavbar', views.index),
-    path('monthlyrecord', views.index),  
-    path('dptrecordpage', views.index),
+    path('dataentry', views.index),  
+    path('dptpage', views.index),
     path('createdepartment', views.index), 
     path('dpttableview', views.index),    
     path('dptgraphview', views.index),
     path('csinput', views.index),
     path('csindividual', views.index),
     path('actioncard', views.index),
-    path('csgridview', views.index)    
+    path('questionlist', views.index),    
+    path('csgridview', views.index),
+    path('csedit', views.index)  
 ]
