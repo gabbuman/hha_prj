@@ -40,6 +40,7 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
     const [maxMonth, setMaxMonth] = useState(12);
 
     useEffect(() => {
+        console.log("Props: " + JSON.stringify(props));
         const questionsApi = axios.create({
             baseURL: "http://127.0.0.1:8000/api/questions_by_date_range/" // TODO: Update this 
         })

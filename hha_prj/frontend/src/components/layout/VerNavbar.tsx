@@ -144,28 +144,28 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
           <DptTableView dptName={this.state.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={2}>
-          <DepartmentGraphPage departmentName={this.props.dptName}/>
+          <DepartmentGraphPage departmentName={this.state.dptName}/>
         </TabPanel>
         <TabPanel  value={this.state.value} index={3}>
-          <DataEntry dptName={this.props.dptName}/>
+          <DataEntry dptName={this.state.dptName}/>
         </TabPanel>
         <TabPanel  value={this.state.value} index={4}>
-          <QuestionList dptName={this.props.dptName}/>
+          <QuestionList dptName={this.state.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={5}>
-          <CaseStudyGridView dptName={this.props.dptName}/>
+          <CaseStudyGridView dptName={this.state.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={6}>
-          <Biosuptform dptName={this.props.dptName}/>
+          <Biosuptform dptName={this.state.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={7}>
           Item Employee
         </TabPanel>
         <TabPanel value={this.state.value} index={8}>
-          <DepartmentGraphPage departmentName={this.props.dptName}/>
+          <DepartmentGraphPage departmentName={this.state.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={9}>
-          <ViewBioform dptName={this.props.dptName}/>
+          <ViewBioform dptName={this.state.dptName}/>
         </TabPanel>
       </Grid>
     </Box>
