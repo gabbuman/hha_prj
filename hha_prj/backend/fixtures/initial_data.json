@@ -293,7 +293,7 @@
     "title":"PatientStory 1",
     "description":"This is a false description for patient story 1",
     "created_at":"2021-11-08 12:12:12",
-    "image":"uploads/default.jpg"
+    "image":"uploads/default.jpeg"
       }
 },
 {
@@ -305,7 +305,7 @@
     "title":"Staff Recognition 1",
     "description":"This is a false description for staff recognition 1",
     "created_at":"2021-11-09 12:12:12",
-    "image":"uploads/default.jpg"
+    "image":"uploads/default.jpeg"
       }
 },
 {
@@ -317,7 +317,7 @@
     "title":"Staff Recognition 2",
     "description":"This is a false description for staff recognition 2",
     "created_at":"2021-11-10 12:12:12",
-    "image":"uploads/default.jpg"
+    "image":"uploads/default.jpeg"
       }
 },
 {
@@ -329,7 +329,7 @@
     "title":"PatientStory 2",
     "description":"This is a false description for patient story 2",
     "created_at":"2021-11-10 12:12:12",
-    "image":"uploads/default.jpg"
+    "image":"uploads/default.jpeg"
       }
 },
 {
@@ -341,7 +341,7 @@
     "title":"Staff Recognition 3",
     "description":"This is an false description for staff recognition 3",
     "created_at":"2021-11-11 12:12:12",
-    "image":"uploads/default.jpg"
+    "image":"uploads/default.jpeg"
       }
 }
 
