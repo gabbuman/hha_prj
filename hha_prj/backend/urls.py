@@ -1,10 +1,10 @@
 from django.utils.module_loading import import_string
 from rest_framework import routers
-from .api import CaseStudyTypeViewSet, CaseStudyViewSet, DischargedAliveRehabGreenDataViewSet, PointsViewSet,StayedInWardRehabGreenDataViewSet
+from .api import CaseStudyTypeViewSet, CaseStudyViewSet, PointsViewSet
 from .api import CurrentFieldListViewSet, MonthlyRecordViewSet 
 from .api import CustomUserViewSet
 from .api import DepartmentViewSet, RoleViewSet
-from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus, UpdateCaseStudyPoints, UpdateMonthlyRecordPoints,RetrieveDepartmentRankingList
+from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus, ResetDepartmentPointsToZero, UpdateCaseStudyPoints, UpdateMonthlyRecordPoints,RetrieveDepartmentRankingList
 from .views import GetRecordDataByDateRange, GetCurrentFieldList, retrieveCaseStudiesForPreview, GetCaseStudies
 from .views import GetQuestionsListByDateRange, GetDepartmentReminders, GetAllMonhtlyRecordDataInCSV
 
@@ -20,13 +20,11 @@ from backend import views
 router = routers.DefaultRouter()
 router.register('api/current_field_list', CurrentFieldListViewSet, "current_field_list")
 router.register('api/monthly_records', MonthlyRecordViewSet, 'monthly_records')
-router.register('api/discharged_alive_rehab_green_data', DischargedAliveRehabGreenDataViewSet, 'discharged_alive_rehab_green_data')
 router.register('api/user', CustomUserViewSet, 'user'),
 router.register('api/department', DepartmentViewSet, 'department'),
 router.register('api/role', RoleViewSet, 'role')
 router.register('api/case_study_type', CaseStudyTypeViewSet, 'case_study_type')
 router.register('api/case_study', CaseStudyViewSet, 'case_study')
-router.register('api/stayed_in_ward_rehab_green_data', StayedInWardRehabGreenDataViewSet, 'stayed_in_ward_rehab_green_data')
 router.register('api/points', PointsViewSet, 'points')
 
 urlpatterns = [
@@ -43,5 +41,6 @@ urlpatterns = [
     path('api/get_all_monhtly_data_csv/', GetAllMonhtlyRecordDataInCSV),
     path('api/update_case_studies_points/',UpdateCaseStudyPoints),
     path('api/update_monthly_record_points/',UpdateMonthlyRecordPoints),
-    path('api/retrieve_department_ranking_list/',RetrieveDepartmentRankingList)
+    path('api/retrieve_department_ranking_list/',RetrieveDepartmentRankingList),
+    path('api/reset_department_points_to_zero/',ResetDepartmentPointsToZero)
 ]

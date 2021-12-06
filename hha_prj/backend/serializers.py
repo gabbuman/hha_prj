@@ -3,7 +3,6 @@ from rest_framework import serializers
 from backend.models import MonthlyRecord 
 from backend.models import CustomUser 
 from backend.models import Department, Role, CurrentFieldsList
-from backend.models import DischargedAliveRehabGreenData,StayedInWardRehabGreenData
 from rest_framework.validators import UniqueValidator
 from backend.models import CaseStudyType, CaseStudy
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -70,14 +69,6 @@ class RoleSerializer(serializers.ModelSerializer):
 class MonthlyRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = MonthlyRecord
-        fields = '__all__'
-class DischargedAliveRehabGreenDataSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DischargedAliveRehabGreenData
-        fields = '__all__'
-class StayedInWardRehabGreenDataSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = StayedInWardRehabGreenData
         fields = '__all__'
 class CurrentFieldListSerializer(serializers.ModelSerializer):
     class Meta:

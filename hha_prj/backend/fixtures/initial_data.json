@@ -44,7 +44,8 @@
       "fields": {
           "monthly_record": 4,
           "case_studies":2,
-          "last_update_month":12
+          "last_update_month":12,
+          "last_update_year":2021
       }
   },   
     {
@@ -200,80 +201,6 @@
           "answer": 5
         }
       ]
-    }
-},
-{
-    "model": "backend.DischargedAliveRehabGreenData", 
-    "pk": 1,
-    "fields": {
-      "patient_discharged_diagnosis": "SCI",
-      "patient_num_days_in_rehab": 230,
-      "discharge_reason": "All goals met",
-      "discharge_outcome_ADLs_self_care": "Modified Independent",
-      "discharge_outcome_transfers_mobility": "Minimum Assitance",
-      "mobility_aid_device_given": "Wheelchair",
-      "discharge_location": "Return home, with family",
-      "discharge_employment_status": "Unemployed, due to condition"
-    }
-},
-{
-    "model": "backend.DischargedAliveRehabGreenData", 
-    "pk": 2,
-    "fields": {
-      "patient_discharged_diagnosis": "SCI",
-      "patient_num_days_in_rehab": 240,
-      "discharge_reason": "All goals met",
-      "discharge_outcome_ADLs_self_care": "Modified Independent",
-      "discharge_outcome_transfers_mobility": "Minimum Assitance",
-      "mobility_aid_device_given": "Wheelchair",
-      "discharge_location": "Return home, with family",
-      "discharge_employment_status": "Unemployed, due to condition"
-    }
-},
-{
-  "model": "backend.DischargedAliveRehabGreenData", 
-  "pk": 3,
-  "fields": {
-    "patient_discharged_diagnosis": "SCI",
-    "patient_num_days_in_rehab": 150,
-    "discharge_reason": "Goals Partially met",
-    "discharge_outcome_ADLs_self_care": "Supervision",
-    "discharge_outcome_transfers_mobility": "Minimum Assitance",
-    "mobility_aid_device_given": "Cane",
-    "discharge_location": "Return home, with family",
-    "discharge_employment_status": "Unemployed, due to condition"
-  }
-},
-{
-    "model": "backend.StayedInWardRehabGreenData", 
-    "pk": 1,
-    "fields": {
-      "not_ready_from_therapy_standpoint": 2,
-      "wound_care": 5,
-      "other_medical_reason": 2,
-      "financial_or_no_place_to_discharge": 1,
-      "_1_to_3_months": 2,
-      "_3_to_6_months": 3,
-      "_6_months_to_1_year": 1,
-      "_1_to_2_years": 2,
-      "_2_to_3_years": 1,
-      "more_than_3_years": 1
-    }
-},
-{
-    "model": "backend.StayedInWardRehabGreenData", 
-    "pk": 2,
-    "fields": {
-      "not_ready_from_therapy_standpoint": 2,
-      "wound_care": 5,
-      "other_medical_reason": 3,
-      "financial_or_no_place_to_discharge": 1,
-      "_1_to_3_months": 2,
-      "_3_to_6_months": 5,
-      "_6_months_to_1_year": 2,
-      "_1_to_2_years": 2,
-      "_2_to_3_years": 1,
-      "more_than_3_years": 1
     }
 },
 {

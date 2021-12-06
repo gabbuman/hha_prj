@@ -1,6 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import render
 from django.core import serializers
+from django.utils.translation import deactivate_all
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import permissions
 from rest_framework.decorators import api_view
@@ -298,15 +299,29 @@ def UpdateMonthlyRecordPoints(request):
 def CheckIfDeparmentMissedSubmission():
     points_record = Points.objects.get(id = 1)
     last_update_month = points_record.last_update_month
+    last_update_year = points_record.record.last_update_year
     current_month = int(datetime.now().strftime('%m'))
+    current_year = int(datetime.now().strftime('%Y'))
 
     # Reset points to default if a department missed a submission from previous month or
     # Reset points to default if all departments submitted on time and now the points have become 0
     if((points_record.monthly_record == 0) or ((points_record.monthly_record != 0) and (last_update_month != current_month))):
+
+        if(current_year != last_update_year):
+            ResetDepartmentPointsToZero()
+            points_record.last_update_year = current_year
+
         points_record.monthly_record = Department.objects.all().count()
         points_record.last_update_month = datetime.now().strftime('%m')
         points_record.save()
-        
+
+def ResetDepartmentPointsToZero():
+    department_query_set = Department.objects.all().values()
+    for department in department_query_set:
+        department_record = Department.objects.get(name = department['name'])
+        department_record.points = 0
+        department_record.save()
+
 def AddPoints(department,points):
         target_department = Department.objects.get(name = department)
         target_department.points = target_department.points + points
