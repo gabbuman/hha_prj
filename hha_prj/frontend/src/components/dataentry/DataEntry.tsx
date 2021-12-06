@@ -124,10 +124,16 @@ const DataEntry = (props: DEProps, state: DEState) => {
         // console.log(values[i])
         values[i][e.target.name] = +e.target.value
         setQuestionAndAswer(values)
-        if(values[i]["question"] == "Stayed In Ward" && values[i]["answer"] > 0)
+        if(values[i]["question"] == "Stayed In Ward")
         {
-            // console.log("check0")
-            updateStayedInWardData(stayedInWardDataQuestions);
+            if(values[i]["answer"] > 0)
+            {
+                // console.log("check0")
+                updateStayedInWardData(stayedInWardDataQuestions);
+            } else if(values[i]["answer"] == 0)
+            {
+                setStayedInWardData([]);
+            }
         }
     }
 
@@ -153,7 +159,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
 
     const addGreenInData = () => {
         questionAndAswer.map((cell: any, i) => {
-            if( cell.question == "Stayed In Ward" && cell.answer > 0)
+            if( cell.question == "Stayed In Ward" )
             {
                 const values:any = [... questionAndAswer]
                 values[i]["greendata"] = stayedInWardData;
