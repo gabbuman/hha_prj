@@ -23,14 +23,42 @@ import QuestionList from './questions/QuestionList';
 import CaseStudyGridView from './casestudy/CaseStudyGridView';
 import CaseStudyEdit from './casestudy/CaseStudyEdit';
 
+interface Props { locale: string }
+
 class App extends Component {
+
+	private locales = {
+		'en': 'English',
+		'fr': 'French'
+	}
+	
+	constructor(props: Props) {
+		super(props);
+	
+		this.state = {
+		  locale: navigator.language
+		}
+	}
+
     render() {
 		
 		return (
 			<Router>
 				<Switch>
 					<Route exact path="/">
-						<h1>HHA Record Management Demo</h1>
+						<div className="App">
+        					<header className="App-header">
+          						<h1 className="App-title">HHA Record Management Demo</h1>
+        					</header>
+        					<p className="App-intro">
+          						To change the language of the application, select one of the supported languaged in this dropdown
+        					</p>
+        					<select>
+          						{Object.keys(this.locales).map((key) => {
+            					//return <option value={key} key={key}>{this.locales[key]}</option>
+          						})}
+        					</select>
+      					</div>
 					</Route>
 					
 					<Route path='/header' component={() => <Header title={`Hope Health Action`} />}  />
