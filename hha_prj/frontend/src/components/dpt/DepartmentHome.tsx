@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { DepartmentGraphCard } from '../home/Department Card/DptGraphCard'
+import { DptGraphCard } from '../home/Department Card/DptGraphCard'
 import { sampleData } from '../home/Department Card/RecordData';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import ActionCard from './ActionCard';
@@ -32,7 +32,7 @@ class DepartmentHome extends Component<dptHomeProps> {
                     {({width, height}) => 
                         <PageContainer>
                             <Link to={{ pathname: "/vernavbar", state: {dptName: this.props.dptName, value: 2}}} >
-                            <DepartmentGraphCard 
+                            <DptGraphCard 
                                 department= {this.props.dptName}
                                 field='Bed days'
                                 minMonth={(new Date()).getMonth() -12 }

@@ -1,5 +1,5 @@
 import { grid } from '@mui/system';
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { StringLiteralLike } from 'typescript';
 import { Box, TextField, Typography, Stack, IconButton, Button,
@@ -7,7 +7,7 @@ import { Box, TextField, Typography, Stack, IconButton, Button,
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import CaseStudySubmissionForm from './CaseStudyInputForm';
+import CaseStudyIndividual from '../casestudy/CaseStudyIndividual';
 import CaseStudyDataFields from '../../types/CaseStudy';
 import CaseStudyServices from '../../services/CaseStudyServices';
 import axios from 'axios';
@@ -97,15 +97,15 @@ const CSCard: React.FC<CSData> = ({stateChanger, id, title, type, content}: CSDa
         <div className="CSCard">
             <CSCardGroup>
                 <TitleGrid>
-                    <Icon src='/static/rehab-bg.png'/>
+                    <Icon src={"/static/" + type + ".png"}/>
                     <CardTitle>{title}</CardTitle>
                 </TitleGrid>
                 <CardContent>{content}</CardContent>
                 <EditDelGrid>
-                    <Link to = "/case_study_individual" style={{ textDecoration: 'none' }}>
+                    <Link to = {"/case_study_individual/"+id} style={{ textDecoration: 'none' }}>
                         <Button variant="contained" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>View</Button>
                     </Link>
-                    <Link to = "/case_study_form" style={{ textDecoration: 'none' }}>
+                    <Link to = {"/csedit/"+id} style={{ textDecoration: 'none' }} >
                         <Button variant="contained" color="warning" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Edit</Button>
                     </Link>
                     <Button variant="contained" onClick={deleteCaseStudy} color="error" style={{maxWidth:'90px',maxHeight:'30px', minWidth:'90px',minHeight:'30px'}}>Delete</Button>

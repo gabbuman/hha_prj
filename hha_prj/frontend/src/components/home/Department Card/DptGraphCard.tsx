@@ -77,7 +77,7 @@ const graphApi = axios.create({
     baseURL: 'http://127.0.0.1:8000/api/graph_data/'
 })
 
-export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData> {
+export class DptGraphCard extends Component<GraphCardProps, GraphCardData> {
     constructor(props: GraphCardProps) {
         super(props);
 
@@ -102,7 +102,7 @@ export class DepartmentGraphCard extends Component<GraphCardProps, GraphCardData
             max_month: props.maxMonth,
             max_year: props.maxYear
         }}).then( (result: any) => {
-            console.log('Responses:' + JSON.stringify(result));
+            // console.log('Responses:' + JSON.stringify(result));
             if (result.data.length == 0) {
                 this.setState({
                     dataState: 'No data',

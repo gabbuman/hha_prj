@@ -52,7 +52,7 @@ class MonthlyRecord(models.Model):
 
     month = models.IntegerField(choices=Months.choices)
     year = models.PositiveSmallIntegerField()
-
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
     question_answer_list = models.JSONField()
     class Meta:
         unique_together = ('month', 'year',)
@@ -105,5 +105,5 @@ class CaseStudy(models.Model):
     type = models.ForeignKey(CaseStudyType, on_delete=models.PROTECT, default="Patient Story", blank=True)
     title = models.CharField(max_length=50, null=False, blank=False, default="Case Study Title")
     description = models.CharField(max_length=1000, null=False, blank=False, default="This is a description of a case study")
-    image = models.ImageField(upload_to="uploads/", null=True, default="uploads/default.jpg")
+    image = models.ImageField(upload_to="uploads/", null=True, default="uploads/default.jpeg")
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
