@@ -1,7 +1,8 @@
 from backend.models import MonthlyRecord, CustomUser, Department, Role, CurrentFieldsList, CaseStudy, CaseStudyType,DischargedAliveRehabGreenData,StayedInWardRehabGreenData, BiomechanicalSupport
+from backend.models import Points
 from rest_framework import viewsets, permissions
 from .serializers import BiomechanicalSupportSerializer, CaseStudySerializer, CaseStudyTypeSerializer, CurrentFieldListSerializer, DepartmentSerializer, MonthlyRecordSerializer, CustomUserSerializer, RoleSerializer,DischargedAliveRehabGreenDataSerializer, StayedInWardRehabGreenDataSerializer,StayedInWardRehabGreenDataSerializer
-
+from .serializers import PointsSerializer
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     permission_classes = [
@@ -79,3 +80,10 @@ class BiomechanicalSupportViewSet(viewsets.ModelViewSet):
         permissions.AllowAny
     ]
     serializer_class = BiomechanicalSupportSerializer
+
+class PointsViewSet(viewsets.ModelViewSet):
+    queryset = Points.objects.all()
+    permissions_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = PointsSerializer

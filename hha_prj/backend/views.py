@@ -10,6 +10,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from datetime import datetime
 import datetime as dt
 from .models import  Department, MonthlyRecord, CurrentFieldsList, CaseStudy, BiomechanicalSupport
+from .models import Points
 import json
 from django.db.models import Q
 import csv
@@ -261,3 +262,115 @@ def checkDepartmentExists(department):
 
 def getLastDayOfMonth(date_value):
     return date_value.replace(day = monthrange(date_value.year, date_value.month)[1])
+
+@api_view(['GET'])
+def UpdateCaseStudyPoints(request):
+
+    case_study_points = Points.objects.get(id = 1).case_studies # retrieve the amount of case study points to be added
+    case_study_department = request.query_params.get("department")
+
+    if case_study_department is None:
+        return HttpResponseBadRequest("Parameters are missing.")
+    
+    if not checkDepartmentExists(case_study_department):
+        return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
+
+    # Add specified points to the department
+    AddPoints(case_study_department,case_study_points)
+
+    # Just to view the department after it's points have been updated
+    department_list = []
+    department_queryset = Department.objects.filter(name = case_study_department).values()
+    department_list.append(department_queryset[0])
+    data = json.dumps(department_list,indent=4,sort_keys=True,default=str)
+    return HttpResponse(data, content_type="application/json")
+
+@api_view(['GET'])
+def UpdateMonthlyRecordPoints(request):
+    monthly_record_department = request.query_params.get("department")
+
+    if monthly_record_department is None:
+        return HttpResponseBadRequest("Parameters are missing.")
+    
+    if not checkDepartmentExists(monthly_record_department):
+        return HttpResponseBadRequest("Invalid department selected. This department does not exist.")
+
+    # Reset points to default if a department missed a submission from previous month or
+    # Reset points to default if all departments submitted on time and now the points have become 0
+    CheckIfDeparmentMissedSubmission()
+
+    monthly_record_points = Points.objects.get(id = 1).monthly_record # retrieve the amount of monthly record submission points to be added
+
+    # Add specified points to the department
+    AddPoints(monthly_record_department,monthly_record_points)
+
+    # Reduce the points gained by 1 for the next department submitting the monthly record
+    UpdatePointsTable()
+
+    # Just to view the department after it's points have been updated
+    department_list = []
+    department_queryset = Department.objects.filter(name = monthly_record_department).values()
+    department_list.append(department_queryset[0])
+    data = json.dumps(department_list,indent=4,sort_keys=True,default=str)
+
+    return HttpResponse(data, content_type="application/json")
+
+def CheckIfDeparmentMissedSubmission():
+    points_record = Points.objects.get(id = 1)
+    last_update_month = points_record.last_update_month
+    last_update_year = points_record.last_update_year
+    current_month = int(datetime.now().strftime('%m'))
+    current_year = int(datetime.now().strftime('%Y'))
+
+    # Reset points to default if a department missed a submission from previous month or
+    # Reset points to default if all departments submitted on time and now the points have become 0
+    if((points_record.monthly_record == 0) or ((points_record.monthly_record != 0) and (last_update_month != current_month))):
+
+        if(current_year != last_update_year):
+            ResetDepartmentPointsToZero()
+            points_record.last_update_year = current_year
+
+        points_record.monthly_record = Department.objects.all().count()
+        points_record.last_update_month = datetime.now().strftime('%m')
+        points_record.save()
+
+def ResetDepartmentPointsToZero():
+    department_query_set = Department.objects.all().values()
+    for department in department_query_set:
+        department_record = Department.objects.get(name = department['name'])
+        department_record.points = 0
+        department_record.save()
+
+def AddPoints(department,points):
+        target_department = Department.objects.get(name = department)
+        target_department.points = target_department.points + points
+        target_department.save() 
+   
+def UpdatePointsTable():
+    points_record = Points.objects.get(id = 1)
+
+    # Decrement monthly record points by one after each department submits a monthly record form
+    points_record.monthly_record = points_record.monthly_record - 1
+    points_record.last_update_month = datetime.now().strftime('%m')
+    points_record.save()
+
+def UpdatePointsAfterDepartmentAdded():
+    points_record  = Points.objects.get(id = 1)
+    points_record.monthly_record = points_record.monthly_record + 1
+    points_record.save()
+
+def RetrieveDepartmentRankingList(request):
+    department_query_set = Department.objects.all().order_by('-points')
+    departments = []
+    department_list = []
+
+    for department_record in department_query_set:
+        departments.append(department_record)
+
+    for department in departments:
+        department_query_set = Department.objects.filter(Q(name = department)).values()
+        points = department_query_set[0]['points']
+        department_list.append({"Department":department,"Points":points})
+
+    data = json.dumps(department_list,indent=4,sort_keys=True,default=str)
+    return HttpResponse(data, content_type="application/json")

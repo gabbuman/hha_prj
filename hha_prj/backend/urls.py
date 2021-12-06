@@ -5,10 +5,12 @@ from .api import CurrentFieldListViewSet, MonthlyRecordViewSet
 from .api import CustomUserViewSet
 from .api import DepartmentViewSet, RoleViewSet
 from .api import BiomechanicalSupportViewSet
+from .api import PointsViewSet
 from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus
 from .views import GetRecordDataByDateRange, GetCurrentFieldList, retrieveCaseStudiesForPreview, GetCaseStudies
 from .views import GetBiomechanicalforms
 from .views import GetQuestionsListByDateRange, GetDepartmentReminders, GetAllMonhtlyRecordDataInCSV
+from .views import UpdateCaseStudyPoints,UpdateMonthlyRecordPoints,RetrieveDepartmentRankingList
 
 from django.urls import path
 from django.urls.conf import include
@@ -29,7 +31,8 @@ router.register('api/role', RoleViewSet, 'role')
 router.register('api/case_study_type', CaseStudyTypeViewSet, 'case_study_type')
 router.register('api/case_study', CaseStudyViewSet, 'case_study')
 router.register('api/stayed_in_ward_rehab_green_data', StayedInWardRehabGreenDataViewSet, 'stayed_in_ward_rehab_green_data')
-router.register('api/bio_support', BiomechanicalSupportViewSet, 'bio_support')
+router.register('api/bio_support', BiomechanicalSupportViewSet, 'bio_support'),
+router.register('api/points', PointsViewSet, 'points')
 
 urlpatterns = [
     path('', include(router.urls)),
@@ -43,5 +46,8 @@ urlpatterns = [
     path('api/get_bio_forms/', GetBiomechanicalforms),
     path('api/questions_by_date_range/', GetQuestionsListByDateRange),
     path('api/get_department_reminders/', GetDepartmentReminders),
-    path('api/get_all_monhtly_data_csv/', GetAllMonhtlyRecordDataInCSV)
+    path('api/get_all_monhtly_data_csv/', GetAllMonhtlyRecordDataInCSV),
+    path('api/update_case_studies_points/',UpdateCaseStudyPoints),
+    path('api/update_monthly_record_points/',UpdateMonthlyRecordPoints),
+    path('api/retrieve_department_ranking_list/',RetrieveDepartmentRankingList)
 ]
