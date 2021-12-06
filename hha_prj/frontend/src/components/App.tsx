@@ -9,13 +9,14 @@ import  { DptOverview } from './home/DptCard';
 import CSPreview from './home/CSPreview';
 import Rank from './home/Rank';
 import {dpts_Data} from './home/DptData';
-import MonthlyRecord from './dpt/MonthlyRecord';
-import DptRecordPage from './dpt/DptRecordPage';
-import {DptTableView} from './DataTable/DptTableView';
+import DataEntry from './dataentry/DataEntry';
+import DptPage from './dpt/DptPage';
 import Homepage from './home/Homepage';
 import { ToastContainer } from 'react-toastify';
+import {DptTableView} from './DataTable/DptTableView';
+import {DptGraphCard} from './home/Department Card/DptGraphCard';
 import CreateDepartment from './dpt/CreateDepartment';
-import CaseStudySubmissionForm from './casestudy/CaseStudyInputForm';
+import CaseStudyInputForm from './casestudy/CaseStudyInputForm';
 import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
 import DepartmentHome from './dpt/DepartmentHome';
 import QuestionList from './questions/QuestionList';
@@ -26,6 +27,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import ProtectedRoutes from '../protected-routes/ProtectedRoutes';
 import Error from './error/Error';
 const queryClient = new QueryClient();
+import CaseStudyEdit from './casestudy/CaseStudyEdit';
+
 class App extends Component {
     render() {
 		return (
@@ -57,11 +60,8 @@ class App extends Component {
 									template={"accessibleAfterLogin"}
 								/>
 								<Route path='/cspreview' component={CSPreview} />
-								<Route path='/vernavbar' component={VerNavbar} />
-								<Route path='/monthlyrecord' component={MonthlyRecord} />			
+								<Route path='/vernavbar' component={VerNavbar} />		
 								<Route path='/datarecordarchive' component={DptTableView} />		 	
-								<Route path='/dptrecordpage' component={DptRecordPage} />	
-								<Route path='/case_study_form' component={CaseStudySubmissionForm}/>
 								<Route path='/case_study_individual' component={CaseStudyIndividual}/>
 								<Route path='/case_study_grid' component={CaseStudyGridView}/>
 								<Route path='/actioncard' component={DepartmentHome}/>	
@@ -70,6 +70,10 @@ class App extends Component {
 									path="*"
 									component={() => <Error msg={"404 NOT FOUND"} />}
 								/>
+								<Route path='/dataentry' component={DataEntry} />				 	
+								<Route path='/graph' component={DptGraphCard}/>
+								<Route path='/dptpage' component={DptPage} />	
+								<Route path='/csedit/:id' component={CaseStudyEdit}/>
 							</Switch>
 							<ToastContainer/>
 						</Router>

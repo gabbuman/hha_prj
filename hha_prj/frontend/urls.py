@@ -12,8 +12,8 @@ urlpatterns = [
     path('homepage', views.index),
     path('cspreview', views.index),
     path('vernavbar', views.index),
-    path('monthlyrecord', views.index),  
-    path('dptrecordpage', views.index),
+    path('dataentry', views.index),  
+    path('dptpage', views.index),
     path('createdepartment', views.index), 
     path('dpttableview', views.index),    
     path('dptgraphview', views.index),
@@ -23,4 +23,5 @@ urlpatterns = [
     path('questionlist', views.index),    
     path('csgridview', views.index),
     # url(r'^.*', views.index),
+    path('csedit', views.index)  
 ]
