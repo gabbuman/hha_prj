@@ -14,7 +14,7 @@ const PageContainer = styled.div `
 `
 
 const ActionCardContainer = styled.div `
-    max-width: 730px;
+    max-width: 600px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 15px;
