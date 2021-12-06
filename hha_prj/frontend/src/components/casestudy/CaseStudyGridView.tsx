@@ -2,7 +2,11 @@ import React, { Component, useState, useEffect } from 'react';
 import CSCard from './CaseStudyCard';
 import styled from 'styled-components';
 import AddCard from './CaseStudyAddCard';
+<<<<<<< HEAD
+import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
+=======
 import {Link, BrowserRouter as Router} from 'react-router-dom';
+>>>>>>> 8f041d52448e022019db8d6d19e2ae7b12c89fc8
 import CaseStudyDataFields from '../../types/CaseStudy';
 import CaseStudyService from '../../services/CaseStudyServices'
 
