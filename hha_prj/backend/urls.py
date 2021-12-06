@@ -41,6 +41,4 @@ urlpatterns = [
     path('api/get_all_monhtly_data_csv/', GetAllMonhtlyRecordDataInCSV),
     path('api/update_case_studies_points/',UpdateCaseStudyPoints),
     path('api/update_monthly_record_points/',UpdateMonthlyRecordPoints),
-    path('api/retrieve_department_ranking_list/',RetrieveDepartmentRankingList),
-    path('api/reset_department_points_to_zero/',ResetDepartmentPointsToZero)
-]
+    path('api/retrieve_department_ranking_list/',RetrieveDepartmentRankingList)]
