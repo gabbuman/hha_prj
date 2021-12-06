@@ -6,7 +6,7 @@ from .api import CustomUserViewSet
 from .api import DepartmentViewSet, RoleViewSet
 from .api import BiomechanicalSupportViewSet
 from .views import ObtainTokenPairWithUsernameView, CheckCurrentMonthAdmissionStatus
-from .views import GetRecordDataByDateRange, GetCurrentFieldList, retrieveCaseStudiesForPreview, GetCaseStudies
+from .views import GetRecordDataByDateRange, GetCurrentFieldList, RetrieveCaseStudiesForPreview, GetCaseStudies
 from .views import GetBiomechanicalforms
 from .views import GetQuestionsListByDateRange, GetDepartmentReminders, GetAllMonhtlyRecordDataInCSV
 
@@ -38,7 +38,7 @@ urlpatterns = [
     path('api/check_current_month_submission_status', CheckCurrentMonthAdmissionStatus),
     path('api/graph_data/', GetRecordDataByDateRange),  
     path('api/get_current_field_list/', GetCurrentFieldList),
-    path('api/retrieve_case_studies_for_preview', retrieveCaseStudiesForPreview),
+    path('api/retrieve_case_studies_for_preview/', RetrieveCaseStudiesForPreview),
     path('api/get_case_studies/', GetCaseStudies),
     path('api/get_bio_forms/', GetBiomechanicalforms),
     path('api/questions_by_date_range/', GetQuestionsListByDateRange),
