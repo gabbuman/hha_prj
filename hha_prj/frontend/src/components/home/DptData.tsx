@@ -1,11 +1,16 @@
 
-import { dptData } from './DptCard';
+export interface dptData {
+    name: string;
+    perc_of_data_entered: number;
+    num_of_case_studies: number;
+    bg_img: string;
+    main_color: string;
+}
 
 export const dpts_Data: dptData[] = [
 
     {
         name: "Rehab",
-        dpt_id: 1,
         perc_of_data_entered: 80,
         num_of_case_studies: 15,
         bg_img: '/static/rehab-bg.png',
@@ -13,7 +18,6 @@ export const dpts_Data: dptData[] = [
     },
     {
         name: "Maternity",
-        dpt_id: 2,
         perc_of_data_entered: 80,
         num_of_case_studies: 15,
         bg_img: '/static/maternity-bg.png',
@@ -21,7 +25,7 @@ export const dpts_Data: dptData[] = [
     },
     {
         name: "NICU / Pediatric",
-        dpt_id: 3,
+
         perc_of_data_entered: 80,
         num_of_case_studies: 15,
         bg_img: '/static/nicu-bg.png',
@@ -29,7 +33,6 @@ export const dpts_Data: dptData[] = [
     },
     {
         name: "Community Health",
-        dpt_id: 4,
         perc_of_data_entered: 80,
         num_of_case_studies: 15,
         bg_img: '/static/community-health-bg.png',

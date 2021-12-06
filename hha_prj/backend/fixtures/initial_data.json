@@ -4,7 +4,9 @@
         "pk": 1,
         "fields": {
             "name": "Rehab",
-            "created_at":"2021-11-07 12:12:12"
+            "created_at":"2021-11-07 12:12:12",
+            "color":"#ef8364",
+            "image": "/static/rehab-bg.png"
         }
     },
     {
@@ -12,9 +14,31 @@
       "pk": 2,
       "fields": {
           "name": "Maternity",
-          "created_at":"2021-11-07 12:12:12"
+          "created_at":"2021-11-07 12:12:12",
+          "color": "#b46fbc",
+          "image": "/static/maternity-bg.png"
       }
-  },   
+  },  
+  {
+    "model": "backend.Department", 
+    "pk": 3,
+    "fields": {
+        "name": "NICU / Pediatric",
+        "created_at":"2021-11-07 12:12:12",
+        "color":"#0aa8d1",
+        "image": "/static/nicu-bg.png"
+    }
+},
+{
+  "model": "backend.Department", 
+  "pk": 4,
+  "fields": {
+      "name": "Community Health",
+      "created_at":"2021-11-07 12:12:12",
+      "color": "#ee594a",
+      "image": "/static/community-health-bg.png"
+  }
+},   
     {
         "model": "backend.Role", 
         "pk": 1,

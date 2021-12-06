@@ -4,11 +4,8 @@ import styled from 'styled-components';
 
 export interface dptData {
     name: string;
-    dpt_id: number;
-    perc_of_data_entered: number;
-    num_of_case_studies: number;
-    bg_img: string;
     main_color: string;
+    bg_img: string;
 }
 
 type DptCardProps = {
@@ -94,28 +91,6 @@ const CardBody = styled.div<txtColorProp>`
     margin: 0 auto 15px 0;
 `
 
-const DptProgressBar: React.FC<ProgressProps> = ({description, percentage, color}: ProgressProps) => {
-    return (
-        <BarContainer main_color={color} >
-            <progress value={percentage} max= {100} />
-            <CardBody txt_color={color}>{description}: {percentage}%</CardBody>
-        </BarContainer>
-    )
-}
-
-export const DptOverview: React.FC<DptCardProps> = ({departmentData}: DptCardProps) =>{
-    return <div className="DpOverview">
-        {departmentData.map(item => {
-            return <DptCard  name={item.name}
-                             dpt_id={item.dpt_id}
-                             perc_of_data_entered={item.perc_of_data_entered}
-                             num_of_case_studies={item.num_of_case_studies}
-                             bg_img={item.bg_img}
-                             main_color={item.main_color}></DptCard>
-        })}
-    </div>
-}
-
 class DptCard extends Component<dptData> {
     constructor(props: dptData){
         super(props);
@@ -128,8 +103,6 @@ class DptCard extends Component<dptData> {
                 <DptCardGroup main_color={this.props.main_color}>
                     <CardBackground src={this.props.bg_img} />
                     <CardTitle>{this.props.name}</CardTitle>
-                    <DptProgressBar description={"Data Entered"} percentage={30} color={"#78FF04"} />
-                    <DptProgressBar description={"Case Studied"} percentage={60} color={"#DBFF00"} />
                 </DptCardGroup> 
             </div>
     </Link>

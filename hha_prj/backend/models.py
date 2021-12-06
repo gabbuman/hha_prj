@@ -9,6 +9,7 @@ from .managers import CustomUserManager
 class Department(models.Model):
     name = models.CharField(unique=True, primary_key=True, max_length=50)
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    color = models.CharField(max_length=50)
     image = models.ImageField(upload_to="uploads/", null=True, default="uploads/default.jpg")
     
     def __str__(self):

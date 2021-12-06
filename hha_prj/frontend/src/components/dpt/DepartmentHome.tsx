@@ -24,8 +24,25 @@ const ActionCardContainer = styled.div `
 interface dptHomeProps{
     dptName: string
 }
-class DepartmentHome extends Component<dptHomeProps> {
+interface dpthomeState{
+    min_month: number,
+    min_year: number,
+    max_month: number,
+    max_year: number
+}
 
+const initialState: dpthomeState = {
+    min_month: (new Date()).getMonth(), 
+    min_year: ((new Date()).getFullYear() -1),
+    max_month: (new Date()).getMonth(),
+    max_year: (new Date()).getFullYear()
+}
+class DepartmentHome extends Component<dptHomeProps, dpthomeState> {
+
+    constructor(props: dptHomeProps){
+        super(props);
+        this.state = initialState;
+    }
     render(){
             return (
                 <ParentSize>
@@ -35,10 +52,10 @@ class DepartmentHome extends Component<dptHomeProps> {
                             <DptGraphCard 
                                 department= {this.props.dptName}
                                 field='Bed days'
-                                minMonth={(new Date()).getMonth() -12 }
-                                minYear={(new Date()).getFullYear() -1}
-                                maxMonth={(new Date()).getMonth()}
-                                maxYear={(new Date()).getFullYear()}
+                                minMonth={this.state.min_month}
+                                minYear={this.state.min_year}
+                                maxMonth={this.state.max_month}
+                                maxYear={this.state.max_year}
                                 width={width} 
                                 height={height}/>
                                 </Link>
