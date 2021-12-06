@@ -40,7 +40,7 @@ export class CSPreview extends Component<{}, { caseStudyList: any }> {
                     {this.state?.caseStudyList.map((item:any, i:number) => {
                         return  <div>
                             <ListItem alignItems="center" key={i}>
-                                <ListItemButton component={Link as any} to={{pathname:"/csindividual", state:item?.id}}>
+                                <ListItemButton component={Link as any} to={{pathname:"/case_study_individual/" + item?.id}}>
                                     <ListItemText
                                     primary={item?.title}
                                     secondary={

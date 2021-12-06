@@ -9,10 +9,12 @@ from .serializers import CustomTokenPairSerializer
 from django.http import HttpResponse, HttpResponseBadRequest
 from datetime import datetime
 import datetime as dt
-from .models import  Department, MonthlyRecord, CurrentFieldsList, CaseStudy
+from .models import  Department, MonthlyRecord, CurrentFieldsList, CaseStudy, BiomechanicalSupport
 import json
 from django.db.models import Q
 import csv
+from calendar import monthrange
+
 class ObtainTokenPairWithUsernameView(TokenObtainPairView):
     permission_classes = (permissions.AllowAny,)
     serializer_class = CustomTokenPairSerializer
@@ -38,7 +40,7 @@ def GetRecordDataByDateRange(request):
     min_month = request.query_params.get("min_month")
     max_month = request.query_params.get("max_month")
 
-    if (target_field or target_dept or min_year or max_year or min_month or max_month) is None:
+    if (target_field or target_dept or min_year or max_year or min_month or max_month) == None:
         return HttpResponseBadRequest("Parameters are missing.")
     
     if not checkDepartmentExists(target_dept):
@@ -52,12 +54,15 @@ def GetRecordDataByDateRange(request):
     except:
         return HttpResponseBadRequest("Date range months and years must be numerical values.")
 
-    isValidDate = (min_year < max_year) or ((min_year is max_year) and (min_month < max_month))
-    if (not isValidDate):
+    start_date = dt.date(min_year,min_month,1)
+    end_date = getLastDayOfMonth(dt.date(max_year,max_month,1))
+
+    isValidDateRange = (start_date <= end_date)
+    if (not isValidDateRange):
         return HttpResponseBadRequest("Invalid date range selected, start date must be earlier than end date.")
 
-    records_in_date_range_and_dept = list(MonthlyRecord.objects.filter(Q(year__gte=min_year), Q(month__gte=min_month),
-        Q(year__lte=max_year), Q(month__lte=max_month), Q(department=target_dept)).values())
+    records_in_date_range_and_dept = list(MonthlyRecord.objects.filter(Q(created_at__gte=start_date), 
+        Q(created_at__lte=end_date), Q(department=target_dept)).values())
 
     if (len(records_in_date_range_and_dept) <= 0):
         return HttpResponse(json.dumps([],indent=4,sort_keys=True,default=str))
@@ -90,7 +95,7 @@ def GetQuestionsListByDateRange(request):
     min_month = request.query_params.get("min_month")
     max_month = request.query_params.get("max_month")
 
-    if (target_dept or min_year or max_year or min_month or max_month) is None:
+    if (target_dept or min_year or max_year or min_month or max_month) == None:
         return HttpResponseBadRequest("Parameters are missing.")
     
     if not checkDepartmentExists(target_dept):
@@ -104,12 +109,15 @@ def GetQuestionsListByDateRange(request):
     except:
         return HttpResponseBadRequest("Date range months and years must be numerical values.")
 
-    isValidDate = (min_year < max_year) or ((min_year == max_year) and (min_month < max_month))
-    if (not isValidDate):
+    start_date = dt.date(min_year,min_month,1)
+    end_date = getLastDayOfMonth(dt.date(max_year,max_month,1))
+
+    isValidDateRange = (start_date <= end_date)
+    if (not isValidDateRange):
         return HttpResponseBadRequest("Invalid date range selected, start date must be earlier than end date.")
 
-    records_in_date_range_and_dept = list(MonthlyRecord.objects.filter(Q(year__gte=min_year), Q(month__gte=min_month),
-        Q(year__lte=max_year), Q(month__lte=max_month), Q(department=target_dept)).values())
+    records_in_date_range_and_dept = list(MonthlyRecord.objects.filter(Q(created_at__gte=start_date), 
+        Q(created_at__lte=end_date), Q(department=target_dept)).values())
 
     if (len(records_in_date_range_and_dept) <= 0):
         return HttpResponse(json.dumps([],indent=4,sort_keys=True,default=str))
@@ -119,7 +127,7 @@ def GetQuestionsListByDateRange(request):
     all_questions_in_range_list = []
     for question_list in record_question_lists:
         extracted_question_list = [question_answer["question"] for question_answer in question_list]
-        if len(all_questions_in_range_list) is 0:
+        if len(all_questions_in_range_list) == 0:
             all_questions_in_range_list = extracted_question_list
         else:
             all_questions_in_range_list = all_questions_in_range_list + extracted_question_list
@@ -179,11 +187,26 @@ def GetCaseStudies(request):
     return HttpResponse(data, content_type="application/json")
 
 @api_view(['GET'])
+def GetBiomechanicalforms(request):
+
+    bio_form_dept = request.query_params.get("department")
+    bio_form_list = []
+
+    if (BiomechanicalSupport.objects.filter(department = bio_form_dept).exists()):
+        bio_form_queryset = BiomechanicalSupport.objects.filter(department = bio_form_dept).values()
+
+        for record in bio_form_queryset:
+            bio_form_list.append(record)
+
+    data = json.dumps(bio_form_list,indent=4,sort_keys=True,default=str)
+    return HttpResponse(data, content_type="application/json")
+    
+@api_view(['GET'])
 def GetDepartmentReminders(request):
 
     target_dept = request.query_params.get("department")
 
-    if target_dept is None:
+    if target_dept == None:
         return HttpResponseBadRequest("Parameters are missing.")
     
     if not checkDepartmentExists(target_dept):
@@ -234,3 +257,6 @@ def GetAllMonhtlyRecordDataInCSV(request):
 
 def checkDepartmentExists(department):
     return len(list(Department.objects.filter(Q(name=department)))) >= 1
+
+def getLastDayOfMonth(date_value):
+    return date_value.replace(day = monthrange(date_value.year, date_value.month)[1])

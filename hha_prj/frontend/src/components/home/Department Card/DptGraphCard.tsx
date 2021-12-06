@@ -102,7 +102,7 @@ export class DptGraphCard extends Component<GraphCardProps, GraphCardData> {
             max_month: props.maxMonth,
             max_year: props.maxYear
         }}).then( (result: any) => {
-            console.log('Responses:' + JSON.stringify(result));
+            // console.log('Responses:' + JSON.stringify(result));
             if (result.data.length == 0) {
                 this.setState({
                     dataState: 'No data',
