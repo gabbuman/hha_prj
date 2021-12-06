@@ -133,7 +133,6 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Case Study" {...a11yProps(5)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Biomechanical Support" {...a11yProps(6)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Employee Of the Month" {...a11yProps(7)} /> 
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="All Graphs" {...a11yProps(8)} /> 
       </Tabs>
 
       <Grid item xs={10}>
@@ -141,19 +140,7 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
           <DptTableView dptName={this.state.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={2}>
-            <ParentSize>
-							  {({width, height}) => 
-								    <DptGraphCard  
-                      department= {this.state.dptName}
-                      field='Bed days'
-                      minMonth={(new Date()).getMonth() -12 }
-                      minYear={(new Date()).getFullYear() -1}
-                      maxMonth={(new Date()).getMonth()}
-                      maxYear={(new Date()).getFullYear()}
-                      width={width} 
-                      height={height}/>
-							  }
-						</ParentSize>
+          <DepartmentGraphPage departmentName={this.props.dptName}/>
         </TabPanel>
         <TabPanel  value={this.state.value} index={3}>
           <DataEntry dptName={this.props.dptName}/>
@@ -169,9 +156,6 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
         </TabPanel>
         <TabPanel value={this.state.value} index={7}>
           Item Employee
-        </TabPanel>
-        <TabPanel value={this.state.value} index={8}>
-          <DepartmentGraphPage departmentName={this.props.dptName}/>
         </TabPanel>
       </Grid>
     </Box>
