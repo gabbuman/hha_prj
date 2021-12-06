@@ -1,17 +1,8 @@
 import React, { Component, useState, useEffect } from 'react';
-import { Box, TextField, Typography, Stack, Button, 
-    FormControl, MenuItem, InputLabel, Select, Grid, Container} from '@mui/material';
-import VerNavbar from '../layout/VerNavbar';
-import Header from '../layout/Header';
-import CSPreview from '../home/CSPreview';
-import Rank from '../home/Rank';
 import CSCard from './CaseStudyCard';
 import styled from 'styled-components';
 import AddCard from './CaseStudyAddCard';
-import { endpoint } from '../Endpoint'
-import CaseStudyIndividual from './CaseStudyIndividual';
-import { Switch, Route, Link, BrowserRouter as Router} from 'react-router-dom';
-import ReactDOM from 'react-dom';
+import {Link, BrowserRouter as Router} from 'react-router-dom';
 import CaseStudyDataFields from '../../types/CaseStudy';
 import CaseStudyService from '../../services/CaseStudyServices'
 
@@ -20,8 +11,6 @@ const HeaderLabel = styled.h3 `
     font-size: 30px;
     width: 350px;
 `
-
-
 
 const CardGroup = styled.div `
     display: grid;
@@ -58,9 +47,8 @@ const ContentGroup = styled.div `
 `
 
 interface csprops{
-    dptName: string;
+    dptName: string;    
 }
-
 
 const CaseStudyGridView: React.FC<csprops> = ({dptName}: csprops) =>{  
     const[caseStudies, setCaseStudies] = useState<Array<CaseStudyDataFields>>([]);
@@ -93,11 +81,11 @@ const CaseStudyGridView: React.FC<csprops> = ({dptName}: csprops) =>{
                                 stateChanger={retrieveCaseStudies}
                                 id={item.id}  
                                 title={item.title}
-                                type={item.type}
+                                type={item.type_id}
                                 content={item.description}></CSCard>
                             )
                         })}
-                        <Link to = "/case_study_form" style={{ textDecoration: 'none' }} >
+                        <Link to ={{ pathname: "/case_study_form", state:dptName }} >
                             <AddCard/>
                         </Link>
                     </CardGroup>

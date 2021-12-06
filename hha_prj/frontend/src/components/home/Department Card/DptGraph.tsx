@@ -59,7 +59,11 @@ const tooltipBottomStyles = {
 };
 
 const formatDate = timeFormat("%b, '%y");
-const getDate = (record: RecordData) => new Date(record.date);
+const getDate = (record: RecordData) => { 
+    let date = new Date(record.date);
+    date.setUTCDate(2);
+    return date;
+};
 const getRecordValue = (record: RecordData) => record.answer;
 const bisectDate = bisector<RecordData, Date>((record) => new Date(record.date)).left;
 
