@@ -134,36 +134,6 @@
         }
 },
 {
-<<<<<<< HEAD
-  "model": "backend.MonthlyRecord",
-  "fields": {
-    "month": 3,
-    "year": 2021,
-    "question_answer_list": [
-      {
-        "question":"Beds available",
-        "answer": 7
-      },
-      {
-        "question":"Bed days",
-        "answer": 6
-      },
-      {
-        "question":"Patient days",
-        "answer": 7
-      },
-      {
-        "question":"Hospitalized",
-        "answer": 7
-      },
-      {
-        "question":"Discharged alive",
-        "answer": 6
-      },
-      {
-        "question":"Died before 48h",
-        "answer": 1
-=======
   "model": "backend.MonthlyRecord", 
   "fields": {
     "department": "Rehab",
@@ -194,7 +164,6 @@
       {
         "question":"Died before 48h",
         "answer": 2
->>>>>>> origin/master
       },
       {
         "question":"Died after 48h",
@@ -202,110 +171,6 @@
       },
       {
         "question":"Days hospitalised",
-<<<<<<< HEAD
-        "answer": 17
-      },
-      {
-        "question":"Referrals",
-        "answer": 5
-      },
-      {
-        "question":"Transfers",
-        "answer": 1
-      },
-      {
-        "question":"Self discharged",
-        "answer": 1
-      },
-      {
-        "question":"Stayed in the ward",
-        "answer": 4
-      },
-      {
-        "question":"Admissions",
-        "answer": 2
-      }
-    ],
-    "department": "Rehab"
-      }
-},
-{
-"model": "backend.MonthlyRecord", 
-"fields": {
-  "department": "Rehab",
-  "month": 4,
-  "year": 2021,
-  "question_answer_list": [
-    {
-      "question":"Beds available",
-      "answer": 20
-    },
-    {
-      "question":"Bed days",
-      "answer": 4
-    },
-    {
-      "question":"Patient days",
-      "answer": 2
-    },
-    {
-      "question":"Hospitalized",
-      "answer": 5
-    },
-    {
-      "question":"Discharged alive",
-      "answer": 5
-    },
-    {
-      "question":"Died before 48h",
-      "answer": 0
-    },
-    {
-      "question":"Died after 48h",
-      "answer": 0
-    },
-    {
-      "question":"Days hospitalised",
-      "answer": 16
-    },
-    {
-      "question":"Referrals",
-      "answer": 1
-    },
-    {
-      "question":"Transfers",
-      "answer": 2
-    },
-    {
-      "question":"Self discharged",
-      "answer": 4
-    },
-    {
-      "question":"Stayed in the ward",
-      "answer": 2
-    },
-    {
-      "question":"Admissions",
-      "answer": 2
-    }
-  ]
-}
-},
-{
-    "model": "backend.DischargedAliveRehabGreenData", 
-    "pk": 1,
-    "fields": {
-      "monthly_record_id": 1,
-      "patient_discharged_diagnosis": "SCI",
-      "patient_num_days_in_rehab": 230,
-      "discharge_reason": "All goals met",
-      "discharge_outcome_ADLs_self_care": "Modified Independent",
-      "discharge_outcome_transfers_mobility": "Minimum Assitance",
-      "mobility_aid_device_given": "Wheelchair",
-      "discharge_location": "Return home, with family",
-      "discharge_employment_status": "Unemployed, due to condition"
-    }
-=======
         "answer": 20
       },
       {
@@ -330,7 +195,69 @@
       }
     ]
   }
->>>>>>> origin/master
+},
+{
+  "model": "backend.MonthlyRecord", 
+  "fields": {
+    "department": "Rehab",
+    "month": 3,
+    "year": 2021,
+    "created_at":"2021-02-07 12:12:12",
+    "question_answer_list": [
+      {
+        "question":"Beds available",
+        "answer": 14
+      },
+      {
+        "question":"Bed days",
+        "answer": 4
+      },
+      {
+        "question":"Patient days",
+        "answer": 6
+      },
+      {
+        "question":"Hospitalized",
+        "answer": 3
+      },
+      {
+        "question":"Discharged alive",
+        "answer": 5
+      },
+      {
+        "question":"Died before 48h",
+        "answer": 1
+      },
+      {
+        "question":"Died after 48h",
+        "answer": 0
+      },
+      {
+        "question":"Days hospitalised",
+        "answer": 14
+      },
+      {
+        "question":"Referrals",
+        "answer": 3
+      },
+      {
+        "question":"Transfers",
+        "answer": 2
+      },
+      {
+        "question":"Self discharged",
+        "answer": 4
+      },
+      {
+        "question":"Stayed in the ward",
+        "answer": 7
+      },
+      {
+        "question":"Admissions",
+        "answer": 4
+      }
+    ]
+  }
 },
 {
   "model": "backend.DischargedAliveRehabGreenData", 

@@ -92,7 +92,7 @@ const secondaryDataQuestions = [
     dptDataAll: [],
     dptData:[],
     getAllData: true,
-    min_month: (new Date()).getMonth() - 12,
+    min_month: (new Date()).getMonth(),
     max_month: (new Date()).getMonth(),
     max_year: (new Date()).getFullYear(),
     min_year: (new Date()).getFullYear() -1,
@@ -164,7 +164,6 @@ class TableData extends Component <tableProps, tableState> {
             graphQuestion: question
         }),
         modalIsOpen = true;
-
         this.forceUpdate();
     }
     
@@ -198,7 +197,7 @@ class TableData extends Component <tableProps, tableState> {
             <>
                 <Box m={5}>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                    <Grid item xs={8}>
+                    <Grid item xs={4}  md={4}>
                         { 
                             <Stack direction="row" justifyContent="flex-end">
                                 <ThemeProvider theme={theme}>
@@ -207,18 +206,6 @@ class TableData extends Component <tableProps, tableState> {
                             </Stack>
                         }                   
                     </Grid> 
-                    <Grid item xs={4} md={4}>
-                    { 
-                        <Stack direction="row" justifyContent="flex-end">
-                                <ThemeProvider theme={theme}>
-                                    <CSVLink {...CsvReport} >
-                                    <Button variant="contained" color="neutral"> Export current to CSV </Button>
-                                    </CSVLink>
-                                </ThemeProvider>
-                            
-                        </Stack>
-                    }                   
-                </Grid> 
 
                 <Grid item xs={4} md={4}>
                     <Stack direction="row" justifyContent="flex-end">
