@@ -721,126 +721,197 @@
       }
     ]
   }
+},   
+    {
+        "model": "backend.Role", 
+        "pk": 1,
+        "fields": {
+          "name": "Staff",
+          "created_at":"2021-11-07 12:12:12"
+            }
+    },
+    {
+        "model": "backend.CurrentFieldsList", 
+        "pk": 1,
+        "fields": {
+          "department": "Rehab",
+          "created_at":"2021-11-07 12:12:12",
+          "list": [
+                "Beds Available",
+                "Bed Days",
+                "Patient Days",
+                "Hospitalized",
+                "Discharged Alive",
+                "Died Before 48hr",
+                "Died After 48hr",
+                "Days Hospitalized",
+                "Referrals",
+                "Transfers",
+                "Self-Discharged",
+                "Stayed In Ward",
+                "Admissions"
+          ]
+            }
+    },
+    
+    {
+      "model": "backend.MonthlyRecord",
+      "fields": {
+        "month": 1,
+        "year": 2021,
+        "created_at":"2021-01-07 12:12:12",
+        "question_answer_list": [
+          {
+            "question":"Beds available",
+            "answer": 10
+          },
+          {
+            "question":"Bed days",
+            "answer": 4
+          },
+          {
+            "question":"Patient days",
+            "answer": 5
+          },
+          {
+            "question":"Hospitalized",
+            "answer": 3
+          },
+          {
+            "question":"Discharged alive",
+            "answer": 2
+          },
+          {
+            "question":"Died before 48h",
+            "answer": 5
+          },
+          {
+            "question":"Died after 48h",
+            "answer": 1
+          },
+          {
+            "question":"Days hospitalised",
+            "answer": 20
+          },
+          {
+            "question":"Referrals",
+            "answer": 2
+          },
+          {
+            "question":"Transfers",
+            "answer": 5
+          },
+          {
+            "question":"Self discharged",
+            "answer": 2
+          },
+          {
+            "question":"Stayed in the ward",
+            "answer": 10
+          },
+          {
+            "question":"Admissions",
+            "answer": 5
+          }
+        ],
+        "department": "Rehab"
+          }
+  },
+  {
+    "model": "backend.MonthlyRecord", 
+    "fields": {
+      "department": "Rehab",
+      "month": 2,
+      "year": 2021,
+      "created_at":"2021-02-07 12:12:12",
+      "question_answer_list": [
+        {
+          "question":"Beds available",
+          "answer": 13
+        },
+        {
+          "question":"Bed days",
+          "answer": 2
+        },
+        {
+          "question":"Patient days",
+          "answer": 5
+        },
+        {
+          "question":"Hospitalized",
+          "answer": 4
+        },
+        {
+          "question":"Discharged alive",
+          "answer": 1
+        },
+        {
+          "question":"Died before 48h",
+          "answer": 2
+        },
+        {
+          "question":"Died after 48h",
+          "answer": 0
+        },
+        {
+          "question":"Days hospitalised",
+          "answer": 20
+        },
+        {
+          "question":"Referrals",
+          "answer": 2
+        },
+        {
+          "question":"Transfers",
+          "answer": 5
+        },
+        {
+          "question":"Self discharged",
+          "answer": 2
+        },
+        {
+          "question":"Stayed in the ward",
+          "answer": 13
+        },
+        {
+          "question":"Admissions",
+          "answer": 5
+        }
+      ]
+    }
 },
 {
-  "model": "backend.monthlyrecord",
-  "pk": 2,
-  "fields": {
-    "department": "Rehab",
-    "month": 2,
-    "year": 2021,
-    "created_at": "2021-02-07T12:12:12Z",
-    "question_answer_list": [
-      {
-        "question": "Beds available",
-        "answer": 13
-      },
-      {
-        "question": "Bed days",
-        "answer": 2
-      },
-      {
-        "question": "Patient days",
-        "answer": 5
-      },
-      {
-        "question": "Hospitalized",
-        "answer": 4
-      },
-      {
-        "question": "Discharged alive",
-        "answer": 1
-      },
-      {
-        "question": "Died before 48h",
-        "answer": 2
-      },
-      {
-        "question": "Died after 48h",
-        "answer": 0
-      },
-      {
-        "question": "Days hospitalised",
-        "answer": 20
-      },
-      {
-        "question": "Referrals",
-        "answer": 2
-      },
-      {
-        "question": "Transfers",
-        "answer": 5
-      },
-      {
-        "question": "Self discharged",
-        "answer": 2
-      },
-      {
-        "question": "Stayed in the ward",
-        "answer": 13
-      },
-      {
-        "question": "Admissions",
-        "answer": 5
-      }
-    ]
-  }
+    "model": "backend.DischargedAliveRehabGreenData", 
+    "pk": 1,
+    "fields": {
+      "monthly_record_id": 1,
+      "patient_discharged_diagnosis": "SCI",
+      "patient_num_days_in_rehab": 230,
+      "discharge_reason": "All goals met",
+      "discharge_outcome_ADLs_self_care": "Modified Independent",
+      "discharge_outcome_transfers_mobility": "Minimum Assitance",
+      "mobility_aid_device_given": "Wheelchair",
+      "discharge_location": "Return home, with family",
+      "discharge_employment_status": "Unemployed, due to condition"
+    }
 },
 {
-  "model": "backend.currentfieldslist",
-  "pk": 1,
-  "fields": {
-    "list": [
-      "Beds Available",
-      "Bed Days",
-      "Patient Days",
-      "Hospitalized",
-      "Discharged Alive",
-      "Died Before 48hr",
-      "Died After 48hr",
-      "Days Hospitalized",
-      "Referrals",
-      "Transfers",
-      "Self-Discharged",
-      "Stayed in Ward",
-      "Admissions"
-    ],
-    "department": "Rehab",
-    "created_at": "2021-11-07T12:12:12Z"
-  }
+    "model": "backend.DischargedAliveRehabGreenData", 
+    "pk": 2,
+    "fields": {
+      "monthly_record_id": 1,
+      "patient_discharged_diagnosis": "SCI",
+      "patient_num_days_in_rehab": 240,
+      "discharge_reason": "All goals met",
+      "discharge_outcome_ADLs_self_care": "Modified Independent",
+      "discharge_outcome_transfers_mobility": "Minimum Assitance",
+      "mobility_aid_device_given": "Wheelchair",
+      "discharge_location": "Return home, with family",
+      "discharge_employment_status": "Unemployed, due to condition"
+    }
 },
 {
-  "model": "backend.dischargedaliverehabgreendata",
-  "pk": 1,
-  "fields": {
-    "monthly_record_id": 1,
-    "patient_discharged_diagnosis": "SCI",
-    "patient_num_days_in_rehab": 230,
-    "discharge_reason": "All goals met",
-    "discharge_outcome_ADLs_self_care": "Modified Independent",
-    "discharge_outcome_transfers_mobility": "Minimum Assitance",
-    "mobility_aid_device_given": "Wheelchair",
-    "discharge_location": "Return home, with family",
-    "discharge_employment_status": "Unemployed, due to condition"
-  }
-},
-{
-  "model": "backend.dischargedaliverehabgreendata",
-  "pk": 2,
-  "fields": {
-    "monthly_record_id": 1,
-    "patient_discharged_diagnosis": "SCI",
-    "patient_num_days_in_rehab": 240,
-    "discharge_reason": "All goals met",
-    "discharge_outcome_ADLs_self_care": "Modified Independent",
-    "discharge_outcome_transfers_mobility": "Minimum Assitance",
-    "mobility_aid_device_given": "Wheelchair",
-    "discharge_location": "Return home, with family",
-    "discharge_employment_status": "Unemployed, due to condition"
-  }
-},
-{
-  "model": "backend.dischargedaliverehabgreendata",
+  "model": "backend.DischargedAliveRehabGreenData", 
   "pk": 3,
   "fields": {
     "monthly_record_id": 2,

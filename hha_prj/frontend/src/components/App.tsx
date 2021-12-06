@@ -19,6 +19,7 @@ import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
 import DepartmentHome from './dpt/DepartmentHome';
 import QuestionList from './questions/QuestionList';
 import CaseStudyGridView from './casestudy/CaseStudyGridView';
+import Biosuptform from './biomechanicalform/BioformCard';
 import CaseStudyEdit from './casestudy/CaseStudyEdit';
 import DptCard from './home/DptCard';
 
@@ -49,7 +50,8 @@ class App extends Component {
 					<Route path='/case_study_form' component={CaseStudyInputForm}/>
 					<Route path='/case_study_individual/:id' component={CaseStudyIndividual}/>
 					<Route path='/case_study_grid' component={CaseStudyGridView}/>
-					<Route path='/actioncard' component={DepartmentHome}/>	
+					<Route path='/actioncard' component={DepartmentHome}/>
+					<Route path='/bio_support_form' component={Biosuptform}/>		
 					<Route path='/questionlist' component={QuestionList} />
 					<Route path='/csedit/:id' component={CaseStudyEdit}/>
 				</Switch>
