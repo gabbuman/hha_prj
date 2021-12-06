@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import VerNavbar from '../layout/VerNavbar';
 import Header from '../layout/Header';
+import { useLocation } from 'react-router';
+import DepartmentHome from './DepartmentHome';
 
 
 interface DptProps{
@@ -22,7 +24,7 @@ class DptPage extends Component <DptProps, DptState>{
         return (
             <div>
                 <Header title= {"Hope Health Action / " + dpt_name}/>  
-                <VerNavbar dptName={dpt_name}/>
+                <DepartmentHome dptName = {dpt_name}/>
             </div>
         );
     }

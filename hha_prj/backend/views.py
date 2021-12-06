@@ -156,7 +156,8 @@ def retrieveCaseStudiesForPreview(request):
     case_studies_list = []
 
     if (CaseStudy.objects.all().count() == 0):
-        return HttpResponse(case_studies_list, content_type="application/json")
+        data = json.dumps(case_studies_list,indent=4,sort_keys=True,default=str)
+        return HttpResponse(data, content_type="application/json")
 
     case_studies_queryset = CaseStudy.objects.all().values()
 

@@ -5,9 +5,12 @@ import VerNavbar from '../layout/VerNavbar';
 import Header from '../layout/Header';
 import CSPreview from '../home/CSPreview';
 import Rank from '../home/Rank';
-import {dpts_Data} from './DptData';
-import DptCard, { DptOverview } from './DptCard';
+import DptCard from './DptCard';
 import styled from 'styled-components'
+import axios from 'axios';
+import { useState, useEffect, ReactElement } from 'react'
+import { endpoint } from '../Endpoint';
+import { render } from 'react-dom';
 
 const HeaderLabel = styled.h3 `
     font-weight: 800;
@@ -55,8 +58,35 @@ const ContentGroup = styled.div `
     }
 `
 
-class HomePage extends Component  {
-    render() {
+
+
+//let dpt_Data: { name: string, created_at:string , color: string, image: string}[];
+class HomePage extends Component<{}, { dpt_Data: { name: string, created_at:string , color: string, image: string}[] }>   {
+    constructor(props: any) {
+        super(props);
+        this.state = { dpt_Data : []};
+     }
+    _isMounted = false;
+    componentDidMount() {
+        this._isMounted = true;
+        
+        this.getDptData();
+        
+    }
+    async getDptData(){
+        console.log("here");
+        axios.get(endpoint + 'api/department/')
+          .then(res => {
+            this.setState({dpt_Data:  this.state.dpt_Data.concat(res.data)}),
+            console.log(this.state.dpt_Data)
+          }
+            ) 
+        .catch((error) => {
+            console.error(error)
+            }
+        )
+    }
+    render(){
         return (
             <div>
                 <Header title={`Hope Health Action`} />
@@ -64,14 +94,11 @@ class HomePage extends Component  {
                     <TitledCardGroup>
                         <HeaderLabel>Departments</HeaderLabel>
                         <CardGroup>
-                            {dpts_Data.map(item => {
+                            {this.state.dpt_Data.map((item:any) => {
                                 return <DptCard  
                                     name={item.name}
-                                    dpt_id={item.dpt_id}
-                                    perc_of_data_entered={item.perc_of_data_entered}
-                                    num_of_case_studies={item.num_of_case_studies}
-                                    bg_img={item.bg_img}
-                                    main_color={item.main_color}></DptCard>
+                                    bg_img={item.image}
+                                    main_color={item.color}></DptCard>
                             })}
                         </CardGroup>
                     </TitledCardGroup>
@@ -85,6 +112,10 @@ class HomePage extends Component  {
             </div>
         );
     }
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+    
 }
 
 export default HomePage

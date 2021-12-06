@@ -20,6 +20,7 @@ import { Component } from 'react';
 import Biosuptform from '../biomechanicalform/Biosuptform';
 import ViewBioform from '../biomechanicalform/ViewBioform';
 import QuestionList from '../questions/QuestionList';
+import Header from './Header';
 import DepartmentGraphPage from '../home/Department Card/DptGraphPage'
 
 interface TabPanelProps {
@@ -86,17 +87,21 @@ const useStyles = makeStyles((theme) => ({
   }
 
   interface verNavState{
-    value: number
+    value: number,
+    dptName: string
   }
 
   const initialState: verNavState = {
     value: 1,
+    dptName: ""
   }
 export default class verNavbar extends Component<verNavProps, verNavState> {
-  constructor(props: verNavProps){
-    super(props);
-    this.state = initialState;
-}
+  constructor(props:any){
+    super(props); 
+    this.state = {
+        value: props.location.state.value,
+        dptName: props.location.state.dptName};
+  }
   render(){
 
      const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -105,10 +110,12 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
     };
 
   return (
-      
+     <> 
+    <Header title= {"Hope Health Action / " + this.state.dptName}/> 
     <Box
       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 1000 }}
     >
+      
       <Tabs
         orientation="vertical"
         variant="scrollable"
@@ -134,22 +141,10 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
 
       <Grid item xs={10}>
         <TabPanel value={this.state.value} index={1}>
-          <DptTableView dptName={this.props.dptName}/>
+          <DptTableView dptName={this.state.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={2}>
-            <ParentSize>
-							  {({width, height}) => 
-								    <DptGraphCard 
-                      department='Rehab'
-                      field='Bed days'
-                      minMonth={1}
-                      minYear={2020}
-                      maxMonth={12}
-                      maxYear={2021}
-                      width={width} 
-                      height={height}/>
-							  }
-						</ParentSize>
+          <DepartmentGraphPage departmentName={this.props.dptName}/>
         </TabPanel>
         <TabPanel  value={this.state.value} index={3}>
           <DataEntry dptName={this.props.dptName}/>
@@ -174,6 +169,7 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
         </TabPanel>
       </Grid>
     </Box>
+    </>
   );
   }
 }
