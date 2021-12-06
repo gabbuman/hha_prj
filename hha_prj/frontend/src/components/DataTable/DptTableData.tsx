@@ -41,7 +41,9 @@ interface tableProps{
     dataRecords: {open: boolean, id: number, question: string, answer: number, greendata: {question: any, answer: any}[]}[]
     dptDataAll: {question: any, answer: any, greendata: {question: any, answer: any}[]}[]
     dptData: {question: any, answer: any,  greendata: {question: any, answer: any}[]}[]
-    greendata: {question: any, answer: any}[]
+    greenDataStr: string;
+    dptData_Str: {question: any, answer: any, greendata: string}[]
+    dptDataAllStr: {question: any, answer: any, greendata: string}[]
     getAllData: boolean;
     min_month: number;
     max_month:number;
@@ -81,8 +83,10 @@ declare module '@mui/material/Button' {
     year: null,
     dataRecords: [],
     dptDataAll: [],
-    dptData:[],
-    greendata: [],
+    dptData: [],
+    greenDataStr: "",
+    dptData_Str:[],
+    dptDataAllStr: [],
     getAllData: true,
     min_month: (new Date()).getMonth(),
     max_month: (new Date()).getMonth(),
@@ -135,15 +139,33 @@ class TableData extends Component <tableProps, tableState> {
         .then(res =>res.json()) 
          .then(  (result)=>{ 
             result.map((data: any)=> (
-                data.department == this.state.dptName && data.month == this.state.month && data.year== this.state.year ? this.setState({dataRecords: data.question_answer_list})
+                data.department == this.state.dptName && data.month == this.state.month && data.year== this.state.year ? this.setState({dataRecords: data.question_answer_list
+                })
                 :{},
+                data.department == this.state.dptName && data.month == this.state.month && data.year== this.state.year ?
+                this.state.dataRecords.map((data: any)=> (
+                    this.setState({greenDataStr: JSON.stringify(data.greendata)}),
+                    this.setState({dptData_Str: this.state.dptData_Str.concat({question: data.question, answer: data.answer, greendata: this.state.greenDataStr})
+                  
+                })
+                )):{},
                 this.state.getAllData && (data.department == this.state.dptName )
-                    ? this.setState({dptDataAll: this.state.dptDataAll.concat({question:"Month/Year", answer:""+ months[data.month] + "/"+ data.year,greendata: []}), 
-                                    dptData: data.question_answer_list
+                    ? this.setState({dptDataAll: this.state.dptDataAll.concat({question:"Month/Year", answer:""+ months[data.month -1] + "/"+ data.year,greendata: []}), 
+                                    dptData: data.question_answer_list,
+                                    dptDataAllStr: this.state.dptDataAllStr.concat({question:"Month/Year", answer:""+ months[data.month -1] + "/"+ data.year,greendata: ""})
                                 })
-                :{dptData: []},
-                
-                this.state.getAllData && (data.department == this.state.dptName)? this.setState({dptDataAll: this.state.dptDataAll.concat(this.state.dptData)}): {}
+                :this.setState({dptData: []}),
+                this.state.getAllData && (data.department == this.state.dptName )
+                    ? this.state.dptData.map((data: any)=> (
+                        this.setState({greenDataStr: JSON.stringify(data.greendata)}),
+                        this.setState({dptData_Str: this.state.dptData_Str.concat({question: data.question, answer: data.answer, greendata: this.state.greenDataStr})
+                      
+                    }))
+                    ):{},
+                this.state.getAllData && (data.department == this.state.dptName)? this.setState({dptDataAll: this.state.dptDataAll.concat(this.state.dptData),
+                                                                        dptDataAllStr: this.state.dptDataAllStr.concat(this.state.dptData_Str),
+                                                                        dptData_Str: []}
+                                    ): {}
             ))
             this.setState({getAllData: false});
         })
@@ -174,12 +196,12 @@ class TableData extends Component <tableProps, tableState> {
         }
 
         const CsvReport = {
-            data: this.state.dataRecords,
-            filename: 'MonthlyReport_' + this.state.dptName + '_' + months[this.state.month]  + '_' + this.state.year + '.csv'
+            data: this.state.dptData_Str,
+            filename: 'MonthlyReport_' + this.state.dptName + '_' + months[this.state.month -1]  + '_' + this.state.year + '.csv'
           };
 
         const CsvReportAll= {
-            data: this.state.dptDataAll,
+            data: this.state.dptDataAllStr,
             filename: 'MonthlyReport_all_' + this.state.dptName + '.csv'
           };
         
@@ -225,13 +247,14 @@ class TableData extends Component <tableProps, tableState> {
                 </Grid>
             </Grid>
             </Box>
-            <Box m={5}>
             <PDFExport
                 ref={pdfExportComponent}
                 paperSize="A2"
                 margin={'4cm'}
                 fileName={`MonthlyReport_` + this.props.dptName + '_' + this.state.month +this.state.year}
                 >
+            <Box m={5}>
+            
 
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             <TableContainer component={Paper}>
@@ -299,6 +322,7 @@ class TableData extends Component <tableProps, tableState> {
                     </Table>
                 </TableContainer>
             </Grid>
+            </Box>
             </PDFExport>
             <Modal
                 open={modalIsOpen}
@@ -319,7 +343,7 @@ class TableData extends Component <tableProps, tableState> {
                         
                 </Box>
             </Modal>
-                </Box>
+                
                 </>
             )
            
