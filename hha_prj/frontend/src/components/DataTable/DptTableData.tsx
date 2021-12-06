@@ -259,12 +259,13 @@ class TableData extends Component <tableProps, tableState> {
                                             </IconButton> 
                                         </TableCell>
                                     </StyledTableRow>
-                                    <StyledTableRow
+                                    
+                                    {row.greendata.length > 0 && <StyledTableRow
                                         key={row.id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                             <TableCell align="left" width="100%">
-                                                {row.greendata.length > 0 &&
+                                                
 
                                                     <Table sx={{ width: "100%" }} aria-label="simple table2">
                                                         <TableBody>
@@ -287,11 +288,12 @@ class TableData extends Component <tableProps, tableState> {
                                                                 }
 
                                                         </TableBody>
-                                                    </Table>}
+                                                    </Table>
                                             </TableCell>
 
 
-                                        </StyledTableRow></>
+                                        </StyledTableRow>
+                                    }</>
                                 ))}
                         </TableBody>
                     </Table>
