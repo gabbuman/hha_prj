@@ -44,6 +44,30 @@
 }
 },
 {
+  "model": "backend.Role", 
+  "pk": 1,
+  "fields": {
+    "name": "Admin",
+    "created_at":"2021-11-07 12:12:12"
+  }
+},
+{
+  "model": "backend.Role", 
+  "pk": 2,
+  "fields": {
+    "name": "Staff",
+    "created_at":"2021-11-07 12:12:12"
+  }
+},
+{
+  "model": "backend.Role", 
+  "pk": 3,
+  "fields": {
+    "name": "Head of Department",
+    "created_at":"2021-11-07 12:12:12"
+  }
+},
+{
 "model": "backend.Points", 
 "pk": 1,
 "fields": {
