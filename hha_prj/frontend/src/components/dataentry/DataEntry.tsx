@@ -280,16 +280,19 @@ const DataEntry = (props: DEProps, state: DEState) => {
                                                 onChange={e => handleChangeInput(i, e)} 
                                                 />
                                             </Col>
-                                            <Col md>
-                                                <IconButton
-                                                    className="mt-4"
-                                                    aria-label="expand row"
-                                                    size="small"
-                                                    onClick={e => handleChangeIcon(i, !element.open)}
-                                                >
-                                                    {element.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                                                </IconButton>
-                                            </Col>
+                                            {element.question != "Stayed In Ward"? 
+                                                <div></div> :
+                                                <Col md>
+                                                    <IconButton
+                                                        className="mt-4"
+                                                        aria-label="expand row"
+                                                        size="small"
+                                                        onClick={e => handleChangeIcon(i, !element.open)}
+                                                    >
+                                                        {element.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                                    </IconButton>
+                                                </Col>
+                                            }
                                         </Row>
                                         <div className="ml-4">
                                             {element.question != "Stayed In Ward"? 
