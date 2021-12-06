@@ -9,7 +9,7 @@ from .serializers import CustomTokenPairSerializer
 from django.http import HttpResponse, HttpResponseBadRequest
 from datetime import datetime
 import datetime as dt
-from .models import  Department, MonthlyRecord, CurrentFieldsList, CaseStudy
+from .models import  Department, MonthlyRecord, CurrentFieldsList, CaseStudy, BiomechanicalSupport
 import json
 from django.db.models import Q
 import csv
@@ -186,6 +186,21 @@ def GetCaseStudies(request):
     data = json.dumps(case_studies_list,indent=4,sort_keys=True,default=str)
     return HttpResponse(data, content_type="application/json")
 
+@api_view(['GET'])
+def GetBiomechanicalforms(request):
+
+    bio_form_dept = request.query_params.get("department")
+    bio_form_list = []
+
+    if (BiomechanicalSupport.objects.filter(department = bio_form_dept).exists()):
+        bio_form_queryset = BiomechanicalSupport.objects.filter(department = bio_form_dept).values()
+
+        for record in bio_form_queryset:
+            bio_form_list.append(record)
+
+    data = json.dumps(bio_form_list,indent=4,sort_keys=True,default=str)
+    return HttpResponse(data, content_type="application/json")
+    
 @api_view(['GET'])
 def GetDepartmentReminders(request):
 
