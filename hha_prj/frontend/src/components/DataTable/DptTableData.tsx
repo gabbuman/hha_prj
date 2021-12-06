@@ -11,11 +11,12 @@ import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
 import { endpoint } from '../Endpoint';
 import { grey } from '@mui/material/colors';
 import { createStyles, Theme, withStyles } from '@material-ui/core';
-import { Button, createTheme, ThemeProvider, Grid, IconButton, Stack } from '@mui/material';
+import { Button, createTheme, ThemeProvider, Grid, IconButton, Stack, Box, Modal } from '@mui/material';
 import { CSVLink } from "react-csv";
 import { months } from './DptTableView';
 
 import { PDFExport} from '@progress/kendo-react-pdf';
+import { DptGraphCard } from '../home/Department Card/DptGraphCard';
 
 const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
@@ -41,7 +42,12 @@ interface tableProps{
     dptDataAll: {question: any, answer: any, greendata: {question: any, answer: any}[]}[]
     dptData: {question: any, answer: any,  greendata: {question: any, answer: any}[]}[]
     greendata: {question: any, answer: any}[]
-    getAllData: boolean
+    getAllData: boolean;
+    min_month: number;
+    max_month:number;
+    max_year: number;
+    min_year: number;
+    graphQuestion: string;
 }
 
 const theme = createTheme({
@@ -77,9 +83,28 @@ declare module '@mui/material/Button' {
     dptDataAll: [],
     dptData:[],
     greendata: [],
-    getAllData: true
+    getAllData: true,
+    min_month: (new Date()).getMonth(),
+    max_month: (new Date()).getMonth(),
+    max_year: (new Date()).getFullYear(),
+    min_year: (new Date()).getFullYear() -1,
+    graphQuestion: "",
 }
 
+let modalIsOpen = false;
+
+const modalStyle = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 700,
+    bgcolor: 'background.paper',
+    outline: 0,
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
 class TableData extends Component <tableProps, tableState> {
     _isMounted = false;
@@ -128,6 +153,16 @@ class TableData extends Component <tableProps, tableState> {
         )
     }
 
+    
+    handleOpen(question: string) {
+        this.setState({
+            graphQuestion: question
+        }),
+        modalIsOpen = true;
+        this.forceUpdate();
+    }
+    
+    
     static months: number[]=[]; 
     render (){ 
 
@@ -147,20 +182,27 @@ class TableData extends Component <tableProps, tableState> {
             data: this.state.dptDataAll,
             filename: 'MonthlyReport_all_' + this.state.dptName + '.csv'
           };
-
+        
+        const handleClose = () => {
+            modalIsOpen = false;
+            this.forceUpdate();
+        }
+      
         return(
-            <><div>
+            <>
+                <Box m={5}>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={8}>
-                    { 
-                        <Stack direction="row" justifyContent="flex-end">
-                            <ThemeProvider theme={theme}>
-                                    { <Button variant="contained" color="neutral" onClick = {exportPDFWithComponent}>Export Current to PDF</Button>  }  
-                            </ThemeProvider>
-                        </Stack>
-                    }                   
-                </Grid> 
-                <Grid item xs={4}>
+                    <Grid item xs={4}  md={4}>
+                        { 
+                            <Stack direction="row" justifyContent="flex-end">
+                                <ThemeProvider theme={theme}>
+                                        { <Button variant="contained" color="neutral" onClick = {exportPDFWithComponent}>Export Current to PDF</Button>  }  
+                                </ThemeProvider>
+                            </Stack>
+                        }                   
+                    </Grid> 
+
+                <Grid item xs={4} md={4}>
                     <Stack direction="row" justifyContent="flex-end">
                             <ThemeProvider theme={theme}>
                                 <CSVLink {...CsvReport} >
@@ -171,8 +213,7 @@ class TableData extends Component <tableProps, tableState> {
                     </Stack>
                 </Grid>
                 
-                
-                <Grid item xs={12}>
+                <Grid item xs={4} md={4}>
                     <Stack direction="row" justifyContent="flex-end">
                             <ThemeProvider theme={theme}>
                                 <CSVLink {...CsvReportAll} >
@@ -182,17 +223,17 @@ class TableData extends Component <tableProps, tableState> {
                         
                     </Stack>
                 </Grid>
-
-                
-                </Grid>
-            </div>
+            </Grid>
+            </Box>
+            <Box m={5}>
             <PDFExport
                 ref={pdfExportComponent}
                 paperSize="A2"
                 margin={'4cm'}
                 fileName={`MonthlyReport_` + this.props.dptName + '_' + this.state.month +this.state.year}
                 >
-            <Grid item xs={12}>
+
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             <TableContainer component={Paper}>
                     <Table sx={{ width: "auto" }} aria-label="simple table">
                         <TableBody>
@@ -204,7 +245,8 @@ class TableData extends Component <tableProps, tableState> {
                                     <><StyledTableRow
                                         key={row.id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
+                                    >   
+                                        
                                         <TableCell component="th" scope="row" width="15%" style={{ fontWeight: 700 }}>
                                             {row.question}
                                         </TableCell>
@@ -212,9 +254,9 @@ class TableData extends Component <tableProps, tableState> {
                                             {row.answer}
                                         </TableCell>
                                         <TableCell align="right" width="100%">
-                                            <IconButton>
+                                            <IconButton onClick = {() =>this.handleOpen(row.question)}>
                                                 <TimelineIcon sx={{ color: grey[500] }} />
-                                            </IconButton>
+                                            </IconButton> 
                                         </TableCell>
                                     </StyledTableRow>
                                     <StyledTableRow
@@ -253,14 +295,35 @@ class TableData extends Component <tableProps, tableState> {
                                 ))}
                         </TableBody>
                     </Table>
-                    
                 </TableContainer>
-                </Grid>
-                </PDFExport></>
+            </Grid>
+            </PDFExport>
+            <Modal
+                open={modalIsOpen}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                >
+                <Box sx={modalStyle}>
+                    <DptGraphCard 
+                        department={this.state.dptName}
+                        field= {this.state.graphQuestion}
+                        minMonth={this.state.min_month}
+                        minYear={this.state.min_year}
+                        maxMonth={this.state.max_month}
+                        maxYear={this.state.max_year}
+                        width={550} 
+                        height={400}/>
+                        
+                </Box>
+            </Modal>
+                </Box>
+                </>
             )
            
         
     }
+
     componentWillUnmount() {
         this._isMounted = false;
     }

@@ -17,7 +17,10 @@ import { RecordData } from '../home/Department Card/RecordData';
 import {DptGraphCard} from '../home/Department Card/DptGraphCard';
 import { render } from 'react-dom';
 import { Component } from 'react';
+import Biosuptform from '../biomechanicalform/Biosuptform';
+import ViewBioform from '../biomechanicalform/ViewBioform';
 import QuestionList from '../questions/QuestionList';
+import Header from './Header';
 import DepartmentGraphPage from '../home/Department Card/DptGraphPage'
 
 interface TabPanelProps {
@@ -84,17 +87,21 @@ const useStyles = makeStyles((theme) => ({
   }
 
   interface verNavState{
-    value: number
+    value: number,
+    dptName: string
   }
 
   const initialState: verNavState = {
     value: 1,
+    dptName: ""
   }
 export default class verNavbar extends Component<verNavProps, verNavState> {
-  constructor(props: verNavProps){
-    super(props);
-    this.state = initialState;
-}
+  constructor(props:any){
+    super(props); 
+    this.state = {
+        value: props.location.state.value,
+        dptName: props.location.state.dptName};
+  }
   render(){
 
      const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -103,10 +110,12 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
     };
 
   return (
-      
+     <> 
+    <Header title= {"Hope Health Action / " + this.state.dptName}/> 
     <Box
       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 1000 }}
     >
+      
       <Tabs
         orientation="vertical"
         variant="scrollable"
@@ -125,49 +134,34 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Question List Template" {...a11yProps(4)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Case Study" {...a11yProps(5)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Biomechanical Support" {...a11yProps(6)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Employee Of the Month" {...a11yProps(7)} /> 
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="All Graphs" {...a11yProps(8)} /> 
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="View Biomechanical Requests" {...a11yProps(7)} /> 
       </Tabs>
 
       <Grid item xs={10}>
         <TabPanel value={this.state.value} index={1}>
-          <DptTableView dptName={this.props.dptName}/>
+          <DptTableView dptName={this.state.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={2}>
-            <ParentSize>
-							  {({width, height}) => 
-								    <DptGraphCard 
-                      department='Rehab'
-                      field='Bed days'
-                      minMonth={1}
-                      minYear={2020}
-                      maxMonth={12}
-                      maxYear={2021}
-                      width={width} 
-                      height={height}/>
-							  }
-						</ParentSize>
+          <DepartmentGraphPage departmentName={this.state.dptName}/>
         </TabPanel>
         <TabPanel  value={this.state.value} index={3}>
-          <DataEntry dptName={this.props.dptName}/>
+          <DataEntry dptName={this.state.dptName}/>
         </TabPanel>
         <TabPanel  value={this.state.value} index={4}>
-          <QuestionList dptName={this.props.dptName}/>
+          <QuestionList dptName={this.state.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={5}>
-          <CaseStudyGridView dptName={this.props.dptName}/>
+          <CaseStudyGridView dptName={this.state.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={6}>
-          Item Biomechanical
+          <Biosuptform dptName={this.state.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={7}>
-          Item Employee
-        </TabPanel>
-        <TabPanel value={this.state.value} index={8}>
-          <DepartmentGraphPage departmentName={this.props.dptName}/>
+          <ViewBioform dptName={this.state.dptName}/>
         </TabPanel>
       </Grid>
     </Box>
+    </>
   );
   }
 }

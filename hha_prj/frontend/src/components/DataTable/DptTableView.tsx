@@ -86,8 +86,8 @@ export class DptTableView extends Component<tableProps, tableState> {
 
         return(
             <div> 
-                    <Box m={5}>
                     <Container maxWidth="md" > 
+                    <Box m={5}>
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         <Grid item xs={12}>
                         {   
@@ -127,13 +127,15 @@ export class DptTableView extends Component<tableProps, tableState> {
                             </Stack>
                             } 
                         </Grid>
-                                                   
-                        <Grid>
-                                <TableData ref={this.tabledataElement} dptName={this.props.dptName} newMonth={months.indexOf(this.state.month) + 1} newYear={parseInt(this.state.year)} />
                         </Grid>
+                        </Box>   
+                                                   
+                        <Grid item xs={12}>
+                                <TableData ref={this.tabledataElement} dptName={this.props.dptName} newMonth={months.indexOf(this.state.month) + 1} newYear={parseInt(this.state.year)} />
+                        
                         </Grid> 
                         </Container>  
-                    </Box>      
+                         
                 </div>
         )
     }

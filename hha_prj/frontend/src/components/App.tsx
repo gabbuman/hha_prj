@@ -5,10 +5,8 @@ import Header from './layout/Header';
 import VerNavbar from './layout/VerNavbar';
 import Login from './login/Login';
 import Register from './login/Register';
-import  { DptOverview } from './home/DptCard';
 import CSPreview from './home/CSPreview';
 import Rank from './home/Rank';
-import {dpts_Data} from './home/DptData';
 import DataEntry from './dataentry/DataEntry';
 import DptPage from './dpt/DptPage';
 import Homepage from './home/Homepage';
@@ -21,7 +19,9 @@ import CaseStudyIndividual from './casestudy/CaseStudyIndividual';
 import DepartmentHome from './dpt/DepartmentHome';
 import QuestionList from './questions/QuestionList';
 import CaseStudyGridView from './casestudy/CaseStudyGridView';
+import Biosuptform from './biomechanicalform/BioformCard';
 import CaseStudyEdit from './casestudy/CaseStudyEdit';
+import DptCard from './home/DptCard';
 
 class App extends Component {
     render() {
@@ -38,9 +38,7 @@ class App extends Component {
 					<Route path='/login' component={Login} />
 					<Route path='/register' component={Register} />
 					<Route path='/rank' component={Rank} />
-					<Route path='/dptcard' component={DptOverview}>
-						<DptOverview departmentData={dpts_Data}/>
-					</Route>
+					<Route path='/dptcard' component={DptCard}/>
 					<Route path='/homepage' component={Homepage}/>
 					<Route path='/cspreview' component={CSPreview} />
 					<Route path='/vernavbar' component={VerNavbar} />
@@ -52,7 +50,8 @@ class App extends Component {
 					<Route path='/case_study_form' component={CaseStudyInputForm}/>
 					<Route path='/case_study_individual/:id' component={CaseStudyIndividual}/>
 					<Route path='/case_study_grid' component={CaseStudyGridView}/>
-					<Route path='/actioncard' component={DepartmentHome}/>	
+					<Route path='/actioncard' component={DepartmentHome}/>
+					<Route path='/bio_support_form' component={Biosuptform}/>		
 					<Route path='/questionlist' component={QuestionList} />
 					<Route path='/csedit/:id' component={CaseStudyEdit}/>
 				</Switch>

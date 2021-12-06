@@ -1,6 +1,6 @@
 import React, { useState, Component, useEffect } from 'react';
 import { Container, Card, CardMedia, CardContent, Box,  Typography, 
-    Paper, Stack, Button, IconButton } from '@mui/material';
+    Paper, Stack, Button, IconButton, Collapse, Divider } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {Row, Col, Form, FormGroup} from "react-bootstrap";
@@ -23,6 +23,11 @@ interface DEState {
         answer: number,
         greendata: []
     }[];
+    stayedInWardData: {
+        id: number,
+        question: string,
+        answer: number
+    }[];  
 }
 
 
@@ -31,6 +36,19 @@ interface DEState {
 const DataEntry = (props: DEProps, state: DEState) => {
     const [step, setStep] = useState(1);
     const [questionAndAswer, setQuestionAndAswer] = useState([]);
+    const [stayedInWardData, setStayedInWardData] = useState([]);
+    const stayedInWardDataQuestions = [
+        "Not ready from therapy standpoint",
+        "Wound care",
+        "Other medical reason (such as IV medication)",
+        "Financial/no place to discharge to",
+        "Stay length: 1-3 months",
+        "Stay length: 3-6 months",
+        "Stay length: 6 months-1 year",
+        "Stay length: 1-2 years",
+        "Stay length: 2-3 years",
+        "Stay length: 3+ years",
+    ]
 
     useEffect(() => {
         initializeDataEntryPage();
@@ -84,12 +102,39 @@ const DataEntry = (props: DEProps, state: DEState) => {
         })
     }
 
+    const updateStayedInWardData = (questions: string[]) => {
+        // console.log(stayedInWardData);
+        if (!stayedInWardData.length)
+        {
+            // console.log("check")
+            questions.map((question: string, i) => {
+                setStayedInWardData((oldValue) => [...oldValue, 
+                {
+                    id: i+1,
+                    question: question,
+                    answer: null
+                }])
+            })
+        }
+    }
+
     const handleChangeInput: any = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
         // console.log(e.target.name);
         const values: any = [...questionAndAswer]
         // console.log(values[i])
         values[i][e.target.name] = +e.target.value
         setQuestionAndAswer(values)
+        if(values[i]["question"] == "Stayed In Ward")
+        {
+            if(values[i]["answer"] > 0)
+            {
+                // console.log("check0")
+                updateStayedInWardData(stayedInWardDataQuestions);
+            } else if(values[i]["answer"] == 0)
+            {
+                setStayedInWardData([]);
+            }
+        }
     }
 
     const handleChangeIcon: any = (i: number, openStatus: boolean) => {
@@ -98,18 +143,40 @@ const DataEntry = (props: DEProps, state: DEState) => {
         setQuestionAndAswer(values)
     }
 
+    const handleChangeInputStayedGreen: any = (i: number, e: React.ChangeEvent<HTMLInputElement>) => {
+        // console.log(e.target.name);
+        const values: any = [...stayedInWardData]
+        // console.log(values[i])
+        values[i][e.target.name] = +e.target.value
+        setStayedInWardData(values)
+    }
+
     const isEmpty = (arr: any []) => {
         var empty = []
         empty = arr.filter(item => item.answer == null)
         return (empty.length > 0)
     }
 
+    const addGreenInData = () => {
+        questionAndAswer.map((cell: any, i) => {
+            if( cell.question == "Stayed In Ward" )
+            {
+                const values:any = [... questionAndAswer]
+                values[i]["greendata"] = stayedInWardData;
+                setStayedInWardData(values)
+            }
+        })
+    }
+
     const submitClick: any = () => {  
         // console.log(questionAndAswer);  
         var currentTime = new Date(); 
         // console.log(currentTime.getFullYear(), currentTime.getMonth()); 
+        // console.log(stayedInWardData);
+        addGreenInData();
+        // console.log(questionAndAswer);
         if (isEmpty(questionAndAswer)){
-            notifyFail('Sorry, Submit fails with empty value.');
+            notifyFail('Sorry, Submit fails with empty input for red data.');
             return
         }  
         axios.post( endpoint + 'api/monthly_records/', {
@@ -127,6 +194,51 @@ const DataEntry = (props: DEProps, state: DEState) => {
             console.log(error);
         })
     }
+
+    const stayedInWard: any = (element: any) => {
+        if (element.answer == 0)
+        {
+            return (<div></div>)
+        } else {
+            return (
+                <Collapse in={element.open} timeout="auto" unmountOnExit>
+                  <Box>
+                    <Form>
+                        <FormGroup>
+                            {stayedInWardData.map((ele: any, i) => (
+                                <div key={ele.id}>
+                                    <Row className="mt-2">
+                                        <Col md>
+                                            {/* <Form.Label>Question {ele.id}</Form.Label> */}
+                                            <Form.Control 
+                                            type="text" 
+                                            disabled
+                                            name="question"
+                                            value={ele.question}
+                                            />
+                                        </Col>
+                                        <Col md>
+                                            {/* <Form.Label>Answer {ele.id}</Form.Label> */}
+                                            <Form.Control 
+                                            type="number"  
+                                            min="0"
+                                            placeholder="Enter answer"
+                                            name = "answer"
+                                            value={ele.answer}
+                                            onChange={e => handleChangeInputStayedGreen(i, e)} 
+                                            />
+                                        </Col>
+                                    </Row>
+                                </div>
+                            ))}
+                        </FormGroup>
+                    </Form>              
+                </Box>
+              </Collapse>
+            )
+        }
+    }
+
 
     const StepOne = () => {
         return (
@@ -148,7 +260,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
                                 {questionAndAswer.map((element: any, i) => (
                                     <div key={element.id}>
                                         <Row className="mt-2">
-                                            <Col md>
+                                            <Col md={5}>
                                                 <Form.Label>Question {element.id}</Form.Label>
                                                 <Form.Control 
                                                 type="text" 
@@ -157,7 +269,7 @@ const DataEntry = (props: DEProps, state: DEState) => {
                                                 value={element.question}
                                                 />
                                             </Col>
-                                            <Col md>
+                                            <Col md={5}>
                                                 <Form.Label>Answer {element.id}</Form.Label>
                                                 <Form.Control 
                                                 type="number"  
@@ -168,17 +280,26 @@ const DataEntry = (props: DEProps, state: DEState) => {
                                                 onChange={e => handleChangeInput(i, e)} 
                                                 />
                                             </Col>
-                                            <Col md>
-                                                <IconButton
-                                                    className="mt-4"
-                                                    aria-label="expand row"
-                                                    size="small"
-                                                    onClick={e => handleChangeIcon(i, !element.open)}
-                                                >
-                                                    {element.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                                                </IconButton>
-                                            </Col>
+                                            {element.question != "Stayed In Ward"? 
+                                                <Col md={2}></Col> :
+                                                <Col md={2}>
+                                                    <IconButton
+                                                        className="mt-4"
+                                                        aria-label="expand row"
+                                                        size="small"
+                                                        onClick={e => handleChangeIcon(i, !element.open)}
+                                                    >
+                                                        {element.open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                                    </IconButton>
+                                                </Col>
+                                            }
                                         </Row>
+                                        <div className="ml-4">
+                                            {element.question != "Stayed In Ward"? 
+                                                <div></div> :
+                                                stayedInWard(element)
+                                            }
+                                        </div>
                                     </div>
                                 ))}
                             </FormGroup>
