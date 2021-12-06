@@ -38,9 +38,10 @@ interface tableProps{
     dptName: string,
     month: number;
     year: number;
-    dataRecords: {question: string, answer: number}[]
-    dptDataAll: {question: any, answer: any}[]
-    dptData: {question: any, answer: any}[]
+    dataRecords: {open: boolean, id: number, question: string, answer: number, greendata: {question: any, answer: any}[]}[]
+    dptDataAll: {question: any, answer: any, greendata: {question: any, answer: any}[]}[]
+    dptData: {question: any, answer: any,  greendata: {question: any, answer: any}[]}[]
+    greendata: {question: any, answer: any}[]
     getAllData: boolean;
     min_month: number;
     max_month:number;
@@ -74,16 +75,6 @@ declare module '@mui/material/Button' {
     }
 }
 
-const secondaryDataQuestions = [
-    "Discharged alive",
-    "Died before 48h",
-    "Self-discharged",
-    "Stayed in the ward",
-    "Admissions",
-    "Hospitalized"
-  ];
-
-
   const initialState: tableState = {
     dptName: "",
     month: null,
@@ -91,6 +82,7 @@ const secondaryDataQuestions = [
     dataRecords: [],
     dptDataAll: [],
     dptData:[],
+    greendata: [],
     getAllData: true,
     min_month: (new Date()).getMonth(),
     max_month: (new Date()).getMonth(),
@@ -135,7 +127,7 @@ class TableData extends Component <tableProps, tableState> {
             this.setState({month: this.props.newMonth, year: this.props.newYear})
             this.setState({dataRecords: initialState.dataRecords});
             this.getDptData();
-          }
+          } 
     }    
 
     async getDptData() {
@@ -145,8 +137,12 @@ class TableData extends Component <tableProps, tableState> {
             result.map((data: any)=> (
                 data.department == this.state.dptName && data.month == this.state.month && data.year== this.state.year ? this.setState({dataRecords: data.question_answer_list})
                 :{},
-                this.state.getAllData && (data.department == this.state.dptName )? this.setState({dptDataAll: this.state.dptDataAll.concat({question:"Month/Year", answer:""+ months[data.month] + "/"+ data.year}), dptData: data.question_answer_list})
+                this.state.getAllData && (data.department == this.state.dptName )
+                    ? this.setState({dptDataAll: this.state.dptDataAll.concat({question:"Month/Year", answer:""+ months[data.month] + "/"+ data.year,greendata: []}), 
+                                    dptData: data.question_answer_list
+                                })
                 :{dptData: []},
+                
                 this.state.getAllData && (data.department == this.state.dptName)? this.setState({dptDataAll: this.state.dptDataAll.concat(this.state.dptData)}): {}
             ))
             this.setState({getAllData: false});
@@ -155,7 +151,6 @@ class TableData extends Component <tableProps, tableState> {
             console.error(error)
           }
         )
-        
     }
 
     
@@ -245,8 +240,10 @@ class TableData extends Component <tableProps, tableState> {
                             {this.state.dataRecords.length == 0 ?
                                 <div> <h3>No Records To View</h3> </div> :
                                 this.state.dataRecords.map((row) => (
-                                    <StyledTableRow
-                                        key={row.question}
+                                    //React complains the parent to have one Jsx component where in this case it was 2, <StyledTableRow>. 
+                                    //For that case it needs to be wrapped inside one Jsx component i.e. <></>. 
+                                    <><StyledTableRow
+                                        key={row.id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >   
                                         
@@ -257,17 +254,44 @@ class TableData extends Component <tableProps, tableState> {
                                             {row.answer}
                                         </TableCell>
                                         <TableCell align="right" width="100%">
-                                            {secondaryDataQuestions.includes(row.question) &&
-                                                <IconButton>
-                                                    <NotesOutlinedIcon sx={{ color: grey[500] }} />
-                                                </IconButton>}
-                                        </TableCell>
-                                        <TableCell align="right" width="100%">
                                             <IconButton onClick = {() =>this.handleOpen(row.question)}>
                                                 <TimelineIcon sx={{ color: grey[500] }} />
                                             </IconButton> 
                                         </TableCell>
                                     </StyledTableRow>
+                                    <StyledTableRow
+                                        key={row.id}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                            <TableCell align="left" width="100%">
+                                                {row.greendata.length > 0 &&
+
+                                                    <Table sx={{ width: "100%" }} aria-label="simple table2">
+                                                        <TableBody>
+                                                            {
+                                                                row.greendata.map((green_row) => ( 
+                                                                    <StyledTableRow
+                                                                        key={green_row.question}
+                                                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                                    >
+                                                                        <TableCell component="th" scope="row" width="15%" style={{ fontWeight: 700 }}>
+                                                                            {green_row.question}
+                                                                        </TableCell>
+                                                                        <TableCell align="left" width="15%">
+                                                                            {green_row.answer}
+                                                                        </TableCell>
+
+                                                                    </StyledTableRow>
+                                                                ))
+                                                                
+                                                                }
+
+                                                        </TableBody>
+                                                    </Table>}
+                                            </TableCell>
+
+
+                                        </StyledTableRow></>
                                 ))}
                         </TableBody>
                     </Table>
