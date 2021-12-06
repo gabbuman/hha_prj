@@ -134,9 +134,7 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Question List Template" {...a11yProps(4)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Case Study" {...a11yProps(5)} />
         <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Biomechanical Support" {...a11yProps(6)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="Employee Of the Month" {...a11yProps(7)} /> 
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="All Graphs" {...a11yProps(8)} />
-        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="View Biomechanical Requests" {...a11yProps(9)} /> 
+        <Tab sx={{alignItems: 'flex-start', textTransform: 'none'}} label="View Biomechanical Requests" {...a11yProps(7)} /> 
       </Tabs>
 
       <Grid item xs={10}>
@@ -159,12 +157,6 @@ export default class verNavbar extends Component<verNavProps, verNavState> {
           <Biosuptform dptName={this.state.dptName}/>
         </TabPanel>
         <TabPanel value={this.state.value} index={7}>
-          Item Employee
-        </TabPanel>
-        <TabPanel value={this.state.value} index={8}>
-          <DepartmentGraphPage departmentName={this.state.dptName}/>
-        </TabPanel>
-        <TabPanel value={this.state.value} index={9}>
           <ViewBioform dptName={this.state.dptName}/>
         </TabPanel>
       </Grid>
