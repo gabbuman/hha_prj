@@ -29,14 +29,9 @@ class App extends Component {
 		return (
 			<Router>
 				<Switch>
-					<Route exact path="/">
-						<h1>HHA Record Management Demo</h1>
-					</Route>
-					
+					<Route path='/' component={Register} />
 					<Route path='/header' component={() => <Header title={`Hope Health Action`} />}  />
-
 					<Route path='/login' component={Login} />
-					<Route path='/register' component={Register} />
 					<Route path='/rank' component={Rank} />
 					<Route path='/dptcard' component={DptCard}/>
 					<Route path='/homepage' component={Homepage}/>
