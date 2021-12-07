@@ -55,8 +55,11 @@ const DataEntry = (props: DEProps, state: DEState) => {
     }, []);
 
     const initializeDataEntryPage = () => {
-        // TODO - add dptName
-        axios.get( endpoint + 'api/check_current_month_submission_status')
+        axios.get( endpoint + 'api/check_current_month_submission_status', {
+            params: {
+                department: props.dptName
+            }
+        })
         .then(function (res: AxiosResponse<any>){
             console.log("record exist: " + res.data);
             if (res.data == true){
