@@ -13,9 +13,7 @@ import axios from 'axios';
 
 interface csprops{
     id: any;
-    dptName: string;
 }
-
 
 
 const CaseStudyIndividual: React.FC = () =>{
@@ -26,11 +24,12 @@ const CaseStudyIndividual: React.FC = () =>{
     useEffect( () => {
         console.log(params.id);
         retrieveIndividualCaseStudy();
+        
     }, []);
 
     const retrieveIndividualCaseStudy = () => {
         axios.get(endpoint + 'api/case_study/' + params.id + "/")
-            .then(res=>{
+            .then((res:any)=>{
                 setIndividualCaseStudy(res.data);
                 console.log(res.data)
             })
@@ -39,9 +38,11 @@ const CaseStudyIndividual: React.FC = () =>{
             }
         );
     }
+
     return (
         <div>
-            <Header title={`Hope Health Action/Rehab Department`} />
+            
+            <Header title={`Hope Health Action`}   />
             <Box
             component="form"
             noValidate
