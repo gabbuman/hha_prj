@@ -4,6 +4,7 @@ import React, { useState, useEffect, ReactElement } from 'react'
 import { DptGraphCard } from './DptGraphCard';
 import styled from 'styled-components'
 import axios from 'axios'
+import { endpoint } from '../../Endpoint';
 
 interface NumberOfGraphsProp {
     numberOfGraphs: number
@@ -42,7 +43,7 @@ export default function DepartmentGraphPage(props: GraphPageProps) {
     useEffect(() => {
         console.log("Props: " + JSON.stringify(props));
         const questionsApi = axios.create({
-            baseURL: "http://127.0.0.1:8000/api/questions_by_date_range/" // TODO: Update this 
+            baseURL: endpoint + "api/questions_by_date_range/" // TODO: Update this 
         })
         questionsApi.get('/', {params: {
             department: props.departmentName,

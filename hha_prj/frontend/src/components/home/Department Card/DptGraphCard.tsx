@@ -3,6 +3,7 @@ import DptGraph from './DptGraph';
 import styled from 'styled-components'
 import { RecordDataSet, sampleData } from './RecordData';
 import axios from 'axios';
+import { endpoint } from '../../Endpoint';
 
 const GraphContainer = styled.div `
     display: grid;
@@ -74,7 +75,7 @@ interface GraphCardData {
 }
 
 const graphApi = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api/graph_data/'
+    baseURL: endpoint + 'api/graph_data/'
 })
 
 export class DptGraphCard extends Component<GraphCardProps, GraphCardData> {
