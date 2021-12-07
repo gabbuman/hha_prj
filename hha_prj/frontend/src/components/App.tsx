@@ -29,7 +29,7 @@ class App extends Component {
 		return (
 			<Router>
 				<Switch>
-					<Route path='/' component={Register} />
+					<Route exact path='/' component={Register} />
 					<Route path='/header' component={() => <Header title={`Hope Health Action`} />}  />
 					<Route path='/login' component={Login} />
 					<Route path='/rank' component={Rank} />
